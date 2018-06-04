@@ -1,5 +1,14 @@
 # DUNGEON MOBS
 
+This is Dungeon Mob, by GnomeWorks (not by me).  I've forked to see if I can update it; 
+I don't know that I'll find the time, but if I do I'll take a stab at it.  At this point 
+nothing has actually been done yet.
+
+Jared (JaredBGreat / BlackJar72)
+
+---
+## GnomeWorks' Goodbye
+
 Hello, folks. Been quite awhile since this mod was updated, and - at this point in my life - I think it's time to admit that I'm not coming back to it.
 
 Don't get me wrong, it was fun while it lasted. The modding community in Minecraft, though, is... difficult, at the best of times, and trying to keep up with all the madness that was Forge back in the day was tiring.
