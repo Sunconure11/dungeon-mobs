@@ -18,5 +18,5 @@ This project will be ported to 1.12.2 to see how adept I can be with modelling +
 
 Tweaks to do:
 
-Let rust monsters attack modded metals
-Modernize the codebase a bit
+1.Let rust monsters attack modded metals
+2. Modernize the codebase a bit
