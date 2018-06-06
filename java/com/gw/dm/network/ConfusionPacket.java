@@ -2,10 +2,9 @@ package com.gw.dm.network;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-import com.gw.dm.DungeonMobs;
-
-public class ConfusionPacket implements NetworkHelper.IPacket {	
+public class ConfusionPacket implements IMessage {	
 	private boolean doConfuse;
 	  
 	public ConfusionPacket() {}
@@ -15,17 +14,21 @@ public class ConfusionPacket implements NetworkHelper.IPacket {
 		doConfuse = b;
 	}
 
-	@Override
-	public void writeBytes(ChannelHandlerContext paramChannelHandlerContext,
-				ByteBuf bytes) {
-		bytes.writeBoolean(this.doConfuse);		
-	}
 
 	@Override
-	public void readBytes(ChannelHandlerContext paramChannelHandlerContext,
-				ByteBuf bytes) {
+	public void fromBytes(ByteBuf bytes) {
+		bytes.writeBoolean(this.doConfuse);	
+	}
+
+
+	@Override
+	public void toBytes(ByteBuf bytes) {
 		doConfuse = bytes.readBoolean();
-	    //DungeonMobs.packetProxy.onConfusionPacket(this.doConfuse);		
+	}
+	
+	
+	public boolean getToConfuse() {
+		return doConfuse;
 	}
 
 }

@@ -49,7 +49,8 @@ public class DungeonMobs
     @Instance(MODID)
     public static DungeonMobs instance;
     
-    @SidedProxy(clientSide="com.gw.dm.ClientProxy", serverSide="com.gw.dm.CommonProxy")
+    @SidedProxy(clientSide="com.gw.dm.proxy.ClientProxy", 
+    		serverSide="com.gw.dm.proxy.CommonProxy")
     public static CommonProxy proxy;
 
 	
@@ -525,33 +526,33 @@ public class DungeonMobs
     	
     	//ArrayList<Set<Biome>> biomes = new ArrayList<>;
     	Biome[][] biomes = { 
-	    		(Biome[])BiomeDictionary.getBiomes(Type.BEACH).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.COLD).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.CONIFEROUS).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.DEAD).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.DENSE).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.DRY).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.FOREST).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.HILLS).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.HOT).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.JUNGLE).toArray(), 
-	    		(Biome[])BiomeDictionary.getBiomes(Type.LUSH).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.MAGICAL).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.MESA).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.MUSHROOM).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.OCEAN).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.PLAINS).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.RIVER).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.SANDY).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.SAVANNA).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.SNOWY).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.SPARSE).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.SPOOKY).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.SWAMP).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.WASTELAND).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.WATER).toArray(),
-	    		(Biome[])BiomeDictionary.getBiomes(Type.WET).toArray() 
-    		};
+    			getBiomesForType(Type.BEACH),
+	    		getBiomesForType(Type.COLD),
+	    		getBiomesForType(Type.CONIFEROUS),
+	    		getBiomesForType(Type.DEAD),
+	    		getBiomesForType(Type.DENSE),
+	    		getBiomesForType(Type.DRY),
+	    		getBiomesForType(Type.FOREST),
+	    		getBiomesForType(Type.HILLS),
+	    		getBiomesForType(Type.HOT),
+	    		getBiomesForType(Type.JUNGLE), 
+	    		getBiomesForType(Type.LUSH),
+	    		getBiomesForType(Type.MAGICAL),
+	    		getBiomesForType(Type.MESA),
+	    		getBiomesForType(Type.MUSHROOM),
+	    		getBiomesForType(Type.OCEAN),
+	    		getBiomesForType(Type.PLAINS),
+	    		getBiomesForType(Type.RIVER),
+	    		getBiomesForType(Type.SANDY),
+	    		getBiomesForType(Type.SAVANNA),
+	    		getBiomesForType(Type.SNOWY),
+	    		getBiomesForType(Type.SPARSE),
+	    		getBiomesForType(Type.SPOOKY),
+	    		getBiomesForType(Type.SWAMP),
+	    		getBiomesForType(Type.WASTELAND),
+	    		getBiomesForType(Type.WATER),
+	    		getBiomesForType(Type.WET) 
+    	};
     	
     	boolean doBeholderSpawn;
     	boolean doCaveFisherSpawn;
@@ -798,6 +799,12 @@ public class DungeonMobs
 	    }
     	
     	return -1;
+    }
+    
+    
+    private static Biome[] getBiomesForType(Type t) {
+    	Set<Biome> biomes = BiomeDictionary.getBiomes(t);
+    	return biomes.toArray(new Biome[biomes.size()]);
     }
     
     

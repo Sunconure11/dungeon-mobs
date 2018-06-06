@@ -10,11 +10,15 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 
+import com.gw.dm.network.ConfusionPacket;
+import com.gw.dm.network.KnockBackPacket;
+import com.gw.dm.network.NetworkHelper;
+
 public class DungeonMobsHelper {
 	
-	private static NetworkHelper helper = new NetworkHelper("GW_DM", new Class[] { KnockBackPacket.class, ConfusionPacket.class });
+	private static NetworkHelper helper = NetworkHelper.getNetworkHelper();
 	
-	private static LinkedList confusedClientPlayers = new LinkedList<EntityClientPlayerMP>();
+	private static LinkedList confusedClientPlayers = new LinkedList<EntityPlayerMP>();
 	private static LinkedList confusedPlayers = new LinkedList<EntityPlayerMP>();
 	
 	public static boolean displayedVersion = false;
@@ -42,7 +46,9 @@ public class DungeonMobsHelper {
         	helper.sendPacketToPlayer(new ConfusionPacket(b), target);
 	}
 	
-	
+	// FIXME:  I don't know if these are needed with the current networking
+	//         System.
+	/*
 	public static void makePlayerConfused(EntityClientPlayerMP player) {
 		if(!confusedClientPlayers.contains(player))
 			confusedClientPlayers.add(player);
@@ -58,9 +64,10 @@ public class DungeonMobsHelper {
 		if(confusedClientPlayers.contains(player))
 			confusedClientPlayers.remove(player);
 	}
+	*/
 	
 	
-	/**
+	/*
 	 *  These three are local, don't deal with packet bullshit.
 	 */
 	public static void makePlayerConfused(EntityPlayerMP player) {
@@ -83,12 +90,9 @@ public class DungeonMobsHelper {
 	public static void sendKnockBackPacket(EntityPlayerMP target, double xVel, double zVel) {
         Entity test = (Entity)target;
         
-        if(!(test instanceof FakePlayer))
+        if(!(test instanceof FakePlayer)) {
 	        helper.sendPacketToPlayer(new KnockBackPacket((float)xVel, (float)zVel), target);
-        
-        //helper.sendPacketToPlayer(new KnockBackPacket(xVel, zVel), target);
-        
-        //PacketDispatcher.sendPacketToPlayer(ForgePacketWrapper.createPacket("GW_DM", 1, toSend), (Player)target);
+        }
     }
 	
 	
