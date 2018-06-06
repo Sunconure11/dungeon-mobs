@@ -13,19 +13,7 @@ public class EntityDungeonFlying extends EntityFlying {
 
 	public EntityDungeonFlying(World worldIn) {
 		super(worldIn);	
-		// I need to Learn what the code below was for.
-		//this.spawnChecked = !DungeonMobsHelper.getMSC();
 	}
-
-	
-	// FIXME: Again, I don't know what this for, so I don't know if it should stay.
-	/*	
-	@Override
-	public int getMaxHealth() 
-	{
-		return 1;
-	}
-	*/
 
 	
 	public void setIgnoreHeight(boolean foo) {
