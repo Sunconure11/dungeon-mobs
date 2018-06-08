@@ -2,6 +2,7 @@ package com.gw.dm.render;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
@@ -10,35 +11,33 @@ import com.gw.dm.DungeonMobs;
 import com.gw.dm.entity.EntityGhoul;
 import com.gw.dm.model.ModelGhoul;
 
-public class RenderGhoul extends RenderLiving
-{
+public class RenderGhoul extends RenderLiving {
+	private static final ResourceLocation ghoulTextures 
+			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Ghoul.png");
 	protected ModelGhoul model;
 	
-	public RenderGhoul(RenderManager renderManager, ModelGhoul modelG, float f)
-	{
+	public RenderGhoul(RenderManager renderManager, ModelGhoul modelG, float f)	{
 		super(renderManager, modelG, f);
-		model = (ModelGhoul)mainModel;
+		mainModel = model = modelG;
+		addLayer(new LayerCustomHead(modelG.bipedHead));
 	}
-	
-	public void renderGhoul(EntityGhoul entity, double par2, double par4, double par6, float par8, float par9)
-	{
+	/*
+	public void renderGhoul(EntityGhoul entity, double par2, double par4, double par6, 
+			float par8, float par9) {
 		super.doRender(entity, par2, par4, par6, par8, par9);
 	}
 	
-	public void doRenderLiving(EntityLiving par1, double par2, double par4, double par6, float par8, float par9)
-	{
+	public void doRenderLiving(EntityLiving par1, double par2, double par4, double par6, 
+			float par8, float par9) {
 		renderGhoul((EntityGhoul)par1, par2, par4, par6, par8, par9);
 	}
 	
-	public void doRender(Entity par1, double par2, double par4, double par6, float par8, float par9)
-	{
+	public void doRender(Entity par1, double par2, double par4, 
+			double par6, float par8, float par9) {
 		renderGhoul((EntityGhoul)par1, par2, par4, par6, par8, par9);
 	}
-
-	private static final ResourceLocation ghoulTextures = new ResourceLocation(DungeonMobs.MODID + ":textures/entity/Ghoul.png");
-	
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
+	*/
+	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return ghoulTextures;
     }
 }
