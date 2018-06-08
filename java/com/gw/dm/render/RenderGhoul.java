@@ -1,24 +1,22 @@
 package com.gw.dm.render;
 
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
+
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.entity.EntityGhoul;
 import com.gw.dm.model.ModelGhoul;
-
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.passive.EntityPig;
-import net.minecraft.util.ResourceLocation;
 
 public class RenderGhoul extends RenderLiving
 {
 	protected ModelGhoul model;
 	
-	public RenderGhoul(ModelGhoul modelG, float f)
+	public RenderGhoul(RenderManager renderManager, ModelGhoul modelG, float f)
 	{
-		super(modelG, f);
+		super(renderManager, modelG, f);
 		model = (ModelGhoul)mainModel;
 	}
 	

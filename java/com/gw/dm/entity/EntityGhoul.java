@@ -1,14 +1,12 @@
 package com.gw.dm.entity;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityGhoul extends EntityZombie
@@ -32,7 +30,7 @@ public class EntityGhoul extends EntityZombie
 	protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(25.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D);
     }
 	
 	protected String getLivingSound()
@@ -45,9 +43,11 @@ public class EntityGhoul extends EntityZombie
 		return "dungeonmobs:g_h";
 	}
 	
-	protected String getDeathSound()
+	protected SoundEvent getDeathSound()
 	{
-		return "dungeonmobs:g_d";
+		// FIXME: Figure out sound and make this work!
+		//return "dungeonmobs:g_d";
+		return null;
 	}
 	
 	/*
@@ -78,14 +78,14 @@ public class EntityGhoul extends EntityZombie
 	
 	public boolean attackEntityAsMob(Entity par1)
 	{
-		this.getAttackTarget().addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 40, 5));
+		this.getAttackTarget().addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"), 40, 5));
 		
 		return super.attackEntityAsMob(par1);
 	}
 	
 	public boolean getCanSpawnHere()
 	{
-		if(this.worldObj.canBlockSeeTheSky((int)this.posX, (int)this.posY, (int)this.posZ))
+		if(world.canSeeSky(new BlockPos((int)this.posX, (int)this.posY, (int)this.posZ)))
 			return false;
 		
 		if(this.posY > 60.0D && !this.ignoreHeight)
