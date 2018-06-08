@@ -36,7 +36,6 @@ public class RenderGhoul extends RenderLiving {
 	}
 	*/
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
-		System.out.println(ghoulTextures);
 		return ghoulTextures;
     }
 }

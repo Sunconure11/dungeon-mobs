@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.gw.dm.entity.EntityGhoul;
 import com.gw.dm.proxy.CommonProxy;
+import com.gw.dm.sound.AudioHandler;
 
 @Mod(modid=DungeonMobs.MODID, name="Dungeon Mobs", version=DungeonMobs.VERSION)
 public class DungeonMobs 
@@ -216,8 +217,8 @@ public class DungeonMobs
 
     
     @EventHandler
-    public void init(FMLInitializationEvent event) 
-    {
+    public void init(FMLInitializationEvent event) {
+    	AudioHandler.registerSounds();
     	//MinecraftForge.TERRAIN_GEN_BUS.register(new DungeonMobsWorldGenEvent());
     	
     	int rustMonsterID	= 201;
