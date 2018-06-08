@@ -1,4 +1,4 @@
-package com.gw.dm.proxy;
+package com.gw.dm;
 
 public class CommonProxy 
 {
@@ -7,3 +7,4 @@ public class CommonProxy
 		
 	}
 }
+

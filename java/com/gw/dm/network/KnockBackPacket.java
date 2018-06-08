@@ -1,42 +1,36 @@
 package com.gw.dm.network;
 
+import com.gw.dm.DungeonMobs;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class KnockBackPacket implements IMessage {
-	private float xv;
-	private float zv;
+public class KnockBackPacket implements NetworkHelper.IPacket
+{
+  private float xv;
+  private float zv;
 
-	public KnockBackPacket() {}
+  public KnockBackPacket()
+  {
+  }
 
-	  
-	public KnockBackPacket(float x, float z) {
-		this.xv = x;
-		this.zv = z;
-	}
+  public KnockBackPacket(float x, float z)
+  {
+    this.xv = x;
+    this.zv = z;
+  }
 
+  public void writeBytes(ChannelHandlerContext ctx, ByteBuf bytes)
+  {
+    bytes.writeFloat(this.xv);
+    bytes.writeFloat(this.zv);
+  }
 
-	@Override
-	public void fromBytes(ByteBuf bytes) {
-		  bytes.writeFloat(this.xv);
-		  bytes.writeFloat(this.zv);
-	}
+  public void readBytes(ChannelHandlerContext ctx, ByteBuf bytes)
+  {
+    this.xv = bytes.readFloat();
+    this.zv = bytes.readFloat();
 
-
-	@Override
-	public void toBytes(ByteBuf bytes) {
-		  this.xv = bytes.readFloat();
-		  this.zv = bytes.readFloat();
-	}
-	
-	
-	public float getXV() {
-		return xv;
-	}
-	
-	
-	public float getZV() {
-		return zv;
-	}
+    DungeonMobs.packetProxy.onKnockBackPacket(this.xv, this.zv);
+  }
 }

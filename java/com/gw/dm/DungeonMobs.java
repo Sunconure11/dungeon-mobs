@@ -1,3 +1,11 @@
+/*
+ * DUNGEON MOBS
+ * Bringing you pain, one mob at a time.
+ * 
+ * (c) GnomeWorks 2013, 2014, 2015
+ * Do not distribute without permission.
+ */
+
 package com.gw.dm;
 
 import java.lang.reflect.Field;
@@ -5,35 +13,78 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.potion.Potion;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenBase.SpawnListEntry;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.DungeonHooks;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.ModMetadata;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.common.config.Property;
 
-import com.gw.dm.proxy.CommonProxy;
+import com.gw.dm.blocks.BlockBladeTrap;
+import com.gw.dm.blocks.BlockLavarock;
+import com.gw.dm.blocks.TileEntityBladeTrap;
+import com.gw.dm.entity.EntityAhriman;
+import com.gw.dm.entity.EntityBeamos;
+import com.gw.dm.entity.EntityBladeTrap;
+import com.gw.dm.entity.EntityCaveFisher;
+import com.gw.dm.entity.EntityCockatrice;
+import com.gw.dm.entity.EntityDestrachan;
+import com.gw.dm.entity.EntityGhoul;
+import com.gw.dm.entity.EntityHookHorror;
+import com.gw.dm.entity.EntityIllithid;
+import com.gw.dm.entity.EntityLizalfos;
+import com.gw.dm.entity.EntityManticore;
+import com.gw.dm.entity.EntityNetherHound;
+import com.gw.dm.entity.EntityPetrified;
+import com.gw.dm.entity.EntityRakshasa;
+import com.gw.dm.entity.EntityRakshasaImage;
+import com.gw.dm.entity.EntityRustMonster;
+import com.gw.dm.entity.EntityShrieker;
+import com.gw.dm.entity.EntityThoqqua;
+import com.gw.dm.entity.EntityTroll;
+import com.gw.dm.entity.EntityUmberHulk;
+import com.gw.dm.entity.EntityVescavor;
+import com.gw.dm.item.ItemSpawnEgg;
+import com.gw.dm.network.ISidedProxy;
+import com.gw.dm.potion.PotionAddle;
+import com.gw.dm.projectile.EntityBeamosBeam;
+import com.gw.dm.projectile.EntityEyeRay;
+import com.gw.dm.projectile.EntityMagicMissile;
+import com.gw.dm.projectile.EntitySonicBoom;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.ModMetadata;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid=DungeonMobs.MODID, name="Dungeon Mobs", version=DungeonMobs.VERSION)
 public class DungeonMobs 
 {
 	public static final String MODID = "dungeonmobs";
     public static final String VERSION = "4.2.0";
+    
+    @Instance(MODID)
+    public static DungeonMobs instance;
+    
+    @SidedProxy(clientSide="com.gw.dm.ClientProxy", serverSide="com.gw.dm.CommonProxy")
+    public static CommonProxy proxy;
     
     public static Block bladeTrap;
 	public static Block lavaRock;
@@ -42,17 +93,37 @@ public class DungeonMobs
 	public static Potion potionAddle;
 	public static int potionAddleID;
 	
-	//public static DungeonMobsEventHandler eventsHandler = new DungeonMobsEventHandler();
+	public static DungeonMobsEventHandler eventsHandler = new DungeonMobsEventHandler();
 	
 	public static boolean haveWarnedVersionOutOfDate = false;
+	
+	@SideOnly(Side.CLIENT)
+	public static InputConfusedMovement confusedMovementInput;
+	
+	@SidedProxy(clientSide="com.gw.dm.network.DungeonMobsClient", serverSide="com.gw.dm.network.DungeonMobsServer")
+	public static ISidedProxy packetProxy;
     
-    @Instance(MODID)
-    public static DungeonMobs instance;
-    
-    @SidedProxy(clientSide="com.gw.dm.proxy.ClientProxy", 
-    		serverSide="com.gw.dm.proxy.CommonProxy")
-    public static CommonProxy proxy;
-
+	public static boolean spawnRustMonster;
+	public static boolean spawnGhoul;
+	public static boolean spawnShrieker;
+	public static boolean spawnHookHorror;
+	public static boolean spawnUmberHulk;
+	public static boolean spawnBeholder;
+	public static boolean spawnBladeTrap;
+	public static boolean spawnCaveFisher;
+	public static boolean spawnCockatrice;
+	public static boolean spawnDestrachan;
+	public static boolean spawnIllithid;
+	public static boolean spawnLizalfos;
+	public static boolean spawnManticore;
+	public static boolean spawnHellHound;
+	public static boolean spawnRakshasa;
+	public static boolean spawnThoqqua;
+	public static boolean spawnTroll;
+	public static boolean spawnVescavor;
+	public static boolean spawnBeamos;
+	
+	public static boolean doUpdateCheck;
 	
 	@EventHandler
     public void preInit(FMLPreInitializationEvent event) 
@@ -72,7 +143,7 @@ public class DungeonMobs
 	    		//"Includes support for: ExtraBiomesXL, Biomes O' Plenty, Highlands, Mob Spawn Controls";
 	    modmeta.url = "http://www.minecraftforum.net/topic/231082-";
 	    
-	    //FMLCommonHandler.instance().bus().register(eventsHandler);
+	    FMLCommonHandler.instance().bus().register(eventsHandler);
 	    //MinecraftForge.EVENT_BUS.register(eventsHandler);
 	    
 	    /*
@@ -112,37 +183,37 @@ public class DungeonMobs
 	    
 	    config.load();
 	    
-	    //Property updateCheck = config.get(Configuration.CATEGORY_GENERAL, "checkForUpdates", true);
-	    //updateCheck.comment = "This value determines whether or not Dungeon Mobs will try to find out if there's a new update.";
-	    //doUpdateCheck = updateCheck.getBoolean();
+	    Property updateCheck = config.get(Configuration.CATEGORY_GENERAL, "checkForUpdates", true);
+	    updateCheck.comment = "This value determines whether or not Dungeon Mobs will try to find out if there's a new update.";
+	    doUpdateCheck = updateCheck.getBoolean();
 	    
-	    //Property beholderSpawn = config.get(Configuration.CATEGORY_GENERAL, "spawnBeholder", true);
-	    //beholderSpawn.comment = "These values determine if a given mob will spawn, if their spawn egg exists, and if they can show up in mob spawners. For blade traps, it also stops the block from generating. However, all blocks are still registered regardless of their parent mob's spawning status, to prevent potential issues.";
-	    //spawnBeholder = beholderSpawn.getBoolean();
+	    Property beholderSpawn = config.get(Configuration.CATEGORY_GENERAL, "spawnBeholder", true);
+	    beholderSpawn.comment = "These values determine if a given mob will spawn, if their spawn egg exists, and if they can show up in mob spawners. For blade traps, it also stops the block from generating. However, all blocks are still registered regardless of their parent mob's spawning status, to prevent potential issues.";
+	    spawnBeholder = beholderSpawn.getBoolean();
 	    
-	    //spawnRustMonster = config.get(Configuration.CATEGORY_GENERAL, "spawnRustMonster", true).getBoolean(true);
-	    //spawnGhoul = config.get(Configuration.CATEGORY_GENERAL, "spawnGhoul", true).getBoolean(true);
-		//spawnShrieker = config.get(Configuration.CATEGORY_GENERAL, "spawnShrieker", true).getBoolean(true);
-		//spawnHookHorror = config.get(Configuration.CATEGORY_GENERAL, "spawnHookHorror", true).getBoolean(true);
-		//spawnUmberHulk = config.get(Configuration.CATEGORY_GENERAL, "spawnUmberHulk", true).getBoolean(true);
-		//spawnBladeTrap = config.get(Configuration.CATEGORY_GENERAL, "spawnBladeTrap", true).getBoolean(true);
-		//spawnCaveFisher = config.get(Configuration.CATEGORY_GENERAL, "spawnCaveFisher", true).getBoolean(true);
-		//spawnCockatrice = config.get(Configuration.CATEGORY_GENERAL, "spawnCockatrice", true).getBoolean(true);
-		//spawnDestrachan = config.get(Configuration.CATEGORY_GENERAL, "spawnDestrachan", true).getBoolean(true);
-		//spawnIllithid = config.get(Configuration.CATEGORY_GENERAL, "spawnIllithid", true).getBoolean(true);
-		//spawnLizalfos = config.get(Configuration.CATEGORY_GENERAL, "spawnLizalfos", true).getBoolean(true);
-		//spawnManticore = config.get(Configuration.CATEGORY_GENERAL, "spawnManticore", true).getBoolean(true);
-		//spawnHellHound = config.get(Configuration.CATEGORY_GENERAL, "spawnHellHound", true).getBoolean(true);
-		//spawnRakshasa = config.get(Configuration.CATEGORY_GENERAL, "spawnRakshasa", true).getBoolean(true);
-		//spawnThoqqua = config.get(Configuration.CATEGORY_GENERAL, "spawnThoqqua", true).getBoolean(true);
-		//spawnTroll = config.get(Configuration.CATEGORY_GENERAL, "spawnTroll", true).getBoolean(true);
-		//spawnVescavor = config.get(Configuration.CATEGORY_GENERAL, "spawnVescavor", true).getBoolean(true);
+	    spawnRustMonster = config.get(Configuration.CATEGORY_GENERAL, "spawnRustMonster", true).getBoolean(true);
+	    spawnGhoul = config.get(Configuration.CATEGORY_GENERAL, "spawnGhoul", true).getBoolean(true);
+		spawnShrieker = config.get(Configuration.CATEGORY_GENERAL, "spawnShrieker", true).getBoolean(true);
+		spawnHookHorror = config.get(Configuration.CATEGORY_GENERAL, "spawnHookHorror", true).getBoolean(true);
+		spawnUmberHulk = config.get(Configuration.CATEGORY_GENERAL, "spawnUmberHulk", true).getBoolean(true);
+		spawnBladeTrap = config.get(Configuration.CATEGORY_GENERAL, "spawnBladeTrap", true).getBoolean(true);
+		spawnCaveFisher = config.get(Configuration.CATEGORY_GENERAL, "spawnCaveFisher", true).getBoolean(true);
+		spawnCockatrice = config.get(Configuration.CATEGORY_GENERAL, "spawnCockatrice", true).getBoolean(true);
+		spawnDestrachan = config.get(Configuration.CATEGORY_GENERAL, "spawnDestrachan", true).getBoolean(true);
+		spawnIllithid = config.get(Configuration.CATEGORY_GENERAL, "spawnIllithid", true).getBoolean(true);
+		spawnLizalfos = config.get(Configuration.CATEGORY_GENERAL, "spawnLizalfos", true).getBoolean(true);
+		spawnManticore = config.get(Configuration.CATEGORY_GENERAL, "spawnManticore", true).getBoolean(true);
+		spawnHellHound = config.get(Configuration.CATEGORY_GENERAL, "spawnHellHound", true).getBoolean(true);
+		spawnRakshasa = config.get(Configuration.CATEGORY_GENERAL, "spawnRakshasa", true).getBoolean(true);
+		spawnThoqqua = config.get(Configuration.CATEGORY_GENERAL, "spawnThoqqua", true).getBoolean(true);
+		spawnTroll = config.get(Configuration.CATEGORY_GENERAL, "spawnTroll", true).getBoolean(true);
+		spawnVescavor = config.get(Configuration.CATEGORY_GENERAL, "spawnVescavor", true).getBoolean(true);
 	    
-		//spawnBeamos = config.get(Configuration.CATEGORY_GENERAL, "spawnBeamos", true).getBoolean(true);
+		spawnBeamos = config.get(Configuration.CATEGORY_GENERAL, "spawnBeamos", true).getBoolean(true);
 		
 		config.save();
 		
-		haveWarnedVersionOutOfDate = !ConfigHandler.doUpdateCheck;
+		haveWarnedVersionOutOfDate = !doUpdateCheck;
 		
 	    /*
 	     * potion land!
@@ -183,10 +254,10 @@ public class DungeonMobs
 	    
 	    potionAddleID = getNextPotionIndex(potionTypes);
 	    
-	    /*if(potionAddleID == -1)
+	    if(potionAddleID == -1)
 	    	System.out.println("[DM] Could not find an open potion index!");
 	    else
-		    potionAddle = (new PotionAddle(potionAddleID, false, 5787222)).setPotionName("Confusion");*/
+		    potionAddle = (new PotionAddle(potionAddleID, false, 5787222)).setPotionName("Confusion");
 	    
 	    /*
 	    for(int i = 0; i < potionTypes.length; i++)
@@ -198,13 +269,11 @@ public class DungeonMobs
 	    }
 	    */
     }
-	
-
     
     @EventHandler
     public void init(FMLInitializationEvent event) 
     {
-    	//MinecraftForge.TERRAIN_GEN_BUS.register(new DungeonMobsWorldGenEvent());
+    	MinecraftForge.TERRAIN_GEN_BUS.register(new DungeonMobsWorldGenEvent());
     	proxy.registerRenders();
     	
     	int rustMonsterID	= 201;
@@ -226,6 +295,8 @@ public class DungeonMobs
 		int lizalfosID		= 217;
 		int cockatriceID	= 218;
 		int petrifiedID		= 219;
+		//int hunterID		= 220;
+		//int wolfID		= 221;
 		int manticoreID		= 222;
 		int bladeTrapID		= 223;
 		int thoqquaID		= 224;
@@ -237,29 +308,29 @@ public class DungeonMobs
 		 * Gotta do biome fetching for mod interoperability...
 		 */
 		
-		ArrayList<Biome> allBiomes = new ArrayList<Biome>();
+		ArrayList<BiomeGenBase> allBiomes = new ArrayList<BiomeGenBase>();
 		
-		ArrayList<Biome> hellBiomes = new ArrayList<Biome>();
+		ArrayList<BiomeGenBase> hellBiomes = new ArrayList<BiomeGenBase>();
 		
-		for(Biome biome : Biome.REGISTRY)
+		for(BiomeGenBase biome : BiomeGenBase.getBiomeGenArray())
 		{
 			if(biome != null)
 			{
-				if(BiomeDictionary.hasType(biome, Type.NETHER))
+				if(BiomeDictionary.isBiomeOfType(biome, Type.NETHER))
 					hellBiomes.add(biome);
-				else if(!BiomeDictionary.hasType(biome, Type.END))
+				else if(!BiomeDictionary.isBiomeOfType(biome, Type.END))
 					allBiomes.add(biome);
 			}
 		}
 		
-		Biome[] biomeList = new Biome[allBiomes.size()];
+		BiomeGenBase[] biomeList = new BiomeGenBase[allBiomes.size()];
 		
 		for(int i = 0; i < allBiomes.size(); i++)
 		{
 			biomeList[i] = allBiomes.get(i);
 		}
 		
-		Biome[] hellList = new Biome[hellBiomes.size()];
+		BiomeGenBase[] hellList = new BiomeGenBase[hellBiomes.size()];
 		
 		for(int i = 0; i < hellBiomes.size(); i++)
 		{
@@ -282,7 +353,6 @@ public class DungeonMobs
 				BiomeGenBase.savanna, BiomeGenBase.savannaPlateau, BiomeGenBase.stoneBeach };
 		*/
 		
-		/*
 		// RUST MONSTER
 		if(spawnRustMonster)
 		{
@@ -491,25 +561,25 @@ public class DungeonMobs
 			GameRegistry.registerItem(beamosSpawn, "spawnEggBeamos");
 			
 	    	EntityRegistry.registerModEntity(EntityBeamosBeam.class, "DMBeamosBeam", beamosBeamID, instance, 80, 3, true);
-		}*/
+		}
     	
-    	//EntityShrieker.appendToSummonList("DMRustMonster");
-		//EntityShrieker.appendToSummonList("DMGhoul");
-		//EntityShrieker.appendToSummonList("DMBeholder");
-		//EntityShrieker.appendToSummonList("DMUmberHulk");
-		//EntityShrieker.appendToSummonList("DMTroll");
-		//EntityShrieker.appendToSummonList("DMHookHorror");
-		//EntityShrieker.appendToSummonList("DMBeholder");
-		//EntityShrieker.appendToSummonList("DMCaveFisher");
-		//EntityShrieker.appendToSummonList("DMDestrachan");
-		//EntityShrieker.appendToSummonList("DMIllithid");
-		//EntityShrieker.appendToSummonList("DMNetherHound");
-		//EntityShrieker.appendToSummonList("DMRakshasa");
-		//EntityShrieker.appendToSummonList("DMLizalfos");
-		//EntityShrieker.appendToSummonList("DMCockatrice");
-		//EntityShrieker.appendToSummonList("DMManticore");
-		//EntityShrieker.appendToSummonList("DMThoqqua");
-		//EntityShrieker.appendToSummonList("DMVescavor");
+    	EntityShrieker.appendToSummonList("DMRustMonster");
+		EntityShrieker.appendToSummonList("DMGhoul");
+		EntityShrieker.appendToSummonList("DMBeholder");
+		EntityShrieker.appendToSummonList("DMUmberHulk");
+		EntityShrieker.appendToSummonList("DMTroll");
+		EntityShrieker.appendToSummonList("DMHookHorror");
+		EntityShrieker.appendToSummonList("DMBeholder");
+		EntityShrieker.appendToSummonList("DMCaveFisher");
+		EntityShrieker.appendToSummonList("DMDestrachan");
+		EntityShrieker.appendToSummonList("DMIllithid");
+		EntityShrieker.appendToSummonList("DMNetherHound");
+		EntityShrieker.appendToSummonList("DMRakshasa");
+		EntityShrieker.appendToSummonList("DMLizalfos");
+		EntityShrieker.appendToSummonList("DMCockatrice");
+		EntityShrieker.appendToSummonList("DMManticore");
+		EntityShrieker.appendToSummonList("DMThoqqua");
+		EntityShrieker.appendToSummonList("DMVescavor");
 		
 		allBiomes = null;
 		hellBiomes = null;
@@ -517,42 +587,38 @@ public class DungeonMobs
 		hellList = null;
     }
     
-
-    
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) 
     {
-    	//BiomeDictionary.registerAllBiomes();
+    	BiomeDictionary.registerAllBiomes();
     	
-    	//ArrayList<Set<Biome>> biomes = new ArrayList<>;
-    	Biome[][] biomes = { 
-    			getBiomesForType(Type.BEACH),
-	    		getBiomesForType(Type.COLD),
-	    		getBiomesForType(Type.CONIFEROUS),
-	    		getBiomesForType(Type.DEAD),
-	    		getBiomesForType(Type.DENSE),
-	    		getBiomesForType(Type.DRY),
-	    		getBiomesForType(Type.FOREST),
-	    		getBiomesForType(Type.HILLS),
-	    		getBiomesForType(Type.HOT),
-	    		getBiomesForType(Type.JUNGLE), 
-	    		getBiomesForType(Type.LUSH),
-	    		getBiomesForType(Type.MAGICAL),
-	    		getBiomesForType(Type.MESA),
-	    		getBiomesForType(Type.MUSHROOM),
-	    		getBiomesForType(Type.OCEAN),
-	    		getBiomesForType(Type.PLAINS),
-	    		getBiomesForType(Type.RIVER),
-	    		getBiomesForType(Type.SANDY),
-	    		getBiomesForType(Type.SAVANNA),
-	    		getBiomesForType(Type.SNOWY),
-	    		getBiomesForType(Type.SPARSE),
-	    		getBiomesForType(Type.SPOOKY),
-	    		getBiomesForType(Type.SWAMP),
-	    		getBiomesForType(Type.WASTELAND),
-	    		getBiomesForType(Type.WATER),
-	    		getBiomesForType(Type.WET) 
-    	};
+    	BiomeGenBase[][] biomes = { BiomeDictionary.getBiomesForType(Type.BEACH),
+    		BiomeDictionary.getBiomesForType(Type.COLD),
+    		BiomeDictionary.getBiomesForType(Type.CONIFEROUS),
+    		BiomeDictionary.getBiomesForType(Type.DEAD),
+    		BiomeDictionary.getBiomesForType(Type.DENSE),
+    		BiomeDictionary.getBiomesForType(Type.DRY),
+    		BiomeDictionary.getBiomesForType(Type.FOREST),
+    		BiomeDictionary.getBiomesForType(Type.HILLS),
+    		BiomeDictionary.getBiomesForType(Type.HOT),
+    		BiomeDictionary.getBiomesForType(Type.JUNGLE), 
+    		BiomeDictionary.getBiomesForType(Type.LUSH),
+    		BiomeDictionary.getBiomesForType(Type.MAGICAL),
+    		BiomeDictionary.getBiomesForType(Type.MESA),
+    		BiomeDictionary.getBiomesForType(Type.MUSHROOM),
+    		BiomeDictionary.getBiomesForType(Type.OCEAN),
+    		BiomeDictionary.getBiomesForType(Type.PLAINS),
+    		BiomeDictionary.getBiomesForType(Type.RIVER),
+    		BiomeDictionary.getBiomesForType(Type.SANDY),
+    		BiomeDictionary.getBiomesForType(Type.SAVANNA),
+    		BiomeDictionary.getBiomesForType(Type.SNOWY),
+    		BiomeDictionary.getBiomesForType(Type.SPARSE),
+    		BiomeDictionary.getBiomesForType(Type.SPOOKY),
+    		BiomeDictionary.getBiomesForType(Type.SWAMP),
+    		BiomeDictionary.getBiomesForType(Type.WASTELAND),
+    		BiomeDictionary.getBiomesForType(Type.WATER),
+    		BiomeDictionary.getBiomesForType(Type.WET) 
+    		};
     	
     	boolean doBeholderSpawn;
     	boolean doCaveFisherSpawn;
@@ -594,10 +660,10 @@ public class DungeonMobs
     			doVescavorSpawn = true;
     			doThoqquaSpawn = true;
     			
-    			List foo = biomes[i][j].getSpawnableList(EnumCreatureType.MONSTER);
+    			List foo = biomes[i][j].getSpawnableList(EnumCreatureType.monster);
     			
     			for(int k = 0; k < foo.size(); k++)
-    			{/*
+    			{
     				SpawnListEntry bar = (SpawnListEntry)foo.get(k);
     				
     				Class<? extends Entity> entityClazz = bar.entityClass;
@@ -653,15 +719,15 @@ public class DungeonMobs
     				if(entityClazz.getName() == EntityVescavor.class.getName())
     					doVescavorSpawn = false;
     				
-    				
-    				//if(entityClazz.getClass().isInstance(EntityVescavor.class))
-    				//{
-    				//	System.out.println("[" + i + "][" + j + "][" + k + "] HOLY FUCKING SHIT REFLECTION WORKS");
-    				//}
-    				//
-    			*/}
+    				/*
+    				if(entityClazz.getClass().isInstance(EntityVescavor.class))
+    				{
+    					System.out.println("[" + i + "][" + j + "][" + k + "] HOLY FUCKING SHIT REFLECTION WORKS");
+    				}
+    				*/
+    			}
     			
-    			/*if(doBeholderSpawn && spawnBeholder)
+    			if(doBeholderSpawn && spawnBeholder)
     				EntityRegistry.addSpawn(EntityAhriman.class, 2, 1, 1, EnumCreatureType.monster, biomes[i][j]);
     			
     			if(doRustMonsterSpawn && spawnRustMonster)
@@ -712,17 +778,16 @@ public class DungeonMobs
     			if(doVescavorSpawn && spawnVescavor)
     				EntityRegistry.addSpawn(EntityVescavor.class, 6, 2, 8, EnumCreatureType.monster, biomes[i][j]);
     			
-    			//
-    			//if(biomes[i][j].getSpawnableList(EnumCreatureType.monster).contains(EntityVescavor.class))
-    			//	System.out.println("[DM] YEP THIS SHIT WORKS.");
-    			//else
-    			//	System.out.println("[DM] WELL IT KINDA WORKS...");
-    			//
-    			//System.out.println("[DM] DEBUG SHIT: " + biomes[i][j].getSpawnableList(EnumCreatureType.monster).toString());
-    			//
+    			/*
+    			if(biomes[i][j].getSpawnableList(EnumCreatureType.monster).contains(EntityVescavor.class))
+    				System.out.println("[DM] YEP THIS SHIT WORKS.");
+    			else
+    				System.out.println("[DM] WELL IT KINDA WORKS...");
+    			
+    			System.out.println("[DM] DEBUG SHIT: " + biomes[i][j].getSpawnableList(EnumCreatureType.monster).toString());
+    			*/
     			
     			//EntityRegistry.addSpawn(EntityVescavor.class, 6, 2, 8, EnumCreatureType.monster, biomes[i]);
-    			*/
     		}
     	}
     	
@@ -735,7 +800,7 @@ public class DungeonMobs
     	}
     	*/
     	
-    	/*if(spawnRustMonster)
+    	if(spawnRustMonster)
     		DungeonHooks.addDungeonMob("DMRustMonster", 80);
     	
     	if(spawnGhoul)
@@ -779,8 +844,7 @@ public class DungeonMobs
 		
 		if(spawnVescavor)
 			DungeonHooks.addDungeonMob("DMVescavor", 40);
-    */}
-
+    }
     
     private int getNextPotionIndex(Potion[] potList)
     {
@@ -800,12 +864,4 @@ public class DungeonMobs
     	
     	return -1;
     }
-    
-    
-    private static Biome[] getBiomesForType(Type t) {
-    	Set<Biome> biomes = BiomeDictionary.getBiomes(t);
-    	return biomes.toArray(new Biome[biomes.size()]);
-    }
-    
-    
 }

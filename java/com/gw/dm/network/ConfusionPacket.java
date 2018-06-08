@@ -1,34 +1,32 @@
 package com.gw.dm.network;
 
+import com.gw.dm.DungeonMobs;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class ConfusionPacket implements IMessage {	
-	private boolean doConfuse;
-	  
-	public ConfusionPacket() {}
+public class ConfusionPacket implements NetworkHelper.IPacket
+{
+  private boolean doConfuse;
 
-	  
-	public ConfusionPacket(boolean b) {
-		doConfuse = b;
-	}
+  public ConfusionPacket()
+  {
+  }
 
+  public ConfusionPacket(boolean b)
+  {
+    this.doConfuse = b;
+  }
 
-	@Override
-	public void fromBytes(ByteBuf bytes) {
-		bytes.writeBoolean(this.doConfuse);	
-	}
+  public void writeBytes(ChannelHandlerContext ctx, ByteBuf bytes)
+  {
+    bytes.writeBoolean(this.doConfuse);
+  }
 
+  public void readBytes(ChannelHandlerContext ctx, ByteBuf bytes)
+  {
+    this.doConfuse = bytes.readBoolean();
 
-	@Override
-	public void toBytes(ByteBuf bytes) {
-		doConfuse = bytes.readBoolean();
-	}
-	
-	
-	public boolean getToConfuse() {
-		return doConfuse;
-	}
-
+    DungeonMobs.packetProxy.onConfusionPacket(this.doConfuse);
+  }
 }

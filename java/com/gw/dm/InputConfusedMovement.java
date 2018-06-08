@@ -4,7 +4,8 @@ import java.util.Random;
 
 import net.minecraft.util.MovementInput;
 
-public class InputConfusedMovement extends MovementInput {
+public class InputConfusedMovement extends MovementInput 
+{
 	protected MovementInput underlyingMovementInput;
 	private boolean confused = false;
 	private int confValue = 1;

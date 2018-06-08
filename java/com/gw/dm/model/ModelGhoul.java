@@ -2,6 +2,8 @@ package com.gw.dm.model;
 
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.MathHelper;
 
 public class ModelGhoul extends ModelBiped
 {
