@@ -2,9 +2,8 @@ package com.gw.dm.render;
 
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerCustomHead;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 import com.gw.dm.DungeonMobs;
@@ -13,13 +12,12 @@ import com.gw.dm.model.ModelGhoul;
 
 public class RenderGhoul extends RenderLiving {
 	private static final ResourceLocation ghoulTextures 
-			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Ghoul.png");
+			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/ghoul.png");
 	protected ModelGhoul model;
 	
 	public RenderGhoul(RenderManager renderManager, ModelGhoul modelG, float f)	{
 		super(renderManager, modelG, f);
 		mainModel = model = modelG;
-		addLayer(new LayerCustomHead(modelG.bipedHead));
 	}
 	/*
 	public void renderGhoul(EntityGhoul entity, double par2, double par4, double par6, 
@@ -38,6 +36,7 @@ public class RenderGhoul extends RenderLiving {
 	}
 	*/
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
+		System.out.println(ghoulTextures);
 		return ghoulTextures;
     }
 }
