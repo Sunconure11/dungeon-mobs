@@ -15,6 +15,7 @@ This project will be ported to 1.12.2 to see how adept I can be with modelling +
 7. Rot Grub
 8. Modron
 9. Sphynx with all variants. Tameable and rideable.
+10. Displacer Beast
 
 Tweaks to do:
 
