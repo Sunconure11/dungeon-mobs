@@ -209,31 +209,6 @@ public class DungeonMobs
     public void init(FMLInitializationEvent event) {
     	AudioHandler.registerSounds();
     	//MinecraftForge.TERRAIN_GEN_BUS.register(new DungeonMobsWorldGenEvent());
-    	
-    	int rustMonsterID	= 201;
-		int shriekerID		= 203;
-		int umberHulkID		= 204;
-		int hookHorrorID	= 205;
-		int ahrimanID		= 206;
-		int eyerayID		= 207;
-		int trollID			= 208;
-		int caveFisherID	= 209;
-		int destrachanID	= 210;
-		int sonicBoomID		= 211;
-		int illithidID		= 212;
-		int netherHoundID	= 213;
-		int rakshasaID		= 214;
-		int rakshasaImageID	= 215;
-		int magicMissileID	= 216;
-		int lizalfosID		= 217;
-		int cockatriceID	= 218;
-		int petrifiedID		= 219;
-		int manticoreID		= 222;
-		int bladeTrapID		= 223;
-		int thoqquaID		= 224;
-		int vescavorID		= 225;
-		int beamosID		= 226;
-    	int beamosBeamID	= 227;
 		
 		/*
 		 * Gotta do biome fetching for mod interoperability...
