@@ -28,7 +28,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.gw.dm.entity.EntityGhoul;
 import com.gw.dm.proxy.CommonProxy;
-import com.gw.dm.sound.AudioHandler;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.MobRegistrar;
 
 @Mod(modid=DungeonMobs.MODID, name="Dungeon Mobs", version=DungeonMobs.VERSION)
 public class DungeonMobs 
@@ -198,19 +199,7 @@ public class DungeonMobs
 	    		System.out.println("Potion #" + i + ": NULL");
 	    }
 	    */
-	    
-	 // GHOUL
-	 		if(true/*spawnGhoul*/)
-	 		{	
-	 			int ghoulID			= 202;
-	 			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMGhoul"), 
-	 					EntityGhoul.class, MODID + ".DMGhoul", ghoulID, instance, 80, 3, 
-	 					true, 0x5F3E67, 0x362C1A);
-	 			//ItemSpawnEgg ghoulSpawn = new ItemSpawnEgg("DMGhoul", 0x5F3E67, 0x362C1A);
-	 			//ghoulSpawn.setTextureName("dungeonmobs:spawn_egg");
-	 			//GameRegistry.registerItem(ghoulSpawn, "spawnEggGhoul");
-	 		}
-
+	    MobRegistrar.registerMobs();
     	proxy.registerRenders();
     }
 	
@@ -528,8 +517,8 @@ public class DungeonMobs
 
     
     @EventHandler
-    public void postInit(FMLPostInitializationEvent event) 
-    {
+    public void postInit(FMLPostInitializationEvent event) {
+    	MobRegistrar.registerSpawns();
     	//BiomeDictionary.registerAllBiomes();
     	
     	//ArrayList<Set<Biome>> biomes = new ArrayList<>;

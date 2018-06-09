@@ -1,4 +1,4 @@
-package com.gw.dm.sound;
+package com.gw.dm.util;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
