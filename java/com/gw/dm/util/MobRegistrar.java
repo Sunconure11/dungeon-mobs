@@ -7,7 +7,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+import com.gw.dm.entity.EntityAhriman;
 import com.gw.dm.entity.EntityGhoul;
+import com.gw.dm.projectile.EntityEyeRay;
 
 public class MobRegistrar {
 	// Fixme: Now that we aren't using vanilla's namespace, should 
@@ -49,7 +51,16 @@ public class MobRegistrar {
 		 	EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMGhoul"), 
 		 			EntityGhoul.class, MODID + ".DMGhoul", ghoulID, instance, 80, 3, 
 		 				true, 0x5F3E67, 0x362C1A);
-		 }
+		 }		
+		// BEHOLDER
+		if(true/*spawnBeholder*/)
+		{
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMBeholder"),
+					EntityAhriman.class, MODID + ".DMBeholder", ahrimanID, 
+					instance, 80, 3, true, 0x720000, 0xFFF99A);
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMEyeRay"), 
+					EntityEyeRay.class, MODID + "DMEyeRay", eyerayID, instance, 80, 1, true);
+		}
 	}
 	
 	
@@ -62,6 +73,7 @@ public class MobRegistrar {
 	public static void registerSpawns() {
 		Biome[] biomes = getBiomeArray();
 		EntityRegistry.addSpawn(EntityGhoul.class, 5, 2, 4, EnumCreatureType.MONSTER, biomes);
+		EntityRegistry.addSpawn(EntityAhriman.class, 2, 1, 1, EnumCreatureType.MONSTER, biomes);
 	}
 	
 	

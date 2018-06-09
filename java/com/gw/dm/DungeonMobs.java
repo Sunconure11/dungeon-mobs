@@ -304,18 +304,6 @@ public class DungeonMobs
 			hookHorrorSpawn.setTextureName("dungeonmobs:spawn_egg");
 			GameRegistry.registerItem(hookHorrorSpawn, "spawnEggHookHorror");
 		}
-		
-		// BEHOLDER
-		if(spawnBeholder)
-		{
-			EntityRegistry.registerModEntity(EntityAhriman.class, "DMBeholder", ahrimanID, instance, 80, 3, true);
-			EntityRegistry.addSpawn(EntityAhriman.class, 2, 1, 1, EnumCreatureType.monster, biomeList);
-			ItemSpawnEgg beholderSpawn = new ItemSpawnEgg("DMBeholder", 0x720000, 0xFFF99A);
-			beholderSpawn.setTextureName("dungeonmobs:spawn_egg");
-			GameRegistry.registerItem(beholderSpawn, "spawnEggBeholder");
-			
-			EntityRegistry.registerModEntity(EntityEyeRay.class, "DMEyeRay", eyerayID, instance, 80, 3, true);
-		}
 			
 		// TROLL
 		if(spawnTroll)

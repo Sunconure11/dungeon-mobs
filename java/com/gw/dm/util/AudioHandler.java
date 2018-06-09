@@ -12,11 +12,15 @@ public class AudioHandler {
 	public static SoundEvent entityGhoulHurt;
 	public static SoundEvent entityGhoulDeath;
 	
+	public static SoundEvent entityAhrimanAmbient;
+	
 	
 	public static void registerSounds() {
 		entityGhoulAmbient = registerSound("g_l");
 		entityGhoulHurt    = registerSound("g_h");
 		entityGhoulDeath   = registerSound("g_d");
+		
+		entityAhrimanAmbient = registerSound("1_l");
 	}
 	
 	
