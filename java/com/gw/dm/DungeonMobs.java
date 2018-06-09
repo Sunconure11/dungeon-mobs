@@ -8,14 +8,12 @@ import java.util.List;
 import java.util.Set;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -26,8 +24,11 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import com.gw.dm.entity.EntityGhoul;
 import com.gw.dm.proxy.CommonProxy;
+import com.gw.dm.sound.AudioHandler;
 
 @Mod(modid=DungeonMobs.MODID, name="Dungeon Mobs", version=DungeonMobs.VERSION)
 public class DungeonMobs 
@@ -197,18 +198,30 @@ public class DungeonMobs
 	    		System.out.println("Potion #" + i + ": NULL");
 	    }
 	    */
+	    
+	 // GHOUL
+	 		if(true/*spawnGhoul*/)
+	 		{	
+	 			int ghoulID			= 202;
+	 			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMGhoul"), 
+	 					EntityGhoul.class, MODID + ".DMGhoul", ghoulID, instance, 80, 3, 
+	 					true, 0x5F3E67, 0x362C1A);
+	 			//ItemSpawnEgg ghoulSpawn = new ItemSpawnEgg("DMGhoul", 0x5F3E67, 0x362C1A);
+	 			//ghoulSpawn.setTextureName("dungeonmobs:spawn_egg");
+	 			//GameRegistry.registerItem(ghoulSpawn, "spawnEggGhoul");
+	 		}
+
+    	proxy.registerRenders();
     }
 	
 
     
     @EventHandler
-    public void init(FMLInitializationEvent event) 
-    {
+    public void init(FMLInitializationEvent event) {
+    	AudioHandler.registerSounds();
     	//MinecraftForge.TERRAIN_GEN_BUS.register(new DungeonMobsWorldGenEvent());
-    	proxy.registerRenders();
     	
     	int rustMonsterID	= 201;
-		int ghoulID			= 202;
 		int shriekerID		= 203;
 		int umberHulkID		= 204;
 		int hookHorrorID	= 205;
@@ -282,6 +295,11 @@ public class DungeonMobs
 				BiomeGenBase.savanna, BiomeGenBase.savannaPlateau, BiomeGenBase.stoneBeach };
 		*/
 		
+
+		
+
+			EntityRegistry.addSpawn(EntityGhoul.class, 5, 2, 4, EnumCreatureType.MONSTER, biomeList);
+		
 		/*
 		// RUST MONSTER
 		if(spawnRustMonster)
@@ -291,16 +309,6 @@ public class DungeonMobs
 			ItemSpawnEgg rustMonsterSpawn = new ItemSpawnEgg("DMRustMonster", 0x643200, 0x7C0F0F);
 			rustMonsterSpawn.setTextureName("dungeonmobs:spawn_egg");
 			GameRegistry.registerItem(rustMonsterSpawn, "spawnEggRustMonster");
-		}
-			
-		// GHOUL
-		if(spawnGhoul)
-		{
-			EntityRegistry.registerModEntity(EntityGhoul.class, "DMGhoul", ghoulID, instance, 80, 3, true);
-			EntityRegistry.addSpawn(EntityGhoul.class, 5, 2, 4, EnumCreatureType.monster, biomeList);
-			ItemSpawnEgg ghoulSpawn = new ItemSpawnEgg("DMGhoul", 0x5F3E67, 0x362C1A);
-			ghoulSpawn.setTextureName("dungeonmobs:spawn_egg");
-			GameRegistry.registerItem(ghoulSpawn, "spawnEggGhoul");
 		}
 		
 		// SHRIEKER
