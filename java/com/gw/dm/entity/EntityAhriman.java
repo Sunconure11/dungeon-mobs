@@ -3,9 +3,8 @@ package com.gw.dm.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,13 +14,14 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
 import com.gw.dm.EntityDungeonFlying;
+import com.gw.dm.ai.AIBeholderAttack;
+import com.gw.dm.ai.AIBeholderWander;
+import com.gw.dm.ai.TaskBeholderAgro;
 import com.gw.dm.projectile.EntityEyeRay;
 import com.gw.dm.util.AudioHandler;
 
@@ -61,30 +61,32 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob
 		*/
 	}
 
-	protected void applyEntityAttributes()
-	{
+	protected void applyEntityAttributes(){
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(32.0d);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5d);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(32.0d);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5d);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.d);
+        getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.0d);
 	}
 
-	protected boolean isAIEnabled()
-	{
-		return false;
+	
+	@Override
+	protected void initEntityAI()   {
+		tasks.addTask(2, new AIBeholderAttack());
+		tasks.addTask(4, new AIBeholderWander());
+		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+		tasks.addTask(6, new EntityAILookIdle(this));
+		targetTasks.addTask(2, new TaskBeholderAgro());
+		targetTasks.addTask(3, new EntityAIFindEntityNearestPlayer(this));
 	}
 
-	public int getTotalArmorValue()
-	{
-		return 10;
-	}
 
-	public int getAttackStrength(Entity par1Entity)
-	{
-		return 0;
+	@Override
+	protected void entityInit() {
+		super.entityInit();
 	}
-
-	public PotionEffect[] defineEyeRay() 
-	{
+	
+	public PotionEffect[] defineEyeRay() {
 		if(this.getAttackTarget() instanceof EntityPlayer)
 		{
 			EntityPlayer foo = (EntityPlayer)this.getAttackTarget();
@@ -154,9 +156,9 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob
 
 		return theEffect;
 	}
+	
 
-	public int getTalkInterval()
-	{
+	public int getTalkInterval(){
 		return 300;
 	}
 	
@@ -170,141 +172,21 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob
 
 		return super.getCanSpawnHere();
 	}
-
 	
-	// FIXME: This crashes the game (and really belongs in a n AI class anyway).
-	/*
-	@Override
-	public void onUpdate() {		
-		if (!world.isRemote && world.getDifficulty() == EnumDifficulty.PEACEFUL) {
-			setDead();
-			despawnEntity();
-			return;
-		}
-		
-		prevAttackCounter = attackCounter;
-		double var1 = waypointX - posX;
-		double var3 = waypointY - posY;
-		double var5 = waypointZ - posZ;
-		double var7 = var1 * var1 + var3 * var3 + var5 * var5;
-
-		if (var7 < 1.0D || var7 > 3600.0d) {
-			this.waypointX = posX + (double)((rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			this.waypointY = posY + (double)((rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-			this.waypointZ = posZ + (double)((rand.nextFloat() * 2.0F - 1.0F) * 16.0F);
-
-			if (this.targetedEntity != null && !this.targetedEntity.isDead) {
-				double fooX = rand.nextFloat() * 10.0F;
-				double fooY = rand.nextFloat() * 10.0F;
-				double fooZ = rand.nextFloat() * 10.0F;
-
-				waypointX = targetedEntity.posX + (fooX * (rand.nextInt(5) - 2));
-				waypointY = targetedEntity.posY + (fooY * (rand.nextInt(5) - 2));
-				waypointZ = targetedEntity.posZ + (fooZ * (rand.nextInt(5) - 2));
-			}
-		}
-
-		if (this.courseChangeCooldown-- <= 0) {
-			this.courseChangeCooldown += this.rand.nextInt(5) + 2;
-			var7 = (double)MathHelper.sqrt(var7);
-
-			if (isCourseTraversable(waypointX, waypointY, waypointZ, var7)) {
-				motionX += var1 / var7 * 0.1D;
-				motionY += var3 / var7 * 0.1D;
-				motionZ += var5 / var7 * 0.1D;
-			} else {
-				waypointX = posX;
-				waypointY = posY;
-				waypointZ = posZ;
-			}
-		}
-
-		if(targetedEntity != null && targetedEntity.isDead) {
-			targetedEntity = null;
-		}
-
-		if(targetedEntity == null) {
-			targetedEntity = world.getClosestPlayerToEntity(this, 24.0D);
-		}
-
-		double var9 = 24.0D;
-
-		if (targetedEntity != null 
-					&& targetedEntity.getDistanceSq(this) < var9 * var9) {
-			faceEntity(targetedEntity, 10.0F, (float)getVerticalFaceSpeed());
-
-			double var11 = targetedEntity.posX + targetedEntity.motionX - posX;
-			double var13 = targetedEntity.getCollisionBox(targetedEntity).minY 
-					+ targetedEntity.motionY  
-					+ (double)(targetedEntity.height / 4.0F) - posY;
-			double var15 = targetedEntity.posZ + targetedEntity.motionZ - posZ;
-			this.renderYawOffset = rotationYaw = 
-					-((float)Math.atan2(var11, var15)) * 180.0F / (float)Math.PI;
-
-			if(this.canEntityBeSeen(targetedEntity)) {
-				this.attackCounter++;
-				int bar = 0;
-				if(world.getDifficulty() == EnumDifficulty.EASY)
-					bar = 1;
-				if(world.getDifficulty() == EnumDifficulty.NORMAL)
-					bar = 2;
-				if(world.getDifficulty() == EnumDifficulty.HARD)
-					bar = 3;
-				if (this.attackCounter >= (15 - (bar * 2))) {
-					PotionEffect[] foo = this.defineEyeRay();
-					EntityEyeRay ray = new EntityEyeRay(world, this, var11, var13, var15);
-					ray.setEffects(foo);
-					world.spawnEntity(ray);
-					attackCounter = (-55 + (bar * 5));
-				}
-			}
-			else if (this.attackCounter > 0)
-			{
-				--this.attackCounter;
-			}
-		}
-		else
-		{
-			this.renderYawOffset = this.rotationYaw = -((float)Math.atan2(this.motionX, this.motionZ)) * 180.0F / (float)Math.PI;
-
-			if (this.attackCounter > 0)
-				--this.attackCounter;
-		}
-	}
-
 	
-	private boolean isCourseTraversable(double par1, double par3, double par5, double par7) {
-		double var9  = (waypointX - posX) / par7;
-		double var11 = (waypointY - posY) / par7;
-		double var13 = (waypointZ - posZ) / par7;
-		AxisAlignedBB aabb = getCollisionBoundingBox();
-
-		for (int var16 = 1; (double)var16 < par7; ++var16) {
-			aabb.offset(new BlockPos(var9, var11, var13)); //FIXME: NullPointerException here!!!
-
-			if (!world.getCollisionBoxes(this, aabb).isEmpty())
-				return false;
-		}
-
-		return true;
-	}
-	*/
-
-	
+	// TODO: New loot dropping system
 	protected void dropFewItems(boolean par1, int par2)	{
 		int var3;
 		int var4;
 		int var5;
-
 		var3 = this.rand.nextInt(3);
-
-		for (var4 = 0; var4 < var3; var4++)
-		{
+		for (var4 = 0; var4 < var3; var4++){
 			this.dropItem(Items.SPIDER_EYE, 1);
 		}
 	}
 
 	
+	// FIXME: Currently, it takes *NO* damage!
 	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
 		if(par1DamageSource.getTrueSource() != null && (par1DamageSource.getTrueSource() 
 				instanceof EntityLiving && !(par1DamageSource.getTrueSource() instanceof EntityEyeRay)))
