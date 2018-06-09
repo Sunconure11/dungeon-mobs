@@ -2,6 +2,8 @@ package com.gw.dm.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -28,8 +30,7 @@ import com.gw.dm.util.AudioHandler;
 /*
  * FIXME: This mob is hopelessly broken; has no behavior and takes no damage!
  */
-public class EntityAhriman extends EntityDungeonFlying implements IMob
-{
+public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedAttackMob {
 	public int courseChangeCooldown = 0;
 	public double waypointX;
 	public double waypointY;
@@ -72,7 +73,7 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob
 	
 	@Override
 	protected void initEntityAI()   {
-		tasks.addTask(2, new AIBeholderAttack());
+		tasks.addTask(2, new AIBeholderAttack(this));
 		tasks.addTask(4, new AIBeholderWander());
 		tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(6, new EntityAILookIdle(this));
@@ -86,9 +87,9 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob
 		super.entityInit();
 	}
 	
+	
 	public PotionEffect[] defineEyeRay() {
-		if(this.getAttackTarget() instanceof EntityPlayer)
-		{
+		if(this.getAttackTarget() instanceof EntityPlayer) {
 			EntityPlayer foo = (EntityPlayer)this.getAttackTarget();
 			if(foo.capabilities.isCreativeMode)
 				return new PotionEffect[0];
@@ -103,12 +104,11 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob
 		if(this.world.getDifficulty() == EnumDifficulty.HARD)
 			bar = 3;
 
-		int num = this.rand.nextInt(3) + bar;
+		int num = rand.nextInt(3) + bar;
 
 		PotionEffect[] theEffect = new PotionEffect[num];
 
-		for(int i = 0; i < num; i++)
-		{
+		for(int i = 0; i < num; i++) {
 			int eff = this.rand.nextInt(11);
 
 			if(eff == 0)
@@ -147,14 +147,23 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob
 						//new PotionEffectAddled(DungeonMobs.potionAddleID, 180, 0);
 						// Change back?
 
-			if(i > 0)
-			{
+			if(i > 0) {
 				if(theEffect[i - 1].equals(theEffect[i]))
 					i--;
 			}
 		}
 
 		return theEffect;
+	}
+	
+	
+	@Override
+	public void onUpdate() {
+		if(!world.isRemote && 
+				(world.getDifficulty() == EnumDifficulty.PEACEFUL)) {
+			setDead();
+		}
+		super.onUpdate();
 	}
 	
 
@@ -224,4 +233,13 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob
 	protected SoundEvent getDeathSound() {
 		return null;
 	}
+
+	@Override
+	public void attackEntityWithRangedAttack(EntityLivingBase target,
+			float distanceFactor) {
+		// TODO Fire an eye ray!
+	}
+
+	@Override
+	public void setSwingingArms(boolean swingingArms) {}
 }
