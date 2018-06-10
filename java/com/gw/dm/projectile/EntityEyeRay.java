@@ -31,6 +31,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.gw.dm.DungeonMobsHelper;
 
+// FIXME:  This whole class makes no sense!  Its a *PROJECTILE*, nothing more complex. Recreate from scratch!
+
 public class EntityEyeRay extends EntityLiving {
 	PotionEffect[] myEffect;
 
@@ -89,7 +91,7 @@ public class EntityEyeRay extends EntityLiving {
 	
 	@SideOnly(Side.CLIENT)	
 	public boolean isInRangeToRenderDist(double par1) {
-		double var3 = getCollisionBox(this).getAverageEdgeLength() * 4.0D;
+		double var3 = getEntityBoundingBox().getAverageEdgeLength() * 4.0D;
 		var3 *= 64.0D;
 		return par1 < var3 * var3;
 	}
@@ -184,7 +186,7 @@ public class EntityEyeRay extends EntityLiving {
 				var2 = new Vec3d(var3.hitVec.x, var3.hitVec.y, var3.hitVec.z);
 
 			Entity var4 = null;
-			List var5 = world.getEntitiesWithinAABBExcludingEntity(this, getCollisionBox(this)
+			List var5 = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox()
 					.expand(motionX, motionY, motionZ).expand(1.0D, 1.0D, 1.0D)); // Not sure this is correct
 			double var6 = 0.0D;
 
@@ -196,7 +198,7 @@ public class EntityEyeRay extends EntityLiving {
 							&& !(var9 instanceof EntityThrowable)) {
 					float var10 = 0.3F;
 					AxisAlignedBB var11 
-						= var9.getCollisionBox(this).expand((double)var10, 
+						= var9.getEntityBoundingBox().offset((double)var10, 
 								(double)var10, (double)var10);
 					RayTraceResult var12 = var11.calculateIntercept(var15, var2);
 
