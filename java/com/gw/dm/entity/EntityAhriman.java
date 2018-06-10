@@ -80,6 +80,21 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedA
 	protected void entityInit() {
 		super.entityInit();
 	}
+	
+	
+	/**
+	 * A convenience method to create potion effects (also good for debugging).
+	 * 
+	 * @param id
+	 * @param duration
+	 * @param level
+	 * @return
+	 */
+	private PotionEffect makePotionEffect(String id, int duration, int level) {
+		//System.out.println("Creating potion effect " + id);
+		return new PotionEffect(Potion
+				.getPotionFromResourceLocation(id), duration, level);
+	}
 
 
 	public PotionEffect[] defineEyeRay() {
@@ -106,46 +121,35 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedA
 			int eff = this.rand.nextInt(11);
 
 			if(eff == 0)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("slowness"), 120, 2);
+				theEffect[i] = makePotionEffect("slowness", 120, 2);
 			else if(eff == 1)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("mining_fatigue"), 160, 2);
+				theEffect[i] = makePotionEffect("mining_fatigue", 160, 2);
 			else if(eff == 2)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("instant_damage"), 1, 1);
+				theEffect[i] = makePotionEffect("instant_damage", 1, 1);
 			else if(eff == 3)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("nausea"), 280, 1);
+				theEffect[i] = makePotionEffect("nausea", 280, 1);
 			else if(eff == 4)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("resistance"), 100, -2);
+				theEffect[i] = makePotionEffect("resistance", 100, -2);
 			else if(eff == 5)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("blindness"), 120, 1);
+				theEffect[i] = makePotionEffect("blindness", 120, 1);
 			else if(eff == 6)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("hunger"), 400, 3);
+				theEffect[i] = makePotionEffect("hunger", 400, 3);
 			else if(eff == 7)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("weakness"), 120, 1);
+				theEffect[i] = makePotionEffect("weakness", 120, 1);
 			else if(eff == 8)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("poison"), 200, 1);
+				theEffect[i] = makePotionEffect("poison", 200, 1);
 			else if(eff == 9)
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("wither"), 100, 1);
+				theEffect[i] = makePotionEffect("wither", 100, 1);
 			else
-				theEffect[i] = new PotionEffect(Potion
-						.getPotionFromResourceLocation("levitate"), 100, 1);
+				theEffect[i] = makePotionEffect("levitation", 100, 1);
 			//new PotionEffectAddled(DungeonMobs.potionAddleID, 180, 0);
 			// Change back?
 
-			/*if(i > 0) {
+			if(i > 0) {
 				if(theEffect[i - 1].equals(theEffect[i]))
 					i--;
-			}*/
-			System.out.println("The Effect: " + theEffect + "; Contains: " + theEffect[i]);
+			}
+			//System.out.println("The Effect: " + theEffect + "; Contains: " + theEffect[i]);
 		}
 
 		return theEffect;
