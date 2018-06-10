@@ -8,8 +8,11 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import com.gw.dm.entity.EntityAhriman;
 import com.gw.dm.entity.EntityGhoul;
 import com.gw.dm.model.ModelAhriman;
+import com.gw.dm.model.ModelEyeRay;
 import com.gw.dm.model.ModelGhoul;
+import com.gw.dm.projectile.EntityEyeRay;
 import com.gw.dm.render.RenderAhriman;
+import com.gw.dm.render.RenderEyeRay;
 import com.gw.dm.render.RenderGhoul;
 
 public class ClientProxy extends CommonProxy {

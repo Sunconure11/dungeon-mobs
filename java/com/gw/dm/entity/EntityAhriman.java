@@ -280,10 +280,11 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedA
 
 				if (this.attackCounter >= (15 - (bar * 2)))	{
 					PotionEffect[] foo = this.defineEyeRay();
-					EntityEyeRay ray = new EntityEyeRay(world, this, var11, var13, var15);
+					EntityEyeRay ray = new EntityEyeRay(world, this);
 					ray.setEffects(foo);
-					this.world.spawnEntity(ray);
-					this.attackCounter = (-55 + (bar * 5));
+					ray.shoot(var11, var13, var15, 1.25f, 0.0f);
+					world.spawnEntity(ray);
+					attackCounter = (-55 + (bar * 5));
 				}
 			} else if (this.attackCounter > 0) {
 				--attackCounter;

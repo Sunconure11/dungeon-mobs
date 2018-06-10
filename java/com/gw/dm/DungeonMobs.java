@@ -70,78 +70,10 @@ public class DungeonMobs
 	    		"Inspiration includes: Dungeons & Dragons, Legend of Zelda\n" + 
 	    		"\n" + 
 	    		"Rust Monster - Ghoul - Shrieker - Umber Hulk - Hook Horror - Beholder - Troll - Cave Fisher - Destrachan - Illithid - Hell Hound - Rakshasa - Lizalfos - Cockatrice - Manticore - Blade Trap - Thoqqua - Vescavor - Beamos\n";
-	    		//"\n" +
-	    		//"Includes support for: ExtraBiomesXL, Biomes O' Plenty, Highlands, Mob Spawn Controls";
 	    modmeta.url = "http://www.minecraftforum.net/topic/231082-";
-	    
-	    //FMLCommonHandler.instance().bus().register(eventsHandler);
-	    //MinecraftForge.EVENT_BUS.register(eventsHandler);
-	    
-	    /*
-	    Configuration config = new Configuration( event.getSuggestedConfigurationFile() );
-        
-	    try {
-                config.load( );
-                
-                for( Map.Entry<String, Integer> e : IDServer.defaultBlockIDs.entrySet( ) ) 
-                {
-                        String key = e.getKey();
-                        int value = ((Integer)e.getValue( )).intValue( );
-                        IDServer.blockIDs.put( key, config.getBlock( key, value ).getInt( value ) );
-                }
-                
-                for( Map.Entry<String, Integer> e : IDServer.defaultItemIDs.entrySet( ) ) 
-                {
-                        String key = e.getKey();
-                        int value = ((Integer)e.getValue( )).intValue( );
-                        IDServer.itemIDs.put( key, config.getItem( key, value ).getInt( value ) );
-                }
-        } 
-        catch( Exception e ) 
-        {
-                FMLLog.log(Level.SEVERE, e, "Unable to load config for Dungeon Mobs!");
-        } 
-        finally 
-        {
-                config.save( );
-        }
-	    */
-	    
-	    /*
-	     * config land!
-	     */
 	    Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-	    
-	    config.load();
-	    
-	    //Property updateCheck = config.get(Configuration.CATEGORY_GENERAL, "checkForUpdates", true);
-	    //updateCheck.comment = "This value determines whether or not Dungeon Mobs will try to find out if there's a new update.";
-	    //doUpdateCheck = updateCheck.getBoolean();
-	    
-	    //Property beholderSpawn = config.get(Configuration.CATEGORY_GENERAL, "spawnBeholder", true);
-	    //beholderSpawn.comment = "These values determine if a given mob will spawn, if their spawn egg exists, and if they can show up in mob spawners. For blade traps, it also stops the block from generating. However, all blocks are still registered regardless of their parent mob's spawning status, to prevent potential issues.";
-	    //spawnBeholder = beholderSpawn.getBoolean();
-	    
-	    //spawnRustMonster = config.get(Configuration.CATEGORY_GENERAL, "spawnRustMonster", true).getBoolean(true);
-	    //spawnGhoul = config.get(Configuration.CATEGORY_GENERAL, "spawnGhoul", true).getBoolean(true);
-		//spawnShrieker = config.get(Configuration.CATEGORY_GENERAL, "spawnShrieker", true).getBoolean(true);
-		//spawnHookHorror = config.get(Configuration.CATEGORY_GENERAL, "spawnHookHorror", true).getBoolean(true);
-		//spawnUmberHulk = config.get(Configuration.CATEGORY_GENERAL, "spawnUmberHulk", true).getBoolean(true);
-		//spawnBladeTrap = config.get(Configuration.CATEGORY_GENERAL, "spawnBladeTrap", true).getBoolean(true);
-		//spawnCaveFisher = config.get(Configuration.CATEGORY_GENERAL, "spawnCaveFisher", true).getBoolean(true);
-		//spawnCockatrice = config.get(Configuration.CATEGORY_GENERAL, "spawnCockatrice", true).getBoolean(true);
-		//spawnDestrachan = config.get(Configuration.CATEGORY_GENERAL, "spawnDestrachan", true).getBoolean(true);
-		//spawnIllithid = config.get(Configuration.CATEGORY_GENERAL, "spawnIllithid", true).getBoolean(true);
-		//spawnLizalfos = config.get(Configuration.CATEGORY_GENERAL, "spawnLizalfos", true).getBoolean(true);
-		//spawnManticore = config.get(Configuration.CATEGORY_GENERAL, "spawnManticore", true).getBoolean(true);
-		//spawnHellHound = config.get(Configuration.CATEGORY_GENERAL, "spawnHellHound", true).getBoolean(true);
-		//spawnRakshasa = config.get(Configuration.CATEGORY_GENERAL, "spawnRakshasa", true).getBoolean(true);
-		//spawnThoqqua = config.get(Configuration.CATEGORY_GENERAL, "spawnThoqqua", true).getBoolean(true);
-		//spawnTroll = config.get(Configuration.CATEGORY_GENERAL, "spawnTroll", true).getBoolean(true);
-		//spawnVescavor = config.get(Configuration.CATEGORY_GENERAL, "spawnVescavor", true).getBoolean(true);
-	    
-		//spawnBeamos = config.get(Configuration.CATEGORY_GENERAL, "spawnBeamos", true).getBoolean(true);
-		
+	    //TODO: Config
+	    config.load();		
 		config.save();
 		
 		haveWarnedVersionOutOfDate = !ConfigHandler.doUpdateCheck;
@@ -184,21 +116,7 @@ public class DungeonMobs
 	    }
 	    
 	    potionAddleID = getNextPotionIndex(potionTypes);
-	    
-	    /*if(potionAddleID == -1)
-	    	System.out.println("[DM] Could not find an open potion index!");
-	    else
-		    potionAddle = (new PotionAddle(potionAddleID, false, 5787222)).setPotionName("Confusion");*/
-	    
-	    /*
-	    for(int i = 0; i < potionTypes.length; i++)
-	    {
-	    	if(potionTypes[i] != null)
-	    		System.out.println("Potion #" + i + ": " + potionTypes[i].getName());
-	    	else
-	    		System.out.println("Potion #" + i + ": NULL");
-	    }
-	    */
+	    	    
 	    MobRegistrar.registerMobs();
     	proxy.registerRenders();
     }
@@ -208,11 +126,6 @@ public class DungeonMobs
     @EventHandler
     public void init(FMLInitializationEvent event) {
     	AudioHandler.registerSounds();
-    	//MinecraftForge.TERRAIN_GEN_BUS.register(new DungeonMobsWorldGenEvent());
-		
-		/*
-		 * Gotta do biome fetching for mod interoperability...
-		 */
 		
 		ArrayList<Biome> allBiomes = new ArrayList<Biome>();
 		
