@@ -10,7 +10,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.gw.dm.sound.AudioHandler;
+import com.gw.dm.util.AudioHandler;
 
 public class EntityGhoul extends EntityZombie {
 	
