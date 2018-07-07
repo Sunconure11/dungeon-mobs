@@ -142,6 +142,8 @@ public class DungeonMobsHelper {
 	 * @return
 	 */
 	public static boolean isNearSpawner(World world, EntityLiving entity) {
+		return false;
+		/*
 		int minx = (int) (entity.posX - 4), maxx = (int) (entity.posX + 5);
 		int miny = (int) (entity.posY - 1), maxy = (int) (entity.posY + 2);
 		int minz = (int) (entity.posZ - 4), maxz = (int) (entity.posZ + 5);
@@ -154,7 +156,7 @@ public class DungeonMobsHelper {
 					test = new BlockPos(i, j, k);
 					if (world.getBlockState(test).getBlock() == Blocks.MOB_SPAWNER) {
 						TileEntity te = world.getTileEntity(test);
-						if (te instanceof TileEntityMobSpawner) {
+						if (te instanceof TileEntityMobSpawner) {							
 							Entity toSpawn = ((TileEntityMobSpawner) te).getSpawnerBaseLogic()
 									.getCachedEntity();
 							return (toSpawn != null) && (toSpawn.getClass() == entity.getClass());
@@ -163,5 +165,5 @@ public class DungeonMobsHelper {
 				}
 
 		return out;
-	}
+	*/}
 }

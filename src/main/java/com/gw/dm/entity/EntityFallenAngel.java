@@ -157,7 +157,7 @@ public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRan
 
 
 	protected float getSoundVolume() {
-		return 3.2f;
+		return 2.5f;
 	}
 
 

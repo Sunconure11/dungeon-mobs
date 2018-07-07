@@ -141,7 +141,7 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 
 
 	protected float getSoundVolume() {
-		return 2.7f;
+		return 2.5f;
 	}
 
 
