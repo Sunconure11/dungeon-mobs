@@ -1,0 +1,2 @@
+make rust monster foods configurable
+make shrieker spawns congigurable

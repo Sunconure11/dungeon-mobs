@@ -1,0 +1,596 @@
+{
+  "bl_b": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:bl_b",
+        "stream": true
+      }
+    ]
+  },
+  "bl_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:bl_d",
+        "stream": true
+      }
+    ]
+  },
+  "bl_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:bl_l",
+        "stream": true
+      }
+    ]
+  },
+  "rm_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:rm_d",
+        "stream": true
+      }
+    ]
+  },
+  "rm_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:rm_h",
+        "stream": true
+      }
+    ]
+  },
+  "rm_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:rm_l",
+        "stream": true
+      }
+    ]
+  },
+  "g_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:g_l",
+        "stream": true
+      }
+    ]
+  },
+  "g_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:g_d",
+        "stream": true
+      }
+    ]
+  },
+  "g_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:g_h",
+        "stream": true
+      }
+    ]
+  },
+  "s_s": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:s_s",
+        "stream": true
+      }
+    ]
+  },
+  "uh_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:uh_l",
+        "stream": true
+      }
+    ]
+  },
+  "uh_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:uh_h",
+        "stream": true
+      }
+    ]
+  },
+  "hh_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:hh_h",
+        "stream": true
+      }
+    ]
+  },
+  "hh_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:hh_l",
+        "stream": true
+      }
+    ]
+  },
+  "hh_l2": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:hh_l2",
+        "stream": true
+      }
+    ]
+  },
+  "a_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:a_l",
+        "stream": true
+      }
+    ]
+  },
+  "er_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:er_d",
+        "stream": true
+      }
+    ]
+  },
+  "t_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:t_l",
+        "stream": true
+      }
+    ]
+  },
+  "t_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:t_h",
+        "stream": true
+      }
+    ]
+  },
+  "t_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:t_d",
+        "stream": true
+      }
+    ]
+  },
+  "cf_c": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:cf_c",
+        "stream": true
+      }
+    ]
+  },
+  "cf_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:cf_d",
+        "stream": true
+      }
+    ]
+  },
+  "cf_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:cf_h",
+        "stream": true
+      }
+    ]
+  },
+  "cf_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:cf_l",
+        "stream": true
+      }
+    ]
+  },
+  "cf_r": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:cf_r",
+        "stream": true
+      }
+    ]
+  },
+  "d_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:d_d",
+        "stream": true
+      }
+    ]
+  },
+  "d_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:d_h",
+        "stream": true
+      }
+    ]
+  },
+  "d_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:d_l",
+        "stream": true
+      }
+    ]
+  },
+  "d_s": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:d_s",
+        "stream": true
+      }
+    ]
+  },
+  "i_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:i_d",
+        "stream": true
+      }
+    ]
+  },
+  "i_e": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:i_e",
+        "stream": true
+      }
+    ]
+  },
+  "i_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:i_l",
+        "stream": true
+      }
+    ]
+  },
+  "i_p": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:i_p",
+        "stream": true
+      }
+    ]
+  },
+  "nh_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:nh_h",
+        "stream": true
+      }
+    ]
+  },
+  "nh_i": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:nh_i",
+        "stream": true
+      }
+    ]
+  },
+  "nh_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:nh_l",
+        "stream": true
+      }
+    ]
+  },
+  "ra_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ra_l",
+        "stream": true
+      }
+    ]
+  },
+  "ra_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ra_h",
+        "stream": true
+      }
+    ]
+  },
+  "ra_el": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ra_el",
+        "stream": true
+      }
+    ]
+  },
+  "li_a": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:li_a",
+        "stream": true
+      }
+    ]
+  },
+  "li_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:li_d",
+        "stream": true
+      }
+    ]
+  },
+  "li_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:li_h",
+        "stream": true
+      }
+    ]
+  },
+  "li_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:li_l",
+        "stream": true
+      }
+    ]
+  },
+  "li_l2": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:li_l2",
+        "stream": true
+      }
+    ]
+  },
+  "co_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:co_h",
+        "stream": true
+      }
+    ]
+  },
+  "co_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:co_l",
+        "stream": true
+      }
+    ]
+  },
+  "t_s": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:t_s",
+        "stream": true
+      }
+    ]
+  },
+  "ma_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ma_d",
+        "stream": true
+      }
+    ]
+  },
+  "ma_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ma_h",
+        "stream": true
+      }
+    ]
+  },
+  "ma_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ma_l",
+        "stream": true
+      }
+    ]
+  },
+  "ma_l2": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ma_l2",
+        "stream": true
+      }
+    ]
+  },
+  "ma_s": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ma_s",
+        "stream": true
+      }
+    ]
+  },
+  "v_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:v_l",
+        "stream": true
+      }
+    ]
+  },
+  "v_l2": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:v_l2",
+        "stream": true
+      }
+    ]
+  },
+  "v_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:v_h",
+        "stream": true
+      }
+    ]
+  },
+  "v_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:v_d",
+        "stream": true
+      }
+    ]
+  },
+  "be_be": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:be_be",
+        "stream": true
+      }
+    ]
+  },
+  "be_pl": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:be_pl",
+        "stream": true
+      }
+    ]
+  },
+  "be_sw": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:be_sw",
+        "stream": true
+      }
+    ]
+  },
+  "fa_l1": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:fa_l1",
+        "stream": true
+      }
+    ]
+  },
+  "fa_l2": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:fa_l2",
+        "stream": true
+      }
+    ]
+  },
+  "fa_l3": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:fa_l3",
+        "stream": true
+      }
+    ]
+  },
+  "fa_l4": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:fa_l4",
+        "stream": true
+      }
+    ]
+  },
+  "em_l1": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:em_l1",
+        "stream": true
+      }
+    ]
+  },
+  "em_l2": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:em_l2",
+        "stream": true
+      }
+    ]
+  },
+  "em_l3": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:em_l3",
+        "stream": true
+      }
+    ]
+  }
+}
