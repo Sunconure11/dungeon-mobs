@@ -35,8 +35,10 @@ import java.util.Collection;
 @Mod.EventBusSubscriber(modid = DungeonMobs.MODID)
 public class ClientProxy extends CommonProxy {
 
+	@SideOnly(Side.CLIENT)
 	static InputConfusedMovement confusedMovementInput;
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void doStuff(ClientTickEvent event) {
 
