@@ -24,7 +24,7 @@ public class PotionAddle extends Potion {
 		super(par2, par3);
 		this.setIconIndex(0, 0);
 		setRegistryName(DungeonMobs.MODID, "potionAddle");
-		setPotionName("addled");
+		setPotionName("Addled");
 	}
 
 	@Override

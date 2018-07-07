@@ -1,10 +1,8 @@
 package com.gw.dm.util;
 
-import com.gw.dm.DungeonMobs;
 import net.minecraft.util.MovementInput;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
