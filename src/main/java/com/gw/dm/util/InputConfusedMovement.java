@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-@SideOnly(Side.CLIENT)
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class InputConfusedMovement extends MovementInput {
 	protected MovementInput underlyingMovementInput;
 	private boolean confused = false;

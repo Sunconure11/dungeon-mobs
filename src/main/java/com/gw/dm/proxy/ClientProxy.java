@@ -31,14 +31,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Collection;
 
-@SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(modid = DungeonMobs.MODID)
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
-	@SideOnly(Side.CLIENT)
 	static InputConfusedMovement confusedMovementInput;
 
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void doStuff(ClientTickEvent event) {
 
