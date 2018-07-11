@@ -55,9 +55,9 @@ public class ConfigHandler {
 		config.addCustomCategoryComment("General", "General setting effecting all mobs");
 		spawnNaturally = config.get("General", "SpawnNaturally", true,
 				"Determines if dungeon mobs can spawn naturally in the world (\"dark spawn\")").getBoolean();
-		//addToVanillaDungeons = config.get("General", "AddToVanillaDungeons", true,
-		//		"Determines dungeons mobs will be added to spawners in vanilla dungeons").getBoolean();
-		addToVanillaDungeons = false;
+		addToVanillaDungeons = config.get("General", "AddToVanillaDungeons", true,
+				"Determines dungeons mobs will be added to spawners in vanilla dungeons").getBoolean();
+		//addToVanillaDungeons = false;
 		config.addCustomCategoryComment("Mobs", "Which mobs exist in the word \r\n "
 				+ "(if false it does not exist and can never spawn)");
 		spawnRustMonster = config.get("Mobs", "RustMonster", true).getBoolean();

@@ -1,7 +1,9 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityZombie;
@@ -15,6 +17,7 @@ import net.minecraft.world.World;
 public class EntityGhoul extends EntityZombie {
 
 	public boolean ignoreHeight;
+	private static String mobName = DungeonMobs.MODID + ":dmghoul";
 
 	public EntityGhoul(World par1World) {
 		super(par1World);
@@ -55,7 +58,7 @@ public class EntityGhoul extends EntityZombie {
 
 
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {

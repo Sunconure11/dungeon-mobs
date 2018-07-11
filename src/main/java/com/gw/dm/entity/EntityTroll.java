@@ -1,7 +1,9 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -25,6 +27,7 @@ public class EntityTroll extends EntityMob {
 	public int stoneStatus = 1;
 	public int stoneCounter = 0;
 	public int regenTimer = 0;
+	private static String mobName = DungeonMobs.MODID + ":dmtroll";
 
 	public EntityTroll(World par1World) {
 		super(par1World);
@@ -105,7 +108,7 @@ public class EntityTroll extends EntityMob {
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (!this.isValidLightLevel()) {
@@ -140,34 +143,33 @@ public class EntityTroll extends EntityMob {
 
 
 	public void onLivingUpdate() {
-		if (this.world.isDaytime() && !this.world.isRemote) {
-			float var1 = getBrightness();
+		if (world.isDaytime() && !this.world.isRemote) {
+			BlockPos here = new BlockPos(MathHelper.floor(posX),
+					MathHelper.floor(posY),
+					MathHelper.floor(posZ));
 
-			if (var1 > 0.5F && this.world.canBlockSeeSky(
-					new BlockPos(MathHelper.floor(this.posX),
-							MathHelper.floor(this.posY),
-							MathHelper.floor(this.posZ)))) {
-				this.stoneCounter++;
+			if (world.canBlockSeeSky(here) && (world.getLightBrightness(here) > 0.5f)) {
+				stoneCounter++;
 
 				int foo = 20 + (DungeonMobsHelper.getDifficulty(this.world) * 15);
 
 				if (this.stoneCounter % foo == 0) {
-					this.stoneStatus++;
+					stoneStatus++;
 
-					if (this.stoneStatus > (7 + DungeonMobsHelper.getDifficulty(this.world)))
-						this.stoneStatus = 7 + DungeonMobsHelper.getDifficulty(this.world);
+					if (stoneStatus > (7 + DungeonMobsHelper.getDifficulty(this.world)))
+						stoneStatus = 7 + DungeonMobsHelper.getDifficulty(this.world);
 				}
 
 				foo = 40 + (DungeonMobsHelper.getDifficulty(this.world) * 20);
 
-				if (this.stoneCounter % foo == 0) {
+				if (stoneCounter % foo == 0) {
 					if (!this.isPotionActive(Potion.getPotionFromResourceLocation("slowness")))
 						this.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"),
 								foo + (60 - (4 * DungeonMobsHelper.getDifficulty(this.world))),
 								DungeonMobsHelper.getDifficulty(this.world) + 1));
 				}
 
-				if (this.stoneStatus >= (7 + DungeonMobsHelper.getDifficulty(this.world))) {
+				if (stoneStatus >= (7 + DungeonMobsHelper.getDifficulty(this.world))) {
 					playSound(AudioHandler.dmbts, 1.0f, 1.0f);
 					this.turnToStone();
 				}

@@ -1,8 +1,10 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.ai.AIVampireAttack;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -17,6 +19,7 @@ import net.minecraft.world.World;
 public class EntityVampire extends EntityDungeonMob {
 	private boolean escaping;
 	private boolean feelTrapped;
+	private static String mobName = DungeonMobs.MODID + ":dmvampire";
 
 	public EntityVampire(World worldIn) {
 		super(worldIn);
@@ -132,7 +135,7 @@ public class EntityVampire extends EntityDungeonMob {
 		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (posY > 32.0D && !ignoreHeight) {

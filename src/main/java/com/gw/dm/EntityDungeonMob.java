@@ -1,13 +1,16 @@
 package com.gw.dm;
 
+import java.util.StringTokenizer;
+
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class EntityDungeonMob extends EntityMob {
+public abstract class EntityDungeonMob extends EntityMob {
 	public boolean ignoreHeight;
 	public boolean spawnChecked;
-
+	
+	
 	public EntityDungeonMob(World worldIn) {
 		super(worldIn);
 		//this.spawnChecked = !DungeonMobsHelper.getMSC();

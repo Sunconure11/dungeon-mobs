@@ -1,13 +1,13 @@
 package com.gw.dm.util;
 
-import com.gw.dm.network.ConfusionPacket;
-import com.gw.dm.network.KnockBackPacket;
-import com.gw.dm.network.NetworkHelper;
+import java.util.LinkedList;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +16,10 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 
-import java.util.LinkedList;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.network.ConfusionPacket;
+import com.gw.dm.network.KnockBackPacket;
+import com.gw.dm.network.NetworkHelper;
 
 public class DungeonMobsHelper {
 
@@ -141,9 +144,7 @@ public class DungeonMobsHelper {
 	 * @param name
 	 * @return
 	 */
-	public static boolean isNearSpawner(World world, EntityLiving entity) {
-		return false;
-		/*
+	public static boolean isNearSpawner(World world, EntityLiving entity, String name) {
 		int minx = (int) (entity.posX - 4), maxx = (int) (entity.posX + 5);
 		int miny = (int) (entity.posY - 1), maxy = (int) (entity.posY + 2);
 		int minz = (int) (entity.posZ - 4), maxz = (int) (entity.posZ + 5);
@@ -156,14 +157,25 @@ public class DungeonMobsHelper {
 					test = new BlockPos(i, j, k);
 					if (world.getBlockState(test).getBlock() == Blocks.MOB_SPAWNER) {
 						TileEntity te = world.getTileEntity(test);
-						if (te instanceof TileEntityMobSpawner) {							
-							Entity toSpawn = ((TileEntityMobSpawner) te).getSpawnerBaseLogic()
-									.getCachedEntity();
-							return (toSpawn != null) && (toSpawn.getClass() == entity.getClass());
+						if (te instanceof TileEntityMobSpawner) {
+							try {
+								TileEntityMobSpawner mobSpawner = (TileEntityMobSpawner)te;
+								NBTTagCompound nbt = new NBTTagCompound();
+								mobSpawner.getSpawnerBaseLogic().writeToNBT(nbt);
+								if (nbt.hasKey("SpawnData")) {
+									NBTTagCompound spawnData = nbt.getCompoundTag("SpawnData");
+									if (spawnData.hasKey("id")) {
+										String mobSpawnEntityId = spawnData.getString("id");
+										String id = (name);
+										if (mobSpawnEntityId.equalsIgnoreCase(id))
+											return true;
+									}
+								}
+							} catch (Exception e) {}
 						}
 					}
 				}
-
 		return out;
-	*/}
+	}
+	
 }

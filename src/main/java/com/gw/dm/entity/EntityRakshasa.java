@@ -5,6 +5,7 @@ import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.projectile.EntityMagicMissile;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -30,6 +31,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob {
+	
+	private static String mobName = DungeonMobs.MODID + ":dmrakshasa";
 
 	private static final ResourceLocation rakshasaTextures
 			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Rakshasa.png");
@@ -167,7 +170,7 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

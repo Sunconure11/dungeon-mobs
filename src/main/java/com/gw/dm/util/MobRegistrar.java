@@ -65,146 +65,146 @@ public class MobRegistrar {
 	public static void registerMobs() {
 		// GHOUL
 		if (spawnGhoul) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMGhoul"),
-					EntityGhoul.class, MODID + ".DMGhoul", ghoulID, instance, 80, 3,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmghoul"),
+					EntityGhoul.class, MODID + ".dmghoul", ghoulID, instance, 80, 3,
 					true, 0x5F3E67, 0x362C1A);
 		}
 		// BEHOLDER
 		if (spawnBeholder) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMBeholder"),
-					EntityAhriman.class, MODID + ".DMBeholder", ahrimanID,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmbeholder"),
+					EntityAhriman.class, MODID + ".dmbeholder", ahrimanID,
 					instance, 80, 3, true, 0x720000, 0xFFF99A);
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMEyeRay"),
-					EntityEyeRay.class, MODID + "DMEyeRay", eyerayID, instance, 80, 1, true);
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmeyeray"),
+					EntityEyeRay.class, MODID + ".dmeyeray", eyerayID, instance, 80, 1, true);
 		}
 		// TROLL
 		if (spawnTroll) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMTroll"),
-					EntityTroll.class, MODID + ".DMTroll", trollID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmtroll"),
+					EntityTroll.class, MODID + ".dmtroll", trollID, instance, 80, 3, true,
 					0x164300, 0x292929);
 		}
 		// MANTICORE
 		if (spawnManticore) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMManticore"),
-					EntityManticore.class, MODID + ".DMManticore", manticoreID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmmanticore"),
+					EntityManticore.class, MODID + ".dmmanticore", manticoreID, instance, 80, 3, true,
 					0xd28247, 0x201f1d);
 		}
 		// REVENANT
 		if (spawnRevenant) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMRevenant"),
-					EntityRevenant.class, MODID + ".DMRevenant", revenantID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmrevenant"),
+					EntityRevenant.class, MODID + ".dmrevenant", revenantID, instance, 80, 3, true,
 					0x004400, 0x777777);
 		}
 		// VAMPIRE
 		if (spawnVampire) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMVampire"),
-					EntityVampire.class, MODID + ".DMVampire", vampireID, instance, 80, 2, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmvampire"),
+					EntityVampire.class, MODID + ".dmvampire", vampireID, instance, 80, 2, true,
 					0x000000, 0x550000);
 		}
 		// HOOK HORROR
 		if (spawnHookHorror) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMHookHorror"),
-					EntityHookHorror.class, MODID + ".DMHookHorror", hookHorrorID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmhookhorror"),
+					EntityHookHorror.class, MODID + ".dmhookhorror", hookHorrorID, instance, 80, 3, true,
 					0x4372AA, 0xD9D9F3);
 		}
 		// DESTRACHAN
 		if (spawnDestrachan) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMDestrachan"),
-					EntityDestrachan.class, MODID + ".DMDestrachan", destrachanID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmdestrachan"),
+					EntityDestrachan.class, MODID + ".dmdestrachan", destrachanID, instance, 80, 3, true,
 					0xc99918, 0x161616);
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMSonicBoom"),
-					EntityEyeRay.class, MODID + "DMSonicBoom", sonicBoomID, instance, 80, 1, true);
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmsonicboom"),
+					EntityEyeRay.class, MODID + "dmsonicboom", sonicBoomID, instance, 80, 1, true);
 		}
 		// CAVE FISHER
 		if (spawnCaveFisher) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMCaveFisher"),
-					EntityCaveFisher.class, MODID + ".DMCaveFisher", caveFisherID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmcavefisher"),
+					EntityCaveFisher.class, MODID + ".dmcavefisher", caveFisherID, instance, 80, 3, true,
 					0xf6e7cc, 0x29a0b2);
 		}
 		// HELL HOUND
 		if (spawnHellHound) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMNetherHound"),
-					EntityNetherHound.class, MODID + ".DMNetherHound", netherHoundID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmnetherhound"),
+					EntityNetherHound.class, MODID + ".dmnetherhound", netherHoundID, instance, 80, 3, true,
 					0xf9390d, 0x775532);
 		}
 		// RUST MONSTER
 		if (spawnRustMonster) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMRustMonster"),
-					EntityRustMonster.class, MODID + ".DMRustMonster", rustMonsterID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmrustmonster"),
+					EntityRustMonster.class, MODID + ".dmrustmonster", rustMonsterID, instance, 80, 3, true,
 					0x643200, 0x7C0F0F);
 		}
 		// UMBER HULK
 		if (spawnUmberHulk) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMUmberHulk"),
-					EntityUmberHulk.class, MODID + ".DMUmberHulk", umberHulkID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmumberhulk"),
+					EntityUmberHulk.class, MODID + ".dmumberhulk", umberHulkID, instance, 80, 3, true,
 					0x734A12, 0x8B795E);
 		}
 		// COCKATRICE
 		if (spawnUmberHulk) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMPetrified"),
-					EntityPetrified.class, MODID + ".DMPetrified", petrifiedID, instance, 80, 3, true);
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMCockatrice"),
-					EntityCockatrice.class, MODID + ".DMCockatrice", cockatriceID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmpetrified"),
+					EntityPetrified.class, MODID + ".dmpetrified", petrifiedID, instance, 80, 3, true);
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmcockatrice"),
+					EntityCockatrice.class, MODID + ".dmcockatrice", cockatriceID, instance, 80, 3, true,
 					0x8acf92, 0x93ab96);
 		}
 		// SHRIEKER
 		if (spawnShrieker) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMShrieker"),
-					EntityShrieker.class, MODID + ".DMShrieker", shriekerID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmshrieker"),
+					EntityShrieker.class, MODID + ".dmshrieker", shriekerID, instance, 80, 3, true,
 					0xBBA786, 0xE4DCB0);
 		}
 		// THOQQUA
 		if (spawnThoqqua) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMThoqqua"),
-					EntityThoqqua.class, MODID + ".DMThoqqua", thoqquaID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmthoqqua"),
+					EntityThoqqua.class, MODID + ".dmthoqqua", thoqquaID, instance, 80, 3, true,
 					0xf1c33a, 0xb08968);
 		}
 		// VESCAVOR
 		if (spawnVescavor) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMVescavor"),
-					EntityVescavor.class, MODID + ".DMVescavor", vescavorID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmvescavor"),
+					EntityVescavor.class, MODID + ".dmvescavor", vescavorID, instance, 80, 3, true,
 					0x170007, 0xa05155);
 		}
 		// MIND FLAYER
 		if (spawnIllithid) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMIllithid"),
-					EntityIllithid.class, MODID + ".DMIllithid", illithidID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmillithid"),
+					EntityIllithid.class, MODID + ".dmillithid", illithidID, instance, 80, 3, true,
 					0x9932CD, 0xf6f4ba);
 		}
 		// RAKSHASA
 		if (spawnRakshasa) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMRakshasa"),
-					EntityRakshasa.class, MODID + ".DMRakshasa", rakshasaID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmrakshasa"),
+					EntityRakshasa.class, MODID + ".dmrakshasa", rakshasaID, instance, 80, 3, true,
 					0xa06c3e, 0xdec580);
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMRakshasaImage"),
-					EntityRakshasaImage.class, MODID + ".DMRakshasaImage", rakshasaImageID,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmrakshasaImage"),
+					EntityRakshasaImage.class, MODID + ".dmrakshasaImage", rakshasaImageID,
 					instance, 80, 3, true);
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMMagicMissile"),
-					EntityMagicMissile.class, MODID + ".DMMagicMissle", magicMissileID,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmmagicmissile"),
+					EntityMagicMissile.class, MODID + ".dmmagicmissle", magicMissileID,
 					instance, 80, 1, true);
 		}
 		// FALLEN ANGEL
 		if (spawnFallenAngel) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMFallenAngel"),
-					EntityFallenAngel.class, MODID + ".DMFallenAngel", fallenAngelID,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmfallenangel"),
+					EntityFallenAngel.class, MODID + ".dmfallenangel", fallenAngelID,
 					instance, 80, 3, true, 0x000000, 0x998800);
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMLightBall"),
-					EntityLightball.class, MODID + ".DMLightBall", lightballID, instance,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmlightball"),
+					EntityLightball.class, MODID + ".dmlightball", lightballID, instance,
 					80, 1, true);
 		}
 		// LIZALFOS
 		if (spawnLizalfos) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMLizalfos"),
-					EntityLizalfos.class, MODID + ".DMLizalfos", lizalfosID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmlizalfos"),
+					EntityLizalfos.class, MODID + ".dmlizalfos", lizalfosID, instance, 80, 3, true,
 					0x257a36, 0xe5d067);
 		}
 		// OUTER THING
 		if (spawnOuterThing) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMEldermob"),
-					EntityEldermob.class, MODID + ".DMEldermob", eldermobID, instance, 80, 3, true,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmeldermob"),
+					EntityEldermob.class, MODID + ".dmeldermob", eldermobID, instance, 80, 3, true,
 					0x003300, 0x004422);
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMDarkball"),
-					EntityEldermobBall.class, MODID + ".DMDarkball", darkballID,
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmdarkball"),
+					EntityEldermobBall.class, MODID + ".dmdarkball", darkballID,
 					instance, 80, 1, true);
 		}
 	}
@@ -317,24 +317,24 @@ public class MobRegistrar {
 
 
 	public static void addToVanillaDungeons() {
-		if (spawnGhoul) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMGhoul"), 1);
-		if (spawnBeholder) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMBeholder"), 1);
-		if (spawnTroll) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMTroll"), 1);
-		if (spawnManticore) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMManticore"), 1);
-		if (spawnRevenant) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMRevenant"), 1);
-		if (spawnVampire) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMVampire"), 1);
-		if (spawnHookHorror) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMHookHorror"), 1);
-		if (spawnDestrachan) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMDestrachan"), 1);
-		if (spawnCaveFisher) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMCaveFisher"), 1);
-		if (spawnHellHound) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMHellHound"), 1);
-		if (spawnRustMonster) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMRustMonster"), 1);
-		if (spawnUmberHulk) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMUmberHulk"), 1);
-		if (spawnCockatrice) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMCockatrice"), 1);
-		if (spawnThoqqua) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMThoqqua"), 1);
-		if (spawnVescavor) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMVescavor"), 1);
-		if (spawnIllithid) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMIllithid"), 1);
-		if (spawnRakshasa) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMRakshasa"), 1);
-		if (spawnLizalfos) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "DMLizalfos"), 1);
+		if (spawnGhoul) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmghoul"), 1);
+		if (spawnBeholder) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmbeholder"), 1);
+		if (spawnTroll) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmtroll"), 1);
+		if (spawnManticore) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmmanticore"), 1);
+		if (spawnRevenant) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmrevenant"), 1);
+		if (spawnVampire) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmvampire"), 1);
+		if (spawnHookHorror) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmhookhorror"), 1);
+		if (spawnDestrachan) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmdestrachan"), 1);
+		if (spawnCaveFisher) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmcavefisher"), 1);
+		if (spawnHellHound) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmhellhound"), 1);
+		if (spawnRustMonster) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmrustmonster"), 1);
+		if (spawnUmberHulk) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmumberhulk"), 1);
+		if (spawnCockatrice) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmcockatrice"), 1);
+		if (spawnThoqqua) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmthoqqua"), 1);
+		if (spawnVescavor) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmvescavor"), 1);
+		if (spawnIllithid) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmillithid"), 1);
+		if (spawnRakshasa) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmrakshasa"), 1);
+		if (spawnLizalfos) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmlizalfos"), 1);
 	}
 
 }

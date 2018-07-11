@@ -1,10 +1,13 @@
 package com.gw.dm.entity;
 
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
@@ -21,6 +24,7 @@ import net.minecraft.world.World;
 
 public class EntityHookHorror extends EntityDungeonMob {
 	private boolean ignoreHeight;
+	private static String mobName = DungeonMobs.MODID + ":dmhookhorror";
 
 	public EntityHookHorror(World par1World) {
 		super(par1World);
@@ -118,7 +122,7 @@ public class EntityHookHorror extends EntityDungeonMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 

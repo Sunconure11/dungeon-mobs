@@ -1,8 +1,10 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -36,6 +38,9 @@ public class EntityIllithid extends EntityDungeonMob {
 
 	private List dominatedEntities;
 	private Map ownerIDs;
+	
+	private static String mobName = DungeonMobs.MODID + ":dmillithid";
+	
 
 	private EntityAIAttackMelee grapple = new EntityAIAttackMelee(this, 1.0F, false);
 
@@ -122,7 +127,7 @@ public class EntityIllithid extends EntityDungeonMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

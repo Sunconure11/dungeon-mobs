@@ -1,8 +1,10 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,6 +20,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityManticore extends EntityDungeonMob implements IRangedAttackMob {
+	
+	private static String mobName = DungeonMobs.MODID + ":dmmanticore";
 
 	public EntityManticore(World par1World) {
 		super(par1World);
@@ -111,7 +115,7 @@ public class EntityManticore extends EntityDungeonMob implements IRangedAttackMo
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

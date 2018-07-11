@@ -1,5 +1,6 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonFlying;
 import com.gw.dm.ai.AIEldermobMove;
 import com.gw.dm.projectile.EntityCloudGenerator;
@@ -7,6 +8,7 @@ import com.gw.dm.projectile.EntityEldermobBall;
 import com.gw.dm.projectile.EntityFireCloudGenerator;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -29,7 +31,9 @@ import net.minecraft.world.WorldProviderEnd;
 
 public class EntityEldermob extends EntityDungeonFlying implements IMob, IRangedAttackMob {
 	private static final int SD = 1024 * 1024;
-	;
+	
+	private static String mobName = DungeonMobs.MODID + ":dmeldermob";
+	
 	private static PotionEffect poison
 			= new PotionEffect((Potion) Potion.REGISTRY
 			.getObject(new ResourceLocation("poison")), 300, 0);
@@ -158,7 +162,7 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48.0d);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(80.0d);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(66.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(1.0d);
 	}
@@ -185,7 +189,7 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 				&& deepEnoughInEnd() && (rand.nextInt(24) == 0)) {
 			return super.getCanSpawnHere();
 		}
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

@@ -1,6 +1,8 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,6 +17,7 @@ import net.minecraft.world.World;
 
 public class EntityRevenant extends EntityZombie {
 	public boolean ignoreHeight;
+	private static String mobName = DungeonMobs.MODID + ":dmrevenant";
 
 	public EntityRevenant(World worldIn) {
 		super(worldIn);
@@ -87,7 +90,7 @@ public class EntityRevenant extends EntityZombie {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

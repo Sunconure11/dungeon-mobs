@@ -1,10 +1,12 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.ai.EntityAIFollowTwin;
 import com.gw.dm.ai.EntityAIMonsterPanic;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -52,6 +54,8 @@ public class EntityLizalfos extends EntityDungeonMob {
 
 	private EntityAIHurtByTarget revenge;
 	private EntityAINearestAttackableTarget target;
+	
+	private static String mobName = DungeonMobs.MODID + ":lizalfos";
 
 
 	public EntityLizalfos(World par1World) {
@@ -174,7 +178,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 					&& world.getEntitiesInAABBexcluding(this, getEntityBoundingBox(), null).isEmpty()
 					&& !world.containsAnyLiquid(getEntityBoundingBox());
 		}
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

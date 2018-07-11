@@ -1,5 +1,6 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonFlying;
 import com.gw.dm.ai.AIAngelAttack;
 import com.gw.dm.ai.AIAngelWander;
@@ -7,6 +8,7 @@ import com.gw.dm.ai.TaskAngelAgroOnPlayer;
 import com.gw.dm.projectile.EntityLightball;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -31,6 +33,8 @@ import net.minecraft.world.WorldProviderHell;
 import javax.annotation.Nullable;
 
 public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRangedAttackMob {
+	
+	private static String mobName = DungeonMobs.MODID + ":dmfallenangel";
 
 	private static final DataParameter<Boolean> SWINGING_ARMS
 			= EntityDataManager.<Boolean>createKey(EntityFallenAngel.class, DataSerializers.BOOLEAN);
@@ -173,7 +177,7 @@ public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRan
 		if (world.provider instanceof WorldProviderHell) {
 			return super.getCanSpawnHere();
 		}
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

@@ -1,10 +1,12 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.potion.PotionEffectAddled;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 import com.gw.dm.util.MiscRegistrar;
+
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public class EntityVescavor extends EntityDungeonMob {
 	private int confuseTicks;
+	private static String mobName = DungeonMobs.MODID + ":dmvescavor";
 
 	public EntityVescavor(World par1World) {
 		super(par1World);
@@ -81,7 +84,7 @@ public class EntityVescavor extends EntityDungeonMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)))

@@ -1,5 +1,7 @@
 package com.gw.dm;
 
+import java.util.StringTokenizer;
+
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
@@ -7,7 +9,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-public class EntityDungeonFlying extends EntityFlying {
+public abstract class EntityDungeonFlying extends EntityFlying {
 	public boolean ignoreHeight;
 	public boolean spawnChecked;
 

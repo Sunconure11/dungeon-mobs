@@ -1,9 +1,13 @@
 package com.gw.dm.entity;
 
+import java.util.StringTokenizer;
+
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.DungeonMobsDamageSource;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -18,6 +22,7 @@ import net.minecraft.world.World;
 public class EntityCockatrice extends EntityDungeonMob {
 	private boolean ignoreHeight;
 	private int stoneChance;
+	private static String mobName; 
 
 	private EntityPetrified stonedPlayer;
 	private boolean incoming;
@@ -67,7 +72,7 @@ public class EntityCockatrice extends EntityDungeonMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)))
@@ -171,5 +176,25 @@ public class EntityCockatrice extends EntityDungeonMob {
 				stonedPlayer = null;
 			}
 		}
+	}
+	
+	
+	public String getRegistryName() {
+		if(mobName == null) fixNameIfNull();
+		return mobName;
+	}
+	
+	
+	public void setRegistryName(String name) {
+		mobName = (DungeonMobs.MODID + ":" + name).trim().toLowerCase();
+	}	
+	
+	
+	private void fixNameIfNull() {
+		StringTokenizer fixer = new StringTokenizer(this.getName()
+				.trim().toLowerCase(), ".");
+		do {
+			mobName = fixer.nextToken();
+		} while(fixer.hasMoreTokens());
 	}
 }

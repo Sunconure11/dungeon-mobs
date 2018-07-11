@@ -1,9 +1,11 @@
 package com.gw.dm.entity;
 
 
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
@@ -36,6 +38,8 @@ public class EntityShrieker extends EntityMob {
 	private boolean hasScreamed;
 	private int maxSummoned;
 	private int cooldown;
+	
+	private static String mobName = DungeonMobs.MODID + ":shrieker";
 
 
 	public EntityShrieker(World par1World) {
@@ -183,7 +187,7 @@ public class EntityShrieker extends EntityMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		BlockPos here = new BlockPos(posX, posY, posZ);

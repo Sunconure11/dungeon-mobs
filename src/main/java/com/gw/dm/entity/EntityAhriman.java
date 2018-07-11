@@ -1,5 +1,8 @@
 package com.gw.dm.entity;
 
+import java.util.StringTokenizer;
+
+import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonFlying;
 import com.gw.dm.ai.AIBeholderAttack;
 import com.gw.dm.ai.AIBeholderWander;
@@ -8,6 +11,8 @@ import com.gw.dm.ai.TaskBeholderAgro;
 import com.gw.dm.projectile.EntityEyeRay;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+
+import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -39,6 +44,7 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedA
 	public boolean ignoreHeight;
 	private MoveHelperBeholder moveHelper;
 	private int aggroCooldown = 0;
+	public static String mobName = DungeonMobs.MODID + ":dmahriman";
 
 	public EntityAhriman(World par1World) {
 		super(par1World);
@@ -165,7 +171,7 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedA
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {
