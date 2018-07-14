@@ -1,19 +1,12 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonFlying;
-import com.gw.dm.ai.AIEldermobMove;
-import com.gw.dm.projectile.EntityCloudGenerator;
-import com.gw.dm.projectile.EntityEldermobBall;
-import com.gw.dm.projectile.EntityFireCloudGenerator;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
-
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
@@ -28,6 +21,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderEnd;
+
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonFlying;
+import com.gw.dm.ai.AIEldermobMove;
+import com.gw.dm.projectile.EntityCloudGenerator;
+import com.gw.dm.projectile.EntityEldermobBall;
+import com.gw.dm.projectile.EntityFireCloudGenerator;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityEldermob extends EntityDungeonFlying implements IMob, IRangedAttackMob {
 	private static final int SD = 1024 * 1024;
@@ -154,6 +156,9 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 		if (world.getDifficulty() == EnumDifficulty.PEACEFUL) {
 			setDead();
 		}
+		if((getAttackTarget() != null) && getAttackTarget().isDead) {
+			setAttackTarget(null);
+		}
 		super.onUpdate();
 	}
 
@@ -217,6 +222,14 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		if (source.isFireDamage() || source.isMagicDamage()) {
 			return false;
+		}
+		Entity entity = source.getTrueSource();
+		if ((entity != null) && (entity instanceof EntityLivingBase)) {
+			if ((getAttackTarget() == null)
+					|| (rand.nextInt(20) < amount)
+					|| (!canEntityBeSeen(getAttackTarget()))) {
+				setAttackTarget((EntityLivingBase) entity);
+			}
 		}
 		return super.attackEntityFrom(source, amount);
 	}
