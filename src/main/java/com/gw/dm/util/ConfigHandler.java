@@ -1,13 +1,19 @@
 package com.gw.dm.util;
 
-import com.gw.dm.DungeonMobs;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.entity.EntityRustMonster;
+import com.gw.dm.entity.EntityShrieker;
 
 public class ConfigHandler {
 
@@ -16,7 +22,7 @@ public class ConfigHandler {
 
 	public static boolean spawnNaturally;
 	public static boolean addToVanillaDungeons;
-	public static boolean addToDoomlikeDungeons;
+	//public static boolean addToDoomlikeDungeons;
 
 	public static boolean spawnRustMonster;
 	public static boolean spawnGhoul;
@@ -41,6 +47,11 @@ public class ConfigHandler {
 	public static boolean spawnOuterThing;
 	//public static boolean spawnBeamos;
 	//public static boolean spawnBladeTrap;
+	
+	public static boolean replaceRMFoods;
+	public static List<String> rustMonFoodsList;
+	
+	public static List<String> shriekerMobs;
 
 
 	public static void init() {
@@ -57,7 +68,8 @@ public class ConfigHandler {
 				"Determines if dungeon mobs can spawn naturally in the world (\"dark spawn\")").getBoolean();
 		addToVanillaDungeons = config.get("General", "AddToVanillaDungeons", true,
 				"Determines dungeons mobs will be added to spawners in vanilla dungeons").getBoolean();
-		//addToVanillaDungeons = false;
+		
+		// Mob Existence
 		config.addCustomCategoryComment("Mobs", "Which mobs exist in the word \r\n "
 				+ "(if false it does not exist and can never spawn)");
 		spawnRustMonster = config.get("Mobs", "RustMonster", true).getBoolean();
@@ -86,6 +98,41 @@ public class ConfigHandler {
 		spawnFallenAngel = config.get("Mobs", "FallenAngel", true).getBoolean();
 		spawnOuterThing = config.get("Mobs", "OuterThing", true).getBoolean();
 
+		// Rust Monster Foods
+		config.addCustomCategoryComment("Rust Monster Foods", "Items eaten / wanted by "
+				+ "rust monsters)");
+		replaceRMFoods = config.get("Rust Monster Foods", "Replace", false, 
+				"If true the food list for rust monster will be replaced, "
+				+ "\r\notherwise it will be kept and added to.").getBoolean();
+		rustMonFoodsList = new ArrayList<String>();
+		String[] array = config.get("Rust Monster Foods", 
+				"FoodList", 
+				new String[]{}, 
+				"Items the rust monsters want to eat (put metal here); \r\n"
+						+ "format \"modid:reistry_name\"")
+				.getStringList();
+		rustMonFoodsList.addAll(Arrays.asList(array));
+		if(!rustMonFoodsList.isEmpty()) {
+			if(replaceRMFoods) {
+				EntityRustMonster.setFoods(rustMonFoodsList);
+			} else {
+				EntityRustMonster.appendToFoods(rustMonFoodsList);
+			}
+		}
+		
+		// Shrieker Summons
+		config.addCustomCategoryComment("Shrieker Summons", "Mobs that can be summoned by shriekers");
+		shriekerMobs = new ArrayList<>();
+		array = config.get("Shrieker Summons", "ShriekerSummons", new String[]{}, 
+				"Mobs the that may be spawned when shriekers shriek (will be added to list); \r\n"
+						+ "format \"modid:resource_location\"")
+				.getStringList();
+		shriekerMobs.addAll(Arrays.asList(array));
+		if(!shriekerMobs.isEmpty()) {
+			EntityShrieker.appendToSummonList(shriekerMobs);
+		}
+		
+		
 		// Save It!!!
 		config.save();
 	}

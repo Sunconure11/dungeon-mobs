@@ -1,11 +1,10 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.ai.EntityAIAttackAnythingWanted;
-import com.gw.dm.ai.EntityAIFindItem;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -20,13 +19,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import java.util.*;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.ai.EntityAIAttackAnythingWanted;
+import com.gw.dm.ai.EntityAIFindItem;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityRustMonster extends EntityDungeonMob {
 	
@@ -89,18 +94,7 @@ public class EntityRustMonster extends EntityDungeonMob {
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAIFindItem(this, 24, foods));
 	}
-
-	public static void appendToFoods(Item single) {
-		foods.add(single);
-	}
-
-	public static void appendToFoods(Collection<Item> list) {
-		foods.addAll(list);
-	}
-
-	public static void appendToFoods(Item[] list) {
-		foods.addAll((List<Item>) Arrays.asList(list));
-	}
+	
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -240,8 +234,45 @@ public class EntityRustMonster extends EntityDungeonMob {
 		return super.attackEntityAsMob(ent);
 	}
 
+	// Manipulate food list with items
+	
 	public void setFoods(Set<Item> list) {
 		foods = list;
+	}
+
+	public static void appendToFoods(Item single) {
+		foods.add(single);
+	}
+
+	public static void appendToFoods(Collection<Item> list) {
+		foods.addAll(list);
+	}
+
+	public static void appendToFoods(Item[] list) {
+		foods.addAll((List<Item>) Arrays.asList(list));
+	}
+	
+	// Manipulate food list with strings
+	
+	public static void setFoods(List<String> list) {
+		Set<Item> set = new HashSet<>();
+		for(String rl : list) {
+			set.add(Item.REGISTRY.getObject(new ResourceLocation(rl)));
+		}
+		foods = set;
+	}
+	
+	
+	public static void appendToFoods(String single) {
+		foods.add(Item.REGISTRY.getObject(new ResourceLocation(single)));
+	}
+	
+	public static void appendToFoods(List<String> list) {
+		Set<Item> set = new HashSet<>();
+		for(String rl : list) {
+			set.add(Item.REGISTRY.getObject(new ResourceLocation(rl)));
+		}
+		foods.addAll(set);
 	}
 
 	public Entity getTarget() {

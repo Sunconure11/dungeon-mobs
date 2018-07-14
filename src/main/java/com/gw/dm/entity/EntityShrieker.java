@@ -1,10 +1,10 @@
 package com.gw.dm.entity;
 
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -20,9 +20,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityShrieker extends EntityMob {
 	private static ResourceLocation[] entityNames = {
@@ -75,6 +76,39 @@ public class EntityShrieker extends EntityMob {
 
 		entityNames = null;
 		entityNames = newlist;
+	}
+
+	private static void appendToSummonListNoGrow(String location, int index) {
+		StringTokenizer tokens = new StringTokenizer(location, ":");
+		String modid = tokens.nextToken(), name;
+		if (tokens.hasMoreTokens()) {
+			name = tokens.nextToken();
+		} else {
+			String msg = "Could not add mob "
+					+ location + "; name malformed.";
+			System.err.println(msg);
+			Logger.getLogger("Error").log(Level.WARNING, msg);
+			return;
+		}
+
+		entityNames[index] = new ResourceLocation(modid, name);
+	}
+	
+	public static void  appendToSummonList(List<String> locations) {
+		ResourceLocation[] newlist
+				= new ResourceLocation[entityNames.length + locations.size()];
+		
+		int ctr;
+		
+		for (ctr = 0; ctr < entityNames.length; ctr++) {
+			newlist[ctr] = entityNames[ctr];
+		}
+		
+		entityNames = newlist;
+		
+		for(String location : locations) {
+			appendToSummonListNoGrow(location, ctr++);
+		}
 	}
 
 	protected void applyEntityAttributes() {
