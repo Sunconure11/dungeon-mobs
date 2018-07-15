@@ -214,36 +214,38 @@ public class ModelBladeTrap extends ModelBase {
 	}
 
 
-	@Override
-	public void render(Entity entity, float f, float f1,
-	                   float f2, float f3, float f4, float f5) {
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		Base.render(f5);
-		BotSpikeB.render(f5);
-		BotSpikeC.render(f5);
-		BotSpikeD.render(f5);
-		BotSpikeA.render(f5);
-		TopSpikeA.render(f5);
-		TopSpikeC.render(f5);
-		TopSpikeD.render(f5);
-		TopSpikeB.render(f5);
-		RerSpikeB.render(f5);
-		RerSpikeC.render(f5);
-		RerSpikeD.render(f5);
-		RerSpikeA.render(f5);
-		FrnSpikeA.render(f5);
-		FrnSpikeC.render(f5);
-		FrnSpikeD.render(f5);
-		FrnSpikeB.render(f5);
-		LftSpikeB.render(f5);
-		LftSpikeC.render(f5);
-		LftSpikeD.render(f5);
-		LftSpikeA.render(f5);
-		RitSpikeD.render(f5);
-		RitSpikeC.render(f5);
-		RitSpikeA.render(f5);
-		RitSpikeB.render(f5);
+	@Override	
+	public void render(Entity entity, float limbSwing, float limbSwingAmount,
+	                   float ageInTicks, float netHeadYaw, float headPitch, float scale) {
+		super.render(entity, limbSwing, limbSwingAmount, ageInTicks, 
+				netHeadYaw, headPitch, scale);
+		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, 
+				netHeadYaw, headPitch, scale, entity);
+		Base.render(scale);
+		BotSpikeB.render(scale);
+		BotSpikeC.render(scale);
+		BotSpikeD.render(scale);
+		BotSpikeA.render(scale);
+		TopSpikeA.render(scale);
+		TopSpikeC.render(scale);
+		TopSpikeD.render(scale);
+		TopSpikeB.render(scale);
+		RerSpikeB.render(scale);
+		RerSpikeC.render(scale);
+		RerSpikeD.render(scale);
+		RerSpikeA.render(scale);
+		FrnSpikeA.render(scale);
+		FrnSpikeC.render(scale);
+		FrnSpikeD.render(scale);
+		FrnSpikeB.render(scale);
+		LftSpikeB.render(scale);
+		LftSpikeC.render(scale);
+		LftSpikeD.render(scale);
+		LftSpikeA.render(scale);
+		RitSpikeD.render(scale);
+		RitSpikeC.render(scale);
+		RitSpikeA.render(scale);
+		RitSpikeB.render(scale);
 	}
 
 
@@ -257,6 +259,35 @@ public class ModelBladeTrap extends ModelBase {
 	@Override
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
+	}
+	
+	
+	public void renderAllTE(float scale) {
+		Base.render(scale);
+		BotSpikeB.render(scale);
+		BotSpikeC.render(scale);
+		BotSpikeD.render(scale);
+		BotSpikeA.render(scale);
+		TopSpikeA.render(scale);
+		TopSpikeC.render(scale);
+		TopSpikeD.render(scale);
+		TopSpikeB.render(scale);
+		RerSpikeB.render(scale);
+		RerSpikeC.render(scale);
+		RerSpikeD.render(scale);
+		RerSpikeA.render(scale);
+		FrnSpikeA.render(scale);
+		FrnSpikeC.render(scale);
+		FrnSpikeD.render(scale);
+		FrnSpikeB.render(scale);
+		LftSpikeB.render(scale);
+		LftSpikeC.render(scale);
+		LftSpikeD.render(scale);
+		LftSpikeA.render(scale);
+		RitSpikeD.render(scale);
+		RitSpikeC.render(scale);
+		RitSpikeA.render(scale);
+		RitSpikeB.render(scale);
 	}
 
 }

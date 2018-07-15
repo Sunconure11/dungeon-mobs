@@ -10,13 +10,13 @@ import com.gw.dm.DungeonMobs;
 import com.gw.dm.entity.EntityBladeTrap;
 import com.gw.dm.model.ModelBladeTrap;
 
-public class RenderBladeTrap extends RenderLiving {
+public class RenderBladeTrapEntity extends RenderLiving {
 	private static final ResourceLocation bladeTrapTextures 
 		= new ResourceLocation(DungeonMobs.MODID, "textures/entity/BladeTrap.png");
 	protected ModelBladeTrap model;
 	
 	
-	public RenderBladeTrap(RenderManager manager, ModelBladeTrap modelBT, float f) {
+	public RenderBladeTrapEntity(RenderManager manager, ModelBladeTrap modelBT, float f) {
 		super(manager, modelBT, f);
 		model = (ModelBladeTrap)mainModel;
 	}
