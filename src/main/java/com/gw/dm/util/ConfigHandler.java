@@ -46,7 +46,7 @@ public class ConfigHandler {
 	public static boolean spawnFallenAngel;
 	public static boolean spawnOuterThing;
 	//public static boolean spawnBeamos;
-	//public static boolean spawnBladeTrap;
+	public static boolean spawnBladeTrap;
 	
 	public static boolean replaceRMFoods;
 	public static List<String> rustMonFoodsList;
@@ -97,6 +97,9 @@ public class ConfigHandler {
 		spawnVampire = config.get("Mobs", "Vampire", true).getBoolean();
 		spawnFallenAngel = config.get("Mobs", "FallenAngel", true).getBoolean();
 		spawnOuterThing = config.get("Mobs", "OuterThing", true).getBoolean();
+		spawnBladeTrap = config.get("Mobs", "BladeTrap", false, 
+				"This will never actually spawn, but can be enabled for dev testing")
+				.getBoolean();
 
 		// Rust Monster Foods
 		config.addCustomCategoryComment("Rust Monster Foods", "Items eaten / wanted by "

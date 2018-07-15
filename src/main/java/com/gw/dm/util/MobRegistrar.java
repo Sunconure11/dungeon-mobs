@@ -207,6 +207,12 @@ public class MobRegistrar {
 					EntityEldermobBall.class, MODID + ".dmdarkball", darkballID,
 					instance, 80, 1, true);
 		}
+		// BLADE TRAP
+		if(spawnBladeTrap) {
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMBladeTrap"), 
+					EntityBladeTrap.class, MODID + ".DMBladeTrap", bladeTrapID, instance, 80, 3, true,  
+					0x464646, 0xb70202);
+		}
 	}
 
 

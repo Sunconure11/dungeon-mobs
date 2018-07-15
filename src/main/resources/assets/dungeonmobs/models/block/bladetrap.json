@@ -1,0 +1,7 @@
+{
+    "__comment": "A stand in -- I want the TESR to render the tile entity, not render the block!",
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "dungeonmobs:entity/bladetrap"
+    }
+} 

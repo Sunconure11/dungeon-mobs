@@ -1,6 +1,7 @@
 package com.gw.dm.proxy;
 
 import com.gw.dm.DungeonMobs;
+import com.gw.dm.blocks.TileEntityBladeTrap;
 import com.gw.dm.entity.*;
 import com.gw.dm.model.*;
 import com.gw.dm.projectile.EntityEldermobBall;
@@ -11,6 +12,7 @@ import com.gw.dm.render.*;
 import com.gw.dm.util.DungeonMobsHelper;
 import com.gw.dm.util.InputConfusedMovement;
 import com.gw.dm.util.MiscRegistrar;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
@@ -21,6 +23,7 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -63,6 +66,7 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 
+	
 	private static boolean isAddled(EntityPlayer player) {
 		Collection<PotionEffect> effects = player.getActivePotionEffects();
 		for (PotionEffect eff : effects) {
@@ -73,6 +77,7 @@ public class ClientProxy extends CommonProxy {
 		return false;
 	}
 
+	
 	@Override
 	public void registerRenders() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityGhoul.class,
@@ -297,6 +302,16 @@ public class ClientProxy extends CommonProxy {
 										"textures/entity/eldermobball.png"));
 					}
 				});
+		RenderingRegistry.registerEntityRenderingHandler(EntityBladeTrap.class, 
+		new IRenderFactory<EntityBladeTrap>(){
+			@Override
+			public Render<EntityBladeTrap> createRenderFor(
+					RenderManager manager) {
+				return new RenderBladeTrapEntity(manager, new ModelBladeTrap(), 0.5f);
+			}			
+		});
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBladeTrap.class, 
+				new RenderBladeTrapBlock());
 	}
 
 }

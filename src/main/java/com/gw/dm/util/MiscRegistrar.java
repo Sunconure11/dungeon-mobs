@@ -39,7 +39,7 @@ public class MiscRegistrar {
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		event.getRegistry().register(itemLavarock = new ItemLavarock(blockLavarock));
-		event.getRegistry().register(itemBladeTrap = new ItemBlock(blockBladeTrap));
+		//event.getRegistry().register(itemBladeTrap = new ItemBlock(blockBladeTrap));
 	}
 
 
