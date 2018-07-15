@@ -74,7 +74,7 @@ public class EntityVampire extends EntityDungeonMob {
 			if (world.isDaytime() && (getBrightness() > 0.5f) && world.canSeeSky(getPosition())) {
 				setFire(8);
 				setHealth(getHealth() - 1.0f);
-			} else if (!this.isDead && (getHealth() > 0)) {
+			} else if(!this.isDead && (getHealth() > 0)) {
 				setHealth(getHealth() + 0.05f);
 			}
 		}

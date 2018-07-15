@@ -18,7 +18,7 @@ import java.util.Arrays;
 @Mod(modid = DungeonMobs.MODID, name = "Dungeon Mobs", version = DungeonMobs.VERSION)
 public class DungeonMobs {
 	public static final String MODID = "dungeonmobs";
-	public static final String VERSION = "5.1.1";
+	public static final String VERSION = "5.2.0";
 
 	@Instance(MODID)
 	public static DungeonMobs instance;
