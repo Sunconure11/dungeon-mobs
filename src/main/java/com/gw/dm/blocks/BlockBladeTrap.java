@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -25,9 +26,10 @@ import net.minecraft.world.World;
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.DungeonMobsDamageSource;
 import com.gw.dm.entity.EntityBladeTrap;
+import com.gw.dm.util.MiscRegistrar;
 
 
-public class BlockBladeTrap extends BlockContainer {
+public class BlockBladeTrap extends ModContainerBase {
 	public static boolean fallInstantly = false;
 
 	public int[][] dir = 
@@ -47,8 +49,11 @@ public class BlockBladeTrap extends BlockContainer {
 		setHardness(20.0F);
 		setResistance(20F);
 		setTickRandomly(true);
-		setUnlocalizedName("bladetrap");
+		setUnlocalizedName(DungeonMobs.MODID + ".bladetrap");
 		setRegistryName(DungeonMobs.MODID, "bladetrap");
+		MiscRegistrar.addBlock(this);
+		MiscRegistrar.addItem(new ItemBlock(this)
+			.setRegistryName(getRegistryName()));
 	}
 
 	

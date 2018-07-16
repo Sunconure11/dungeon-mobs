@@ -1,15 +1,16 @@
 package com.gw.dm.blocks;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.util.DungeonMobsHelper;
-import net.minecraft.block.Block;
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
@@ -18,9 +19,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.util.DungeonMobsHelper;
+import com.gw.dm.util.MiscRegistrar;
 
-public class BlockLavarock extends Block {
+public class BlockLavarock extends ModBlockBase {
 
 	public static final PropertyInteger TIME_TO_LIVE = PropertyInteger.create("age", 0, 15);
 
@@ -31,6 +34,10 @@ public class BlockLavarock extends Block {
 		setUnlocalizedName(DungeonMobs.MODID + ".lavarock");
 		setDefaultState(blockState.getBaseState().withProperty(TIME_TO_LIVE, Integer.valueOf(6)));
 		setLightLevel(0.4375f);
+		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		MiscRegistrar.addBlock(this);
+		MiscRegistrar.addItem(new ItemBlock(this)
+			.setRegistryName(getRegistryName()));
 	}
 
 

@@ -1,5 +1,5 @@
-block.bladetrap.name=Blade Trap
-tile.bladetrap.name=Blade Trap
+block.dungeonmobs.bladetrap.name=Blade Trap
+tile.dungeonmobs.bladetrap.name=Blade Trap
 entity.dungeonmobs.dmbladetrap.name=Blade Trap
 entity.dungeonmobs.dmrustmonster.name=Rust Monster
 entity.dungeonmobs.dmghoul.name=Ghoul
@@ -33,6 +33,6 @@ tile.lavarock.name=Magma Rock
 entity.dungeonmobs.dmvescavor.name=Vescavor
 death.attack.bladetrap=%s was killed by a blade trap
 death.attack.petrified=%s was turned to stone
-block.beamos.name=Beamos
-tile.beamos.name=Beamos
+block.dungeonmobs.beamos.name=Beamos
+tile.dungeonmobs.beamos.name=Beamos
 entity.dungeonmobs.dmbeamosbeam.name=Beamos Laser

@@ -3,7 +3,9 @@ package com.gw.dm;
 import com.gw.dm.proxy.CommonProxy;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.ConfigHandler;
+import com.gw.dm.util.MiscRegistrar;
 import com.gw.dm.util.MobRegistrar;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -48,13 +50,15 @@ public class DungeonMobs {
 		ConfigHandler.configDir = ConfigHandler.findConfigDir(event.getModConfigurationDirectory());
 		ConfigHandler.init();
 
+		MiscRegistrar.initBlocks();
+		
+		
 		MobRegistrar.registerMobs();
 		if (ConfigHandler.spawnNaturally) {
 			MobRegistrar.registerSpawns();
 		}
 		if (ConfigHandler.addToVanillaDungeons) {
 			MobRegistrar.addToVanillaDungeons();
-			;
 		}
 		proxy.registerRenders();
 	}

@@ -72,7 +72,7 @@ public class EntityRevenant extends EntityZombie {
 	protected void initEntityAI() {
 		tasks.addTask(0, new EntityAISwimming(this));
 		tasks.addTask(1, new EntityAIRestrictSun(this));
-		tasks.addTask(2, new EntityAILeapAtTarget(this, 1.0F));
+		tasks.addTask(2, new EntityAILeapAtTarget(this, 0.8F));
 		tasks.addTask(3, new EntityAIZombieAttack(this, 1.0D, false));
 		tasks.addTask(4, new EntityAIFleeSun(this, 1.0D));
 		tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));

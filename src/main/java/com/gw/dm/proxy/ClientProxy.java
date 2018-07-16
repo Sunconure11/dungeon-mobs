@@ -1,28 +1,20 @@
 package com.gw.dm.proxy;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.blocks.TileEntityBladeTrap;
-import com.gw.dm.entity.*;
-import com.gw.dm.model.*;
-import com.gw.dm.projectile.EntityEldermobBall;
-import com.gw.dm.projectile.EntityEyeRay;
-import com.gw.dm.projectile.EntityLightball;
-import com.gw.dm.projectile.EntityMagicMissile;
-import com.gw.dm.render.*;
-import com.gw.dm.util.DungeonMobsHelper;
-import com.gw.dm.util.InputConfusedMovement;
-import com.gw.dm.util.MiscRegistrar;
+import java.util.Collection;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderZombie;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -31,7 +23,85 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 
-import java.util.Collection;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.blocks.TileEntityBladeTrap;
+import com.gw.dm.entity.EntityAhriman;
+import com.gw.dm.entity.EntityBladeTrap;
+import com.gw.dm.entity.EntityCaveFisher;
+import com.gw.dm.entity.EntityCockatrice;
+import com.gw.dm.entity.EntityDestrachan;
+import com.gw.dm.entity.EntityEldermob;
+import com.gw.dm.entity.EntityFallenAngel;
+import com.gw.dm.entity.EntityGhoul;
+import com.gw.dm.entity.EntityHookHorror;
+import com.gw.dm.entity.EntityIllithid;
+import com.gw.dm.entity.EntityLizalfos;
+import com.gw.dm.entity.EntityManticore;
+import com.gw.dm.entity.EntityNetherHound;
+import com.gw.dm.entity.EntityPetrified;
+import com.gw.dm.entity.EntityRakshasa;
+import com.gw.dm.entity.EntityRakshasaImage;
+import com.gw.dm.entity.EntityRevenant;
+import com.gw.dm.entity.EntityRustMonster;
+import com.gw.dm.entity.EntityShrieker;
+import com.gw.dm.entity.EntityThoqqua;
+import com.gw.dm.entity.EntityTroll;
+import com.gw.dm.entity.EntityUmberHulk;
+import com.gw.dm.entity.EntityVampire;
+import com.gw.dm.entity.EntityVescavor;
+import com.gw.dm.model.ModelAhriman;
+import com.gw.dm.model.ModelBladeTrap;
+import com.gw.dm.model.ModelCaveFisher;
+import com.gw.dm.model.ModelCockatrice;
+import com.gw.dm.model.ModelDestrachan;
+import com.gw.dm.model.ModelEldermob;
+import com.gw.dm.model.ModelFallenAngel;
+import com.gw.dm.model.ModelGhoul;
+import com.gw.dm.model.ModelHookHorror;
+import com.gw.dm.model.ModelIllithid;
+import com.gw.dm.model.ModelLizalfos;
+import com.gw.dm.model.ModelManticore;
+import com.gw.dm.model.ModelNetherHound;
+import com.gw.dm.model.ModelPetrified;
+import com.gw.dm.model.ModelRakshasa;
+import com.gw.dm.model.ModelRustMonster;
+import com.gw.dm.model.ModelShrieker;
+import com.gw.dm.model.ModelThoqqua;
+import com.gw.dm.model.ModelTroll;
+import com.gw.dm.model.ModelUmberHulk;
+import com.gw.dm.model.ModelVescavor;
+import com.gw.dm.projectile.EntityEldermobBall;
+import com.gw.dm.projectile.EntityEyeRay;
+import com.gw.dm.projectile.EntityLightball;
+import com.gw.dm.projectile.EntityMagicMissile;
+import com.gw.dm.render.RenderAhriman;
+//import com.gw.dm.render.RenderBladeTrapBlock;
+import com.gw.dm.render.RenderBladeTrapEntity;
+import com.gw.dm.render.RenderCaveFisher;
+import com.gw.dm.render.RenderCockatrice;
+import com.gw.dm.render.RenderDestrachan;
+import com.gw.dm.render.RenderEldermob;
+import com.gw.dm.render.RenderFallenAngel;
+import com.gw.dm.render.RenderGhoul;
+import com.gw.dm.render.RenderHookHorror;
+import com.gw.dm.render.RenderIllithid;
+import com.gw.dm.render.RenderLizalfos;
+import com.gw.dm.render.RenderMagicMissile;
+import com.gw.dm.render.RenderManticore;
+import com.gw.dm.render.RenderNetherHound;
+import com.gw.dm.render.RenderPetrified;
+import com.gw.dm.render.RenderProjectile;
+import com.gw.dm.render.RenderRakshasa;
+import com.gw.dm.render.RenderRustMonster;
+import com.gw.dm.render.RenderShrieker;
+import com.gw.dm.render.RenderThoqqua;
+import com.gw.dm.render.RenderTroll;
+import com.gw.dm.render.RenderUmberHulk;
+import com.gw.dm.render.RenderVampire;
+import com.gw.dm.render.RenderVescavor;
+import com.gw.dm.util.DungeonMobsHelper;
+import com.gw.dm.util.InputConfusedMovement;
+import com.gw.dm.util.MiscRegistrar;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
@@ -310,8 +380,15 @@ public class ClientProxy extends CommonProxy {
 				return new RenderBladeTrapEntity(manager, new ModelBladeTrap(), 0.5f);
 			}			
 		});
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBladeTrap.class, 
-				new RenderBladeTrapBlock());
+		//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBladeTrap.class, 
+		//		new RenderBladeTrapBlock());
+	}
+	
+
+	@Override
+	public void registerItemRender(Item item, int meta, String id) {
+		ModelLoader.setCustomModelResourceLocation(item, meta, 
+				new ModelResourceLocation(item.getRegistryName(), id));
 	}
 
 }
