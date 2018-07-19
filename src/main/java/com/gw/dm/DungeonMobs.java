@@ -1,10 +1,6 @@
 package com.gw.dm;
 
-import com.gw.dm.proxy.CommonProxy;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.ConfigHandler;
-import com.gw.dm.util.MiscRegistrar;
-import com.gw.dm.util.MobRegistrar;
+import java.util.Arrays;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -15,12 +11,17 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import java.util.Arrays;
+import com.gw.dm.entity.EntityLizalfos;
+import com.gw.dm.proxy.CommonProxy;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
+import com.gw.dm.util.MiscRegistrar;
+import com.gw.dm.util.MobRegistrar;
 
 @Mod(modid = DungeonMobs.MODID, name = "Dungeon Mobs", version = DungeonMobs.VERSION)
 public class DungeonMobs {
 	public static final String MODID = "dungeonmobs";
-	public static final String VERSION = "5.2.0";
+	public static final String VERSION = "5.3.0";
 
 	@Instance(MODID)
 	public static DungeonMobs instance;
@@ -77,7 +78,7 @@ public class DungeonMobs {
 	
 	
 	private static void initMonsterSpecialData() {
-		LizalfosinitLocations();
+		EntityLizalfos.initLocations();
 	}
 
 }

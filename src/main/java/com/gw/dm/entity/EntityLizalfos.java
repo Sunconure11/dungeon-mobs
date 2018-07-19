@@ -1,18 +1,24 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.ai.EntityAIFollowTwin;
-import com.gw.dm.ai.EntityAIMonsterPanic;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -29,9 +35,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import java.lang.ref.WeakReference;
-import java.util.Iterator;
-import java.util.List;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.ai.EntityAIFollowTwin;
+import com.gw.dm.ai.EntityAIMonsterPanic;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityLizalfos extends EntityDungeonMob {
 	public boolean myTwinIsDead;
@@ -52,7 +61,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 	private EntityAIAvoidEntity retreat;
 	private EntityAIMonsterPanic panic;
 		
-	private boolean newspawn;
+	private boolean newSpawn;
 
 	private EntityAIHurtByTarget revenge;
 	private EntityAINearestAttackableTarget target;
@@ -124,12 +133,22 @@ public class EntityLizalfos extends EntityDungeonMob {
 	 * @param w
 	 */
 	private EntityLizalfos(World world, EntityLizalfos twin, 
-				double x, double z, double w) {
+				double x, double y, double z) {
 		this(world);
 		newSpawn = false;
-		// TODO: Make it work!
-		// I need to look more carefully at the old, broken system, so I can 
-		// take its code out as I replace it with this system.
+				
+		twin.setTwin(this);
+		setTwin(twin);
+		
+		isTwin = true;
+		
+		this.twinEntityID = this.getTwin().getEntityId();
+		this.getTwin().twinEntityID = this.getEntityId();
+		
+		setLocationAndAngles(x, y, z, this.rotationYaw, this.rotationPitch);
+		
+		setIsTwin(true);
+		setTwinID(this.twinID);
 	}
 
 
@@ -235,7 +254,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 
 
 	public void setDead() {
-		if (myTwinWeak != null && !isTwinDead())
+		if(this.myTwin != null && myTwinWeak != null && !isTwinDead())
 			myTwinWeak.get().killTwin();
 		super.setDead();
 	}
@@ -251,7 +270,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 		par1NBTTagCompound.setBoolean("hasFled", hasRetreated);
 		par1NBTTagCompound.setBoolean("isRunning", isRetreating);
 		par1NBTTagCompound.setInteger("runTimer", runTimer);
-		par1NBTTagCompound.setInteger("newSpawn", newSpawn);
+		par1NBTTagCompound.setBoolean("newSpawn", newSpawn);
 	}
 
 
@@ -278,108 +297,19 @@ public class EntityLizalfos extends EntityDungeonMob {
 	}
 
 
-	@Override
-	protected void entityInit() {
-		if (twinID == -1 && !world.isRemote) {
-			boolean twinSpawned = false;
-
-			twinID = world.rand.nextInt(16000);
-
-			int spawnAttempts = 0;
-
-			while (!twinSpawned && spawnAttempts < 6) {
-				WeakReference<EntityLizalfos> bar
-						= new WeakReference<EntityLizalfos>(new EntityLizalfos(world));
-
-				EntityLizalfos foo = bar.get();
-
-				double randX = posX + ((world.rand.nextFloat() - 0.5F) * 8.0F);
-				double randY = posY + 0.5F;
-				double randZ = posZ + ((world.rand.nextFloat() - 0.5F) * 8.0F);
-
-				foo.setLocationAndAngles(randX, randY, randZ, rotationYaw, rotationPitch);
-
-				foo.setIsTwin(true);
-				foo.setTwinID(twinID);
-
-				if (foo.getCanSpawnHere()) {
-					foo.setTwin(this);
-					setTwin(foo);
-
-					twinEntityID = getTwin().getEntityId();
-					getTwin().twinEntityID = getEntityId();
-
-					foo.entityInit();
-					world.spawnEntity(foo);
-					twinSpawned = true;
-				} else {
-					spawnAttempts++;
-				}
-			}
-
-			if (spawnAttempts > 5)
-				setDead();
-		}
-		super.entityInit();
-	}
-
-
-	public void forceTwinSpawn() {
-		if (twinID == -1 && !world.isRemote) {
-			boolean twinSpawned = false;
-
-			twinID = world.rand.nextInt(16000);
-
-			int spawnAttempts = 0;
-
-			while (!twinSpawned && spawnAttempts < 6) {
-				WeakReference<EntityLizalfos> bar
-						= new WeakReference<EntityLizalfos>(new EntityLizalfos(world));
-
-				EntityLizalfos foo = bar.get();
-
-				double randX = posX + ((world.rand.nextFloat() - 0.5F) * 8.0F);
-				double randY = posY + 0.5F;
-				double randZ = posZ + ((world.rand.nextFloat() - 0.5F) * 8.0F);
-
-				foo.setLocationAndAngles(randX, randY, randZ, rotationYaw, rotationPitch);
-
-				foo.setIsTwin(true);
-				foo.setTwinID(twinID);
-
-				if (foo.getCanSpawnHere()) {
-					foo.setTwin(this);
-					setTwin(foo);
-
-					twinEntityID = getTwin().getEntityId();
-					getTwin().twinEntityID = getEntityId();
-
-					foo.entityInit();
-					world.spawnEntity(foo);
-					twinSpawned = true;
-				} else {
-					spawnAttempts++;
-				}
-			}
-
-			if (spawnAttempts > 5)
-				setDead();
-		}
-	}
-
-
 	// FIXME: This should probably by in onUpdate(), not onLivingUpdate()...?
 	public void onLivingUpdate() {
 		if(newSpawn) {
 			spawnTwin();
 		}
-		/*if (!isTwinDead() && myTwinWeak == null)
-			goodToGo = false;
+		
+		//if (!isTwinDead() && myTwinWeak == null)
+		//	goodToGo = false;
 
 		if (!goodToGo && !isTwinDead()) {
 			findTwin();
 			goodToGo = true;
-		}*/
+		}
 
 		if (runTimer > 0) {
 			runTimer--;
@@ -589,15 +519,18 @@ public class EntityLizalfos extends EntityDungeonMob {
 		Collections.shuffle(locations);
 		EntityLizalfos twin = new EntityLizalfos(world, this, posX, posY, posZ);
 		for(LocOffset offset : locations) {
-			twin.posX = posX + offset.x;
-			twin.posZ = pozZ + offset.z;
+			twin.setLocationAndAngles(posX + offset.x, posY, posZ + offset.z, 
+					rotationYaw, rotationPitch);
 			if(twin.isNotColliding()) {
 				world.spawnEntity(twin);
+				twinEntityID = twin.getEntityId();
+				twin.twinEntityID = getEntityId();
 				successful = true;
 				break;
 			}
 		}
 		if(!successful) {
+			twin.setDead();
 			setDead();
 		}
 	}
@@ -605,9 +538,9 @@ public class EntityLizalfos extends EntityDungeonMob {
 	
 	public static void initLocations() {
 		for(int i = -2; i < 3; i++)
-			for(int k = -2; j < 3; j++) {
-				if((x != 0) && (z != 0) {
-					locations.add(new LocOffset(i, j);
+			for(int j = -2; j < 3; j++) {
+				if((i != 0) && (j != 0)) {
+					locations.add(new LocOffset(i, j));
 				}
 		}
 	}
