@@ -1,4 +1,3 @@
-block.dungeonmobs.bladetrap.name=Blade Trap
 tile.dungeonmobs.bladetrap.name=Blade Trap
 entity.dungeonmobs.dmbladetrap.name=Blade Trap
 entity.dungeonmobs.dmrustmonster.name=Rust Monster
@@ -28,7 +27,6 @@ entity.dungeonmobs.dmvampire.name=Vampire
 entity.dungeonmobs.dmfallenangel.name=Fallen Angel
 entity.dungeonmobs.dmlightball.name=Corrupted Lightball
 entity.dungeonmobs.dmeldermob.name=Outer Thing
-block.lavarock.name=Magma Rock
 tile.lavarock.name=Magma Rock
 entity.dungeonmobs.dmvescavor.name=Vescavor
 death.attack.bladetrap=%s was killed by a blade trap

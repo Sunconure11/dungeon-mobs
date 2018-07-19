@@ -16,6 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -69,10 +71,16 @@ public class BlockBladeTrap extends ModContainerBase {
 	
 	
 	@Override
-	public boolean isOpaqueCube(net.minecraft.block.state.IBlockState state) {
+	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
-
+	
+	
+	@Override
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
+	
 	
 	@Override
 	public void onEntityCollidedWithBlock(World world, 
@@ -185,19 +193,11 @@ public class BlockBladeTrap extends ModContainerBase {
 		}
 	}
 
+	
 	@Override
-	public int quantityDropped(Random par1Random)
-	{
+	public int quantityDropped(Random par1Random) {
 		return 0;
 	}
-
-	/*
-	@Override
-	public int idDropped(int par1, Random par2Random, int par3)
-    {
-        return 0;
-    }
-	 */
 
 	
 	public static boolean canMoveInto(World par0World, int par1, int par2, int par3) {

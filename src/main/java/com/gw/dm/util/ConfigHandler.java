@@ -84,9 +84,7 @@ public class ConfigHandler {
 		spawnCockatrice = config.get("Mobs", "Cockatrice", true).getBoolean();
 		spawnDestrachan = config.get("Mobs", "Destrachan", true).getBoolean();
 		spawnIllithid = config.get("Mobs", "Illithid", true).getBoolean();
-		spawnLizalfos = config.get("Mobs", "Lizalfos", false,
-				"False because partially broken (does not spwn twin), \r\nbut can "
-						+ "be set to spawn if you like.").getBoolean();
+		spawnLizalfos = config.get("Mobs", "Lizalfos", true).getBoolean();
 		spawnManticore = config.get("Mobs", "Manticore", true).getBoolean();
 		spawnHellHound = config.get("Mobs", "HellHound", true).getBoolean();
 		spawnRakshasa = config.get("Mobs", "Rakshasa", true).getBoolean();
@@ -97,9 +95,7 @@ public class ConfigHandler {
 		spawnVampire = config.get("Mobs", "Vampire", true).getBoolean();
 		spawnFallenAngel = config.get("Mobs", "FallenAngel", true).getBoolean();
 		spawnOuterThing = config.get("Mobs", "OuterThing", true).getBoolean();
-		spawnBladeTrap = config.get("Mobs", "BladeTrap", false, 
-				"This will never actually spawn, but can be enabled for dev testing")
-				.getBoolean();
+		spawnBladeTrap = config.get("Mobs", "BladeTrap", true).getBoolean();
 
 		// Rust Monster Foods
 		config.addCustomCategoryComment("Rust Monster Foods", "Items eaten / wanted by "

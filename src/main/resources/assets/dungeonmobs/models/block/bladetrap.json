@@ -1,6 +1,6 @@
 {
     "parent": "block/cross",
     "textures": {
-        "all": "dungeonmobs:blocks/bladetrap"
+        "cross": "dungeonmobs:blocks/bladetrap"
     }
 } 
