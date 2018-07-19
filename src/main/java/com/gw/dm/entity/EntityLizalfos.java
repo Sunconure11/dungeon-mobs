@@ -58,6 +58,12 @@ public class EntityLizalfos extends EntityDungeonMob {
 	private static String mobName = DungeonMobs.MODID + ":lizalfos";
 
 
+	/**
+	 * The primary (and public) constructor, for creating the first 
+	 * of each pair -- i.e., the normal constructor for core spawning.
+	 * 
+	 * @param par1World
+	 */
 	public EntityLizalfos(World par1World) {
 		super(par1World);
 		ignoreHeight = false;
@@ -92,6 +98,24 @@ public class EntityLizalfos extends EntityDungeonMob {
 		tasks.addTask(5, new EntityAILookIdle(this));
 		targetTasks.addTask(0, revenge);
 		targetTasks.addTask(1, target);
+	}
+	
+	
+	/**
+	 * A special private constructor, just for creating the twin.
+	 * 
+	 * @param world
+	 * @param twin
+	 * @param x
+	 * @param z
+	 * @param w
+	 */
+	private EntityLizalfos(World world, EntityLizalfos twin, 
+				double x, double z, double w) {
+		this(world);
+		// TODO: Make it work!
+		// I need to look more carefully at the old, broken system, so I can 
+		// take its code out as I replace it with this system.
 	}
 
 
