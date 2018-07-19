@@ -51,12 +51,23 @@ public class EntityLizalfos extends EntityDungeonMob {
 	private EntityAIAttackMelee attack;
 	private EntityAIAvoidEntity retreat;
 	private EntityAIMonsterPanic panic;
+		
+	private boolean newspawn;
 
 	private EntityAIHurtByTarget revenge;
 	private EntityAINearestAttackableTarget target;
 	
 	private static String mobName = DungeonMobs.MODID + ":lizalfos";
 
+	private static class LocOffset {
+		public double x, z;
+		public LocOffset(int x, int z) {
+			this.x = (double)x;
+			this.z = (double)x;
+		}
+	}
+	
+	private static final List<LocOffset> locations = new ArrayList<>();
 
 	/**
 	 * The primary (and public) constructor, for creating the first 
@@ -72,6 +83,8 @@ public class EntityLizalfos extends EntityDungeonMob {
 		myTwin = null;
 		myTwinIsDead = false;
 		goodToGo = false;
+		
+		newSpawn = true;
 
 		isRetreating = false;
 		hasRetreated = false;
@@ -113,6 +126,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 	private EntityLizalfos(World world, EntityLizalfos twin, 
 				double x, double z, double w) {
 		this(world);
+		newSpawn = false;
 		// TODO: Make it work!
 		// I need to look more carefully at the old, broken system, so I can 
 		// take its code out as I replace it with this system.
@@ -237,6 +251,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 		par1NBTTagCompound.setBoolean("hasFled", hasRetreated);
 		par1NBTTagCompound.setBoolean("isRunning", isRetreating);
 		par1NBTTagCompound.setInteger("runTimer", runTimer);
+		par1NBTTagCompound.setInteger("newSpawn", newSpawn);
 	}
 
 
@@ -250,6 +265,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 		hasRetreated = par1NBTTagCompound.getBoolean("hasFled");
 		isRetreating = par1NBTTagCompound.getBoolean("isRunning");
 		runTimer = par1NBTTagCompound.getInteger("runTimer");
+		newSpawn = par1NBTTagCompound.getBoolean("newSpawn");
 
 		if (isRetreating) {
 			retreat = new EntityAIAvoidEntity(this, EntityPlayer.class, 12.0F, 1.0F, 0.4F);
@@ -352,14 +368,18 @@ public class EntityLizalfos extends EntityDungeonMob {
 	}
 
 
+	// FIXME: This should probably by in onUpdate(), not onLivingUpdate()...?
 	public void onLivingUpdate() {
-		if (!isTwinDead() && myTwinWeak == null)
+		if(newSpawn) {
+			spawnTwin();
+		}
+		/*if (!isTwinDead() && myTwinWeak == null)
 			goodToGo = false;
 
 		if (!goodToGo && !isTwinDead()) {
 			findTwin();
 			goodToGo = true;
-		}
+		}*/
 
 		if (runTimer > 0) {
 			runTimer--;
@@ -556,6 +576,39 @@ public class EntityLizalfos extends EntityDungeonMob {
 
 				playSound(sound.getFallSound(), sound.getVolume() * 0.5F, sound.getPitch() * 0.75F);
 			}
+		}
+	}
+	
+	
+	private void spawnTwin() {
+		newSpawn = false;
+		if(world.isRemote) {
+			return;
+		}
+		boolean successful = false;
+		Collections.shuffle(locations);
+		EntityLizalfos twin = new EntityLizalfos(world, this, posX, posY, posZ);
+		for(LocOffset offset : locations) {
+			twin.posX = posX + offset.x;
+			twin.posZ = pozZ + offset.z;
+			if(twin.isNotColliding()) {
+				world.spawnEntity(twin);
+				successful = true;
+				break;
+			}
+		}
+		if(!successful) {
+			setDead();
+		}
+	}
+	
+	
+	public static void initLocations() {
+		for(int i = -2; i < 3; i++)
+			for(int k = -2; j < 3; j++) {
+				if((x != 0) && (z != 0) {
+					locations.add(new LocOffset(i, j);
+				}
 		}
 	}
 }

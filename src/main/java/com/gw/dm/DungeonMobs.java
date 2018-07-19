@@ -72,6 +72,12 @@ public class DungeonMobs {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		initMonsterSpecialData();
+	}
+	
+	
+	private static void initMonsterSpecialData() {
+		LizalfosinitLocations();
 	}
 
 }

@@ -171,6 +171,13 @@ public class EntityRevenant extends EntityZombie {
 	}
 	
 	
+	@Override
+	protected void jump() {
+		super.jump();
+		// TODO: More forward
+	}
+	
+	
 	private void regenerate() {
 		if(!isDead && (getHealth() > 0) 
 				&& (getHealth() < HEALTH) && !isBurning()) {
