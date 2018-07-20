@@ -15,6 +15,7 @@ import com.gw.dm.entity.EntityLizalfos;
 import com.gw.dm.proxy.CommonProxy;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.ConfigHandler;
+import com.gw.dm.util.DMGenerationHandler;
 import com.gw.dm.util.MiscRegistrar;
 import com.gw.dm.util.MobRegistrar;
 
@@ -25,6 +26,7 @@ public class DungeonMobs {
 
 	@Instance(MODID)
 	public static DungeonMobs instance;
+	DMGenerationHandler worldGen;
 
 	@SidedProxy(clientSide = "com.gw.dm.proxy.ClientProxy",
 			serverSide = "com.gw.dm.proxy.CommonProxy")
@@ -68,6 +70,9 @@ public class DungeonMobs {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		AudioHandler.registerSounds();
+		if(ConfigHandler.spawnBladeTrap) {
+			worldGen = new DMGenerationHandler();
+		}
 	}
 
 
@@ -79,6 +84,7 @@ public class DungeonMobs {
 	
 	private static void initMonsterSpecialData() {
 		EntityLizalfos.initLocations();
+		DMGenerationHandler.initTargetBlocks();
 	}
 
 }

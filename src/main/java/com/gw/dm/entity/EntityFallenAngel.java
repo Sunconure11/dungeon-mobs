@@ -1,14 +1,8 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonFlying;
-import com.gw.dm.ai.AIAngelAttack;
-import com.gw.dm.ai.AIAngelWander;
-import com.gw.dm.ai.TaskAngelAgroOnPlayer;
-import com.gw.dm.projectile.EntityLightball;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import javax.annotation.Nullable;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -18,7 +12,9 @@ import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -30,7 +26,14 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
 
-import javax.annotation.Nullable;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonFlying;
+import com.gw.dm.ai.AIAngelAttack;
+import com.gw.dm.ai.AIAngelWander;
+import com.gw.dm.ai.TaskAngelAgroOnPlayer;
+import com.gw.dm.projectile.EntityLightball;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRangedAttackMob {
 	
@@ -196,6 +199,12 @@ public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRan
 		int n = rand.nextInt(5) + 3 + lootingModifier;
 		for (int i = 0; i < n; i++) {
 			dropItem(item, 1);
+		}
+		if(rand.nextInt(DungeonMobsHelper.getDifficulty(world)) == 0) {
+			ItemStack sword = new ItemStack(Items.GOLDEN_SWORD);
+			Enchantment ench;
+			sword.addEnchantment(Enchantment.getEnchantmentByLocation("smite"), 
+					rand.nextInt(3) + rand.nextInt(3) + 1);
 		}
 		super.dropFewItems(wasRecentlyHit, lootingModifier);
 	}

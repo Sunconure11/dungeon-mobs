@@ -136,34 +136,13 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 	 * about the new system, or they enhance it).
 	 */
 	protected void dropFewItems(boolean par1, int par2) {
-		int var2 = 100;
-
-		if (DungeonMobsHelper.getDifficulty(world) > 0) {
-			var2 = rand.nextInt(DungeonMobsHelper.getDifficulty(world));
-
-			if (var2 == 0) {
-				ItemStack myBook = new ItemStack(Items.ENCHANTED_BOOK, 1);
-				//EnchantmentHelper.addRandomEnchantment(world.rand, myBook, 30, true);
-				addEnchantment(myBook);
-				EntityItem itemEnt = new EntityItem(world, posX, posY, posZ, myBook);
-				world.spawnEntity(itemEnt);
-			}
-		}
-	}
-
-
-	/**
-	 * A replacement for the vanilla addRandomEnchantment methodm which is
-	 * broken in Forge 1.12.2.
-	 *
-	 * @param stack
-	 */
-	public void addEnchantment(ItemStack stack) {
-		int n = rand.nextInt(2) + rand.nextInt(2) + 1;
-		for (int i = 0; i < n; i++) {
-			Enchantment ench = Enchantment.REGISTRY.getRandomObject(rand);
-			int l = ench.getMaxLevel();
-			stack.addEnchantment(ench, l);
+		int var2 = rand.nextInt(DungeonMobsHelper.getDifficulty(world));
+		if (var2 == 0) {
+			ItemStack myBook = new ItemStack(Items.ENCHANTED_BOOK, 1);
+			//EnchantmentHelper.addRandomEnchantment(world.rand, myBook, 30, true);
+			DungeonMobsHelper.addEnchantment(myBook, rand);
+			EntityItem itemEnt = new EntityItem(world, posX, posY, posZ, myBook);
+			world.spawnEntity(itemEnt);
 		}
 	}
 
@@ -291,18 +270,6 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 							castAttempts++;
 						}
 						break;
-					/*
-					case 5: // dummied out for now...
-						if(illusionTimer == 0)
-						{
-							makeIllusion();
-							castFlag = true;
-						}
-						else
-							castAttempts++;
-
-						break;
-					 */
 					default:
 						castAttempts++;
 						break;
@@ -380,67 +347,7 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 			}
 		}
 	}
-
-	/*
-	public void setDead()
-	{
-		Iterator iter = myImages.iterator();
-
-		while(iter.hasNext())
-		{
-			EntityRakshasaImage foo = (EntityRakshasaImage)iter.next();
-
-			if(!foo.isDead)
-			{
-				try
-				{
-					foo.setDead();
-				}
-				catch(ConcurrentModificationException e)
-				{
-					;
-				}
-			}
-		}
-
-		super.setDead();
-	}
-	 */
-
-	/*
-	private void makeIllusion()
-	{
-		if(!world.isRemote)
-		{
-			List wantList = world.playerEntities;
-
-			if(!wantList.isEmpty())
-			{
-				EntityPlayer foo = (EntityPlayer)wantList.get(world.rand.nextInt(wantList.size()));
-
-				currentName = foo.getEntityName();
-
-				tasks.removeTask(rangeAttack);
-				tasks.addTask(2, meleeAttack);
-
-				illusionTimer = 240;
-
-				hasIllusion = true;
-			}
-		}
-	}
-
-	private void resetIllusion()
-	{
-		currentSkin = "/mods/dungeonMobs/Rakshasa.png";
-		currentName = "Rakshasa";
-		hasIllusion = false;
-
-		tasks.removeTask(meleeAttack);
-		tasks.addTask(2, rangeAttack);
-	}
-	 */
-
+	
 
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeEntityToNBT(par1NBTTagCompound);

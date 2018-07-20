@@ -12,6 +12,7 @@ import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -126,6 +127,16 @@ public class EntityVampire extends EntityDungeonMob {
 			return true;
 		} else {
 			return false;
+		}
+	}
+	
+
+	@Override
+	protected void dropFewItems(boolean par1, int par2) {
+		// They drop some cash, OK....
+		dropItem(Items.GOLD_INGOT, rand.nextInt(2) + par2);
+		if (par1) {
+			dropItem(Items.EMERALD, rand.nextInt(2) + par2);
 		}
 	}
 

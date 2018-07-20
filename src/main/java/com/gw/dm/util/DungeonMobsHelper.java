@@ -1,12 +1,15 @@
 package com.gw.dm.util;
 
 import java.util.LinkedList;
+import java.util.Random;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
@@ -16,7 +19,6 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 
-import com.gw.dm.DungeonMobs;
 import com.gw.dm.network.ConfusionPacket;
 import com.gw.dm.network.KnockBackPacket;
 import com.gw.dm.network.NetworkHelper;
@@ -176,6 +178,22 @@ public class DungeonMobsHelper {
 					}
 				}
 		return out;
+	}
+	
+
+	/**
+	 * A replacement for the vanilla addRandomEnchantment methodm which is
+	 * broken in Forge 1.12.2.
+	 *
+	 * @param stack
+	 */
+	public static void addEnchantment(ItemStack stack, Random rand) {
+		int n = rand.nextInt(2) + rand.nextInt(2) + 1;
+		for (int i = 0; i < n; i++) {
+			Enchantment ench = Enchantment.REGISTRY.getRandomObject(rand);
+			int l = ench.getMaxLevel();
+			stack.addEnchantment(ench, l);
+		}
 	}
 	
 }

@@ -9,9 +9,14 @@ import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -232,6 +237,32 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 			}
 		}
 		return super.attackEntityFrom(source, amount);
+	}
+
+
+	@Override
+	/**
+	 * Drop a randomly enchanted book.
+	 *
+	 * Unlike for many other mobs, this will not be replaced with
+	 * the JSON based system, as its needs its own special logic,
+	 * notable for enchanting (unless there is more I don't know 
+	 * about the new system, or they enhance it).
+	 */
+	protected void dropFewItems(boolean par1, int par2) {
+		dropItem(Item.getItemFromBlock(Blocks.SLIME_BLOCK), 
+				rand.nextInt(2) + par2);
+		dropItem(Items.ENDER_EYE, rand.nextInt(2) + par2);
+		if(par1) {
+			int var2 = rand.nextInt(DungeonMobsHelper.getDifficulty(world) + 2);
+			if (var2 == 0) {
+				ItemStack myBook = new ItemStack(Items.ENCHANTED_BOOK, 1);
+				//EnchantmentHelper.addRandomEnchantment(world.rand, myBook, 30, true);
+				DungeonMobsHelper.addEnchantment(myBook, rand);
+				EntityItem itemEnt = new EntityItem(world, posX, posY, posZ, myBook);
+				world.spawnEntity(itemEnt);
+			}
+		}
 	}
 
 
