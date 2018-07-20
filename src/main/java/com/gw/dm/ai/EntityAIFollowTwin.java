@@ -1,12 +1,15 @@
 package com.gw.dm.ai;
 
-import com.gw.dm.entity.EntityLizalfos;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.pathfinding.Path;
+
+import com.gw.dm.entity.EntityLizalfos;
 
 public class EntityAIFollowTwin extends EntityAIBase {
 	private EntityLizalfos entityOwner;
 	private float speed;
-	private int field_75345_d;
+	private int cooldown;
+	private Path path;
 
 
 	public EntityAIFollowTwin(EntityLizalfos entity, float par2) {
@@ -17,33 +20,43 @@ public class EntityAIFollowTwin extends EntityAIBase {
 
 	@Override
 	public boolean shouldExecute() {
-		return !entityOwner.isTwinDead() || this.entityOwner.getAttackTarget() != null;
+		boolean out = !entityOwner.isTwinDead() || this.entityOwner.getAttackTarget() != null;
+		if(out && (entityOwner.getTwin() != null)) {
+			path = entityOwner.getNavigator().getPathToEntityLiving(entityOwner.getTwin());
+		}
+		return out && (path != null);
 	}
 
 
 	@Override
 	public boolean shouldContinueExecuting() {
-		if (this.entityOwner.isTwinDead()
-				|| this.entityOwner.getAttackTarget() != null) {
+		if((path == null) || this.entityOwner.isTwinDead()
+				|| (this.entityOwner.getAttackTarget() != null)) {
 			return false;
 		} else {
 			double var1 = this.entityOwner.getDistanceSq(this.entityOwner.getTwin());
-			return var1 >= 16.0D/* && var1 <= 256.0D*/;
+			return var1 >= 16.0D;
 		}
 	}
 
 
 	@Override
 	public void startExecuting() {
-		this.field_75345_d = 0;
+		this.cooldown = 10;
+		if(path != null) {
+			entityOwner.getNavigator().setPath(path, speed);
+		}
 	}
 
 
 	@Override
 	public void updateTask() {
-		if (--this.field_75345_d <= 0) {
-			this.field_75345_d = 10;
-			this.entityOwner.getNavigator().tryMoveToEntityLiving(this.entityOwner.getTwin(), this.speed);
+		if (--this.cooldown <= 0) {
+			this.cooldown = 10;
+			path = entityOwner.getNavigator().getPathToEntityLiving(entityOwner.getTwin());
+			if(path != null) {
+				entityOwner.getNavigator().setPath(path, speed);
+			}
 		}
 	}
 }

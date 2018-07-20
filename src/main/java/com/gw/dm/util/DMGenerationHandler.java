@@ -39,6 +39,8 @@ public class DMGenerationHandler implements IWorldGenerator {
 
 		BlockPos foo = iChunkGenerator.getNearestStructurePos(world, "Stronghold", 
 				new BlockPos(posX, 64, posZ), false);
+		
+		boolean sh = (((foo.getX() >> 4) == chunkX) && ((foo.getZ() >> 4) == chunkZ)); 
 
 		int max = 0;
 
@@ -56,14 +58,15 @@ public class DMGenerationHandler implements IWorldGenerator {
 			}
 		}
 		
-		int x, z, lower, upper = 64;
-		int match = world.rand.nextInt(12 - DungeonMobsHelper.getDifficulty(world));
+		int x, z, lower, upper;
+		int match = world.rand.nextInt(10 - DungeonMobsHelper.getDifficulty(world));
 		
 		for(int i = 0; i < max; i++) {
 			x = posX + world.rand.nextInt(16);
 			z = posZ + world.rand.nextInt(16);
 			lower = 10;
-			if((i % 3) == match) {
+			upper = 64;
+			if(((i % 3) == match) || (sh && ((i % 2) == 0))) {
 				do {
 					if(targets.contains(world.getBlockState(new BlockPos(x, lower, z)).getBlock())
 							&& world.isAirBlock(new BlockPos(x, lower + 1, z))) {
@@ -74,11 +77,23 @@ public class DMGenerationHandler implements IWorldGenerator {
 					lower++;
 				} while(lower < upper); 
 			} else {
-				lower = rand.nextInt(54) + 10;
-				if(targets.contains(world.getBlockState(new BlockPos(x, lower, z)).getBlock())
-						&& world.isAirBlock(new BlockPos(x, lower + 1, z))) {
-					world.setBlockState(new BlockPos(x, lower + 1, z), 
-							MiscRegistrar.blockBladeTrap.getDefaultState(), 3);
+				if(sh) {
+					do {
+						if(targets.contains(world.getBlockState(new BlockPos(x, upper, z)).getBlock())
+								&& world.isAirBlock(new BlockPos(x, upper + 1, z))) {
+							world.setBlockState(new BlockPos(x, upper + 1, z), 
+									MiscRegistrar.blockBladeTrap.getDefaultState(), 3);
+							break;
+						}
+						upper--;
+					} while(lower < upper); 
+				} else {
+					lower = rand.nextInt(54) + 10;
+					if(targets.contains(world.getBlockState(new BlockPos(x, lower, z)).getBlock())
+							&& world.isAirBlock(new BlockPos(x, lower + 1, z))) {
+						world.setBlockState(new BlockPos(x, lower + 1, z), 
+								MiscRegistrar.blockBladeTrap.getDefaultState(), 3);
+					}
 				} 
 			}
 		}
