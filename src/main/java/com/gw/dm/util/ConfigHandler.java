@@ -19,6 +19,8 @@ public class ConfigHandler {
 
 	public static File mainConfig;
 	public static File configDir;
+	
+	public static boolean devMode;
 
 	public static boolean spawnNaturally;
 	public static boolean addToVanillaDungeons;
@@ -61,6 +63,12 @@ public class ConfigHandler {
 		config.load();
 
 		boolean client = FMLCommonHandler.instance().getSide() == Side.CLIENT;
+		
+		// Dev and Debugging
+		config.addCustomCategoryComment("DevNDebug", "Setting for debugging a development");
+		devMode = config.get("DevNDebug", "DevMode", false, "Allow WIP mobs / features to appear; "
+				+ "these mobs may not have AI or even textures and done.  \r\n "
+				+ "Keep this false (unless you're actually trying to code new mobs).").getBoolean();
 
 		// General Configuration
 		config.addCustomCategoryComment("General", "General setting effecting all mobs");
