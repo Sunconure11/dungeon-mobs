@@ -63,6 +63,7 @@ public class EntityVampire extends EntityDungeonMob {
 
 
 	protected void applyEntityAI() {
+        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
