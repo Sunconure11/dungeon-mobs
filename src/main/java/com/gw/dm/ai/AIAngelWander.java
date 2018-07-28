@@ -53,8 +53,6 @@ public class AIAngelWander extends EntityAIBase {
 
 	@Override
 	public boolean shouldContinueExecuting() {
-		//System.out.println("Testing continueExecute");
-		//return !((AngelicMoveHelper)owner.getMoveHelper()).blocked && !atTarget();
 		return false;
 	}
 

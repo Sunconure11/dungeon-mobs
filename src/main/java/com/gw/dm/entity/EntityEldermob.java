@@ -171,7 +171,7 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(48.0d);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0d);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(66.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(1.0d);

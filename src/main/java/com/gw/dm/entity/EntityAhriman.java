@@ -55,6 +55,7 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedA
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0d);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(32.0d);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.d);

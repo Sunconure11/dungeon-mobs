@@ -37,10 +37,6 @@ public class AIBeholderAttack extends EntityAIBase {
 	public void updateTask() {
 		EntityLivingBase target = owner.getAttackTarget();
 		attackMovement();
-		/*if(cooldown-- < 1) {
-			owner.attackEntityWithRangedAttack(owner.getAttackTarget(), 1.0f);
-			cooldown = 10 + owner.getRNG().nextInt(20); // Not sure that is the right delay
-		}*/
 		owner.doAttack();
 	}
 

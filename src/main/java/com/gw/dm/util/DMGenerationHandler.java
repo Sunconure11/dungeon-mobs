@@ -40,7 +40,12 @@ public class DMGenerationHandler implements IWorldGenerator {
 		BlockPos foo = iChunkGenerator.getNearestStructurePos(world, "Stronghold", 
 				new BlockPos(posX, 64, posZ), false);
 		
-		boolean sh = (((foo.getX() >> 4) == chunkX) && ((foo.getZ() >> 4) == chunkZ)); 
+		boolean sh;
+		if(foo == null) {
+			sh = false;
+		} else {
+			sh = (((foo.getX() >> 4) == chunkX) && ((foo.getZ() >> 4) == chunkZ)); 
+		}
 
 		int max = 0;
 

@@ -74,7 +74,7 @@ public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRan
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(64.0d);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0d);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(72.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(7.0d);
