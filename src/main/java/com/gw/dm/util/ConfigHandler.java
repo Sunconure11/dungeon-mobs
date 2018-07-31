@@ -24,7 +24,7 @@ public class ConfigHandler {
 
 	public static boolean spawnNaturally;
 	public static boolean addToVanillaDungeons;
-	//public static boolean addToDoomlikeDungeons;
+	public static boolean addToDoomlikeDungeons;
 
 	public static boolean spawnRustMonster;
 	public static boolean spawnGhoul;
@@ -47,7 +47,7 @@ public class ConfigHandler {
 	public static boolean spawnVampire;
 	public static boolean spawnFallenAngel;
 	public static boolean spawnOuterThing;
-	//public static boolean spawnBeamos;
+	public static boolean spawnBeamos;
 	public static boolean spawnBladeTrap;
 	
 	public static boolean replaceRMFoods;

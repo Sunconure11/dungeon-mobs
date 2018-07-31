@@ -19,14 +19,17 @@ import com.gw.dm.util.DMGenerationHandler;
 import com.gw.dm.util.MiscRegistrar;
 import com.gw.dm.util.MobRegistrar;
 
-@Mod(modid = DungeonMobs.MODID, name = "Dungeon Mobs", version = DungeonMobs.VERSION)
+@Mod(modid = DungeonMobs.MODID, name = "Dungeon Mobs", version = DungeonMobs.VERSION, 
+	 dependencies = "after:dldungeonsjbg")
 public class DungeonMobs {
 	public static final String MODID = "dungeonmobs";
-	public static final String VERSION = "5.3.2";
+	public static final String VERSION = "5.4.0";
 
 	@Instance(MODID)
 	public static DungeonMobs instance;
 	DMGenerationHandler worldGen;
+	
+	private static boolean gotDLD;
 
 	@SidedProxy(clientSide = "com.gw.dm.proxy.ClientProxy",
 			serverSide = "com.gw.dm.proxy.CommonProxy")
@@ -63,7 +66,7 @@ public class DungeonMobs {
 		if (ConfigHandler.addToVanillaDungeons) {
 			MobRegistrar.addToVanillaDungeons();
 		}
-		proxy.registerRenders();
+		proxy.registerRenders();		
 	}
 
 
@@ -72,6 +75,9 @@ public class DungeonMobs {
 		AudioHandler.registerSounds();
 		if(ConfigHandler.spawnBladeTrap) {
 			worldGen = new DMGenerationHandler();
+		}
+		if (gotDLD && ConfigHandler.addToDoomlikeDungeons) {
+			MobRegistrar.addToDLD();
 		}
 	}
 
@@ -85,6 +91,12 @@ public class DungeonMobs {
 	private static void initMonsterSpecialData() {
 		EntityLizalfos.initLocations();
 		DMGenerationHandler.initTargetBlocks();
+	}
+	
+	
+	private static void testDLD() {
+		gotDLD = net.minecraftforge.fml.common.Loader.isModLoaded("DLDungeonsJBG") 
+						 || net.minecraftforge.fml.common.Loader.isModLoaded("dldungeonsjbg");	
 	}
 
 }
