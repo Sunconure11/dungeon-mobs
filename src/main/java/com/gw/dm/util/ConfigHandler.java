@@ -76,6 +76,9 @@ public class ConfigHandler {
 				"Determines if dungeon mobs can spawn naturally in the world (\"dark spawn\")").getBoolean();
 		addToVanillaDungeons = config.get("General", "AddToVanillaDungeons", true,
 				"Determines dungeons mobs will be added to spawners in vanilla dungeons").getBoolean();
+		//addToDoomlikeDungeons = config.get("General", "AddToDoomlikeDungeons", true,
+		//		"Determines dungeons mobs will be added to spawners in vanilla dungeons").getBoolean();
+		addToDoomlikeDungeons = false; // FIXME: Make adding these mobs work
 		
 		// Mob Existence
 		config.addCustomCategoryComment("Mobs", "Which mobs exist in the word \r\n "
@@ -119,13 +122,6 @@ public class ConfigHandler {
 						+ "format \"modid:reistry_name\"")
 				.getStringList();
 		rustMonFoodsList.addAll(Arrays.asList(array));
-		if(!rustMonFoodsList.isEmpty()) {
-			if(replaceRMFoods) {
-				EntityRustMonster.setFoods(rustMonFoodsList);
-			} else {
-				EntityRustMonster.appendToFoods(rustMonFoodsList);
-			}
-		}
 		
 		// Shrieker Summons
 		config.addCustomCategoryComment("Shrieker Summons", "Mobs that can be summoned by shriekers");
@@ -166,6 +162,17 @@ public class ConfigHandler {
 			configDir = out;
 		}
 		return out;
+	}
+	
+	
+	public static void mobSpecialSetup() {
+		if(!rustMonFoodsList.isEmpty()) {
+			if(replaceRMFoods) {
+				EntityRustMonster.setFoods(rustMonFoodsList);
+			} else {
+				EntityRustMonster.appendToFoods(rustMonFoodsList);
+			}
+		}
 	}
 
 }

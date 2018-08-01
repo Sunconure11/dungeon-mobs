@@ -91,6 +91,7 @@ public class DungeonMobs {
 	private static void initMonsterSpecialData() {
 		EntityLizalfos.initLocations();
 		DMGenerationHandler.initTargetBlocks();
+		ConfigHandler.mobSpecialSetup();
 	}
 	
 	

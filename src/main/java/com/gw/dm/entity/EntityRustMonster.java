@@ -268,11 +268,9 @@ public class EntityRustMonster extends EntityDungeonMob {
 	}
 	
 	public static void appendToFoods(List<String> list) {
-		Set<Item> set = new HashSet<>();
 		for(String rl : list) {
-			set.add(Item.REGISTRY.getObject(new ResourceLocation(rl)));
+			foods.add(Item.REGISTRY.getObject(new ResourceLocation(rl)));
 		}
-		foods.addAll(set);
 	}
 
 	public Entity getTarget() {
