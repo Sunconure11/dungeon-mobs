@@ -12,6 +12,8 @@ package com.gw.dm.ai;
  */
 
 import com.gw.dm.entity.EntityRustMonster;
+import com.gw.dm.util.RMFoodItem;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,18 +35,18 @@ public class EntityAIFindItem extends EntityAIBase {
 	private EntityRustMonster taskOwner;
 	private World theWorld;
 	private int targetDistance;
-	private Set<Item> wantedThings;
+	private Set<RMFoodItem> wantedThings;
 	private boolean livingFlag;
 	private boolean gottaCompare;
 	private EntityAINearestWantedThingSorter theNearestWantedThingSorter;
 
 
-	public EntityAIFindItem(EntityRustMonster par1, int par2, Set<Item> par4) {
+	public EntityAIFindItem(EntityRustMonster par1, int par2, Set<RMFoodItem> foods) {
 		taskOwner = par1;
 		theWorld = par1.world;
 		setMutexBits(3);
 		targetDistance = par2;
-		wantedThings = par4;
+		wantedThings = foods;
 		theNearestWantedThingSorter = new EntityAINearestWantedThingSorter(this, par1);
 	}
 
@@ -65,7 +67,10 @@ public class EntityAIFindItem extends EntityAIBase {
 
 				int numSlots = theStuff.getSizeInventory();
 				for (int j = 0; j < numSlots; j++) {
-					if (wantedThings.contains(theStuff.getStackInSlot(j).getItem())) {
+					ItemStack theItem = theStuff.getStackInSlot(j);
+					//System.out.println("Checking Item: " + theItem.getItem());
+					if (wantedThings.contains(new RMFoodItem(theItem.getItem(), 
+							theItem.getItemDamage()))) {
 						wantLiving.add(aPlayer);
 						break;
 					}
@@ -73,7 +78,7 @@ public class EntityAIFindItem extends EntityAIBase {
 
 				for (ItemStack armorPiece : aPlayer.getArmorInventoryList()) {
 					if (armorPiece != null) {
-						if (wantedThings.contains(armorPiece.getItem())) {
+						if (wantedThings.contains(new RMFoodItem(armorPiece.getItem()))) {
 							wantLiving.add(aPlayer);
 							break;
 						}
@@ -89,7 +94,9 @@ public class EntityAIFindItem extends EntityAIBase {
 
 			if (allThings.get(i) instanceof EntityItem) {
 				EntityItem thisThing = (EntityItem) allThings.get(i);
-				if (wantedThings.contains(thisThing.getItem().getItem())) {
+				ItemStack theItem = thisThing.getItem();
+				if (wantedThings.contains(new RMFoodItem(theItem.getItem(), 
+						theItem.getItemDamage()))) {
 					wantItems.add(allThings.get(i));
 				}
 			}
@@ -186,7 +193,10 @@ public class EntityAIFindItem extends EntityAIBase {
 
 					int numSlots = theStuff.getSizeInventory();
 					for (int j = 0; j < numSlots; j++) {
-						if (wantedThings.contains(theStuff.getStackInSlot(j).getItem())) {
+						ItemStack theItem = theStuff.getStackInSlot(j);
+						//System.out.println("Checking Item: " + theItem.getItem());
+						if (wantedThings.contains(new RMFoodItem(theItem.getItem(), 
+								theItem.getItemDamage()))) {
 							hasStuff = true;
 							break;
 						}
@@ -194,7 +204,7 @@ public class EntityAIFindItem extends EntityAIBase {
 
 					for (ItemStack armorPiece : check.getArmorInventoryList()) {
 						if (armorPiece != null) {
-							if (wantedThings.contains(armorPiece.getItem())) {
+							if (wantedThings.contains(new RMFoodItem(armorPiece.getItem()))) {
 								hasStuff = true;
 								break;
 							}
@@ -214,7 +224,7 @@ public class EntityAIFindItem extends EntityAIBase {
 		private Entity theEntity;
 
 		public EntityAINearestWantedThingSorter(EntityAIFindItem
-				                                        par1EntityAINearestItem, Entity par2Entity) {
+						par1EntityAINearestItem, Entity par2Entity) {
 			parent = par1EntityAINearestItem;
 			theEntity = par2Entity;
 		}

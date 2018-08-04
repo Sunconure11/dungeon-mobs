@@ -1,10 +1,10 @@
 package com.gw.dm.entity;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -32,49 +32,51 @@ import com.gw.dm.ai.EntityAIAttackAnythingWanted;
 import com.gw.dm.ai.EntityAIFindItem;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
+import com.gw.dm.util.RMFoodItem;
 
 public class EntityRustMonster extends EntityDungeonMob {
 	
 	private static String mobName = DungeonMobs.MODID + ":dmrustmonster";
 
-	private static Set<Item> foods = new HashSet<Item>(((List<Item>) Arrays.asList(new Item[]{
-			Item.getItemFromBlock(Blocks.GOLD_ORE),
-			Item.getItemFromBlock(Blocks.IRON_ORE),
-			Item.getItemFromBlock(Blocks.RAIL),
-			Item.getItemFromBlock(Blocks.GOLDEN_RAIL),
-			Item.getItemFromBlock(Blocks.PISTON),
-			Item.getItemFromBlock(Blocks.GOLD_BLOCK),
-			Item.getItemFromBlock(Blocks.IRON_BLOCK),
-			Item.getItemFromBlock(Blocks.IRON_BARS),
-			Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK),
-			Item.getItemFromBlock(Blocks.ACTIVATOR_RAIL),
-			Items.IRON_AXE,
-			Items.IRON_DOOR,
-			Items.IRON_HOE,
-			Items.IRON_HORSE_ARMOR,
-			Items.IRON_INGOT,
-			Items.IRON_NUGGET,
-			Items.IRON_PICKAXE,
-			Items.IRON_SHOVEL,
-			Items.IRON_SWORD,
-			Items.IRON_BOOTS,
-			Items.IRON_CHESTPLATE,
-			Items.IRON_HELMET,
-			Items.IRON_LEGGINGS,
-			Items.GOLDEN_AXE,
-			Items.GOLDEN_CARROT,
-			Items.GOLDEN_APPLE,
-			Items.GOLDEN_HOE,
-			Items.GOLDEN_HORSE_ARMOR,
-			Items.GOLD_INGOT,
-			Items.GOLD_NUGGET,
-			Items.GOLDEN_PICKAXE,
-			Items.GOLDEN_SHOVEL,
-			Items.GOLDEN_SWORD,
-			Items.GOLDEN_BOOTS,
-			Items.GOLDEN_CHESTPLATE,
-			Items.GOLDEN_HELMET,
-			Items.GOLDEN_LEGGINGS
+	private static Set<RMFoodItem> foods = new HashSet<RMFoodItem>(((List<RMFoodItem>) 
+						Arrays.asList(new RMFoodItem[]{
+			new RMFoodItem(Item.getItemFromBlock(Blocks.GOLD_ORE)),
+			new RMFoodItem(Item.getItemFromBlock(Blocks.IRON_ORE)),
+			new RMFoodItem(Item.getItemFromBlock(Blocks.RAIL)),
+			new RMFoodItem(Item.getItemFromBlock(Blocks.GOLDEN_RAIL)),
+			new RMFoodItem(Item.getItemFromBlock(Blocks.PISTON)),
+			new RMFoodItem(Item.getItemFromBlock(Blocks.GOLD_BLOCK)),
+			new RMFoodItem(Item.getItemFromBlock(Blocks.IRON_BLOCK)),
+			new RMFoodItem(Item.getItemFromBlock(Blocks.IRON_BARS)),
+			new RMFoodItem(Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK)),
+			new RMFoodItem(Item.getItemFromBlock(Blocks.ACTIVATOR_RAIL)),
+			new RMFoodItem(Items.IRON_AXE),
+			new RMFoodItem(Items.IRON_DOOR),
+			new RMFoodItem(Items.IRON_HOE),
+			new RMFoodItem(Items.IRON_HORSE_ARMOR),
+			new RMFoodItem(Items.IRON_INGOT),
+			new RMFoodItem(Items.IRON_NUGGET),
+			new RMFoodItem(Items.IRON_PICKAXE),
+			new RMFoodItem(Items.IRON_SHOVEL),
+			new RMFoodItem(Items.IRON_SWORD),
+			new RMFoodItem(Items.IRON_BOOTS),
+			new RMFoodItem(Items.IRON_CHESTPLATE),
+			new RMFoodItem(Items.IRON_HELMET),
+			new RMFoodItem(Items.IRON_LEGGINGS),
+			new RMFoodItem(Items.GOLDEN_AXE),
+			new RMFoodItem(Items.GOLDEN_CARROT),
+			new RMFoodItem(Items.GOLDEN_APPLE),
+			new RMFoodItem(Items.GOLDEN_HOE),
+			new RMFoodItem(Items.GOLDEN_HORSE_ARMOR),
+			new RMFoodItem(Items.GOLD_INGOT),
+			new RMFoodItem(Items.GOLD_NUGGET),
+			new RMFoodItem(Items.GOLDEN_PICKAXE),
+			new RMFoodItem(Items.GOLDEN_SHOVEL),
+			new RMFoodItem(Items.GOLDEN_SWORD),
+			new RMFoodItem(Items.GOLDEN_BOOTS),
+			new RMFoodItem(Items.GOLDEN_CHESTPLATE),
+			new RMFoodItem(Items.GOLDEN_HELMET),
+			new RMFoodItem(Items.GOLDEN_LEGGINGS)
 	})));
 
 	private Entity myTarget;
@@ -198,7 +200,8 @@ public class EntityRustMonster extends EntityDungeonMob {
 			ItemStack stack = player.getHeldItemMainhand();
 
 			if ((stack != null) && (stack.getItem() != null)
-					&& foods.contains(stack.getItem())) {
+					&& foods.contains(new RMFoodItem(stack.getItem(), 
+							stack.getItemDamage()))) {
 				if (player.getHeldItemMainhand().isItemStackDamageable()) {
 					int yar = rand.nextInt(11) + 15;
 					player.getHeldItemMainhand().damageItem(yar, this);
@@ -224,7 +227,7 @@ public class EntityRustMonster extends EntityDungeonMob {
 
 			for (ItemStack armorPiece : armors) {
 				if ((armorPiece != null) && (armorPiece.getItem() != null)) {
-					if (foods.contains(armorPiece.getItem())) {
+					if (foods.contains(new RMFoodItem(armorPiece.getItem()))) {
 						int lawlz = getRNG().nextInt(11) + 15;
 						armorPiece.damageItem(lawlz, this);
 					}
@@ -233,46 +236,30 @@ public class EntityRustMonster extends EntityDungeonMob {
 		}
 		return super.attackEntityAsMob(ent);
 	}
-
-	// Manipulate food list with items
 	
-	public void setFoods(Set<Item> list) {
-		foods = list;
-	}
-
-	public static void appendToFoods(Item single) {
-		foods.add(single);
-	}
-
-	public static void appendToFoods(Collection<Item> list) {
-		foods.addAll(list);
-	}
-
-	public static void appendToFoods(Item[] list) {
-		foods.addAll((List<Item>) Arrays.asList(list));
-	}
 	
 	// Manipulate food list with strings
 	
 	public static void setFoods(List<String> list) {
-		Set<Item> set = new HashSet<>();
-		for(String rl : list) {
-			set.add(Item.REGISTRY.getObject(new ResourceLocation(rl)));
-		}
-		foods = set;
+		foods = new HashSet<>();
+		appendToFoods(list);
 	}
 	
-	
-	public static void appendToFoods(String single) {
-		foods.add(Item.REGISTRY.getObject(new ResourceLocation(single)));
-	}
 	
 	public static void appendToFoods(List<String> list) {
 		for(String rl : list) {
-			foods.add(Item.REGISTRY.getObject(new ResourceLocation(rl)));
+			StringTokenizer tokens = new StringTokenizer(rl, ":");
+			Item item = Item.REGISTRY.getObject(new ResourceLocation(tokens.nextToken(), 
+					tokens.nextToken()));
+			if(tokens.hasMoreTokens()) {
+				foods.add(new RMFoodItem(item, Integer.getInteger(tokens.nextToken())));
+			} else {
+				foods.add(new RMFoodItem(item));
+			}
 		}
 	}
 
+	
 	public Entity getTarget() {
 		if (pissed) {
 			return this.getAttackTarget();
