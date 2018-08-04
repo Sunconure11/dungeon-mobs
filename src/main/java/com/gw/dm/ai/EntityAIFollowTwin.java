@@ -21,8 +21,9 @@ public class EntityAIFollowTwin extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 		boolean out = !entityOwner.isTwinDead() || this.entityOwner.getAttackTarget() != null;
-		if(out && (entityOwner.getTwin() != null)) {
-			path = entityOwner.getNavigator().getPathToEntityLiving(entityOwner.getTwin());
+		EntityLizalfos twin = entityOwner.getTwin(); 
+		if(out && (twin != null)) {
+			path = entityOwner.getNavigator().getPathToEntityLiving(twin);
 		}
 		return out && (path != null);
 	}
@@ -30,8 +31,11 @@ public class EntityAIFollowTwin extends EntityAIBase {
 
 	@Override
 	public boolean shouldContinueExecuting() {
-		if((path == null) || this.entityOwner.isTwinDead()
-				|| (this.entityOwner.getAttackTarget() != null)) {
+		EntityLizalfos twin = entityOwner.getTwin(); 
+		if((path == null) 
+				|| entityOwner.isTwinDead()
+				|| (entityOwner.getAttackTarget() != null)
+				|| (twin == null)) {
 			return false;
 		} else {
 			double var1 = this.entityOwner.getDistanceSq(this.entityOwner.getTwin());
@@ -53,9 +57,12 @@ public class EntityAIFollowTwin extends EntityAIBase {
 	public void updateTask() {
 		if (--this.cooldown <= 0) {
 			this.cooldown = 10;
-			path = entityOwner.getNavigator().getPathToEntityLiving(entityOwner.getTwin());
-			if(path != null) {
-				entityOwner.getNavigator().setPath(path, speed);
+			EntityLizalfos twin = entityOwner.getTwin();
+			if(twin != null) {
+				path = entityOwner.getNavigator().getPathToEntityLiving(twin);
+				if(path != null) {
+					entityOwner.getNavigator().setPath(path, speed);
+				}
 			}
 		}
 	}

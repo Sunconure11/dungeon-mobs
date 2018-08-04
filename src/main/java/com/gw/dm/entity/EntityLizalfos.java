@@ -141,9 +141,9 @@ public class EntityLizalfos extends EntityDungeonMob {
 		setTwin(twin);
 		
 		isTwin = true;
-		
-		this.twinEntityID = this.getTwin().getEntityId();
-		this.getTwin().twinEntityID = this.getEntityId();
+		 
+		twinEntityID = twin.getEntityId();
+		twin.twinEntityID = getEntityId();
 		
 		setLocationAndAngles(x, y, z, this.rotationYaw, this.rotationPitch);
 		
@@ -213,12 +213,13 @@ public class EntityLizalfos extends EntityDungeonMob {
 
 	public void setTwin(EntityLizalfos foo) {
 		myTwinWeak = new WeakReference<EntityLizalfos>(foo);
-		//myTwin = foo;
 	}
 
 
 	public EntityLizalfos getTwin() {
-		return myTwinWeak.get();
+		if(myTwinWeak != null) {
+			return myTwinWeak.get();
+		} else return null;
 	}
 
 
@@ -302,9 +303,6 @@ public class EntityLizalfos extends EntityDungeonMob {
 		if(newSpawn) {
 			spawnTwin();
 		}
-		
-		//if (!isTwinDead() && myTwinWeak == null)
-		//	goodToGo = false;
 
 		if (!goodToGo && !isTwinDead()) {
 			findTwin();
