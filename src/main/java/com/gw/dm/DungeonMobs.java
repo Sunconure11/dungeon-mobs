@@ -50,7 +50,7 @@ public class DungeonMobs {
 						+ "- Beholder - Troll - Cave Fisher - Destrachan - Illithid "
 						+ "- Hell Hound - Rakshasa - Lizalfos - Cockatrice - Manticore "
 						+ "- Thoqqua - Vescavor - Revenant - Vampire - Fallen Angel - Outer Thing\n";
-		modmeta.url = "http://www.minecraftforum.net/topic/231082-"; // FIXME: New page
+		modmeta.url = "https://minecraft.curseforge.com/projects/dungeon-mobs-reborn";
 
 
 		ConfigHandler.configDir = ConfigHandler.findConfigDir(event.getModConfigurationDirectory());

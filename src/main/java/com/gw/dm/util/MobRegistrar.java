@@ -211,8 +211,8 @@ public class MobRegistrar {
 		}
 		// BLADE TRAP
 		if(spawnBladeTrap) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "DMBladeTrap"), 
-					EntityBladeTrap.class, MODID + ".DMBladeTrap", bladeTrapID, instance, 80, 3, true,  
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmbladetrap"), 
+					EntityBladeTrap.class, MODID + ".dmbladetrap", bladeTrapID, instance, 80, 3, true,  
 					0x464646, 0xb70202);
 		}
 	}

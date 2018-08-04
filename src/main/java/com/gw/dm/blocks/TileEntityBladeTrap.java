@@ -5,9 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -51,28 +53,34 @@ public class TileEntityBladeTrap extends TileEntity implements ITickable {
 
 	
 	public int isPlayerNearby(World w, int x, int y, int z) {
-		int dist;
+		int sqDist;
 		switch(w.getDifficulty()) {
 			case EASY:
-				dist = 20;
+				sqDist = 400;
 				break;
 			case HARD:
-				dist = 32;
+				sqDist = 1024;
 				break;
 			case NORMAL:
-				dist = 24;
+				sqDist = 576;
 				break;
 			case PEACEFUL:
-				dist = 16;
+				sqDist = 256;
 				break;
 			default:
-				dist = 24;
+				sqDist = 576;
 				break;		
 		}
 
-		List<EntityPlayer> players = w.getEntitiesWithinAABB(EntityPlayer.class, 
-				new AxisAlignedBB(x - dist, y - dist, z - dist, 
-						x + dist, y + dist, z + dist));
+		List<EntityPlayer> players = new ArrayList<>();
+		for(EntityPlayer player : world.playerEntities) {
+			if(((player.posX - x) * (player.posX - x)) + 
+			   ((player.posY - y) * (player.posY - y)) +
+			   ((player.posZ - z) * (player.posZ - z)) < sqDist) {
+					players.add(player);
+			}
+		}
+		
 		List<EntityPlayer> playersCanSee = new ArrayList();
 		List<EntityPlayer> playersInLine = new ArrayList();
 
