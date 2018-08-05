@@ -252,7 +252,7 @@ public class EntityRustMonster extends EntityDungeonMob {
 			Item item = Item.REGISTRY.getObject(new ResourceLocation(tokens.nextToken(), 
 					tokens.nextToken()));
 			if(tokens.hasMoreTokens()) {
-				foods.add(new RMFoodItem(item, Integer.getInteger(tokens.nextToken())));
+				foods.add(new RMFoodItem(item, Integer.parseInt(tokens.nextToken())));
 			} else {
 				foods.add(new RMFoodItem(item));
 			}
