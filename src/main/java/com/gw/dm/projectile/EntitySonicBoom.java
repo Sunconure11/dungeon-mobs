@@ -291,7 +291,6 @@ public class EntitySonicBoom extends Entity {
 
 	@Override
 	public void setDead() {
-		System.out.println("Sonic boom died!");
 		super.setDead();
 	}
 }

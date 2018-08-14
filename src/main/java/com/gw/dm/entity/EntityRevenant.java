@@ -84,15 +84,14 @@ public class EntityRevenant extends EntityZombie {
 
 
 	protected void applyEntityAttributes() {
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(HEALTH);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4d);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0d);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0d);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0d);
-		getAttributeMap().registerAttribute(SPAWN_REINFORCEMENTS_CHANCE).setBaseValue(this.rand.nextDouble()
-				* net.minecraftforge.common.ForgeModContainer.zombieSummonBaseChance);
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(HEALTH);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4d);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0d);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0d);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0d);
 	}
 	
 	
@@ -159,7 +158,7 @@ public class EntityRevenant extends EntityZombie {
 			if(buff == regen) {
 				regenerate();
 			} else if(!isPotionActive(buff)) {
-				addPotionEffect(new PotionEffect(buff, 60));
+				addPotionEffect(new PotionEffect(buff, 60, 1));
 			}
 		} 
 		super.onUpdate();

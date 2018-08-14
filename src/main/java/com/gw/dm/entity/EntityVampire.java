@@ -52,13 +52,14 @@ public class EntityVampire extends EntityDungeonMob {
 
 	@Override
 	protected void applyEntityAttributes() {
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0d);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.54d);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0d);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0d);
-		getAttributeMap().registerAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0d);
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0d);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.54d);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0d);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0d);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0d);
 	}
 
 
