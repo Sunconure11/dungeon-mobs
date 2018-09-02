@@ -273,7 +273,7 @@ public class EntityIllithid extends EntityDungeonMob {
 			EntityPlayer player = (EntityPlayer) ent;
 
 			if (!player.capabilities.isCreativeMode) {
-				if (player.inventory.armorItemInSlot(3) != null) {
+				if (player.inventory.armorInventory.get(3) != null) {
 					if (world.rand.nextInt(4 - DungeonMobsHelper.getDifficulty(world)) == 0) {
 						this.playSound(AudioHandler.entityIllithidPower,
 								1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));

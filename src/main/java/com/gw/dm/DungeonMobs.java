@@ -23,7 +23,7 @@ import com.gw.dm.util.MobRegistrar;
 	 dependencies = "after:dldungeonsjbg")
 public class DungeonMobs {
 	public static final String MODID = "dungeonmobs";
-	public static final String VERSION = "5.4.4";
+	public static final String VERSION = "5.4.5";
 
 	@Instance(MODID)
 	public static DungeonMobs instance;
