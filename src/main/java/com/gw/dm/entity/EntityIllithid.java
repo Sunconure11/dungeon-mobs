@@ -271,7 +271,7 @@ public class EntityIllithid extends EntityDungeonMob {
 					if (world.rand.nextInt(4 - DungeonMobsHelper.getDifficulty(world)) == 0) {
 						this.playSound(AudioHandler.entityIllithidPower,
 								1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
-						EntityItem helm = ent.entityDropItem(player.inventory.armorItemInSlot(3), 1.5F);
+						EntityItem helm = ent.entityDropItem(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD), 1.5F);
 						player.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
 					}
 				}
