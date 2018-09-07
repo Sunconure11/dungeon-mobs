@@ -4,7 +4,6 @@ import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -22,11 +21,10 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
 
 public class EntityNetherHound extends EntityDungeonMob {
+	private static String mobName = DungeonMobs.MODID + ":dmnetherhound";
 	public boolean ignoreHeight;
 	private int flameTimer;
 	private int jumpTimer;
-	
-	private static String mobName = DungeonMobs.MODID + ":dmnetherhound";
 
 	public EntityNetherHound(World par1World) {
 		super(par1World);

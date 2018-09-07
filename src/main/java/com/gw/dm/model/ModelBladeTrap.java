@@ -214,12 +214,12 @@ public class ModelBladeTrap extends ModelBase {
 	}
 
 
-	@Override	
+	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAmount,
 	                   float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-		super.render(entity, limbSwing, limbSwingAmount, ageInTicks, 
+		super.render(entity, limbSwing, limbSwingAmount, ageInTicks,
 				netHeadYaw, headPitch, scale);
-		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, 
+		setRotationAngles(limbSwing, limbSwingAmount, ageInTicks,
 				netHeadYaw, headPitch, scale, entity);
 		Base.render(scale);
 		BotSpikeB.render(scale);
@@ -260,8 +260,8 @@ public class ModelBladeTrap extends ModelBase {
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
 	}
-	
-	
+
+
 	public void renderAllTE(float scale) {
 		Base.render(scale);
 		BotSpikeB.render(scale);

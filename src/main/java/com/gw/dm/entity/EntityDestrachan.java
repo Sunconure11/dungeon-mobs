@@ -1,13 +1,10 @@
 package com.gw.dm.entity;
 
-import java.util.StringTokenizer;
-
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.projectile.EntitySonicBoom;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
-
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +15,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.StringTokenizer;
+
 public class EntityDestrachan extends EntityDungeonMob implements IRangedAttackMob {
+	private static String mobName = DungeonMobs.MODID + ":dmdestrachan";
 	public EntityAIAttackRanged rangedAttack = new EntityAIAttackRanged(this, 0.4F, 10, 70, 20.0F);
 	public EntityAIAttackMelee meleeAttack = new EntityAIAttackMelee(this, 0.4F, false);
 	public float attackDistance;
@@ -26,8 +26,6 @@ public class EntityDestrachan extends EntityDungeonMob implements IRangedAttackM
 	public boolean isRanged;
 	public boolean ignoreHeight;
 	private int resetAttackTimer;
-	
-	private static String mobName = DungeonMobs.MODID + ":dmdestrachan";
 
 	public EntityDestrachan(World par1World) {
 		super(par1World);
@@ -104,7 +102,7 @@ public class EntityDestrachan extends EntityDungeonMob implements IRangedAttackM
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this,mobName)) {
+		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
@@ -200,24 +198,24 @@ public class EntityDestrachan extends EntityDungeonMob implements IRangedAttackM
 	@Override
 	public void setSwingingArms(boolean swingingArms) {
 	}
-	
-	
+
+
 	public String getRegistryName() {
-		if(mobName == null) fixNameIfNull();
+		if (mobName == null) fixNameIfNull();
 		return mobName;
 	}
-	
-	
+
+
 	public void setRegistryName(String name) {
 		mobName = (DungeonMobs.MODID + ":" + name).trim().toLowerCase();
-	}	
-	
-	
+	}
+
+
 	private void fixNameIfNull() {
 		StringTokenizer fixer = new StringTokenizer(this.getName()
 				.trim().toLowerCase(), ".");
 		do {
 			mobName = fixer.nextToken();
-		} while(fixer.hasMoreTokens());
+		} while (fixer.hasMoreTokens());
 	}
 }

@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "normal": { "model": "dungeonmobs:bladetrap" }
+  "variants": {
+    "normal": {
+      "model": "dungeonmobs:bladetrap"
     }
+  }
 }

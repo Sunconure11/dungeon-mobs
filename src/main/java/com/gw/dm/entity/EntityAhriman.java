@@ -1,7 +1,5 @@
 package com.gw.dm.entity;
 
-import java.util.StringTokenizer;
-
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonFlying;
 import com.gw.dm.ai.AIBeholderAttack;
@@ -11,8 +9,6 @@ import com.gw.dm.ai.TaskBeholderAgro;
 import com.gw.dm.projectile.EntityEyeRay;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
-
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -35,6 +31,7 @@ import net.minecraft.world.World;
 
 public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedAttackMob {
 	private static final double ADIST2 = 24.0d * 24.0d;
+	public static String mobName = DungeonMobs.MODID + ":dmahriman";
 	public int courseChangeCooldown = 0;
 	public double waypointX;
 	public double waypointY;
@@ -44,7 +41,6 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedA
 	public boolean ignoreHeight;
 	private MoveHelperBeholder moveHelper;
 	private int aggroCooldown = 0;
-	public static String mobName = DungeonMobs.MODID + ":dmahriman";
 
 	public EntityAhriman(World par1World) {
 		super(par1World);

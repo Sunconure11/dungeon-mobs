@@ -1,5 +1,12 @@
 package com.gw.dm.util;
 
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.entity.EntityRustMonster;
+import com.gw.dm.entity.EntityShrieker;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,19 +14,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.relauncher.Side;
-
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.entity.EntityRustMonster;
-import com.gw.dm.entity.EntityShrieker;
-
 public class ConfigHandler {
 
 	public static File mainConfig;
 	public static File configDir;
-	
+
 	public static boolean devMode;
 
 	public static boolean spawnNaturally;
@@ -49,10 +48,10 @@ public class ConfigHandler {
 	public static boolean spawnOuterThing;
 	public static boolean spawnBeamos;
 	public static boolean spawnBladeTrap;
-	
+
 	public static boolean replaceRMFoods;
 	public static List<String> rustMonFoodsList;
-	
+
 	public static List<String> shriekerMobs;
 
 
@@ -63,7 +62,7 @@ public class ConfigHandler {
 		config.load();
 
 		boolean client = FMLCommonHandler.instance().getSide() == Side.CLIENT;
-		
+
 		// Dev and Debugging
 		config.addCustomCategoryComment("DevNDebug", "Setting for debugging a development");
 		devMode = config.get("DevNDebug", "DevMode", false, "Allow WIP mobs / features to appear; "
@@ -79,7 +78,7 @@ public class ConfigHandler {
 		//addToDoomlikeDungeons = config.get("General", "AddToDoomlikeDungeons", true,
 		//		"Determines dungeons mobs will be added to spawners in vanilla dungeons").getBoolean();
 		addToDoomlikeDungeons = false; // FIXME: Make adding these mobs work
-		
+
 		// Mob Existence
 		config.addCustomCategoryComment("Mobs", "Which mobs exist in the word \r\n "
 				+ "(if false it does not exist and can never spawn)");
@@ -111,31 +110,31 @@ public class ConfigHandler {
 		// Rust Monster Foods
 		config.addCustomCategoryComment("Rust Monster Foods", "Items eaten / wanted by "
 				+ "rust monsters)");
-		replaceRMFoods = config.get("Rust Monster Foods", "Replace", false, 
+		replaceRMFoods = config.get("Rust Monster Foods", "Replace", false,
 				"If true the food list for rust monster will be replaced, "
-				+ "\r\notherwise it will be kept and added to.").getBoolean();
+						+ "\r\notherwise it will be kept and added to.").getBoolean();
 		rustMonFoodsList = new ArrayList<String>();
-		String[] array = config.get("Rust Monster Foods", 
-				"FoodList", 
-				new String[]{}, 
+		String[] array = config.get("Rust Monster Foods",
+				"FoodList",
+				new String[]{},
 				"Items the rust monsters want to eat (put metal here); \r\n"
 						+ "format \"modid:reistry_name\"")
 				.getStringList();
 		rustMonFoodsList.addAll(Arrays.asList(array));
-		
+
 		// Shrieker Summons
 		config.addCustomCategoryComment("Shrieker Summons", "Mobs that can be summoned by shriekers");
 		shriekerMobs = new ArrayList<>();
-		array = config.get("Shrieker Summons", "ShriekerSummons", new String[]{}, 
+		array = config.get("Shrieker Summons", "ShriekerSummons", new String[]{},
 				"Mobs the that may be spawned when shriekers shriek (will be added to list); \r\n"
 						+ "format \"modid:resource_location\"")
 				.getStringList();
 		shriekerMobs.addAll(Arrays.asList(array));
-		if(!shriekerMobs.isEmpty()) {
+		if (!shriekerMobs.isEmpty()) {
 			EntityShrieker.appendToSummonList(shriekerMobs);
 		}
-		
-		
+
+
 		// Save It!!!
 		config.save();
 	}
@@ -163,11 +162,11 @@ public class ConfigHandler {
 		}
 		return out;
 	}
-	
-	
+
+
 	public static void mobSpecialSetup() {
-		if(!rustMonFoodsList.isEmpty()) {
-			if(replaceRMFoods) {
+		if (!rustMonFoodsList.isEmpty()) {
+			if (replaceRMFoods) {
 				EntityRustMonster.setFoods(rustMonFoodsList);
 			} else {
 				EntityRustMonster.appendToFoods(rustMonFoodsList);

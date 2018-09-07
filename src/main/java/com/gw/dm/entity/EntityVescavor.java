@@ -6,7 +6,6 @@ import com.gw.dm.potion.PotionEffectAddled;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 import com.gw.dm.util.MiscRegistrar;
-
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,8 +22,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class EntityVescavor extends EntityDungeonMob {
-	private int confuseTicks;
 	private static String mobName = DungeonMobs.MODID + ":dmvescavor";
+	private int confuseTicks;
 
 	public EntityVescavor(World par1World) {
 		super(par1World);

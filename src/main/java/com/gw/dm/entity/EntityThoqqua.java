@@ -4,7 +4,6 @@ import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.DungeonMobsHelper;
 import com.gw.dm.util.MiscRegistrar;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -25,10 +24,10 @@ import net.minecraft.world.WorldProviderHell;
 
 
 public class EntityThoqqua extends EntityDungeonMob {
+	private static String mobName = DungeonMobs.MODID + ":dmthoqqua";
 	public int lavaResetTimer;
 	public int setShitOnFire;
 	public int attackTime;
-	private static String mobName = DungeonMobs.MODID + ":dmthoqqua";
 
 	public EntityThoqqua(World par1World) {
 		super(par1World);

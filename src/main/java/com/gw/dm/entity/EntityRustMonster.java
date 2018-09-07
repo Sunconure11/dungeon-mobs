@@ -1,11 +1,12 @@
 package com.gw.dm.entity;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.StringTokenizer;
-
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.ai.EntityAIAttackAnythingWanted;
+import com.gw.dm.ai.EntityAIFindItem;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
+import com.gw.dm.util.RMFoodItem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -26,58 +27,52 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.ai.EntityAIAttackAnythingWanted;
-import com.gw.dm.ai.EntityAIFindItem;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
-import com.gw.dm.util.RMFoodItem;
+import java.util.*;
 
 public class EntityRustMonster extends EntityDungeonMob {
-	
+
 	private static String mobName = DungeonMobs.MODID + ":dmrustmonster";
 
-	private static Set<RMFoodItem> foods = new HashSet<RMFoodItem>(((List<RMFoodItem>) 
-						Arrays.asList(new RMFoodItem[]{
-			new RMFoodItem(Item.getItemFromBlock(Blocks.GOLD_ORE)),
-			new RMFoodItem(Item.getItemFromBlock(Blocks.IRON_ORE)),
-			new RMFoodItem(Item.getItemFromBlock(Blocks.RAIL)),
-			new RMFoodItem(Item.getItemFromBlock(Blocks.GOLDEN_RAIL)),
-			new RMFoodItem(Item.getItemFromBlock(Blocks.PISTON)),
-			new RMFoodItem(Item.getItemFromBlock(Blocks.GOLD_BLOCK)),
-			new RMFoodItem(Item.getItemFromBlock(Blocks.IRON_BLOCK)),
-			new RMFoodItem(Item.getItemFromBlock(Blocks.IRON_BARS)),
-			new RMFoodItem(Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK)),
-			new RMFoodItem(Item.getItemFromBlock(Blocks.ACTIVATOR_RAIL)),
-			new RMFoodItem(Items.IRON_AXE),
-			new RMFoodItem(Items.IRON_DOOR),
-			new RMFoodItem(Items.IRON_HOE),
-			new RMFoodItem(Items.IRON_HORSE_ARMOR),
-			new RMFoodItem(Items.IRON_INGOT),
-			new RMFoodItem(Items.IRON_NUGGET),
-			new RMFoodItem(Items.IRON_PICKAXE),
-			new RMFoodItem(Items.IRON_SHOVEL),
-			new RMFoodItem(Items.IRON_SWORD),
-			new RMFoodItem(Items.IRON_BOOTS),
-			new RMFoodItem(Items.IRON_CHESTPLATE),
-			new RMFoodItem(Items.IRON_HELMET),
-			new RMFoodItem(Items.IRON_LEGGINGS),
-			new RMFoodItem(Items.GOLDEN_AXE),
-			new RMFoodItem(Items.GOLDEN_CARROT),
-			new RMFoodItem(Items.GOLDEN_APPLE),
-			new RMFoodItem(Items.GOLDEN_HOE),
-			new RMFoodItem(Items.GOLDEN_HORSE_ARMOR),
-			new RMFoodItem(Items.GOLD_INGOT),
-			new RMFoodItem(Items.GOLD_NUGGET),
-			new RMFoodItem(Items.GOLDEN_PICKAXE),
-			new RMFoodItem(Items.GOLDEN_SHOVEL),
-			new RMFoodItem(Items.GOLDEN_SWORD),
-			new RMFoodItem(Items.GOLDEN_BOOTS),
-			new RMFoodItem(Items.GOLDEN_CHESTPLATE),
-			new RMFoodItem(Items.GOLDEN_HELMET),
-			new RMFoodItem(Items.GOLDEN_LEGGINGS)
-	})));
+	private static Set<RMFoodItem> foods = new HashSet<RMFoodItem>(((List<RMFoodItem>)
+			Arrays.asList(new RMFoodItem[]{
+					new RMFoodItem(Item.getItemFromBlock(Blocks.GOLD_ORE)),
+					new RMFoodItem(Item.getItemFromBlock(Blocks.IRON_ORE)),
+					new RMFoodItem(Item.getItemFromBlock(Blocks.RAIL)),
+					new RMFoodItem(Item.getItemFromBlock(Blocks.GOLDEN_RAIL)),
+					new RMFoodItem(Item.getItemFromBlock(Blocks.PISTON)),
+					new RMFoodItem(Item.getItemFromBlock(Blocks.GOLD_BLOCK)),
+					new RMFoodItem(Item.getItemFromBlock(Blocks.IRON_BLOCK)),
+					new RMFoodItem(Item.getItemFromBlock(Blocks.IRON_BARS)),
+					new RMFoodItem(Item.getItemFromBlock(Blocks.TRIPWIRE_HOOK)),
+					new RMFoodItem(Item.getItemFromBlock(Blocks.ACTIVATOR_RAIL)),
+					new RMFoodItem(Items.IRON_AXE),
+					new RMFoodItem(Items.IRON_DOOR),
+					new RMFoodItem(Items.IRON_HOE),
+					new RMFoodItem(Items.IRON_HORSE_ARMOR),
+					new RMFoodItem(Items.IRON_INGOT),
+					new RMFoodItem(Items.IRON_NUGGET),
+					new RMFoodItem(Items.IRON_PICKAXE),
+					new RMFoodItem(Items.IRON_SHOVEL),
+					new RMFoodItem(Items.IRON_SWORD),
+					new RMFoodItem(Items.IRON_BOOTS),
+					new RMFoodItem(Items.IRON_CHESTPLATE),
+					new RMFoodItem(Items.IRON_HELMET),
+					new RMFoodItem(Items.IRON_LEGGINGS),
+					new RMFoodItem(Items.GOLDEN_AXE),
+					new RMFoodItem(Items.GOLDEN_CARROT),
+					new RMFoodItem(Items.GOLDEN_APPLE),
+					new RMFoodItem(Items.GOLDEN_HOE),
+					new RMFoodItem(Items.GOLDEN_HORSE_ARMOR),
+					new RMFoodItem(Items.GOLD_INGOT),
+					new RMFoodItem(Items.GOLD_NUGGET),
+					new RMFoodItem(Items.GOLDEN_PICKAXE),
+					new RMFoodItem(Items.GOLDEN_SHOVEL),
+					new RMFoodItem(Items.GOLDEN_SWORD),
+					new RMFoodItem(Items.GOLDEN_BOOTS),
+					new RMFoodItem(Items.GOLDEN_CHESTPLATE),
+					new RMFoodItem(Items.GOLDEN_HELMET),
+					new RMFoodItem(Items.GOLDEN_LEGGINGS)
+			})));
 
 	private Entity myTarget;
 	private boolean pissed;
@@ -96,7 +91,24 @@ public class EntityRustMonster extends EntityDungeonMob {
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
 		targetTasks.addTask(2, new EntityAIFindItem(this, 24, foods));
 	}
-	
+
+	public static void setFoods(List<String> list) {
+		foods = new HashSet<>();
+		appendToFoods(list);
+	}
+
+	public static void appendToFoods(List<String> list) {
+		for (String rl : list) {
+			StringTokenizer tokens = new StringTokenizer(rl, ":");
+			Item item = Item.REGISTRY.getObject(new ResourceLocation(tokens.nextToken(),
+					tokens.nextToken()));
+			if (tokens.hasMoreTokens()) {
+				foods.add(new RMFoodItem(item, Integer.parseInt(tokens.nextToken())));
+			} else {
+				foods.add(new RMFoodItem(item));
+			}
+		}
+	}
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -193,6 +205,9 @@ public class EntityRustMonster extends EntityDungeonMob {
 		ForgeHooks.onLivingJump(this);
 	}
 
+
+	// Manipulate food list with strings
+
 	@Override
 	public boolean attackEntityFrom(DamageSource src, float amount) {
 		if (src.getTrueSource() instanceof EntityPlayer) {
@@ -200,8 +215,8 @@ public class EntityRustMonster extends EntityDungeonMob {
 			ItemStack stack = player.getHeldItemMainhand();
 
 			if ((stack != null) && (stack.getItem() != null)
-					&& foods.contains(new RMFoodItem(stack.getItem(), 
-							stack.getItemDamage()))) {
+					&& foods.contains(new RMFoodItem(stack.getItem(),
+					stack.getItemDamage()))) {
 				if (player.getHeldItemMainhand().isItemStackDamageable()) {
 					int yar = rand.nextInt(11) + 15;
 					player.getHeldItemMainhand().damageItem(yar, this);
@@ -236,30 +251,7 @@ public class EntityRustMonster extends EntityDungeonMob {
 		}
 		return super.attackEntityAsMob(ent);
 	}
-	
-	
-	// Manipulate food list with strings
-	
-	public static void setFoods(List<String> list) {
-		foods = new HashSet<>();
-		appendToFoods(list);
-	}
-	
-	
-	public static void appendToFoods(List<String> list) {
-		for(String rl : list) {
-			StringTokenizer tokens = new StringTokenizer(rl, ":");
-			Item item = Item.REGISTRY.getObject(new ResourceLocation(tokens.nextToken(), 
-					tokens.nextToken()));
-			if(tokens.hasMoreTokens()) {
-				foods.add(new RMFoodItem(item, Integer.parseInt(tokens.nextToken())));
-			} else {
-				foods.add(new RMFoodItem(item));
-			}
-		}
-	}
 
-	
 	public Entity getTarget() {
 		if (pissed) {
 			return this.getAttackTarget();

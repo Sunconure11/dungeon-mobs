@@ -1,17 +1,11 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.util.DungeonMobsHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIFleeSun;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAIRestrictSun;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityAIZombieAttack;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -20,13 +14,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.util.DungeonMobsHelper;
-
 public class EntityRevenant extends EntityZombie {
-	private static double HEALTH = 30.0; 
-	public boolean ignoreHeight;
+	private static double HEALTH = 30.0;
 	private static String mobName = DungeonMobs.MODID + ":dmrevenant";
+	public boolean ignoreHeight;
 	private boolean darkspawn;
 	private boolean newspawn;
 	private Potion buff;
@@ -37,7 +28,7 @@ public class EntityRevenant extends EntityZombie {
 		regen = Potion.getPotionFromResourceLocation("regeneration");
 		experienceValue = 15;
 		darkspawn = true;
-		newspawn  = true;
+		newspawn = true;
 	}
 
 
@@ -93,17 +84,15 @@ public class EntityRevenant extends EntityZombie {
 		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0d);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0d);
 	}
-	
-	
-	
-	
+
+
 	public void addBuff() {
-		if(isChild() || ((rand.nextInt(16) + 24) < posY)) {
+		if (isChild() || ((rand.nextInt(16) + 24) < posY)) {
 			buff = null;
 			return;
 		}
-		switch(rand.nextInt(6)) {
-			case 0: 
+		switch (rand.nextInt(6)) {
+			case 0:
 				buff = Potion.getPotionFromResourceLocation("resistance");
 				return;
 			case 1:
@@ -132,7 +121,7 @@ public class EntityRevenant extends EntityZombie {
 			darkspawn = false;
 			return super.getCanSpawnHere();
 		}
-		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)) 
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))
 				|| (!world.isRemote && world.isDaytime())) {
 			return false;
 		}
@@ -141,44 +130,44 @@ public class EntityRevenant extends EntityZombie {
 		}
 		return super.getCanSpawnHere();
 	}
-	
-	
+
+
 	@Override
 	public void onUpdate() {
 		// "Hacky" and inefficient, but its the option the vanilla code leaves
-		if(newspawn) {
+		if (newspawn) {
 			addBuff();
 			newspawn = false;
 			darkspawn = !DungeonMobsHelper.isNearSpawner(world, this, mobName);
 		}
-		if(isInDay()) {
+		if (isInDay()) {
 			setDead();
 		}
-		if(buff != null) {
-			if(buff == regen) {
+		if (buff != null) {
+			if (buff == regen) {
 				regenerate();
-			} else if(!isPotionActive(buff)) {
+			} else if (!isPotionActive(buff)) {
 				addPotionEffect(new PotionEffect(buff, 60, 1));
 			}
-		} 
+		}
 		super.onUpdate();
 	}
-	
-	
+
+
 	public boolean isInDay() {
-		 return (darkspawn && !world.isRemote && world.isDaytime());
+		return (darkspawn && !world.isRemote && world.isDaytime());
 	}
-	
-	
+
+
 	@Override
 	protected void jump() {
 		super.jump();
 		// TODO: More forward
 	}
-	
-	
+
+
 	private void regenerate() {
-		if(!isDead && (getHealth() > 0) 
+		if (!isDead && (getHealth() > 0)
 				&& (getHealth() < HEALTH) && !isBurning()) {
 			setHealth(getHealth() + 0.05f);
 		}

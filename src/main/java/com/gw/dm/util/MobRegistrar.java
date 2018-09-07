@@ -5,7 +5,7 @@ import com.gw.dm.projectile.EntityEldermobBall;
 import com.gw.dm.projectile.EntityEyeRay;
 import com.gw.dm.projectile.EntityLightball;
 import com.gw.dm.projectile.EntityMagicMissile;
-
+import jaredbgreat.dldungeons.api.DLDungeonsAPI;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
@@ -13,7 +13,6 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import jaredbgreat.dldungeons.api.DLDungeonsAPI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -210,9 +209,9 @@ public class MobRegistrar {
 					instance, 80, 1, true);
 		}
 		// BLADE TRAP
-		if(spawnBladeTrap) {
-			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmbladetrap"), 
-					EntityBladeTrap.class, MODID + ".dmbladetrap", bladeTrapID, instance, 80, 3, true,  
+		if (spawnBladeTrap) {
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmbladetrap"),
+					EntityBladeTrap.class, MODID + ".dmbladetrap", bladeTrapID, instance, 80, 3, true,
 					0x464646, 0xb70202);
 		}
 	}
@@ -344,69 +343,69 @@ public class MobRegistrar {
 		if (spawnRakshasa) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmrakshasa"), 1);
 		if (spawnLizalfos) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmlizalfos"), 1);
 	}
-	
-	
+
+
 	public static void addToDLD() {
-		if(spawnGhoul) 
-			DLDungeonsAPI.addMob(MODID+ ":dmghoul", 1, 
+		if (spawnGhoul)
+			DLDungeonsAPI.addMob(MODID + ":dmghoul", 1,
 					"SWAMP", "DESERT", "DUNGEON", "URBAN", "NECRO");
-		if(spawnBeholder) 
-			DLDungeonsAPI.addMob(MODID+ ":dmbeholder", 2, 
+		if (spawnBeholder)
+			DLDungeonsAPI.addMob(MODID + ":dmbeholder", 2,
 					"MAGICAL", "MOUNTAIN", "DUNGEON", "WASTELAND", "END");
-		if(spawnTroll) 
-			DLDungeonsAPI.addMob(MODID+ ":dmtroll", 2, 
+		if (spawnTroll)
+			DLDungeonsAPI.addMob(MODID + ":dmtroll", 2,
 					"MOUNTAIN", "FOREST", "DUNGEON", "FROZEN", "URBAN");
-		if(spawnManticore) 
-			DLDungeonsAPI.addMob(MODID+ ":dmmanticore", 2, 
+		if (spawnManticore)
+			DLDungeonsAPI.addMob(MODID + ":dmmanticore", 2,
 					"MOUNTAIN", "DESERT", "DUNGEON", "WASTELAND");
-		if(spawnRevenant) 
-			DLDungeonsAPI.addMob(MODID+ ":dmrevenant", 2, 
+		if (spawnRevenant)
+			DLDungeonsAPI.addMob(MODID + ":dmrevenant", 2,
 					"FOREST", "DUNGEON", "URBAN", "NECRO", "SHADOW");
-		if(spawnVampire) 
-			DLDungeonsAPI.addMob(MODID+ ":dmvampire", 3, 
+		if (spawnVampire)
+			DLDungeonsAPI.addMob(MODID + ":dmvampire", 3,
 					"FOREST", "PLAINS", "DUNGEON", "URBAN", "NECRO", "SHADOW");
-		if(spawnHookHorror) 
-			DLDungeonsAPI.addMob(MODID+ ":dmhookhorror", 2, 
+		if (spawnHookHorror)
+			DLDungeonsAPI.addMob(MODID + ":dmhookhorror", 2,
 					"MOUNTAIN", "FOREST", "DUNGEON", "JUNGLE", "TECH", "FROZEN");
-		if(spawnDestrachan) 
-			DLDungeonsAPI.addMob(MODID+ ":dmdestrachan", 2, 
+		if (spawnDestrachan)
+			DLDungeonsAPI.addMob(MODID + ":dmdestrachan", 2,
 					"SWAMP", "JUNGLE", "DUNGEON", "URBAN", "MAGICAL", "TECH");
-		if(spawnCaveFisher) 
-			DLDungeonsAPI.addMob(MODID+ ":dmcavefisher", 2, 
+		if (spawnCaveFisher)
+			DLDungeonsAPI.addMob(MODID + ":dmcavefisher", 2,
 					"MAGICAL", "TECH", "DUNGEON", "URBAN", "WASTELAND", "FROZEN");
-		if(spawnHellHound) 
-			DLDungeonsAPI.addMob(MODID+ ":dmhellhound", 2, 
+		if (spawnHellHound)
+			DLDungeonsAPI.addMob(MODID + ":dmhellhound", 2,
 					"NETHER", "FIERY", "DUNGEON");
-		if(spawnUmberHulk) 
-			DLDungeonsAPI.addMob(MODID+ ":dmumberhulk", 2, 
+		if (spawnUmberHulk)
+			DLDungeonsAPI.addMob(MODID + ":dmumberhulk", 2,
 					"SWAMP", "WASTELAND", "DUNGEON", "MUSHROOM", "TECH");
-		if(spawnRustMonster) 
-			DLDungeonsAPI.addMob(MODID+ ":dmrustmonster", 2, 
+		if (spawnRustMonster)
+			DLDungeonsAPI.addMob(MODID + ":dmrustmonster", 2,
 					"DUNGEON", "MAGICAL", "TECH", "MUSHROOM", "WASTELAND");
-		if(spawnCockatrice) 
-			DLDungeonsAPI.addMob(MODID+ ":dmcockatrice", 1, 
+		if (spawnCockatrice)
+			DLDungeonsAPI.addMob(MODID + ":dmcockatrice", 1,
 					"FOREST", "PLAINS", "DESERT", "DUNGEON", "MAGICAL", "WASTELAND");
-		if(spawnThoqqua) 
-			DLDungeonsAPI.addMob(MODID+ ":dmthoqqua", 2, 
+		if (spawnThoqqua)
+			DLDungeonsAPI.addMob(MODID + ":dmthoqqua", 2,
 					"DUNGEON", "MOUNTAIN", "FIERY", "NETHER");
-		if(spawnVescavor) 
+		if (spawnVescavor)
 			// Not really elite, but their power in a crowded dungeon...? ...might as well be!
-			DLDungeonsAPI.addMob(MODID+ ":dmvescavor", 3,  
+			DLDungeonsAPI.addMob(MODID + ":dmvescavor", 3,
 					"MAGICAL", "TECH", "DUNGEON", "WASTELAND", "JUNGLE");
-		if(spawnIllithid) 
-			DLDungeonsAPI.addMob(MODID+ ":dmillithid", 2, 
+		if (spawnIllithid)
+			DLDungeonsAPI.addMob(MODID + ":dmillithid", 2,
 					"URBAN", "MAGICAL", "DUNGEON", "TECH", "FROZEN", "END");
-		if(spawnRakshasa) 
-			DLDungeonsAPI.addMob(MODID+ ":dmghoul", 3, 
+		if (spawnRakshasa)
+			DLDungeonsAPI.addMob(MODID + ":dmghoul", 3,
 					"URBAN", "DESERT", "JUNGLE", "MAGICAL");
-		if(spawnLizalfos) 
-			DLDungeonsAPI.addMob(MODID+ ":dmghoul", 2, 
+		if (spawnLizalfos)
+			DLDungeonsAPI.addMob(MODID + ":dmghoul", 2,
 					"SWAMP", "FOREST", "DUNGEON", "JUNGLE");
-		if(spawnOuterThing) 
-			DLDungeonsAPI.addMob(MODID+ ":dmeldermob", 3, 
+		if (spawnOuterThing)
+			DLDungeonsAPI.addMob(MODID + ":dmeldermob", 3,
 					"END", "MAGICAL", "TECH", "SHADOW", "FROZEN");
-		if(spawnFallenAngel) 
-			DLDungeonsAPI.addMob(MODID+ ":dmfallenangel", 3, 
+		if (spawnFallenAngel)
+			DLDungeonsAPI.addMob(MODID + ":dmfallenangel", 3,
 					"NETHER", "MAGICAL", "PARADISE", "WASTELAND");
 	}
 

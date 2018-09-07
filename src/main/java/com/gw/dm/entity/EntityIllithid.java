@@ -4,7 +4,6 @@ import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -28,20 +27,15 @@ import net.minecraft.world.World;
 import java.util.*;
 
 public class EntityIllithid extends EntityDungeonMob {
+	private static String mobName = DungeonMobs.MODID + ":dmillithid";
 	public boolean isGrappling;
 	private boolean ignoreHeight;
 	private int tentacleCounter;
 	private EntityLivingBase stunnedEntity;
 	private int stunDuration;
-
 	private int mindBlastTicks;
-
 	private List dominatedEntities;
 	private Map ownerIDs;
-	
-	private static String mobName = DungeonMobs.MODID + ":dmillithid";
-	
-
 	private EntityAIAttackMelee grapple = new EntityAIAttackMelee(this, 1.0F, false);
 
 	public EntityIllithid(World par1World) {

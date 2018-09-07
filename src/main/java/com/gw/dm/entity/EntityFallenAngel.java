@@ -1,7 +1,13 @@
 package com.gw.dm.entity;
 
-import javax.annotation.Nullable;
-
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonFlying;
+import com.gw.dm.ai.AIAngelAttack;
+import com.gw.dm.ai.AIAngelWander;
+import com.gw.dm.ai.TaskAngelAgroOnPlayer;
+import com.gw.dm.projectile.EntityLightball;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,21 +32,13 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonFlying;
-import com.gw.dm.ai.AIAngelAttack;
-import com.gw.dm.ai.AIAngelWander;
-import com.gw.dm.ai.TaskAngelAgroOnPlayer;
-import com.gw.dm.projectile.EntityLightball;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import javax.annotation.Nullable;
 
 public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRangedAttackMob {
-	
-	private static String mobName = DungeonMobs.MODID + ":dmfallenangel";
 
 	private static final DataParameter<Boolean> SWINGING_ARMS
 			= EntityDataManager.<Boolean>createKey(EntityFallenAngel.class, DataSerializers.BOOLEAN);
+	private static String mobName = DungeonMobs.MODID + ":dmfallenangel";
 
 
 	public EntityFallenAngel(World worldIn) {
@@ -200,10 +198,10 @@ public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRan
 		for (int i = 0; i < n; i++) {
 			dropItem(item, 1);
 		}
-		if(rand.nextInt(DungeonMobsHelper.getDifficulty(world)) == 0) {
+		if (rand.nextInt(DungeonMobsHelper.getDifficulty(world)) == 0) {
 			ItemStack sword = new ItemStack(Items.GOLDEN_SWORD);
 			Enchantment ench;
-			sword.addEnchantment(Enchantment.getEnchantmentByLocation("smite"), 
+			sword.addEnchantment(Enchantment.getEnchantmentByLocation("smite"),
 					rand.nextInt(3) + rand.nextInt(3) + 1);
 		}
 		super.dropFewItems(wasRecentlyHit, lootingModifier);

@@ -4,7 +4,6 @@ import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.ai.AIVampireAttack;
 import com.gw.dm.util.DungeonMobsHelper;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -18,9 +17,9 @@ import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 public class EntityVampire extends EntityDungeonMob {
+	private static String mobName = DungeonMobs.MODID + ":dmvampire";
 	private boolean escaping;
 	private boolean feelTrapped;
-	private static String mobName = DungeonMobs.MODID + ":dmvampire";
 
 	public EntityVampire(World worldIn) {
 		super(worldIn);
@@ -64,7 +63,7 @@ public class EntityVampire extends EntityDungeonMob {
 
 
 	protected void applyEntityAI() {
-        targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
+		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
 		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityVillager.class, false));
 		targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityIronGolem.class, true));
@@ -77,7 +76,7 @@ public class EntityVampire extends EntityDungeonMob {
 			if (world.isDaytime() && (getBrightness() > 0.5f) && world.canSeeSky(getPosition())) {
 				setFire(8);
 				setHealth(getHealth() - 1.0f);
-			} else if(!this.isDead && (getHealth() > 0)) {
+			} else if (!this.isDead && (getHealth() > 0)) {
 				setHealth(getHealth() + 0.05f);
 			}
 		}
@@ -131,7 +130,7 @@ public class EntityVampire extends EntityDungeonMob {
 			return false;
 		}
 	}
-	
+
 
 	@Override
 	protected void dropFewItems(boolean par1, int par2) {

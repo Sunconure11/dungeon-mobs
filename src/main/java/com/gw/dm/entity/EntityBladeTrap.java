@@ -1,8 +1,9 @@
 package com.gw.dm.entity;
 
-import java.util.Iterator;
-import java.util.List;
-
+import com.gw.dm.DungeonMobsDamageSource;
+import com.gw.dm.blocks.BlockBladeTrap;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.MiscRegistrar;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -17,26 +18,21 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import com.gw.dm.DungeonMobsDamageSource;
-import com.gw.dm.blocks.BlockBladeTrap;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.MiscRegistrar;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class EntityBladeTrap extends EntityLiving {
-	private int[] dir = {0, 0, 0};
-
 	public int moveTime = 0;
 	public int attackTimer = 0;
+	private int[] dir = {0, 0, 0};
 
-	public EntityBladeTrap(World par1World) 
-	{
+	public EntityBladeTrap(World par1World) {
 		super(par1World);
 		setSize(0.98F, 0.98F);
 	}
 
-	public EntityBladeTrap(World w, double x, double y, double z) 
-	{
+	public EntityBladeTrap(World w, double x, double y, double z) {
 		super(w);
 		setSize(0.98F, 0.98F);
 		posX = x;
@@ -64,7 +60,7 @@ public class EntityBladeTrap extends EntityLiving {
 
 	public boolean canBeCollidedWith() {
 		return false;
-	}	
+	}
 
 
 	public void onUpdate() {
@@ -74,7 +70,7 @@ public class EntityBladeTrap extends EntityLiving {
 		++moveTime;
 		++attackTimer;
 
-		if(attackTimer > 11)
+		if (attackTimer > 11)
 			attackTimer = 11;
 
 		motionX += (0.12D * dir[0]);
@@ -94,39 +90,39 @@ public class EntityBladeTrap extends EntityLiving {
 
 			where = new BlockPos(i, j, k);
 
-			if(!BlockBladeTrap.canMoveInto(world, i + dir[0], j + dir[1], k + dir[2])) {
+			if (!BlockBladeTrap.canMoveInto(world, i + dir[0], j + dir[1], k + dir[2])) {
 				world.setBlockState(where, MiscRegistrar.blockBladeTrap.getDefaultState(), 3);
 
 				setDead();
-			} else if(moveTime > 40) {
+			} else if (moveTime > 40) {
 				world.setBlockState(where, MiscRegistrar.blockBladeTrap.getDefaultState(), 3);
 
 				setDead();
 			}
 		}
 
-		if(attackTimer > 10) {
+		if (attackTimer > 10) {
 			boolean flag = false;
 
 			List<Entity> foo = null;
 
 			try {
 				foo = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox());
-			} catch(NullPointerException e) {
+			} catch (NullPointerException e) {
 				flag = true;
 			}
 
-			if(!flag && !(foo == null) && !foo.isEmpty()) {
+			if (!flag && !(foo == null) && !foo.isEmpty()) {
 				Iterator iter = foo.iterator();
 
-				while(iter.hasNext()) {
-					Entity bar = (Entity)iter.next();
-					playSound(AudioHandler.entityBladeTrapBlade, 1.0F, 
+				while (iter.hasNext()) {
+					Entity bar = (Entity) iter.next();
+					playSound(AudioHandler.entityBladeTrapBlade, 1.0F,
 							(world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
 
 					int dmgValue = 1;
 
-					switch(world.getDifficulty()) {
+					switch (world.getDifficulty()) {
 						case EASY:
 							dmgValue = 2;
 							break;
@@ -147,26 +143,26 @@ public class EntityBladeTrap extends EntityLiving {
 		}
 	}
 
-	
-	@Override
-	public void jump() {/*Do Nothing*/}    
 
-	
+	@Override
+	public void jump() {/*Do Nothing*/}
+
+
 	@Override
 	public void fall(float distance, float damageMultiplier) {/*NA*/}
 
-	
+
 	@Override
 	public boolean canRenderOnFire() {
 		return false;
 	}
 
-	
+
 	@Override
 	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
 		int dmgValue = 4;
-		
-		switch(world.getDifficulty()) {
+
+		switch (world.getDifficulty()) {
 			case EASY:
 				dmgValue += 2;
 				break;
@@ -183,13 +179,13 @@ public class EntityBladeTrap extends EntityLiving {
 		par1EntityPlayer.attackEntityFrom(DungeonMobsDamageSource.bladeTrap, dmgValue);
 	}
 
-	
+
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float amount) {
 		return false;
 	}
 
-	
+
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -197,7 +193,7 @@ public class EntityBladeTrap extends EntityLiving {
 		//dataWatcher.addObject(16, new Byte((byte)0));
 	}
 
-	
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeEntityToNBT(par1NBTTagCompound);
@@ -210,7 +206,7 @@ public class EntityBladeTrap extends EntityLiving {
 		par1NBTTagCompound.setInteger("d2", dir[2]);
 	}
 
-	
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
 		super.readEntityFromNBT(par1NBTTagCompound);
@@ -223,13 +219,13 @@ public class EntityBladeTrap extends EntityLiving {
 		dir[2] = par1NBTTagCompound.getInteger("d2");
 	}
 
-	
+
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return AudioHandler.entityBladeTrapAmbient;
 	}
 
-	
+
 	@Override
 	protected SoundEvent getHurtSound(DamageSource src) {
 		return AudioHandler.entityBladeTrapHurt;
@@ -240,13 +236,13 @@ public class EntityBladeTrap extends EntityLiving {
 		return AudioHandler.entityBladeTrapDeath;
 	}
 
-	
+
 	@Override
 	public int getTalkInterval() {
 		return 20;
 	}
 
-	
+
 	/*
 	 * Apparently these once had spawning logic, but it was removed. 
 	 * This is probably the way it should be -- they should be placed 
@@ -345,24 +341,24 @@ public class EntityBladeTrap extends EntityLiving {
 		 */
 	}
 
-	
+
 	private boolean tooManyTrapsNearby(int x, int y, int z) {
 		int count = 0;
 		int max = 4;
 
-		for(int i = -6; i < 6; i++) 
-			for(int j = -6; j < 6; j++)
-				for(int k = -6; k < 6; k++) {
+		for (int i = -6; i < 6; i++)
+			for (int j = -6; j < 6; j++)
+				for (int k = -6; k < 6; k++) {
 					int foo = y + j;
 
-					if(foo < 1) {
+					if (foo < 1) {
 						foo = 1;
 					}
-					if(world.getBlockState(new BlockPos(x + i, foo, z + k)).getBlock()  
+					if (world.getBlockState(new BlockPos(x + i, foo, z + k)).getBlock()
 							== MiscRegistrar.blockBladeTrap) {
 						count++;
 					}
-		}
+				}
 
 		/*
 		List<EntityBladeTrap> foo = world.getEntitiesWithinAABB(EntityBladeTrap.class, getBoundingBox().expand(4.0D, 4.0D, 4.0D));
@@ -374,20 +370,20 @@ public class EntityBladeTrap extends EntityLiving {
 		}
 		 */
 
-		if(count > max)
+		if (count > max)
 			return true;
 		else
 			return false;
 	}
 
-	
+
 	public boolean findNearbyMoss(int x, int y, int z) {
-		for(int i = -4; i < 4; i++) {
-			for(int j = -4; j < 4; j++) {
-				for(int k = -4; k < 4; k++) {
-					Block toTest = world.getBlockState(new 
+		for (int i = -4; i < 4; i++) {
+			for (int j = -4; j < 4; j++) {
+				for (int k = -4; k < 4; k++) {
+					Block toTest = world.getBlockState(new
 							BlockPos(x + i, y + j, z + k)).getBlock();
-					if(toTest == Blocks.STONEBRICK) {
+					if (toTest == Blocks.STONEBRICK) {
 						return true;
 					}
 				}
@@ -395,5 +391,5 @@ public class EntityBladeTrap extends EntityLiving {
 		}
 		return false;
 	}
-	
+
 }

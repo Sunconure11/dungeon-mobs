@@ -1,13 +1,10 @@
 package com.gw.dm.entity;
 
-import java.util.StringTokenizer;
-
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.DungeonMobsDamageSource;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -19,11 +16,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.StringTokenizer;
+
 public class EntityCockatrice extends EntityDungeonMob {
+	private static String mobName;
 	private boolean ignoreHeight;
 	private int stoneChance;
-	private static String mobName; 
-
 	private EntityPetrified stonedPlayer;
 	private boolean incoming;
 	private boolean waitTick;
@@ -177,24 +175,24 @@ public class EntityCockatrice extends EntityDungeonMob {
 			}
 		}
 	}
-	
-	
+
+
 	public String getRegistryName() {
-		if(mobName == null) fixNameIfNull();
+		if (mobName == null) fixNameIfNull();
 		return mobName;
 	}
-	
-	
+
+
 	public void setRegistryName(String name) {
 		mobName = (DungeonMobs.MODID + ":" + name).trim().toLowerCase();
-	}	
-	
-	
+	}
+
+
 	private void fixNameIfNull() {
 		StringTokenizer fixer = new StringTokenizer(this.getName()
 				.trim().toLowerCase(), ".");
 		do {
 			mobName = fixer.nextToken();
-		} while(fixer.hasMoreTokens());
+		} while (fixer.hasMoreTokens());
 	}
 }

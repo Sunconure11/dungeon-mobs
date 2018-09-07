@@ -1,24 +1,17 @@
 package com.gw.dm.entity;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.ai.EntityAIFollowTwin;
+import com.gw.dm.ai.EntityAIMonsterPanic;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -35,14 +28,15 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.ai.EntityAIFollowTwin;
-import com.gw.dm.ai.EntityAIMonsterPanic;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 public class EntityLizalfos extends EntityDungeonMob {
+	private static final List<LocOffset> locations = new ArrayList<>();
+	private static String mobName = DungeonMobs.MODID + ":lizalfos";
 	public boolean myTwinIsDead;
 	public boolean goodToGo;
 	public boolean isRetreating;
@@ -55,33 +49,18 @@ public class EntityLizalfos extends EntityDungeonMob {
 	private WeakReference<EntityLizalfos> myTwinWeak;
 	private boolean isLeaping;
 	private int runTimer;
-
 	private EntityAIFollowTwin followTwin;
 	private EntityAIAttackMelee attack;
 	private EntityAIAvoidEntity retreat;
 	private EntityAIMonsterPanic panic;
-		
 	private boolean newSpawn;
-
 	private EntityAIHurtByTarget revenge;
 	private EntityAINearestAttackableTarget target;
-	
-	private static String mobName = DungeonMobs.MODID + ":lizalfos";
-
-	private static class LocOffset {
-		public double x, z;
-		public LocOffset(int x, int z) {
-			this.x = (double)x;
-			this.z = (double)x;
-		}
-	}
-	
-	private static final List<LocOffset> locations = new ArrayList<>();
 
 	/**
-	 * The primary (and public) constructor, for creating the first 
+	 * The primary (and public) constructor, for creating the first
 	 * of each pair -- i.e., the normal constructor for core spawning.
-	 * 
+	 *
 	 * @param par1World
 	 */
 	public EntityLizalfos(World par1World) {
@@ -92,7 +71,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 		myTwin = null;
 		myTwinIsDead = false;
 		goodToGo = false;
-		
+
 		newSpawn = true;
 
 		isRetreating = false;
@@ -121,36 +100,43 @@ public class EntityLizalfos extends EntityDungeonMob {
 		targetTasks.addTask(0, revenge);
 		targetTasks.addTask(1, target);
 	}
-	
-	
+
 	/**
 	 * A special private constructor, just for creating the twin.
-	 * 
+	 *
 	 * @param world
 	 * @param twin
 	 * @param x
 	 * @param z
 	 * @param w
 	 */
-	private EntityLizalfos(World world, EntityLizalfos twin, 
-				double x, double y, double z) {
+	private EntityLizalfos(World world, EntityLizalfos twin,
+	                       double x, double y, double z) {
 		this(world);
 		newSpawn = false;
-				
+
 		twin.setTwin(this);
 		setTwin(twin);
-		
+
 		isTwin = true;
-		 
+
 		twinEntityID = twin.getEntityId();
 		twin.twinEntityID = getEntityId();
-		
+
 		setLocationAndAngles(x, y, z, this.rotationYaw, this.rotationPitch);
-		
+
 		setIsTwin(true);
 		setTwinID(this.twinID);
 	}
 
+	public static void initLocations() {
+		for (int i = -2; i < 3; i++)
+			for (int j = -2; j < 3; j++) {
+				if ((i != 0) && (j != 0)) {
+					locations.add(new LocOffset(i, j));
+				}
+			}
+	}
 
 	@Override
 	protected void applyEntityAttributes() {
@@ -217,7 +203,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 
 
 	public EntityLizalfos getTwin() {
-		if(myTwinWeak != null) {
+		if (myTwinWeak != null) {
 			return myTwinWeak.get();
 		} else return null;
 	}
@@ -255,7 +241,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 
 
 	public void setDead() {
-		if(this.myTwin != null && myTwinWeak != null && !isTwinDead())
+		if (this.myTwin != null && myTwinWeak != null && !isTwinDead())
 			myTwinWeak.get().killTwin();
 		super.setDead();
 	}
@@ -300,7 +286,7 @@ public class EntityLizalfos extends EntityDungeonMob {
 
 	// FIXME: This should probably by in onUpdate(), not onLivingUpdate()...?
 	public void onLivingUpdate() {
-		if(newSpawn) {
+		if (newSpawn) {
 			spawnTwin();
 		}
 
@@ -506,20 +492,20 @@ public class EntityLizalfos extends EntityDungeonMob {
 			}
 		}
 	}
-	
-	
+
+
 	private void spawnTwin() {
 		newSpawn = false;
-		if(world.isRemote) {
+		if (world.isRemote) {
 			return;
 		}
 		boolean successful = false;
 		Collections.shuffle(locations);
 		EntityLizalfos twin = new EntityLizalfos(world, this, posX, posY, posZ);
-		for(LocOffset offset : locations) {
-			twin.setLocationAndAngles(posX + offset.x, posY, posZ + offset.z, 
+		for (LocOffset offset : locations) {
+			twin.setLocationAndAngles(posX + offset.x, posY, posZ + offset.z,
 					rotationYaw, rotationPitch);
-			if(twin.isNotColliding()) {
+			if (twin.isNotColliding()) {
 				world.spawnEntity(twin);
 				twinEntityID = twin.getEntityId();
 				twin.twinEntityID = getEntityId();
@@ -527,19 +513,18 @@ public class EntityLizalfos extends EntityDungeonMob {
 				break;
 			}
 		}
-		if(!successful) {
+		if (!successful) {
 			twin.setDead();
 			setDead();
 		}
 	}
-	
-	
-	public static void initLocations() {
-		for(int i = -2; i < 3; i++)
-			for(int j = -2; j < 3; j++) {
-				if((i != 0) && (j != 0)) {
-					locations.add(new LocOffset(i, j));
-				}
+
+	private static class LocOffset {
+		public double x, z;
+
+		public LocOffset(int x, int z) {
+			this.x = (double) x;
+			this.z = (double) x;
 		}
 	}
 }

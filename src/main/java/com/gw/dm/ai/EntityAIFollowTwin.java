@@ -1,9 +1,8 @@
 package com.gw.dm.ai;
 
+import com.gw.dm.entity.EntityLizalfos;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.Path;
-
-import com.gw.dm.entity.EntityLizalfos;
 
 public class EntityAIFollowTwin extends EntityAIBase {
 	private EntityLizalfos entityOwner;
@@ -21,8 +20,8 @@ public class EntityAIFollowTwin extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 		boolean out = !entityOwner.isTwinDead() || this.entityOwner.getAttackTarget() != null;
-		EntityLizalfos twin = entityOwner.getTwin(); 
-		if(out && (twin != null)) {
+		EntityLizalfos twin = entityOwner.getTwin();
+		if (out && (twin != null)) {
 			path = entityOwner.getNavigator().getPathToEntityLiving(twin);
 		}
 		return out && (path != null);
@@ -31,8 +30,8 @@ public class EntityAIFollowTwin extends EntityAIBase {
 
 	@Override
 	public boolean shouldContinueExecuting() {
-		EntityLizalfos twin = entityOwner.getTwin(); 
-		if((path == null) 
+		EntityLizalfos twin = entityOwner.getTwin();
+		if ((path == null)
 				|| entityOwner.isTwinDead()
 				|| (entityOwner.getAttackTarget() != null)
 				|| (twin == null)) {
@@ -47,7 +46,7 @@ public class EntityAIFollowTwin extends EntityAIBase {
 	@Override
 	public void startExecuting() {
 		this.cooldown = 10;
-		if(path != null) {
+		if (path != null) {
 			entityOwner.getNavigator().setPath(path, speed);
 		}
 	}
@@ -58,9 +57,9 @@ public class EntityAIFollowTwin extends EntityAIBase {
 		if (--this.cooldown <= 0) {
 			this.cooldown = 10;
 			EntityLizalfos twin = entityOwner.getTwin();
-			if(twin != null) {
+			if (twin != null) {
 				path = entityOwner.getNavigator().getPathToEntityLiving(twin);
-				if(path != null) {
+				if (path != null) {
 					entityOwner.getNavigator().setPath(path, speed);
 				}
 			}

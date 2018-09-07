@@ -1,8 +1,8 @@
 package com.gw.dm.util;
 
-import java.util.LinkedList;
-import java.util.Random;
-
+import com.gw.dm.network.ConfusionPacket;
+import com.gw.dm.network.KnockBackPacket;
+import com.gw.dm.network.NetworkHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -19,9 +19,8 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.FakePlayer;
 
-import com.gw.dm.network.ConfusionPacket;
-import com.gw.dm.network.KnockBackPacket;
-import com.gw.dm.network.NetworkHelper;
+import java.util.LinkedList;
+import java.util.Random;
 
 public class DungeonMobsHelper {
 
@@ -161,7 +160,7 @@ public class DungeonMobsHelper {
 						TileEntity te = world.getTileEntity(test);
 						if (te instanceof TileEntityMobSpawner) {
 							try {
-								TileEntityMobSpawner mobSpawner = (TileEntityMobSpawner)te;
+								TileEntityMobSpawner mobSpawner = (TileEntityMobSpawner) te;
 								NBTTagCompound nbt = new NBTTagCompound();
 								mobSpawner.getSpawnerBaseLogic().writeToNBT(nbt);
 								if (nbt.hasKey("SpawnData")) {
@@ -173,13 +172,14 @@ public class DungeonMobsHelper {
 											return true;
 									}
 								}
-							} catch (Exception e) {}
+							} catch (Exception e) {
+							}
 						}
 					}
 				}
 		return out;
 	}
-	
+
 
 	/**
 	 * A replacement for the vanilla addRandomEnchantment methodm which is
@@ -195,5 +195,5 @@ public class DungeonMobsHelper {
 			stack.addEnchantment(ench, l);
 		}
 	}
-	
+
 }

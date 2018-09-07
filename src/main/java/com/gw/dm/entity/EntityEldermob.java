@@ -1,12 +1,19 @@
 package com.gw.dm.entity;
 
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonFlying;
+import com.gw.dm.ai.AIEldermobMove;
+import com.gw.dm.projectile.EntityCloudGenerator;
+import com.gw.dm.projectile.EntityEldermobBall;
+import com.gw.dm.projectile.EntityFireCloudGenerator;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackRanged;
 import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
@@ -27,20 +34,11 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderEnd;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonFlying;
-import com.gw.dm.ai.AIEldermobMove;
-import com.gw.dm.projectile.EntityCloudGenerator;
-import com.gw.dm.projectile.EntityEldermobBall;
-import com.gw.dm.projectile.EntityFireCloudGenerator;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
-
 public class EntityEldermob extends EntityDungeonFlying implements IMob, IRangedAttackMob {
 	private static final int SD = 1024 * 1024;
-	
+
 	private static String mobName = DungeonMobs.MODID + ":dmeldermob";
-	
+
 	private static PotionEffect poison
 			= new PotionEffect((Potion) Potion.REGISTRY
 			.getObject(new ResourceLocation("poison")), 300, 0);
@@ -161,7 +159,7 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 		if (world.getDifficulty() == EnumDifficulty.PEACEFUL) {
 			setDead();
 		}
-		if((getAttackTarget() != null) && getAttackTarget().isDead) {
+		if ((getAttackTarget() != null) && getAttackTarget().isDead) {
 			setAttackTarget(null);
 		}
 		super.onUpdate();
@@ -250,10 +248,10 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 	 * about the new system, or they enhance it).
 	 */
 	protected void dropFewItems(boolean par1, int par2) {
-		dropItem(Item.getItemFromBlock(Blocks.SLIME_BLOCK), 
+		dropItem(Item.getItemFromBlock(Blocks.SLIME_BLOCK),
 				rand.nextInt(2) + par2);
 		dropItem(Items.ENDER_EYE, rand.nextInt(2) + par2);
-		if(par1) {
+		if (par1) {
 			int var2 = rand.nextInt(DungeonMobsHelper.getDifficulty(world) + 2);
 			if (var2 == 0) {
 				ItemStack myBook = new ItemStack(Items.ENCHANTED_BOOK, 1);

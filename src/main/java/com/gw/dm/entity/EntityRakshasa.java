@@ -5,8 +5,6 @@ import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.projectile.EntityMagicMissile;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
-
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -31,12 +29,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob {
-	
-	private static String mobName = DungeonMobs.MODID + ":dmrakshasa";
 
 	private static final ResourceLocation rakshasaTextures
 			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Rakshasa.png");
-
+	private static String mobName = DungeonMobs.MODID + ":dmrakshasa";
 	public boolean ignoreHeight;
 	public String currentName;
 	public ResourceLocation currentSkin;
@@ -347,7 +343,7 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 			}
 		}
 	}
-	
+
 
 	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
 		super.writeEntityToNBT(par1NBTTagCompound);

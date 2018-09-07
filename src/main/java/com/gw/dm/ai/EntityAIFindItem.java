@@ -13,7 +13,6 @@ package com.gw.dm.ai;
 
 import com.gw.dm.entity.EntityRustMonster;
 import com.gw.dm.util.RMFoodItem;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,7 +22,6 @@ import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -69,7 +67,7 @@ public class EntityAIFindItem extends EntityAIBase {
 				for (int j = 0; j < numSlots; j++) {
 					ItemStack theItem = theStuff.getStackInSlot(j);
 					//System.out.println("Checking Item: " + theItem.getItem());
-					if (wantedThings.contains(new RMFoodItem(theItem.getItem(), 
+					if (wantedThings.contains(new RMFoodItem(theItem.getItem(),
 							theItem.getItemDamage()))) {
 						wantLiving.add(aPlayer);
 						break;
@@ -95,7 +93,7 @@ public class EntityAIFindItem extends EntityAIBase {
 			if (allThings.get(i) instanceof EntityItem) {
 				EntityItem thisThing = (EntityItem) allThings.get(i);
 				ItemStack theItem = thisThing.getItem();
-				if (wantedThings.contains(new RMFoodItem(theItem.getItem(), 
+				if (wantedThings.contains(new RMFoodItem(theItem.getItem(),
 						theItem.getItemDamage()))) {
 					wantItems.add(allThings.get(i));
 				}
@@ -195,7 +193,7 @@ public class EntityAIFindItem extends EntityAIBase {
 					for (int j = 0; j < numSlots; j++) {
 						ItemStack theItem = theStuff.getStackInSlot(j);
 						//System.out.println("Checking Item: " + theItem.getItem());
-						if (wantedThings.contains(new RMFoodItem(theItem.getItem(), 
+						if (wantedThings.contains(new RMFoodItem(theItem.getItem(),
 								theItem.getItemDamage()))) {
 							hasStuff = true;
 							break;
@@ -224,7 +222,7 @@ public class EntityAIFindItem extends EntityAIBase {
 		private Entity theEntity;
 
 		public EntityAINearestWantedThingSorter(EntityAIFindItem
-						par1EntityAINearestItem, Entity par2Entity) {
+				                                        par1EntityAINearestItem, Entity par2Entity) {
 			parent = par1EntityAINearestItem;
 			theEntity = par2Entity;
 		}

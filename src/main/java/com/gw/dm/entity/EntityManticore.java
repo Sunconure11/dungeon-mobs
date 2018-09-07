@@ -4,7 +4,6 @@ import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -20,7 +19,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityManticore extends EntityDungeonMob implements IRangedAttackMob {
-	
+
 	private static String mobName = DungeonMobs.MODID + ":dmmanticore";
 
 	public EntityManticore(World par1World) {

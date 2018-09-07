@@ -1,7 +1,8 @@
 package com.gw.dm.blocks;
 
-import java.util.Random;
-
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.util.DungeonMobsHelper;
+import com.gw.dm.util.MiscRegistrar;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -19,9 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.util.DungeonMobsHelper;
-import com.gw.dm.util.MiscRegistrar;
+import java.util.Random;
 
 public class BlockLavarock extends ModBlockBase {
 
@@ -37,7 +36,7 @@ public class BlockLavarock extends ModBlockBase {
 		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		MiscRegistrar.addBlock(this);
 		MiscRegistrar.addItem(new ItemBlock(this)
-			.setRegistryName(getRegistryName()));
+				.setRegistryName(getRegistryName()));
 	}
 
 

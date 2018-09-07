@@ -3,7 +3,6 @@ package com.gw.dm.entity;
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -24,10 +23,10 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 public class EntityTroll extends EntityMob {
+	private static String mobName = DungeonMobs.MODID + ":dmtroll";
 	public int stoneStatus = 1;
 	public int stoneCounter = 0;
 	public int regenTimer = 0;
-	private static String mobName = DungeonMobs.MODID + ":dmtroll";
 
 	public EntityTroll(World par1World) {
 		super(par1World);

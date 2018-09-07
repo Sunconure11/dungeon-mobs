@@ -1,9 +1,8 @@
 package com.gw.dm.entity;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.StringTokenizer;
-
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,19 +22,19 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringTokenizer;
 
 
 public class EntityCaveFisher extends EntitySpider {
 
+	protected static String mobName = DungeonMobs.MODID + ":" + "dmcavefisher";
 	public boolean ignoreHeight;
 	public float myAngles[] = new float[4];
 	private int stringTimer;
 	private int grabTimer;
 	private EntityPlayer myTarget;
-	protected static String mobName = DungeonMobs.MODID + ":" + "dmcavefisher";
 
 
 	public EntityCaveFisher(World par1World) {
@@ -344,24 +343,24 @@ public class EntityCaveFisher extends EntitySpider {
 		}
 		return super.attackEntityFrom(src, amount);
 	}
-	
-	
+
+
 	public String getRegistryName() {
-		if(mobName == null) fixNameIfNull();
+		if (mobName == null) fixNameIfNull();
 		return mobName;
 	}
-	
-	
+
+
 	public void setRegistryName(String name) {
 		mobName = (DungeonMobs.MODID + ":" + name).trim().toLowerCase();
-	}	
-	
-	
+	}
+
+
 	private void fixNameIfNull() {
 		StringTokenizer fixer = new StringTokenizer(this.getName()
 				.trim().toLowerCase(), ".");
 		do {
 			mobName = fixer.nextToken();
-		} while(fixer.hasMoreTokens());
+		} while (fixer.hasMoreTokens());
 	}
 }
