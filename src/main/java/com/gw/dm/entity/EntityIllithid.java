@@ -230,7 +230,7 @@ public class EntityIllithid extends EntityDungeonMob {
 					for (ItemStack slot : armors) {
 						if ((slot != null) && (slot.getItem() instanceof ItemArmor)) {
 							ItemArmor armor = (ItemArmor) slot.getItem();
-							if (world.isRemote & armor.getEquipmentSlot() == EntityEquipmentSlot.HEAD) {
+							if (world.isRemote && armor.getEquipmentSlot() == EntityEquipmentSlot.HEAD) {
 								hat = slot;
 								break;
 							}
