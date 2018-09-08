@@ -12,6 +12,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
@@ -188,11 +189,11 @@ public class EntityIllithid extends EntityDungeonMob {
 				ownerIDs.put(target, victim);
 			} else {
 				if (getAttackTarget() != null) {
-					Potion mf = Potion.getPotionFromResourceLocation("mining_fatigue");
+					Potion mf = MobEffects.MINING_FATIGUE;
 					if (!getAttackTarget().isPotionActive(mf)) {
 						getAttackTarget().addPotionEffect(new PotionEffect(mf, 240, 3));
 					}
-					Potion slow = Potion.getPotionFromResourceLocation("slowness");
+					Potion slow = MobEffects.SLOWNESS;
 					if (!getAttackTarget().isPotionActive(slow)) {
 						getAttackTarget().addPotionEffect(new PotionEffect(slow, 240, 3));
 					}
@@ -210,10 +211,8 @@ public class EntityIllithid extends EntityDungeonMob {
 		if (stunnedEntity != null) {
 			tasks.addTask(2, grapple);
 
-			if (!stunnedEntity.isPotionActive(Potion
-					.getPotionFromResourceLocation("mining_fatigue"))
-					&& !stunnedEntity.isPotionActive(Potion
-					.getPotionFromResourceLocation("slowness"))) {
+			if (!stunnedEntity.isPotionActive(MobEffects.MINING_FATIGUE)
+					&& !stunnedEntity.isPotionActive(MobEffects.SLOWNESS)) {
 				tasks.removeTask(grapple);
 				stunnedEntity = null;
 			} else if (stunnedEntity instanceof EntityPlayer) {
