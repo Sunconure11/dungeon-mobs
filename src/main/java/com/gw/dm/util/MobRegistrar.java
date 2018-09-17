@@ -1,11 +1,13 @@
 package com.gw.dm.util;
 
-import com.gw.dm.entity.*;
-import com.gw.dm.projectile.EntityEldermobBall;
-import com.gw.dm.projectile.EntityEyeRay;
-import com.gw.dm.projectile.EntityLightball;
-import com.gw.dm.projectile.EntityMagicMissile;
+import static com.gw.dm.DungeonMobs.MODID;
+import static com.gw.dm.DungeonMobs.instance;
+import static com.gw.dm.util.ConfigHandler.*;
 import jaredbgreat.dldungeons.api.DLDungeonsAPI;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
@@ -14,12 +16,34 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.gw.dm.DungeonMobs.MODID;
-import static com.gw.dm.DungeonMobs.instance;
-import static com.gw.dm.util.ConfigHandler.*;
+import com.gw.dm.entity.EntityAhriman;
+import com.gw.dm.entity.EntityBladeTrap;
+import com.gw.dm.entity.EntityCaveFisher;
+import com.gw.dm.entity.EntityCockatrice;
+import com.gw.dm.entity.EntityDestrachan;
+import com.gw.dm.entity.EntityEldermob;
+import com.gw.dm.entity.EntityFallenAngel;
+import com.gw.dm.entity.EntityGhoul;
+import com.gw.dm.entity.EntityHookHorror;
+import com.gw.dm.entity.EntityIllithid;
+import com.gw.dm.entity.EntityLizalfos;
+import com.gw.dm.entity.EntityManticore;
+import com.gw.dm.entity.EntityNetherHound;
+import com.gw.dm.entity.EntityPetrified;
+import com.gw.dm.entity.EntityRakshasa;
+import com.gw.dm.entity.EntityRakshasaImage;
+import com.gw.dm.entity.EntityRevenant;
+import com.gw.dm.entity.EntityRustMonster;
+import com.gw.dm.entity.EntityShrieker;
+import com.gw.dm.entity.EntityThoqqua;
+import com.gw.dm.entity.EntityTroll;
+import com.gw.dm.entity.EntityUmberHulk;
+import com.gw.dm.entity.EntityVampire;
+import com.gw.dm.entity.EntityVescavor;
+import com.gw.dm.projectile.EntityEldermobBall;
+import com.gw.dm.projectile.EntityEyeRay;
+import com.gw.dm.projectile.EntityLightball;
+import com.gw.dm.projectile.EntityMagicMissile;
 
 public class MobRegistrar {
 	public static final int revenantID = 0;
@@ -246,17 +270,21 @@ public class MobRegistrar {
 		tmp2.toArray(end);
 
 		// FIXME: This should be re-organized to simplified application of a config file.  
-		if (spawnGhoul) EntityRegistry.addSpawn(EntityGhoul.class, 5, 2, 4,
+		if (spawnGhoul) EntityRegistry.addSpawn(EntityGhoul.class, 
+				ghoulP, ghoulMn, ghoulMx,
 				EnumCreatureType.MONSTER, overworld);
 		if (spawnBeholder) EntityRegistry.addSpawn(EntityAhriman.class, 2, 1, 1,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnRustMonster) EntityRegistry.addSpawn(EntityRustMonster.class, 8, 1, 4,
+		if (spawnRustMonster) EntityRegistry.addSpawn(EntityRustMonster.class, 
+				rustMonsterP, rustMonsterMn, rustMonsterMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnShrieker) EntityRegistry.addSpawn(EntityShrieker.class, 5, 2, 4,
+		if (spawnShrieker) EntityRegistry.addSpawn(EntityShrieker.class, 
+				shriekerP, shriekerMn, shriekerMx,
 				EnumCreatureType.MONSTER, overworld);
 		if (spawnUmberHulk) EntityRegistry.addSpawn(EntityUmberHulk.class, 2, 1, 1,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnHookHorror) EntityRegistry.addSpawn(EntityHookHorror.class, 4, 1, 4,
+		if (spawnHookHorror) EntityRegistry.addSpawn(EntityHookHorror.class, 
+				hookHorrorP, hookHorrorMn, hookHorrorMx,
 				EnumCreatureType.MONSTER, overworld);
 		if (spawnTroll) EntityRegistry.addSpawn(EntityTroll.class, 6, 1, 4,
 				EnumCreatureType.MONSTER, overworld);

@@ -53,6 +53,126 @@ public class ConfigHandler {
 	public static List<String> rustMonFoodsList;
 
 	public static List<String> shriekerMobs;
+	
+	/*----------------------------------------------------------*
+	 *                VARIABLE FOR SPAWN CONTROL                *
+	 *----------------------------------------------------------*/
+	
+	// For the following these variables, the name goes starts with the 
+	// mob name, and is follow by one of the following:
+	// Ig (ignore basic dungeon mobs spawn rules), P (chance of spawn), 
+	// Mn (minimum number to spawn), or Mx (maximum number to spawn).
+	
+	
+	public static boolean rustMonsterIg;
+	public static int rustMonsterP;
+	public static int rustMonsterMn;
+	public static int rustMonsterMx; 
+	
+	public static boolean ghoulIg;
+	public static int ghoulP;
+	public static int ghoulMn;
+	public static int ghoulMx;
+	
+	public static boolean shriekerIg;
+	public static int shriekerP;
+	public static int shriekerMn;
+	public static int shriekerMx;
+	
+	public static boolean hookHorrorIg;
+	public static int hookHorrorP;
+	public static int hookHorrorMn;
+	public static int hookHorrorMx;
+	
+	public static boolean umberHulkIg;
+	public static int umberHulkP;
+	public static int umberHulkMn;
+	public static int umberHulkMx;
+	
+	public static boolean beholderIg;
+	public static int beholderP;
+	public static int beholderMn;
+	public static int beholderMx;
+	
+	public static boolean caveFisherIg;
+	public static int caveFisherP;
+	public static int caveFisherMn;
+	public static int caveFisherMx;
+	
+	public static boolean cockatriceIg;
+	public static int cockatriceP;
+	public static int cockatriceMn;
+	public static int cockatriceMx;
+	
+	public static boolean destrachanIg;
+	public static int destrachanP;
+	public static int destrachanMn;
+	public static int destrachanMx;
+	
+	public static boolean illithidIg;
+	public static int illithidP;
+	public static int illithidMn;
+	public static int illithidMx;
+	
+	public static boolean lizalfosIg;
+	public static int lizalfosP;
+	public static int lizalfosMn;
+	public static int lizalfosMx;
+	
+	public static boolean manticoreIg;
+	public static int manticoreP;
+	public static int manticoreMn;
+	public static int manticoreMx;
+	
+	public static boolean hellHoundIg;
+	public static int hellHoundP;
+	public static int hellHoundMn;
+	public static int hellHoundMx;
+	
+	public static boolean rakshasaIg;
+	public static int rakshasaP;
+	public static int rakshasaMn;
+	public static int rakshasaMx;
+	
+	public static boolean thoqquaIg;
+	public static int thoqquaP;
+	public static int thoqquaMn;
+	public static int thoqquaMx;
+	
+	public static boolean trollIg;
+	public static int trollP;
+	public static int trollMn;
+	public static int trollMx;
+	
+	public static boolean vescavorIg;
+	public static int vescavorP;
+	public static int vescavorMn;
+	public static int vescavorMx;
+	
+	public static boolean revenantIg;
+	public static int revenantP;
+	public static int revenantMn;
+	public static int revenantMx;
+	
+	public static boolean vampireIg;
+	public static int vampireP;
+	public static int vampireMn;
+	public static int vampireMx;
+	
+	public static boolean fallenAngelIg;
+	public static int fallenAngelP;
+	public static int fallenAngelMn;
+	public static int fallenAngelMx;
+	
+	public static boolean outerThingIg;
+	public static int outerThingP;
+	public static int outerThingMn;
+	public static int outerThingMx;
+
+	
+	/*----------------------------------------------------------*
+	 *                     WORKING CODE                         *
+	 *----------------------------------------------------------*/
 
 
 	public static void init() {
@@ -134,9 +254,9 @@ public class ConfigHandler {
 			EntityShrieker.appendToSummonList(shriekerMobs);
 		}
 
-
 		// Save It!!!
 		config.save();
+		mobDat();
 	}
 
 
@@ -172,6 +292,127 @@ public class ConfigHandler {
 				EntityRustMonster.appendToFoods(rustMonFoodsList);
 			}
 		}
+	}
+	
+	
+	public static void mobDat() {
+		File file = new File(ConfigHandler.configDir.toString()
+				+ File.separator + "spawn_rules.cfg");
+		Configuration config = new Configuration(file);
+		config.load();	
+		
+		config.addCustomCategoryComment("Rust Monster", "Spawn configurations for rust monster");		
+		rustMonsterIg = config.get("Rust Monster", "RMSpawnAnywhere", false).getBoolean();;
+		rustMonsterP  = config.get("Rust Monster", "RMSpawnChance", 8).getInt();
+		rustMonsterMn = config.get("Rust Monster", "RMSpawnMin", 1).getInt();
+		rustMonsterMx = config.get("Rust Monster", "RMSpawnMax", 4).getInt(); 	
+		
+		config.addCustomCategoryComment("Ghoul", "Spawn configurations for rust monster");		
+		ghoulIg = config.get("Ghoul", "GhoulSpawnAnywhere", false).getBoolean();;
+		ghoulP  = config.get("Ghoul", "GhoulSpawnChance", 5).getInt();
+		ghoulMn = config.get("Ghoul", "GhoulSpawnMin", 2).getInt();
+		ghoulMx = config.get("Ghoul", "GhoulSpawnMax", 4).getInt();  	
+		
+		config.addCustomCategoryComment("Shrieker", "Spawn configurations for rust monster");		
+		shriekerIg = config.get("Shrieker", "ShriekerSpawnAnywhere", false).getBoolean();;
+		shriekerP  = config.get("Shrieker", "ShriekerSpawnChance", 5).getInt();
+		shriekerMn = config.get("Shrieker", "ShriekerSpawnMin", 2).getInt();
+		shriekerMx = config.get("Shrieker", "ShriekerSpawnMax", 4).getInt();  	
+		
+		config.addCustomCategoryComment("Hook Horror", "Spawn configurations for rust monster");		
+		hookHorrorIg = config.get("Hook Horror", "HHSpawnAnywhere", false).getBoolean();;
+		hookHorrorP  = config.get("Hook Horror", "HHSpawnChance", 5).getInt();
+		hookHorrorMn = config.get("Hook Horror", "HHSpawnMin", 2).getInt();
+		hookHorrorMx = config.get("Hook Horror", "HHSpawnMax", 4).getInt(); 
+		
+		/*
+		public static boolean umberHulkIg;
+		public static boolean umberHulkP;
+		public static boolean umberHulkMn;
+		public static boolean umberHulkMx;
+		
+		public static boolean beholderIg;
+		public static boolean beholderP;
+		public static boolean beholderMn;
+		public static boolean beholderMx;
+		
+		public static boolean caveFisherIg;
+		public static boolean caveFisherP;
+		public static boolean caveFisherMn;
+		public static boolean caveFisherMx;
+		
+		public static boolean cockatriceIg;
+		public static boolean cockatriceP;
+		public static boolean cockatriceMn;
+		public static boolean cockatriceMx;
+		
+		public static boolean destrachanIg;
+		public static boolean destrachanP;
+		public static boolean destrachanMn;
+		public static boolean destrachanMx;
+		
+		public static boolean illithidIg;
+		public static boolean illithidP;
+		public static boolean illithidMn;
+		public static boolean illithidMx;
+		
+		public static boolean lizalfosIg;
+		public static boolean lizalfosP;
+		public static boolean lizalfosMn;
+		public static boolean lizalfosMx;
+		
+		public static boolean manticoreIg;
+		public static boolean manticoreP;
+		public static boolean manticoreMn;
+		public static boolean manticoreMx;
+		
+		public static boolean hellHoundIg;
+		public static boolean hellHoundP;
+		public static boolean hellHoundMn;
+		public static boolean hellHoundMx;
+		
+		public static boolean rakshasaIg;
+		public static boolean rakshasaP;
+		public static boolean rakshasaMn;
+		public static boolean rakshasaMx;
+		
+		public static boolean thoqquaIg;
+		public static boolean thoqquaP;
+		public static boolean thoqquaMn;
+		public static boolean thoqquaMx;
+		
+		public static boolean trollIg;
+		public static boolean trollP;
+		public static boolean trollMn;
+		public static boolean trollMx;
+		
+		public static boolean vescavorIg;
+		public static boolean vescavorP;
+		public static boolean vescavorMn;
+		public static boolean vescavorMx;
+		
+		public static boolean revenantIg;
+		public static boolean revenantP;
+		public static boolean revenantMn;
+		public static boolean revenantMx;
+		
+		public static boolean vampireIg;
+		public static boolean vampireP;
+		public static boolean vampireMn;
+		public static boolean vampireMx;
+		
+		public static boolean fallenAngelIg;
+		public static boolean fallenAngelP;
+		public static boolean fallenAngelMn;
+		public static boolean fallenAngelMx;
+		
+		public static boolean outerThingIg;
+		public static boolean outerThingP;
+		public static boolean outerThingMn;
+		*/
+
+		// Save It!!!
+		config.save();
 	}
 
 }
