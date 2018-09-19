@@ -273,7 +273,8 @@ public class MobRegistrar {
 		if (spawnGhoul) EntityRegistry.addSpawn(EntityGhoul.class, 
 				ghoulP, ghoulMn, ghoulMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnBeholder) EntityRegistry.addSpawn(EntityAhriman.class, 2, 1, 1,
+		if (spawnBeholder) EntityRegistry.addSpawn(EntityAhriman.class, 
+				beholderP, beholderMn, beholderMx,
 				EnumCreatureType.MONSTER, overworld);
 		if (spawnRustMonster) EntityRegistry.addSpawn(EntityRustMonster.class, 
 				rustMonsterP, rustMonsterMn, rustMonsterMx,
@@ -281,52 +282,76 @@ public class MobRegistrar {
 		if (spawnShrieker) EntityRegistry.addSpawn(EntityShrieker.class, 
 				shriekerP, shriekerMn, shriekerMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnUmberHulk) EntityRegistry.addSpawn(EntityUmberHulk.class, 2, 1, 1,
+		if (spawnUmberHulk) EntityRegistry.addSpawn(EntityUmberHulk.class, 
+				umberHulkP, umberHulkMn, umberHulkMx,
 				EnumCreatureType.MONSTER, overworld);
 		if (spawnHookHorror) EntityRegistry.addSpawn(EntityHookHorror.class, 
 				hookHorrorP, hookHorrorMn, hookHorrorMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnTroll) EntityRegistry.addSpawn(EntityTroll.class, 6, 1, 4,
+		if (spawnTroll) EntityRegistry.addSpawn(EntityTroll.class, 
+				trollP, trollMn, trollMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnCaveFisher) EntityRegistry.addSpawn(EntityCaveFisher.class, 4, 1, 2,
+		if (spawnCaveFisher) EntityRegistry.addSpawn(EntityCaveFisher.class, 
+				caveFisherP, caveFisherMn, caveFisherMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnDestrachan) EntityRegistry.addSpawn(EntityDestrachan.class, 5, 1, 3,
+		if (spawnDestrachan) EntityRegistry.addSpawn(EntityDestrachan.class, 
+				destrachanP, destrachanMn, destrachanMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnIllithid) EntityRegistry.addSpawn(EntityIllithid.class, 3, 1, 1,
+		if (spawnIllithid) EntityRegistry.addSpawn(EntityIllithid.class, 
+				illithidP, illithidMn, illithidMx,
 				EnumCreatureType.MONSTER, overworld);
 		if (spawnHellHound) {
-			EntityRegistry.addSpawn(EntityNetherHound.class, 4, 1, 2,
+			EntityRegistry.addSpawn(EntityNetherHound.class, 
+					hellHoundP, hellHoundMn, hellHoundMx,
 					EnumCreatureType.MONSTER, overworld);
-			EntityRegistry.addSpawn(EntityNetherHound.class, 10, 4, 4,
+			EntityRegistry.addSpawn(EntityNetherHound.class, 
+					hellHoundNP, hellHoundNMn, hellHoundMx,
 					EnumCreatureType.MONSTER, nether);
 		}
-		if (spawnRakshasa) EntityRegistry.addSpawn(EntityRakshasa.class, 3, 1, 1,
+		if (spawnRakshasa) EntityRegistry.addSpawn(EntityRakshasa.class, 
+				rakshasaP, rakshasaMn, rakshasaMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnLizalfos) EntityRegistry.addSpawn(EntityLizalfos.class, 2, 2, 2,
+		if (spawnLizalfos) EntityRegistry.addSpawn(EntityLizalfos.class, 
+				lizalfosP, lizalfosMn, lizalfosMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnCockatrice) EntityRegistry.addSpawn(EntityCockatrice.class, 5, 1, 3,
+		if (spawnCockatrice) EntityRegistry.addSpawn(EntityCockatrice.class, 
+				cockatriceP, cockatriceMn, cockatriceMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnManticore) EntityRegistry.addSpawn(EntityManticore.class, 4, 1, 2,
+		if (spawnManticore) EntityRegistry.addSpawn(EntityManticore.class, 
+				manticoreP, manticoreMn, manticoreMx,
 				EnumCreatureType.MONSTER, overworld);
 		if (spawnThoqqua) {
-			EntityRegistry.addSpawn(EntityThoqqua.class, 3, 1, 1,
+			EntityRegistry.addSpawn(EntityThoqqua.class, 
+					thoqquaP, thoqquaMn, thoqquaMx,
 					EnumCreatureType.MONSTER, overworld);
-			EntityRegistry.addSpawn(EntityThoqqua.class, 6, 1, 2,
+			EntityRegistry.addSpawn(EntityThoqqua.class, 
+					thoqquaNP, thoqquaNMn, thoqquaNMx,
 					EnumCreatureType.MONSTER, nether);
 		}
-		if (spawnVescavor) EntityRegistry.addSpawn(EntityVescavor.class, 6, 2, 8,
+		if (spawnVescavor) EntityRegistry.addSpawn(EntityVescavor.class, 
+				vescavorP, vescavorMn, vescavorMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnRevenant) EntityRegistry.addSpawn(EntityRevenant.class, 3, 1, 2,
+		if (spawnRevenant) EntityRegistry.addSpawn(EntityRevenant.class, 
+				revenantP, revenantMn, revenantMx,
 				EnumCreatureType.MONSTER, overworld);
-		if (spawnVampire) EntityRegistry.addSpawn(EntityVampire.class, 2, 1, 2,
+		if (spawnVampire) EntityRegistry.addSpawn(EntityVampire.class, 
+				vampireP, vampireMn, vampireMx,
 				EnumCreatureType.MONSTER, overworld);
 		if (spawnFallenAngel) {
-			EntityRegistry.addSpawn(EntityFallenAngel.class, 1, 1, 1, EnumCreatureType.MONSTER, overworld);
-			EntityRegistry.addSpawn(EntityFallenAngel.class, 2, 1, 1, EnumCreatureType.MONSTER, nether);
+			EntityRegistry.addSpawn(EntityFallenAngel.class, 
+					fallenAngelP, fallenAngelMn, fallenAngelMx, 
+					EnumCreatureType.MONSTER, overworld);
+			EntityRegistry.addSpawn(EntityFallenAngel.class, 
+					fallenAngelP, fallenAngelMn, fallenAngelMx, 
+					EnumCreatureType.MONSTER, nether);
 		}
 		if (spawnOuterThing) {
-			EntityRegistry.addSpawn(EntityEldermob.class, 1, 1, 1, EnumCreatureType.MONSTER, overworld);
-			EntityRegistry.addSpawn(EntityEldermob.class, 1, 1, 1, EnumCreatureType.MONSTER, end);
+			EntityRegistry.addSpawn(EntityEldermob.class, 
+					outerThingP, outerThingMn, outerThingMx, 
+					EnumCreatureType.MONSTER, overworld);
+			EntityRegistry.addSpawn(EntityEldermob.class, 
+					outerThingEP, outerThingEMn, outerThingEMx, 
+					EnumCreatureType.MONSTER, end);
 		}
 	}
 
