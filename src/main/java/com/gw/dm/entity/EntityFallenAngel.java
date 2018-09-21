@@ -1,13 +1,9 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonFlying;
-import com.gw.dm.ai.AIAngelAttack;
-import com.gw.dm.ai.AIAngelWander;
-import com.gw.dm.ai.TaskAngelAgroOnPlayer;
-import com.gw.dm.projectile.EntityLightball;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.fallenAngelIg;
+
+import javax.annotation.Nullable;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -32,7 +28,14 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
 
-import javax.annotation.Nullable;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonFlying;
+import com.gw.dm.ai.AIAngelAttack;
+import com.gw.dm.ai.AIAngelWander;
+import com.gw.dm.ai.TaskAngelAgroOnPlayer;
+import com.gw.dm.projectile.EntityLightball;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRangedAttackMob {
 
@@ -175,10 +178,9 @@ public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRan
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (world.provider instanceof WorldProviderHell) {
-			return super.getCanSpawnHere();
-		}
-		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
+		if(fallenAngelIg 
+				|| (world.provider instanceof WorldProviderHell) 
+				|| DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

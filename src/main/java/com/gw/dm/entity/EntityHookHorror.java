@@ -1,13 +1,16 @@
 package com.gw.dm.entity;
 
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.hookHorrorIg;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,6 +22,11 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityHookHorror extends EntityDungeonMob {
 	private static String mobName = DungeonMobs.MODID + ":dmhookhorror";
@@ -120,7 +128,7 @@ public class EntityHookHorror extends EntityDungeonMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
+		if(hookHorrorIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 

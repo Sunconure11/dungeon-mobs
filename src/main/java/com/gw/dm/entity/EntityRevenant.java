@@ -1,11 +1,18 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.revenantIg;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIFleeSun;
+import net.minecraft.entity.ai.EntityAILeapAtTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAIRestrictSun;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityAIZombieAttack;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
@@ -13,6 +20,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityRevenant extends EntityZombie {
 	private static double HEALTH = 30.0;
@@ -117,7 +127,7 @@ public class EntityRevenant extends EntityZombie {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
+		if (revenantIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			darkspawn = false;
 			return super.getCanSpawnHere();
 		}

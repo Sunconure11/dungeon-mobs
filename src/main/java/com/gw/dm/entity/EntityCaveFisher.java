@@ -1,8 +1,11 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.caveFisherIg;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.StringTokenizer;
+
 import net.minecraft.client.entity.EntityOtherPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,9 +25,9 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.StringTokenizer;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 
 public class EntityCaveFisher extends EntitySpider {
@@ -102,7 +105,7 @@ public class EntityCaveFisher extends EntitySpider {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
+		if (caveFisherIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

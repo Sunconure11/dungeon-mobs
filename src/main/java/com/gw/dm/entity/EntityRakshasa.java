@@ -1,14 +1,23 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.projectile.EntityMagicMissile;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.rakshasaIg;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIAttackRanged;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -24,9 +33,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.projectile.EntityMagicMissile;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob {
 
@@ -145,7 +156,7 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
+		if (rakshasaIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {

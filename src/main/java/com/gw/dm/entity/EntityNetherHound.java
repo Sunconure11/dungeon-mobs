@@ -1,12 +1,15 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.hellHoundIg;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -19,6 +22,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
+
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityNetherHound extends EntityDungeonMob {
 	private static String mobName = DungeonMobs.MODID + ":dmnetherhound";
@@ -87,11 +95,9 @@ public class EntityNetherHound extends EntityDungeonMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (world.provider instanceof WorldProviderHell) {
-			System.out.println(isNotColliding());
-			return super.getCanSpawnHere();
-		}
-		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
+		if (hellHoundIg 
+				|| (world.provider instanceof WorldProviderHell) 
+				|| DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canBlockSeeSky(new BlockPos((int) posX, (int) posY, (int) posZ))) {

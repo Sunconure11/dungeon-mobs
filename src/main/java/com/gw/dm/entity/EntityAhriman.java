@@ -1,14 +1,6 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonFlying;
-import com.gw.dm.ai.AIBeholderAttack;
-import com.gw.dm.ai.AIBeholderWander;
-import com.gw.dm.ai.MoveHelperBeholder;
-import com.gw.dm.ai.TaskBeholderAgro;
-import com.gw.dm.projectile.EntityEyeRay;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.beholderIg;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -27,6 +19,16 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonFlying;
+import com.gw.dm.ai.AIBeholderAttack;
+import com.gw.dm.ai.AIBeholderWander;
+import com.gw.dm.ai.MoveHelperBeholder;
+import com.gw.dm.ai.TaskBeholderAgro;
+import com.gw.dm.projectile.EntityEyeRay;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 
 public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedAttackMob {
@@ -168,7 +170,7 @@ public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedA
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
+		if (beholderIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {

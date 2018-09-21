@@ -1,13 +1,19 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.ai.AIVampireAttack;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.vampireIg;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIFleeSun;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
+import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAIRestrictSun;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,6 +21,11 @@ import net.minecraft.init.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.ai.AIVampireAttack;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityVampire extends EntityDungeonMob {
 	private static String mobName = DungeonMobs.MODID + ":dmvampire";
@@ -144,7 +155,7 @@ public class EntityVampire extends EntityDungeonMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {
+		if (vampireIg || world.canSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
 		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {

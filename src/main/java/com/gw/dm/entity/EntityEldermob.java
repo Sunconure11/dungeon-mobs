@@ -1,13 +1,6 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonFlying;
-import com.gw.dm.ai.AIEldermobMove;
-import com.gw.dm.projectile.EntityCloudGenerator;
-import com.gw.dm.projectile.EntityEldermobBall;
-import com.gw.dm.projectile.EntityFireCloudGenerator;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.outerThingIg;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -33,6 +26,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderEnd;
+
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonFlying;
+import com.gw.dm.ai.AIEldermobMove;
+import com.gw.dm.projectile.EntityCloudGenerator;
+import com.gw.dm.projectile.EntityEldermobBall;
+import com.gw.dm.projectile.EntityFireCloudGenerator;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityEldermob extends EntityDungeonFlying implements IMob, IRangedAttackMob {
 	private static final int SD = 1024 * 1024;
@@ -195,6 +197,8 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 	public boolean getCanSpawnHere() {
 		if (world.provider instanceof WorldProviderEnd
 				&& deepEnoughInEnd() && (rand.nextInt(24) == 0)) {
+			return super.getCanSpawnHere();
+		} else if(outerThingIg && !(world.provider instanceof WorldProviderEnd)) {
 			return super.getCanSpawnHere();
 		}
 		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {

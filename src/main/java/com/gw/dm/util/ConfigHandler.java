@@ -313,7 +313,7 @@ public class ConfigHandler {
 				+ File.separator + "spawn_rules.cfg");
 		Configuration config = new Configuration(file);
 		config.load();	
-		
+			
 		config.addCustomCategoryComment("Rust Monster", "Spawn configurations for rust monster");		
 		rustMonsterIg = config.get("Rust Monster", "RMSpawnAnywhere", false).getBoolean();;
 		rustMonsterP  = config.get("Rust Monster", "RMSpawnChance", 8).getInt();
