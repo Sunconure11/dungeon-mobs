@@ -1,6 +1,7 @@
 package com.gw.dm.entity;
 
 import static com.gw.dm.util.ConfigHandler.outerThingIg;
+import static com.gw.dm.util.ConfigHandler.outerThingEI;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IRangedAttackMob;
@@ -221,7 +222,7 @@ public class EntityEldermob extends EntityDungeonFlying implements IMob, IRanged
 	 * @return
 	 */
 	private boolean deepEnoughInEnd() {
-		return ((posX * posX) + (posZ * posZ)) > SD;
+		return outerThingEI || (((posX * posX) + (posZ * posZ)) > SD);
 	}
 
 
