@@ -1,8 +1,8 @@
 [
 {
   "modid": "dungeonmobs",
-  "name": "Dungeon Mods",
-  "description": "Example placeholder mod.",
+  "name": "Dungeon Mobs",
+  "description": "Evil Monsters for Minecraft",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
