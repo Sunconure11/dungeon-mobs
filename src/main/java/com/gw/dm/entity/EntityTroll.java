@@ -114,10 +114,10 @@ public class EntityTroll extends EntityMob {
 
 
 	public boolean getCanSpawnHere() {
-		if (trollIg || world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
-		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
+		if (trollIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (!this.isValidLightLevel()) {
@@ -152,61 +152,16 @@ public class EntityTroll extends EntityMob {
 
 
 	public void onLivingUpdate() {
-		if (world.isDaytime() && !this.world.isRemote) {
-			BlockPos here = new BlockPos(MathHelper.floor(posX),
-					MathHelper.floor(posY),
-					MathHelper.floor(posZ));
-
-			if (world.canBlockSeeSky(here) && (world.getLightBrightness(here) > 0.5f)) {
-				stoneCounter++;
-
-				int foo = 20 + (DungeonMobsHelper.getDifficulty(this.world) * 15);
-
-				if (this.stoneCounter % foo == 0) {
-					stoneStatus++;
-
-					if (stoneStatus > (7 + DungeonMobsHelper.getDifficulty(this.world)))
-						stoneStatus = 7 + DungeonMobsHelper.getDifficulty(this.world);
-				}
-
-				foo = 40 + (DungeonMobsHelper.getDifficulty(this.world) * 20);
-
-				if (stoneCounter % foo == 0) {
-					if (!this.isPotionActive(Potion.getPotionFromResourceLocation("slowness")))
-						this.addPotionEffect(new PotionEffect(Potion.getPotionFromResourceLocation("slowness"),
-								foo + (60 - (4 * DungeonMobsHelper.getDifficulty(this.world))),
-								DungeonMobsHelper.getDifficulty(this.world) + 1));
-				}
-
-				if (stoneStatus >= (7 + DungeonMobsHelper.getDifficulty(this.world))) {
+		// A much cleaner and simpler way to handle petrification and regen
+		if (!world.isRemote) {
+			if (world.isDaytime() && (getBrightness() > 0.5f) && world.canSeeSky(getPosition())) {
+				if(getRNG().nextInt((int)getHealth() + 2) < ++stoneCounter) {
 					playSound(AudioHandler.dmbts, 1.0f, 1.0f);
-					this.turnToStone();
+					this.turnToStone();				
 				}
+			} else if (!this.isDead && (getHealth() > 0) && !isBurning()) {
+				setHealth(getHealth() + 0.3f);
 			}
-		} else if (!this.world.isRemote) {
-			if (this.stoneCounter > 0) {
-				for (int i = 0; i < (2 + DungeonMobsHelper.getDifficulty(this.world)); i++) {
-					this.stoneCounter--;
-
-					int foo = 20 + (DungeonMobsHelper.getDifficulty(this.world) * 15);
-
-					if (this.stoneCounter % foo == 0) {
-						this.stoneStatus--;
-
-						if (this.stoneStatus < 1)
-							stoneStatus = 1;
-					}
-				}
-			}
-		}
-
-		if (!this.isBurning()) {
-			if (!this.isPotionActive(Potion.getPotionFromResourceLocation("regeneration")))
-				this.addPotionEffect(
-						new PotionEffect(Potion.getPotionFromResourceLocation("regeneration"),
-								60, DungeonMobsHelper.getDifficulty(this.world) + 3));
-		} else if (this.isPotionActive(Potion.getPotionFromResourceLocation("regeneration"))) {
-			this.removePotionEffect(Potion.getPotionFromResourceLocation("regeneration"));
 		}
 		super.onLivingUpdate();
 	}
@@ -217,10 +172,16 @@ public class EntityTroll extends EntityMob {
 			regenTimer = -1;
 
 			setDead();
+			
+			int sx = (int)(getEntityBoundingBox().minX + 
+					  ((getEntityBoundingBox().maxX - getEntityBoundingBox().minX) / 2) - 0.5);
 
-			world.setBlockState(new BlockPos((int) posX, (int) getEntityBoundingBox().minY, (int) posZ),
+			int sz = (int)(getEntityBoundingBox().minZ + 
+					  ((getEntityBoundingBox().maxZ - getEntityBoundingBox().minZ) / 2) - 0.5);
+
+			world.setBlockState(new BlockPos(sx, (int) getEntityBoundingBox().minY, sz),
 					Blocks.STONE.getDefaultState(), 3);
-			world.setBlockState(new BlockPos((int) posX, (int) getEntityBoundingBox().minY + 1, (int) posZ),
+			world.setBlockState(new BlockPos(sx, (int) getEntityBoundingBox().minY + 1, sz),
 					Blocks.STONE.getDefaultState(), 3);
 			this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
 					this.posX, this.posY, this.posZ, 0.0D, 0.0D, 0.0D);

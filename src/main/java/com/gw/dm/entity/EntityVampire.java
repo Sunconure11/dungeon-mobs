@@ -155,10 +155,10 @@ public class EntityVampire extends EntityDungeonMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (vampireIg || world.canSeeSky(new BlockPos(posX, posY, posZ))) {
+		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
-		if (DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
+		if (vampireIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
 		if (posY > 32.0D && !ignoreHeight) {
