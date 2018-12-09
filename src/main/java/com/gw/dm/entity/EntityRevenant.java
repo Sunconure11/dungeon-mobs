@@ -48,15 +48,15 @@ public class EntityRevenant extends EntityZombie {
 				switch (world.getDifficulty()) {
 					case EASY:
 						((EntityLivingBase) victim)
-								.addPotionEffect(new PotionEffect(MobEffects.WITHER, 80));
+								.addPotionEffect(new PotionEffect(MobEffects.WITHER, 80, 1));
 						break;
 					case HARD:
 						((EntityLivingBase) victim)
-								.addPotionEffect(new PotionEffect(MobEffects.WITHER, 120));
+								.addPotionEffect(new PotionEffect(MobEffects.WITHER, 120, 1));
 						break;
 					case NORMAL:
 						((EntityLivingBase) victim)
-								.addPotionEffect(new PotionEffect(MobEffects.WITHER, 100));
+								.addPotionEffect(new PotionEffect(MobEffects.WITHER, 100, 1));
 						break;
 					case PEACEFUL:
 					default:

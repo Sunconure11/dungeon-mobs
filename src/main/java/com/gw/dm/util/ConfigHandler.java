@@ -49,6 +49,8 @@ public class ConfigHandler {
 	public static boolean spawnBeamos;
 	public static boolean spawnBladeTrap;
 
+	public static boolean lightBallExplode;
+	
 	public static boolean replaceRMFoods;
 	public static List<String> rustMonFoodsList;
 

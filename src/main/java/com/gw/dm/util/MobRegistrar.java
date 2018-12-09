@@ -117,7 +117,7 @@ public class MobRegistrar {
 		// REVENANT
 		if (spawnRevenant) {
 			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmrevenant"),
-					EntityRevenant.class, MODID + ".dmrevenant", revenantID, instance, 80, 3, true,
+					EntityRevenant.class, MODID + ".dmrevenant", revenantID, instance, 80, 2, true,
 					0x004400, 0x777777);
 		}
 		// VAMPIRE

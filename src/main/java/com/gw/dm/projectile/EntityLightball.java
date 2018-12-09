@@ -54,7 +54,9 @@ public class EntityLightball extends EntityThrowable {
 						break;
 				}
 			}
-			world.newExplosion(this, posX, posY, posZ, 1, false, false);
+			// Nerfing this -- mob is too hard for the nether; this might be 
+			// configurable in the future.
+			//world.newExplosion(this, posX, posY, posZ, 1, false, false);
 			setDead();
 		}
 
