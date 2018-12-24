@@ -78,9 +78,9 @@ public class DungeonMobs {
 		if (ConfigHandler.spawnBladeTrap) {
 			worldGen = new DMGenerationHandler();
 		}
-		if (gotDLD && ConfigHandler.addToDoomlikeDungeons) {
-			MobRegistrar.addToDLD();
-		}
+		//if (gotDLD && ConfigHandler.addToDoomlikeDungeons) {
+		//	MobRegistrar.addToDLD();
+		//}
 	}
 
 	@EventHandler
