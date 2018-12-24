@@ -1,7 +1,13 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { 
+		url = "http://files.minecraftforge.net/maven" 
+		}
+        maven {
+            name = "CurseForge"
+            url = "https://minecraft.curseforge.com/api/maven/"
+        }		
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -21,7 +27,7 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.3.2655"
+    version = "1.12.2-14.23.5.2768"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
@@ -29,9 +35,18 @@ minecraft {
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20171003"
+    mappings = "stable_39"
     makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven {
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
+}	
 
 dependencies {
     // you may put jars on which you depend on in ./libs
@@ -40,6 +55,9 @@ dependencies {
     //compile "some.group:artifact:version"
     
     compile files ('src/main/libs/DLDungeonsAPI-1.4.jar')
+	
+    compile "baubles:Baubles:1.12:${baubles_version}"	
+	compile "thaumcraft:Thaumcraft:1.12.2:${thaumcraft_version}"
       
     // real examples
     //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
