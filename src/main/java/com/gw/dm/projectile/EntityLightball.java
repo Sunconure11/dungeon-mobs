@@ -1,9 +1,13 @@
 package com.gw.dm.projectile;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -57,6 +61,10 @@ public class EntityLightball extends EntityThrowable {
 			// Nerfing this -- mob is too hard for the nether; this might be 
 			// configurable in the future.
 			//world.newExplosion(this, posX, posY, posZ, 1, false, false);
+			world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, 
+					SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 
+					4.0F, (1.0F + (this.world.rand.nextFloat() 
+							- world.rand.nextFloat()) * 0.2F) * 0.7F);
 			setDead();
 		}
 
