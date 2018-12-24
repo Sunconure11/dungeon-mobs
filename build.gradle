@@ -53,8 +53,6 @@ dependencies {
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
     //compile "some.group:artifact:version"
-    
-    compile files ('src/main/libs/DLDungeonsAPI-1.4.jar')
 	
     compile "baubles:Baubles:1.12:${baubles_version}"	
 	compile "thaumcraft:Thaumcraft:1.12.2:${thaumcraft_version}"

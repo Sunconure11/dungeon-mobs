@@ -6,7 +6,7 @@ import com.sun.jna.platform.unix.X11.XSizeHints.Aspect;
 
 public class Thaumic {
 
-	/*
+	//*
 	@SuppressWarnings("deprecation")
 	@SubscribeEvent
 	public void aspectRegistrationEvent(AspectRegistryEvent evt) {
@@ -17,6 +17,6 @@ public class Thaumic {
 						 		.add(Aspect.MAN, 8)
 						 		.add(Aspect.BEAST, 8));
 	}
-	*/
+	//*/
 	
 }
