@@ -1,8 +1,10 @@
 package com.gw.dm;
 
+import com.gw.dm.compat.DLDCompat;
 import com.gw.dm.entity.EntityLizalfos;
 import com.gw.dm.proxy.CommonProxy;
 import com.gw.dm.util.*;
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -15,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import java.util.Arrays;
 
 @Mod(modid = DungeonMobs.MODID, name = "Dungeon Mobs", version = DungeonMobs.VERSION,
-		dependencies = "after:dldungeonsjbg")
+		dependencies = "after:thaumcraft; after:dldungeonsjbg; after:dldungeonjbg")
 public class DungeonMobs {
 	public static final String MODID = "dungeonmobs";
 	public static final String VERSION = "5.5.3";
@@ -32,11 +34,6 @@ public class DungeonMobs {
 		EntityLizalfos.initLocations();
 		DMGenerationHandler.initTargetBlocks();
 		ConfigHandler.mobSpecialSetup();
-	}
-
-	private static void testDLD() {
-		gotDLD = net.minecraftforge.fml.common.Loader.isModLoaded("DLDungeonsJBG")
-				|| net.minecraftforge.fml.common.Loader.isModLoaded("dldungeonsjbg");
 	}
 
 	@EventHandler
@@ -78,17 +75,14 @@ public class DungeonMobs {
 		if (ConfigHandler.spawnBladeTrap) {
 			worldGen = new DMGenerationHandler();
 		}
-		//if (gotDLD && ConfigHandler.addToDoomlikeDungeons) {
-		//	MobRegistrar.addToDLD();
-		//}
+		if(ConfigHandler.addToDoomlikeDungeons) {
+			DLDCompat.addDLD();
+		}
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {		
 		initMonsterSpecialData();
-		if(net.minecraftforge.fml.common.Loader.isModLoaded("thaumcraft")) {
-			
-		}
 	}
 
 }

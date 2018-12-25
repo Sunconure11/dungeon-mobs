@@ -210,9 +210,15 @@ public class ConfigHandler {
 				"Determines if dungeon mobs can spawn naturally in the world (\"dark spawn\")").getBoolean();
 		addToVanillaDungeons = config.get("General", "AddToVanillaDungeons", true,
 				"Determines dungeons mobs will be added to spawners in vanilla dungeons").getBoolean();
-		//addToDoomlikeDungeons = config.get("General", "AddToDoomlikeDungeons", true,
-		//		"Determines dungeons mobs will be added to spawners in vanilla dungeons").getBoolean();
-		addToDoomlikeDungeons = false; // FIXME: Make adding these mobs work
+//		addToDoomlikeDungeons = config.get("General", "AddToDoomlikeDungeons", true,
+//				"Determines dungeons mobs will be added to spawners in vanilla dungeons").getBoolean()
+//				&& (net.minecraftforge.fml.common.Loader.isModLoaded("DLDungeonsJBG")
+//						// Yes, I botch some of this and Doomlike Dungeons and have to
+//						// accomodate for it here... :(
+//						|| net.minecraftforge.fml.common.Loader.isModLoaded("dldungeonsjbg")
+//						|| net.minecraftforge.fml.common.Loader.isModLoaded("dldungeonjbg")
+//						|| net.minecraftforge.fml.common.Loader.isModLoaded("DLDungeonJBG"));
+		addToDoomlikeDungeons = false;
 
 		// Mob Existence
 		config.addCustomCategoryComment("Mobs", "Which mobs exist in the word \r\n "
