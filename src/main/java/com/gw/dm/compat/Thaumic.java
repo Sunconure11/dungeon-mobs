@@ -38,6 +38,7 @@ public class Thaumic {
 		ThaumcraftApi.registerEntityTag("dungeonmobs.dmtroll", 
 				new AspectList().add(Aspect.MAGIC, 15)
 						 		.add(Aspect.LIFE, 10)
+						 		.add(Aspect.EARTH, 20)
 						 		.add(Aspect.DARKNESS, 5));
 
 		ThaumcraftApi.registerEntityTag("dungeonmobs.dmmanticore", 
@@ -51,8 +52,8 @@ public class Thaumic {
 						 		.add(Aspect.ENTROPY, 10));
 
 		ThaumcraftApi.registerEntityTag("dungeonmobs.dmvampire", 
-				new AspectList().add(Aspect.MAN, 20)
-						 		.add(Aspect.UNDEAD, 20)
+				new AspectList().add(Aspect.MAN, 10)
+						 		.add(Aspect.UNDEAD, 25)
 						 		.add(Aspect.DARKNESS, 10));
 
 		ThaumcraftApi.registerEntityTag("dungeonmobs.dmhookhorror", 
