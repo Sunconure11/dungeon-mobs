@@ -84,8 +84,11 @@ public class DungeonMobs {
 	}
 
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent event) {		
 		initMonsterSpecialData();
+		if(net.minecraftforge.fml.common.Loader.isModLoaded("thaumcraft")) {
+			
+		}
 	}
 
 }
