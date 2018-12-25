@@ -7,7 +7,7 @@ import static com.gw.dm.util.ConfigHandler.*;
 public class DLDCompat {
 	
 	
-	public static void addDLD() {/*
+	public static void addDLD() {
 		System.out.println();
 		System.out.println("****************");
 		System.out.println("Running addDLD()");
@@ -42,7 +42,7 @@ public class DLDCompat {
 			DLDungeonsAPI.addMob(MODID + ":dmcavefisher", 2,
 					"MAGICAL", "TECH", "DUNGEON", "URBAN", "WASTELAND", "FROZEN");
 		if (spawnHellHound)
-			DLDungeonsAPI.addMob(MODID + ":dmhellhound", 2,
+			DLDungeonsAPI.addMob(MODID + ":dmnetherhound", 2,
 					"NETHER", "FIERY", "DUNGEON");
 		if (spawnUmberHulk)
 			DLDungeonsAPI.addMob(MODID + ":dmumberhulk", 2,
@@ -64,10 +64,10 @@ public class DLDCompat {
 			DLDungeonsAPI.addMob(MODID + ":dmillithid", 2,
 					"URBAN", "MAGICAL", "DUNGEON", "TECH", "FROZEN", "END");
 		if (spawnRakshasa)
-			DLDungeonsAPI.addMob(MODID + ":dmghoul", 3,
+			DLDungeonsAPI.addMob(MODID + ":dmrakshasa", 3,
 					"URBAN", "DESERT", "JUNGLE", "MAGICAL");
 		if (spawnLizalfos)
-			DLDungeonsAPI.addMob(MODID + ":dmghoul", 2,
+			DLDungeonsAPI.addMob(MODID + ":dmlizalfos", 2,
 					"SWAMP", "FOREST", "DUNGEON", "JUNGLE");
 		if (spawnOuterThing)
 			DLDungeonsAPI.addMob(MODID + ":dmeldermob", 3,
@@ -76,6 +76,6 @@ public class DLDCompat {
 			DLDungeonsAPI.addMob(MODID + ":dmfallenangel", 3,
 					"NETHER", "MAGICAL", "PARADISE", "WASTELAND");
 	
-	*/}
+	}
 
 }
