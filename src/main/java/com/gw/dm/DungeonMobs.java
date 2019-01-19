@@ -20,7 +20,7 @@ import java.util.Arrays;
 		dependencies = "after:thaumcraft; after:dldungeonsjbg; after:dldungeonjbg")
 public class DungeonMobs {
 	public static final String MODID = "dungeonmobs";
-	public static final String VERSION = "5.7.0";
+	public static final String VERSION = "5.7.1";
 
 	@Instance(MODID)
 	public static DungeonMobs instance;
@@ -44,7 +44,7 @@ public class DungeonMobs {
 		modmeta.credits = "_303, ZeuX, r4wk, Zorn_Taov, Wreckage, Crudedragos, DraxisWuf, MohawkyMagoo";
 		modmeta.description =
 				"Adds a variety of new hostile mobs, all of which hate you.\n" +
-						"Inspiration includes: Dungeons & Dragons, Legend of Zelda\n" +
+						"Inspiration includes: Dungeons & Dragons, Legend of Zelda, Hexen\n" +
 						"\n" +
 						"Rust Monster - Ghoul - Shrieker - Umber Hulk - Hook Horror "
 						+ "- Beholder - Troll - Cave Fisher - Destrachan - Illithid "

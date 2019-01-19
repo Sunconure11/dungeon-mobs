@@ -42,21 +42,8 @@ public class EntityLightball extends EntityThrowable {
 			if (result.entityHit instanceof EntityLivingBase) {
 				// No longer checking for null thrower -- that should never happen!
 				EntityLivingBase entity = (EntityLivingBase) result.entityHit;
-				switch (world.getDifficulty()) {
-					case EASY:
 						entity.attackEntityFrom(DamageSource.causeMobDamage(getThrower())
 								.setDamageBypassesArmor(), 1.0f);
-						break;
-					case HARD:
-						entity.attackEntityFrom(DamageSource.causeMobDamage(getThrower())
-								.setDamageBypassesArmor(), 3.0f);
-						break;
-					case NORMAL:
-					default:
-						entity.attackEntityFrom(DamageSource.causeMobDamage(getThrower())
-								.setDamageBypassesArmor(), 2.0f);
-						break;
-				}
 			}
 			// Nerfing this -- mob is too hard for the nether; this might be 
 			// configurable in the future.
