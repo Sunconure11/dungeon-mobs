@@ -256,7 +256,7 @@ public class MobRegistrar {
 					0x734A12, 0x8B795E);
 		}
 		// COCKATRICE
-		if (spawnUmberHulk) {
+		if (spawnCockatrice) {
 			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmpetrified"),
 					EntityPetrified.class, MODID + ".dmpetrified", petrifiedID, instance, 80, 3, true);
 			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmcockatrice"),
