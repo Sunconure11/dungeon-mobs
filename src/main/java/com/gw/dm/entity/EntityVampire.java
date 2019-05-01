@@ -95,14 +95,6 @@ public class EntityVampire extends EntityDungeonMob {
 	}
 
 
-	public String getName() {
-		if (this.hasCustomName()) {
-			return this.getCustomNameTag();
-		}
-		return I18n.translateToLocal("entity.rpgdungeonsjbg.vampire.name");
-	}
-
-
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.UNDEAD;
 	}

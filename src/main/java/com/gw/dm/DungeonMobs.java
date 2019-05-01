@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import java.util.Arrays;
 
 @Mod(modid = DungeonMobs.MODID, name = "Dungeon Mobs", version = DungeonMobs.VERSION,
-		dependencies = "after:thaumcraft; after:dldungeonsjbg; after:dldungeonjbg")
+		dependencies = "after:thaumcraft; after:dldungeonsjbg")
 public class DungeonMobs {
 	public static final String MODID = "dungeonmobs";
 	public static final String VERSION = "5.7.2";
