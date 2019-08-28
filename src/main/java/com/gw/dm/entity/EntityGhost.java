@@ -166,6 +166,17 @@ public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
 	protected SoundEvent getDeathSound() {
 		return AudioHandler.entityGhostDeath;
 	}
+
+
+	@Override
+	public void onLivingUpdate() {
+		if (!world.isRemote) {
+			if (world.isDaytime() && (getBrightness() > 0.5f) && world.canSeeSky(getPosition())) {
+				setFire(8);
+			}
+		}
+		super.onLivingUpdate();
+	}
 	
 
 }

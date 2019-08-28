@@ -233,7 +233,7 @@ public class ConfigHandler {
 				+ "(if false it does not exist and can never spawn)");
 		spawnRustMonster = config.get("Mobs", "RustMonster", true).getBoolean();
 		spawnGhoul = config.get("Mobs", "Ghoul", true).getBoolean();
-		spawnGhost = config.get("Mobs", "Ghost", false).getBoolean();
+		spawnGhost = config.get("Mobs", "Ghost", true).getBoolean();
 		spawnShrieker = config.get("Mobs", "Shrieker", true).getBoolean();
 		spawnHookHorror = config.get("Mobs", "HookHorror", true).getBoolean();
 		spawnUmberHulk = config.get("Mobs", "UmberHulk", true).getBoolean();
