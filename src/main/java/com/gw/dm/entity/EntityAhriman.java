@@ -31,7 +31,8 @@ import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 
-public class EntityAhriman extends EntityDungeonFlying implements IMob, IRangedAttackMob {
+public class EntityAhriman extends EntityDungeonFlying 
+				implements IMob, IRangedAttackMob, IBeMagicMob {
 	private static final double ADIST2 = 24.0d * 24.0d;
 	public static String mobName = DungeonMobs.MODID + ":dmahriman";
 	public int courseChangeCooldown = 0;

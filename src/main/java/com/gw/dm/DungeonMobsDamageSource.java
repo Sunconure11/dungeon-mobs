@@ -3,9 +3,13 @@ package com.gw.dm;
 import net.minecraft.util.DamageSource;
 
 public class DungeonMobsDamageSource extends DamageSource {
-	public static DamageSource bladeTrap   = (new DamageSource("bladeTrap"));
-	public static DamageSource petrified   = (new DamageSource("petrified")).setDamageBypassesArmor();
-	public static DamageSource energyDrain = (new DamageSource("energydrain")).setDamageBypassesArmor();
+	public static final DamageSource BLADE_TRAP   = (new DamageSource("bladeTrap"));
+	public static final DamageSource PETRIFIED   = (new DamageSource("petrified"))
+			.setDamageBypassesArmor();
+	public static final DamageSource ENERGY_DRAIN = (new DamageSource("energydrain"))
+			.setDamageBypassesArmor();
+	public static final DamageSource LIGHT_BALL = new DamageSource("light_ball")
+			.setDamageBypassesArmor();
 
 	public DungeonMobsDamageSource(String name) {
 		super(name);

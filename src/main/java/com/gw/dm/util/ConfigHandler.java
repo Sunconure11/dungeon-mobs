@@ -48,6 +48,7 @@ public class ConfigHandler {
 	public static boolean spawnOuterThing;
 	public static boolean spawnBeamos;
 	public static boolean spawnBladeTrap;
+	public static boolean spawnGhost;
 
 	public static boolean lightBallExplode;
 	public static boolean loudVescavor;
@@ -58,7 +59,7 @@ public class ConfigHandler {
 
 	public static List<String> shriekerMobs;
 	
-	/*----------------------------------------------------------*
+	/*-------------------------------------------------------spawnGhoul---*
 	 *                VARIABLE FOR SPAWN CONTROL                *
 	 *----------------------------------------------------------*/
 	
@@ -169,6 +170,11 @@ public class ConfigHandler {
 	public static int vampireMn;
 	public static int vampireMx;
 	
+	public static boolean ghostIg;
+	public static int ghostP;
+	public static int ghostMn;
+	public static int ghostMx;
+	
 	public static boolean fallenAngelIg;
 	public static int fallenAngelP;
 	public static int fallenAngelMn;
@@ -227,6 +233,7 @@ public class ConfigHandler {
 				+ "(if false it does not exist and can never spawn)");
 		spawnRustMonster = config.get("Mobs", "RustMonster", true).getBoolean();
 		spawnGhoul = config.get("Mobs", "Ghoul", true).getBoolean();
+		spawnGhost = config.get("Mobs", "Ghost", true).getBoolean();
 		spawnShrieker = config.get("Mobs", "Shrieker", true).getBoolean();
 		spawnHookHorror = config.get("Mobs", "HookHorror", true).getBoolean();
 		spawnUmberHulk = config.get("Mobs", "UmberHulk", true).getBoolean();
@@ -344,7 +351,13 @@ public class ConfigHandler {
 		ghoulIg = config.get("Ghoul", "GhoulSpawnAnywhere", false).getBoolean();;
 		ghoulP  = config.get("Ghoul", "GhoulSpawnChance", 5).getInt();
 		ghoulMn = config.get("Ghoul", "GhoulSpawnMin", 2).getInt();
-		ghoulMx = config.get("Ghoul", "GhoulSpawnMax", 4).getInt();  	
+		ghoulMx = config.get("Ghoul", "GhoulSpawnMax", 4).getInt();	
+		
+		config.addCustomCategoryComment("Ghost", "Spawn configurations for ghostl");		
+		ghostIg = config.get("Ghost", "GhostSpawnAnywhere", false).getBoolean();;
+		ghostP  = config.get("Ghost", "GhostSpawnChance", 2).getInt();
+		ghostMn = config.get("Ghost", "GhostSpawnMin", 1).getInt();
+		ghostMx = config.get("Ghost", "GhostSpawnMax", 3).getInt();  	
 		
 		config.addCustomCategoryComment("Shrieker", "Spawn configurations for shrieker");		
 		shriekerIg = config.get("Shrieker", "ShriekerSpawnAnywhere", false).getBoolean();;

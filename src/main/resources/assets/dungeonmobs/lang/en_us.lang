@@ -28,6 +28,7 @@ entity.dungeonmobs.dmvampire.name=Vampire
 entity.dungeonmobs.dmfallenangel.name=Fallen Angel
 entity.dungeonmobs.dmlightball.name=Corrupted Lightball
 entity.dungeonmobs.dmeldermob.name=Outer Thing
+entity.dungeonmobs.dmghost.name=Ghost
 tile.lavarock.name=Magma Rock
 entity.dungeonmobs.dmvescavor.name=Vescavor
 death.attack.bladetrap=%s was killed by a blade trap

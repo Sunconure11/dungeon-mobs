@@ -37,7 +37,8 @@ import com.gw.dm.projectile.EntityFireCloudGenerator;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
-public class EntityEldermob extends EntityDungeonFlying implements IMob, IRangedAttackMob {
+public class EntityEldermob extends EntityDungeonFlying 
+				implements IMob, IRangedAttackMob, IBeMagicMob  {
 	private static final int SD = 1024 * 1024;
 
 	private static String mobName = DungeonMobs.MODID + ":dmeldermob";

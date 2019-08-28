@@ -136,7 +136,7 @@ public class EntityBladeTrap extends EntityLiving {
 						default:
 							break;
 					}
-					bar.attackEntityFrom(DungeonMobsDamageSource.bladeTrap, dmgValue);
+					bar.attackEntityFrom(DungeonMobsDamageSource.BLADE_TRAP, dmgValue);
 				}
 				attackTimer = 0;
 			}
@@ -176,7 +176,7 @@ public class EntityBladeTrap extends EntityLiving {
 			default:
 				break;
 		}
-		par1EntityPlayer.attackEntityFrom(DungeonMobsDamageSource.bladeTrap, dmgValue);
+		par1EntityPlayer.attackEntityFrom(DungeonMobsDamageSource.BLADE_TRAP, dmgValue);
 	}
 
 

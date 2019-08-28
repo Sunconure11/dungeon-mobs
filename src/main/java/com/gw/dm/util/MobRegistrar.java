@@ -17,6 +17,9 @@ import static com.gw.dm.util.ConfigHandler.destrachanP;
 import static com.gw.dm.util.ConfigHandler.fallenAngelMn;
 import static com.gw.dm.util.ConfigHandler.fallenAngelMx;
 import static com.gw.dm.util.ConfigHandler.fallenAngelP;
+import static com.gw.dm.util.ConfigHandler.ghostMn;
+import static com.gw.dm.util.ConfigHandler.ghostMx;
+import static com.gw.dm.util.ConfigHandler.ghostP;
 import static com.gw.dm.util.ConfigHandler.ghoulMn;
 import static com.gw.dm.util.ConfigHandler.ghoulMx;
 import static com.gw.dm.util.ConfigHandler.ghoulP;
@@ -61,6 +64,7 @@ import static com.gw.dm.util.ConfigHandler.spawnCaveFisher;
 import static com.gw.dm.util.ConfigHandler.spawnCockatrice;
 import static com.gw.dm.util.ConfigHandler.spawnDestrachan;
 import static com.gw.dm.util.ConfigHandler.spawnFallenAngel;
+import static com.gw.dm.util.ConfigHandler.spawnGhost;
 import static com.gw.dm.util.ConfigHandler.spawnGhoul;
 import static com.gw.dm.util.ConfigHandler.spawnHellHound;
 import static com.gw.dm.util.ConfigHandler.spawnHookHorror;
@@ -114,6 +118,7 @@ import com.gw.dm.entity.EntityCockatrice;
 import com.gw.dm.entity.EntityDestrachan;
 import com.gw.dm.entity.EntityEldermob;
 import com.gw.dm.entity.EntityFallenAngel;
+import com.gw.dm.entity.EntityGhost;
 import com.gw.dm.entity.EntityGhoul;
 import com.gw.dm.entity.EntityHookHorror;
 import com.gw.dm.entity.EntityIllithid;
@@ -171,6 +176,7 @@ public class MobRegistrar {
 	public static final int darkballID = 33;
 	public static final int eldermobID = 34;
 	public static final int fireparticloidID = 35;
+	public static final int ghostID = 36;
 
 	// FIXME: All identifiers should now be all lower case!
 
@@ -329,6 +335,12 @@ public class MobRegistrar {
 					EntityBladeTrap.class, MODID + ".dmbladetrap", bladeTrapID, instance, 80, 3, true,
 					0x464646, 0xb70202);
 		}
+		// GHOST
+		if (spawnGhost) {
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmghost"),
+					EntityGhost.class, MODID + ".dmghost", ghostID, instance, 80, 3,
+					true, 0xffffff, 0xe0e0e8);
+		}
 	}
 
 
@@ -443,7 +455,10 @@ public class MobRegistrar {
 			EntityRegistry.addSpawn(EntityEldermob.class, 
 					outerThingEP, outerThingEMn, outerThingEMx, 
 					EnumCreatureType.MONSTER, end);
-		}
+		} 
+		if (spawnGhost) EntityRegistry.addSpawn(EntityGhost.class, 
+				ghostP, ghostMn, ghostMx,
+				EnumCreatureType.MONSTER, overworld);
 	}
 
 
@@ -486,5 +501,6 @@ public class MobRegistrar {
 		if (spawnIllithid) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmillithid"), 1);
 		if (spawnRakshasa) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmrakshasa"), 1);
 		if (spawnLizalfos) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmlizalfos"), 1);
+		if (spawnGhost) DungeonHooks.addDungeonMob(new ResourceLocation(MODID, "dmghost"), 1);
 	}
 }

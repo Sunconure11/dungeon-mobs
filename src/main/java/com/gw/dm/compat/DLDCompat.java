@@ -74,7 +74,10 @@ public class DLDCompat {
 					"END", "MAGICAL", "TECH", "SHADOW", "FROZEN");
 		if (spawnFallenAngel)
 			DLDungeonsAPI.addMob(MODID + ":dmfallenangel", 3,
-					"NETHER", "MAGICAL", "PARADISE", "WASTELAND");
+					"NETHER", "MAGICAL", "PARADISE", "WASTELAND");		
+		if (spawnGhost)
+			DLDungeonsAPI.addMob(MODID + ":dmghost", 2,
+					"SHADOW", "PARADISE", "DUNGEON", "URBAN", "NECRO");
 	
 	}
 

@@ -628,5 +628,41 @@
         "stream": true
       }
     ]
+  },
+  "g2_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:g2_l",
+        "stream": true
+      }
+    ]
+  },
+  "g2_l2": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:g2_l2",
+        "stream": true
+      }
+    ]
+  },
+  "g2_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:g2_h",
+        "stream": true
+      }
+    ]
+  },
+  "g2_d": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:g2_d",
+        "stream": true
+      }
+    ]
   }
 }

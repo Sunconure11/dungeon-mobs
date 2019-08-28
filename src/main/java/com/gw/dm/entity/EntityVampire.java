@@ -32,14 +32,19 @@ import com.gw.dm.ai.AIVampireAttack;
 import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
-public class EntityVampire extends EntityDungeonMob {
+public class EntityVampire extends EntityDungeonMob implements IBeMagicMob {
 	private static String mobName = DungeonMobs.MODID + ":dmvampire";
 	private boolean escaping;
 	private boolean feelTrapped;
 
 	public EntityVampire(World worldIn) {
 		super(worldIn);
-		experienceValue = 20;
+        setSize(0.6F, 1.95F);
+		if(ConfigHandler.hardcoreVampire) {
+			experienceValue = 30;
+		} else {
+			experienceValue = 20;
+		}
 		feelTrapped = false;
 	}
 
@@ -131,20 +136,20 @@ public class EntityVampire extends EntityDungeonMob {
 	}
 	
 	
-	private void energyDrain(Entity victim, int levels, int exhaustion) {
+	private void energyDrain(Entity victim, int levels, float exhaustion) {
 		if(victim instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) victim;
 			player.addExhaustion(exhaustion);
 			if(ConfigHandler.hardcoreVampire) {
 				if(player.experienceLevel < (0 - levels)) {
-					player.attackEntityFrom(DungeonMobsDamageSource.energyDrain, 1024);
+					player.attackEntityFrom(DungeonMobsDamageSource.ENERGY_DRAIN, 1024);
 				}
 				player.addExperienceLevel(levels);
 			}
 			heal(2.0f);
 		} else if(victim instanceof EntityLiving) {
 			EntityLiving mob = (EntityLiving)victim;
-			mob.attackEntityFrom(DungeonMobsDamageSource.energyDrain, 
+			mob.attackEntityFrom(DungeonMobsDamageSource.ENERGY_DRAIN, 
 					(exhaustion / 2) - levels);
 			heal(2.0f);
 		}

@@ -1,5 +1,7 @@
 package com.gw.dm.projectile;
 
+import com.gw.dm.DungeonMobsDamageSource;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -14,8 +16,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityLightball extends EntityThrowable {
-	private static final DamageSource SOURCE = new DamageSource("light_ball")
-			.setDamageBypassesArmor();
+	public static final DamageSource LIGHT_BALL = DungeonMobsDamageSource.LIGHT_BALL;
 	private int age;
 
 	public EntityLightball(World worldIn) {
@@ -41,8 +42,8 @@ public class EntityLightball extends EntityThrowable {
 		if (!world.isRemote) {
 			if (result.entityHit instanceof EntityLivingBase) {
 				EntityLivingBase entity = (EntityLivingBase) result.entityHit;
-						entity.attackEntityFrom(DamageSource.causeMobDamage(getThrower())
-								.setDamageBypassesArmor(), 1.0f);
+						entity.attackEntityFrom(DungeonMobsDamageSource.LIGHT_BALL
+								.causeMobDamage(getThrower()), 1.0f);
 			}
 			world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, 
 					SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 

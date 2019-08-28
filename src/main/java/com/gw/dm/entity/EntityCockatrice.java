@@ -125,7 +125,7 @@ public class EntityCockatrice extends EntityDungeonMob {
 
 				foo.setStuff(bar);
 
-				bar.attackEntityFrom(DungeonMobsDamageSource.petrified, 100);
+				bar.attackEntityFrom(DungeonMobsDamageSource.PETRIFIED, 1024);
 
 				incoming = true;
 				waitTick = true;

@@ -37,7 +37,8 @@ import com.gw.dm.projectile.EntityLightball;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
-public class EntityFallenAngel extends EntityDungeonFlying implements IMob, IRangedAttackMob {
+public class EntityFallenAngel extends EntityDungeonFlying 
+				implements IMob, IRangedAttackMob, IBeMagicMob  {
 
 	private static final DataParameter<Boolean> SWINGING_ARMS
 			= EntityDataManager.<Boolean>createKey(EntityFallenAngel.class, DataSerializers.BOOLEAN);

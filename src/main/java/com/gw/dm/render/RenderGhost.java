@@ -1,25 +1,20 @@
 package com.gw.dm.render;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.entity.EntityGhost;
-import com.gw.dm.entity.EntityVampire;
 
-public class renderGhost extends RenderBiped<EntityGhost>  {
+public class RenderGhost extends RenderBiped<EntityGhost>  {
 	public static final ResourceLocation VAMPIRE_TEXTURES =
 			new ResourceLocation(DungeonMobs.MODID, "textures/entity/ghost.png");
 
 	
-	public renderGhost(RenderManager renderManagerIn, ModelBiped modelBipedIn,
+	public RenderGhost(RenderManager renderManagerIn, ModelBiped modelBipedIn,
 			float shadowSize) {
 		super(renderManagerIn, modelBipedIn, shadowSize);
 	}

@@ -39,7 +39,7 @@ import com.gw.dm.projectile.EntityMagicMissile;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
-public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob {
+public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob, IBeMagicMob  {
 
 	private static final ResourceLocation rakshasaTextures
 			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Rakshasa.png");

@@ -105,7 +105,7 @@ public class BlockBladeTrap extends ModContainerBase {
 
 		if (entity != null && !world.isRemote) {
 			if (entity instanceof EntityPlayer)
-				entity.attackEntityFrom(DungeonMobsDamageSource.bladeTrap, dmgValue);
+				entity.attackEntityFrom(DungeonMobsDamageSource.BLADE_TRAP, dmgValue);
 		}
 	}
 

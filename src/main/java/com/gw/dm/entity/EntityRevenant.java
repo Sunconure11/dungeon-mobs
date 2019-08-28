@@ -24,7 +24,7 @@ import net.minecraft.world.World;
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.util.DungeonMobsHelper;
 
-public class EntityRevenant extends EntityZombie {
+public class EntityRevenant extends EntityZombie implements IBeMagicMob  {
 	private static double HEALTH = 30.0;
 	private static String mobName = DungeonMobs.MODID + ":dmrevenant";
 	public boolean ignoreHeight;

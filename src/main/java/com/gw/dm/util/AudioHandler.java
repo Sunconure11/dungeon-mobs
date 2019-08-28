@@ -95,6 +95,11 @@ public class AudioHandler {
 	public static SoundEvent entityEldermobA1;
 	public static SoundEvent entityEldermobA2;
 	public static SoundEvent entityEldermobA3;
+	
+	public static SoundEvent entityGhostAmbient1;
+	public static SoundEvent entityGhostAmbient2;
+	public static SoundEvent entityGhostHurt;
+	public static SoundEvent entityGhostDeath;
 
 
 	public static void registerSounds() {
@@ -193,6 +198,11 @@ public class AudioHandler {
 		entityEldermobA1 = registerSound("em_l1");
 		entityEldermobA2 = registerSound("em_l2");
 		entityEldermobA3 = registerSound("em_l3");
+		
+		entityGhostAmbient1 = registerSound("g2_l");
+		entityGhostAmbient2 = registerSound("g2_l2");
+		entityGhostHurt = registerSound("g2_h");
+		entityGhostDeath = registerSound("g2_d");
 	}
 
 
