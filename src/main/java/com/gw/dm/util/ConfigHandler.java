@@ -50,6 +50,8 @@ public class ConfigHandler {
 	public static boolean spawnBladeTrap;
 
 	public static boolean lightBallExplode;
+	public static boolean loudVescavor;
+	public static boolean hardcoreVampire;
 	
 	public static boolean replaceRMFoods;
 	public static List<String> rustMonFoodsList;
@@ -274,6 +276,16 @@ public class ConfigHandler {
 		if (!shriekerMobs.isEmpty()) {
 			EntityShrieker.appendToSummonList(shriekerMobs);
 		}
+		
+		// Special mob configurations
+		config.addCustomCategoryComment("Special Mob Traits", 
+				"Some other special characteristics of some mobs");
+		loudVescavor = config.get("Special Mob Traits", "LoudVescavor", false, 
+				"True: Use old, LOUD vescavor sound\nFalse: Use new, quieter vescavor sound")
+				.getBoolean();
+		hardcoreVampire = config.get("Special Mob Traits", "HardcoreVampire", false, 
+				"If true vampires will drain levels from the player.")
+				.getBoolean();
 
 		// Save It!!!
 		config.save();

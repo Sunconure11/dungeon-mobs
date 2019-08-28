@@ -69,7 +69,8 @@ public class AIVampireAttack extends EntityAIBase {
 
 
 	private boolean shouldAttack() {
-		boolean out = (owner.getHealth() > THRESHHOLD) || owner.isTrapped();
+		boolean out = (owner.getHealth() > THRESHHOLD) || owner.isTrapped() 
+				|| !(owner.getTags() instanceof EntityPlayer);
 		owner.setRunning(!out);
 		return out;
 	}

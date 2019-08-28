@@ -503,6 +503,42 @@
       }
     ]
   },
+  "v_lo": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:v_lo",
+        "stream": true
+      }
+    ]
+  },
+  "v_lo2": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:v_lo2",
+        "stream": true
+      }
+    ]
+  },
+  "v_ho": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:v_ho",
+        "stream": true
+      }
+    ]
+  },
+  "v_do": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:v_do",
+        "stream": true
+      }
+    ]
+  },
   "be_be": {
     "category": "entity",
     "sounds": [

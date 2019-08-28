@@ -55,7 +55,16 @@ public class AudioHandler {
 
 	public static SoundEvent entityShrieker;
 
-	public static SoundEvent entityVescavorAmbient;
+	public static SoundEvent entityVescavorAmbient1q;
+	public static SoundEvent entityVescavorAmbient2q;
+	public static SoundEvent entityVescavorHurtq;
+	public static SoundEvent entityVescavorDeathq;
+	public static SoundEvent entityVescavorAmbient1l;
+	public static SoundEvent entityVescavorAmbient2l;
+	public static SoundEvent entityVescavorHurtl;
+	public static SoundEvent entityVescavorDeathl;
+	public static SoundEvent entityVescavorAmbient1;
+	public static SoundEvent entityVescavorAmbient2;
 	public static SoundEvent entityVescavorHurt;
 	public static SoundEvent entityVescavorDeath;
 
@@ -136,10 +145,26 @@ public class AudioHandler {
 		entityCockatriceStone = registerSound("co_s");
 
 		entityShrieker = registerSound("s_s");
-
-		entityVescavorAmbient = registerSound("v_l2");
-		entityVescavorHurt = registerSound("v_h");
-		entityVescavorDeath = registerSound("v_d");
+		
+		entityVescavorAmbient1l = registerSound("v_lo");
+		entityVescavorAmbient2l = registerSound("v_lo2");			
+		entityVescavorHurtl = registerSound("v_ho");
+		entityVescavorDeathl = registerSound("v_do");			
+		entityVescavorAmbient1q = registerSound("v_l");
+		entityVescavorAmbient1q = registerSound("v_l2");
+		entityVescavorHurtq = registerSound("v_h");
+		entityVescavorDeathq = registerSound("v_d");		
+		if(ConfigHandler.loudVescavor) {
+			entityVescavorAmbient1 = entityVescavorAmbient2l; 
+			entityVescavorAmbient2 = entityVescavorAmbient2l;			
+			entityVescavorHurt = entityVescavorHurtl;
+			entityVescavorDeath = entityVescavorDeathl;			
+		} else {
+			entityVescavorAmbient1 = entityVescavorAmbient1q; 
+			entityVescavorAmbient2 = entityVescavorAmbient2q;			
+			entityVescavorHurt = entityVescavorHurtq;
+			entityVescavorDeath = entityVescavorDeathq;
+		}
 
 		entityIllithidAmbient = registerSound("i_l");
 		entityIllithidPower = registerSound("i_p");

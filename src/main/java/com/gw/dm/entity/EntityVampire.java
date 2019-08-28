@@ -2,6 +2,8 @@ package com.gw.dm.entity;
 
 import static com.gw.dm.util.ConfigHandler.vampireIg;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFleeSun;
@@ -19,12 +21,13 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import com.gw.dm.DungeonMobs;
+import com.gw.dm.DungeonMobsDamageSource;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.ai.AIVampireAttack;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityVampire extends EntityDungeonMob {
@@ -104,33 +107,44 @@ public class EntityVampire extends EntityDungeonMob {
 		if (escaping) {
 			setTrapped();
 		}
-		if (super.attackEntityAsMob(victim)) {
-			// Energy drain power on the victim (which heals the vampire)
-			if (victim instanceof EntityPlayer) {
-				EntityPlayer player = (EntityPlayer) victim;
-				switch (world.getDifficulty()) {
-					case EASY:
-						player.addExhaustion(8);
-						break;
-					case HARD:
-						player.addExhaustion(12);
-						player.setHealth(player.getHealth() - 1);
-						if (player.getHealth() < 0.0f) {
-							player.setHealth(0.0f);
-						}
-						break;
-					case NORMAL:
-						player.addExhaustion(10);
-						break;
-					case PEACEFUL:
-					default:
-						break;
-				}
-				heal(2.0f);
+		if(super.attackEntityAsMob(victim)) {
+			switch (world.getDifficulty()) {
+				case EASY:
+					energyDrain(victim, -1, 8);
+					break;
+				case HARD:
+					energyDrain(victim, -2, 12);
+					break;
+				case NORMAL:
+					energyDrain(victim, -1, 10);
+					break;
+				case PEACEFUL:
+				default:
+					break;
 			}
 			return true;
 		} else {
 			return false;
+		}
+	}
+	
+	
+	private void energyDrain(Entity victim, int levels, int exhaustion) {
+		if(victim instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) victim;
+			player.addExhaustion(exhaustion);
+			if(ConfigHandler.hardcoreVampire) {
+				if(player.experienceLevel < (0 - levels)) {
+					player.attackEntityFrom(DungeonMobsDamageSource.energyDrain, 1024);
+				}
+				player.addExperienceLevel(levels);
+			}
+			heal(2.0f);
+		} else if(victim instanceof EntityLiving) {
+			EntityLiving mob = (EntityLiving)victim;
+			mob.attackEntityFrom(DungeonMobsDamageSource.energyDrain, 
+					(exhaustion / 2) - levels);
+			heal(2.0f);
 		}
 	}
 

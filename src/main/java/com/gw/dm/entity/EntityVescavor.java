@@ -69,7 +69,11 @@ public class EntityVescavor extends EntityDungeonMob {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return AudioHandler.entityVescavorAmbient;
+		if(rand.nextBoolean()) {
+			return AudioHandler.entityVescavorAmbient1;
+		} else {
+			return AudioHandler.entityVescavorAmbient2;
+		}
 	}
 
 
