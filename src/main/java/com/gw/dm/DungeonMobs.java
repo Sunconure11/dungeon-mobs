@@ -20,7 +20,7 @@ import java.util.Arrays;
 		dependencies = "after:thaumcraft; after:dldungeonsjbg")
 public class DungeonMobs {
 	public static final String MODID = "dungeonmobs";
-	public static final String VERSION = "5.7.2";
+	public static final String VERSION = "5.7.3";
 
 	@Instance(MODID)
 	public static DungeonMobs instance;
