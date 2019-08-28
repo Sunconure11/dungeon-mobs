@@ -83,7 +83,8 @@ public class EntityMagicMissile extends EntityArrow {
 
 
 	@SideOnly(Side.CLIENT)
-	public int getBrightnessForRender(float partialTicks) {
+	@Override
+	public int getBrightnessForRender() {
 		return 0xf000f0;
 	}
 

@@ -40,14 +40,10 @@ public class EntityLightball extends EntityThrowable {
 	protected void onImpact(RayTraceResult result) {
 		if (!world.isRemote) {
 			if (result.entityHit instanceof EntityLivingBase) {
-				// No longer checking for null thrower -- that should never happen!
 				EntityLivingBase entity = (EntityLivingBase) result.entityHit;
 						entity.attackEntityFrom(DamageSource.causeMobDamage(getThrower())
 								.setDamageBypassesArmor(), 1.0f);
 			}
-			// Nerfing this -- mob is too hard for the nether; this might be 
-			// configurable in the future.
-			//world.newExplosion(this, posX, posY, posZ, 1, false, false);
 			world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, 
 					SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 
 					4.0F, (1.0F + (this.world.rand.nextFloat() 
@@ -90,7 +86,8 @@ public class EntityLightball extends EntityThrowable {
 
 
 	@SideOnly(Side.CLIENT)
-	public int getBrightnessForRender(float partialTicks) {
+	@Override
+	public int getBrightnessForRender() {
 		return 0xf000f0;
 	}
 

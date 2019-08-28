@@ -73,7 +73,7 @@ public class RenderProjectile extends Render {
 				.endVertex();
 		tessellator.draw();
 
-		if (renderOutlines) {
+		if(renderOutlines) {
 			GlStateManager.disableOutlineMode();
 			GlStateManager.disableColorMaterial();
 		}
