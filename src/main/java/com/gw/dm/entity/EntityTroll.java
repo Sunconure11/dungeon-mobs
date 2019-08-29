@@ -38,7 +38,7 @@ public class EntityTroll extends EntityMob {
 	public int stoneStatus = 1;
 	public int stoneCounter = 0;
 	public int regenTimer = 0;
-	public float regen;
+	public static final float regen = (float)(0.3 + Math.log10(ConfigHandler.healthx));;
 
 	public EntityTroll(World par1World) {
 		super(par1World);
@@ -65,7 +65,6 @@ public class EntityTroll extends EntityMob {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		regen = (float)(0.3 + Math.log10(ConfigHandler.healthx));
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D 
 				* ConfigHandler.healthx);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.22D);

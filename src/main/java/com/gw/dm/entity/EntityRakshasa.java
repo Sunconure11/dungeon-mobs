@@ -45,7 +45,7 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 	private static final ResourceLocation rakshasaTextures
 			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Rakshasa.png");
 	private static String mobName = DungeonMobs.MODID + ":dmrakshasa";
-	private int potionLevel;
+	private static final int potionLevel;
 	public boolean ignoreHeight;
 	public String currentName;
 	public ResourceLocation currentSkin;
@@ -58,8 +58,13 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 			= new EntityAIAttackRanged(this, 0.3F, 5, 40, 24.0F);
 	private EntityAIAttackMelee meleeAttack
 			= new EntityAIAttackMelee(this, 0.3F, false);
-
 	private List myImages;
+	
+	
+	static {
+		potionLevel = Math.min(Math.max(1, (int)(Math.sqrt(ConfigHandler.damagex) 
+				+ Math.log(ConfigHandler.damageplus + 1)) - 2), 127);
+	}
 
 
 	public EntityRakshasa(World par1World) {
@@ -93,8 +98,6 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		potionLevel = Math.min(Math.max(1, (int)(Math.sqrt(ConfigHandler.damagex) 
-				+ Math.log(ConfigHandler.damageplus + 1)) - 2), 127);
 		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(42.0D 
 				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
