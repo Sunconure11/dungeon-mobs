@@ -13,6 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 
 public class EntityMagicMissile extends EntityArrow {
+	private int potionLevel = 2;
 	private int age = 0;
 
 
@@ -26,8 +27,9 @@ public class EntityMagicMissile extends EntityArrow {
 	}
 
 
-	public EntityMagicMissile(World worldIn, EntityLivingBase entity) {
+	public EntityMagicMissile(World worldIn, EntityLivingBase entity, int level) {
 		super(worldIn, entity);
+		potionLevel = level;
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class EntityMagicMissile extends EntityArrow {
 			if (var1.entityHit != null) {
 				EntityLivingBase foo = (EntityLivingBase) var1.entityHit;
 				foo.addPotionEffect(new PotionEffect(Potion
-						.getPotionFromResourceLocation("instant_damage"), 1, 1));
+						.getPotionFromResourceLocation("instant_damage"), 1, potionLevel));
 			}
 		}
 		setDead();

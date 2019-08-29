@@ -1,6 +1,7 @@
 package com.gw.dm.projectile;
 
 import com.gw.dm.DungeonMobsDamageSource;
+import com.gw.dm.util.ConfigHandler;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,7 +44,8 @@ public class EntityLightball extends EntityThrowable {
 			if (result.entityHit instanceof EntityLivingBase) {
 				EntityLivingBase entity = (EntityLivingBase) result.entityHit;
 						entity.attackEntityFrom(DungeonMobsDamageSource.LIGHT_BALL
-								.causeMobDamage(getThrower()), 1.0f);
+								.causeMobDamage(getThrower()), ConfigHandler.damagex
+									+ (ConfigHandler.damageplus / 5.0f));
 			}
 			world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, 
 					SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 

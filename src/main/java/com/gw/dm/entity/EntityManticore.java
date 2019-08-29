@@ -25,6 +25,7 @@ import net.minecraft.world.World;
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityManticore extends EntityDungeonMob implements IRangedAttackMob {
@@ -91,9 +92,11 @@ public class EntityManticore extends EntityDungeonMob implements IRangedAttackMo
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D 
+				* ConfigHandler.healthx);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
 		this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0D);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
 	}

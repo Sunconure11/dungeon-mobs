@@ -37,6 +37,7 @@ import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.projectile.EntityMagicMissile;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob, IBeMagicMob  {
@@ -44,6 +45,7 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 	private static final ResourceLocation rakshasaTextures
 			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Rakshasa.png");
 	private static String mobName = DungeonMobs.MODID + ":dmrakshasa";
+	private int potionLevel;
 	public boolean ignoreHeight;
 	public String currentName;
 	public ResourceLocation currentSkin;
@@ -91,9 +93,13 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(42.0D);
+		potionLevel = Math.min(Math.max(1, (int)(Math.sqrt(ConfigHandler.damagex) 
+				+ Math.log(ConfigHandler.damageplus + 1)) - 2), 127);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(42.0D 
+				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8.0D);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(1.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
@@ -176,7 +182,7 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 				+ var1.height - getEntityBoundingBox().maxY;
 		double var15 = var1.posZ + var1.motionZ - posZ;
 
-		EntityMagicMissile mm = new EntityMagicMissile(world, this);
+		EntityMagicMissile mm = new EntityMagicMissile(world, this, potionLevel);
 		targetArrow(mm);
 		world.spawnEntity(mm);
 	}

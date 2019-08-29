@@ -30,6 +30,7 @@ import net.minecraft.world.World;
 
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityTroll extends EntityMob {
@@ -37,6 +38,7 @@ public class EntityTroll extends EntityMob {
 	public int stoneStatus = 1;
 	public int stoneCounter = 0;
 	public int regenTimer = 0;
+	public float regen;
 
 	public EntityTroll(World par1World) {
 		super(par1World);
@@ -63,9 +65,12 @@ public class EntityTroll extends EntityMob {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D);
+		regen = (float)(0.3 + Math.log10(ConfigHandler.healthx));
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D 
+				* ConfigHandler.healthx);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.22D);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D 
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
 		this.getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
 	}
 
@@ -160,7 +165,7 @@ public class EntityTroll extends EntityMob {
 					this.turnToStone();				
 				}
 			} else if (!this.isDead && (getHealth() > 0) && !isBurning()) {
-				setHealth(getHealth() + 0.3f);
+				setHealth(getHealth() + regen);
 			}
 		}
 		super.onLivingUpdate();

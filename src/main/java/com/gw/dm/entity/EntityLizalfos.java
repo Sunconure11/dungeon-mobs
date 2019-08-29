@@ -42,6 +42,7 @@ import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.ai.EntityAIFollowTwin;
 import com.gw.dm.ai.EntityAIMonsterPanic;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityLizalfos extends EntityDungeonMob {
@@ -151,9 +152,11 @@ public class EntityLizalfos extends EntityDungeonMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D 
+				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(7.0D
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
 	}

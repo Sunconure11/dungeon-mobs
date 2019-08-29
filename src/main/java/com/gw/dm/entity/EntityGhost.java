@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,6 +29,7 @@ import com.gw.dm.DungeonMobs;
 import com.gw.dm.DungeonMobsDamageSource;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
@@ -42,14 +44,15 @@ public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(35.0d);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(35.0d 
+				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(8.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.0d);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0d);
-        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0d);
+        getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0d 
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
 	}
 
 	
@@ -65,7 +68,8 @@ public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
 
     
     protected void applyEntityAI() {
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, 
+        		EntityPlayer.class, true));
     }
 
 
@@ -74,8 +78,15 @@ public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
 	public int getBrightnessForRender() {
 		return 0xf000f0;
 	}
+	
+	
+	@Override
+	public boolean canBreatheUnderwater() {
+		return true;
+	}
 
 
+	@Override
 	public EnumCreatureAttribute getCreatureAttribute() {
 		return EnumCreatureAttribute.UNDEAD;
 	}
@@ -176,6 +187,22 @@ public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
 			}
 		}
 		super.onLivingUpdate();
+	}
+
+
+	@Override
+	protected void dropFewItems(boolean par1, int par2) {
+		entityDropItem(new ItemStack(Items.DYE, rand.nextInt(4) + par2, 0xf), 0.0f);
+		if (par1) {
+			if(par2 > 2) {
+				dropItem(Items.GLOWSTONE_DUST, rand.nextInt(2));
+				dropItem(Items.GHAST_TEAR, rand.nextInt(par2));
+			} else {
+				dropItem(Items.GHAST_TEAR, rand.nextInt(2));
+			}
+		} else {
+			dropItem(Items.GHAST_TEAR, rand.nextInt(2));
+		}
 	}
 	
 

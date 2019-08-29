@@ -27,6 +27,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonFlying;
@@ -35,6 +37,7 @@ import com.gw.dm.ai.AIAngelWander;
 import com.gw.dm.ai.TaskAngelAgroOnPlayer;
 import com.gw.dm.projectile.EntityLightball;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityFallenAngel extends EntityDungeonFlying 
@@ -77,7 +80,8 @@ public class EntityFallenAngel extends EntityDungeonFlying
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0d);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(72.0d);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(72.0d 
+				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(7.0d);
 	}
@@ -225,6 +229,13 @@ public class EntityFallenAngel extends EntityDungeonFlying
 
 	public boolean areArmsUp() {
 		return ((Boolean) dataManager.get(SWINGING_ARMS)).booleanValue();
+	}
+
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public int getBrightnessForRender() {
+		return 0xf000f0;
 	}
 
 

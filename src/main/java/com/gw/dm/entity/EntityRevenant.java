@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.gw.dm.DungeonMobs;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityRevenant extends EntityZombie implements IBeMagicMob  {
@@ -86,12 +87,14 @@ public class EntityRevenant extends EntityZombie implements IBeMagicMob  {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(HEALTH);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(HEALTH
+				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0d);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0d 
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0d);
 	}
 

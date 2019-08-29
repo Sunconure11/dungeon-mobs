@@ -28,6 +28,7 @@ import com.gw.dm.ai.MoveHelperBeholder;
 import com.gw.dm.ai.TaskBeholderAgro;
 import com.gw.dm.projectile.EntityEyeRay;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 
@@ -55,7 +56,8 @@ public class EntityAhriman extends EntityDungeonFlying
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0d);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(32.0d);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(32.0d 
+				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(10.d);
 		getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(0.0d);

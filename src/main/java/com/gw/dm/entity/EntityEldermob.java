@@ -35,6 +35,7 @@ import com.gw.dm.projectile.EntityCloudGenerator;
 import com.gw.dm.projectile.EntityEldermobBall;
 import com.gw.dm.projectile.EntityFireCloudGenerator;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityEldermob extends EntityDungeonFlying 
@@ -174,7 +175,8 @@ public class EntityEldermob extends EntityDungeonFlying
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0d);
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(66.0d);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(66.0d
+				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(6.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(1.0d);
 	}

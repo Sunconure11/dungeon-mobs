@@ -73,12 +73,14 @@ public class EntityVampire extends EntityDungeonMob implements IBeMagicMob {
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0d);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0d 
+				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.54d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0d);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0d 
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0d);
 	}
 

@@ -56,7 +56,6 @@ public class ConfigHandler {
 	
 	public static boolean replaceRMFoods;
 	public static List<String> rustMonFoodsList;
-
 	public static List<String> shriekerMobs;
 	
 	/*-------------------------------------------------------spawnGhoul---*
@@ -182,7 +181,6 @@ public class ConfigHandler {
 	public static int fallenAngelNP;
 	public static int fallenAngelNMn;
 	public static int fallenAngelNMx;
-	
 	public static boolean outerThingIg;
 	public static boolean outerThingEI;
 	public static int outerThingP;
@@ -192,6 +190,10 @@ public class ConfigHandler {
 	public static int outerThingEMn;
 	public static int outerThingEMx;
 
+	
+	public static float healthx;
+	public static float damagex;
+	public static float damageplus; 
 	
 	/*----------------------------------------------------------*
 	 *                     WORKING CODE                         *
@@ -293,6 +295,20 @@ public class ConfigHandler {
 		hardcoreVampire = config.get("Special Mob Traits", "HardcoreVampire", false, 
 				"If true vampires will drain levels from the player.")
 				.getBoolean();
+		
+		// Power-Up
+		config.addCustomCategoryComment("Power Boost", 
+				"Incase you don't think these mobs are tough enough for your "
+				+ "OP modpack / gear");		
+		healthx = config.getFloat("Health Multiplier", "Power Boost", 1.0f, 1.0f, 1000f, 
+					"Multiply every mob's base health by this");
+		damagex = config.getFloat("Damage Multiplier", "Power Boost", 1.0f, 1.0f, 1000f, 
+				"Multiply every mob's base damage by this");;
+		damageplus  = config.getFloat("Damage Additive", "Power Boost", 0.0f, 0.0f, 1000f, 
+				"Add this to every mob's base damage "
+				+ "(usually less extreme than multiplying"); 
+		
+		
 
 		// Save It!!!
 		config.save();

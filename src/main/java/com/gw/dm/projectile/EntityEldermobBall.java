@@ -1,5 +1,7 @@
 package com.gw.dm.projectile;
 
+import com.gw.dm.util.ConfigHandler;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,7 +41,8 @@ public class EntityEldermobBall extends EntityThrowable {
 				EntityLivingBase entity = (EntityLivingBase) result.entityHit;
 				entity.attackEntityFrom(DamageSource.causeMobDamage(getThrower())
 						.setDifficultyScaled()
-						.setProjectile(), 12.0f);
+						.setProjectile(), 6.0f +   
+							(6.0f * ConfigHandler.damagex) + ConfigHandler.damageplus);
 				world.newExplosion(this, posX, posY, posZ, 1, false, true);
 			}
 			setDead();

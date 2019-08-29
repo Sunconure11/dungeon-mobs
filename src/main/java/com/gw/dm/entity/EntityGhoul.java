@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityGhoul extends EntityZombie {
@@ -29,7 +30,8 @@ public class EntityGhoul extends EntityZombie {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0d);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0d 
+				* ConfigHandler.healthx);
 		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.27f);
 	}
 

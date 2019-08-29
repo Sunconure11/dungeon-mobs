@@ -3,7 +3,9 @@ package com.gw.dm.entity;
 import com.gw.dm.DungeonMobsDamageSource;
 import com.gw.dm.blocks.BlockBladeTrap;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.MiscRegistrar;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -42,7 +44,8 @@ public class EntityBladeTrap extends EntityLiving {
 
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D);
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(100.0D 
+				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.0D);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0D);
 	}
@@ -120,17 +123,17 @@ public class EntityBladeTrap extends EntityLiving {
 					playSound(AudioHandler.entityBladeTrapBlade, 1.0F,
 							(world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F + 1.0F);
 
-					int dmgValue = 1;
+					float dmgValue = ConfigHandler.damagex;
 
 					switch (world.getDifficulty()) {
 						case EASY:
-							dmgValue = 2;
+							dmgValue = 2 * ConfigHandler.damagex;
 							break;
 						case HARD:
-							dmgValue = 8;
+							dmgValue = 8 * ConfigHandler.damagex;
 							break;
 						case NORMAL:
-							dmgValue = 5;
+							dmgValue = 5 * ConfigHandler.damagex;
 							break;
 						case PEACEFUL:
 						default:
