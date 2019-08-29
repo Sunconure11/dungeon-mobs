@@ -152,8 +152,29 @@ public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
 		if(((target == null) || target.isDead) 
 				&& (attacker instanceof EntityLivingBase)) {
 			setAttackTarget((EntityLivingBase)attacker);
-		}		
-		return super.attackEntityFrom(source, amount);
+		}
+		if(canHarmGhost(source)) {
+			return super.attackEntityFrom(source, amount);
+		}
+		return false;
+	}
+	
+	
+	public boolean canHarmGhost(DamageSource damageSrc) {
+		Entity attacker = damageSrc.getTrueSource();
+		if(damageSrc.isMagicDamage() || damageSrc.isCreativePlayer() 
+				|| (damageSrc == DungeonMobsDamageSource.LIGHT_BALL)
+				|| damageSrc.isFireDamage() || 
+				(damageSrc.getTrueSource() instanceof IBeMagicMob)) {
+			return true;
+		} else if(attacker instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer)attacker;
+			ItemStack equipt = player.inventory.mainInventory.get(player.inventory.currentItem);
+			if(equipt.isItemEnchanted()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 
