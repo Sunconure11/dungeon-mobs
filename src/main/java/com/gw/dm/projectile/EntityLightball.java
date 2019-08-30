@@ -45,6 +45,22 @@ public class EntityLightball extends EntityThrowable {
 				EntityLivingBase entity = (EntityLivingBase) result.entityHit;
 				float dmg = ConfigHandler.damagex
 						+ (ConfigHandler.damageplus / 5.0f);
+				if(entity instanceof EntityPlayer) {
+					switch(world.getDifficulty()) {
+						case EASY:
+							dmg *= 0.5;
+							break;
+						case NORMAL:
+							dmg *= 0.75;
+							break;
+						case PEACEFUL:
+							dmg = 0.0f;
+							break;
+						case HARD:
+						default:
+							break;					
+					}
+				}
 				// First, do some armor piercing damage
 				if(damageable(entity)) {
 					entity.setHealth(entity.getHealth() - dmg);
