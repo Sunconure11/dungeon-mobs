@@ -1,8 +1,5 @@
 package com.gw.dm.projectile;
 
-import com.gw.dm.DungeonMobsDamageSource;
-import com.gw.dm.util.ConfigHandler;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -15,6 +12,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.gw.dm.DungeonMobsDamageSource;
+import com.gw.dm.util.ConfigHandler;
 
 public class EntityLightball extends EntityThrowable {
 	public static final DamageSource LIGHT_BALL = DungeonMobsDamageSource.LIGHT_BALL;
@@ -43,9 +43,20 @@ public class EntityLightball extends EntityThrowable {
 		if (!world.isRemote) {
 			if (result.entityHit instanceof EntityLivingBase) {
 				EntityLivingBase entity = (EntityLivingBase) result.entityHit;
-						entity.attackEntityFrom(DungeonMobsDamageSource.LIGHT_BALL
-								.causeMobDamage(getThrower()), ConfigHandler.damagex
-									+ (ConfigHandler.damageplus / 5.0f));
+				float dmg = ConfigHandler.damagex
+						+ (ConfigHandler.damageplus / 5.0f);
+				// First, do some armor piercing damage
+				if(damageable(entity)) {
+					entity.setHealth(entity.getHealth() - dmg);
+	                if(entity.getHealth() <= 0.0F) {
+	                		entity.onDeath(DungeonMobsDamageSource.LIGHT_BALL
+	        						.causeMobDamage(getThrower()));
+	                }
+	            }
+				// Then do some normal damage
+				// This is what the explosion was used as a stand-in for
+				entity.attackEntityFrom(DungeonMobsDamageSource.LIGHT_BALL
+						.causeMobDamage(getThrower()), dmg);
 			}
 			world.playSound((EntityPlayer)null, this.posX, this.posY, this.posZ, 
 					SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 
@@ -54,6 +65,16 @@ public class EntityLightball extends EntityThrowable {
 			setDead();
 		}
 
+	}
+	
+	
+	private boolean damageable(EntityLivingBase entity) {
+		boolean out = entity.getIsInvulnerable() || entity.world.isRemote || (entity.getHealth() <= 0.0);
+		if(entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer)entity;
+			out = out || player.isCreative();
+		}
+		return !out;
 	}
 
 
