@@ -7,13 +7,7 @@ import static com.gw.dm.util.ConfigHandler.*;
 public class DLDCompat {
 	
 	
-	public static void addDLD() {
-		System.out.println();
-		System.out.println("****************");
-		System.out.println("Running addDLD()");
-		System.out.println("****************");
-		System.out.println();
-		
+	public static void addDLD() {		
 		if (spawnGhoul)
 			DLDungeonsAPI.addMob(MODID + ":dmghoul", 1,
 					"SWAMP", "DESERT", "DUNGEON", "URBAN", "NECRO");
