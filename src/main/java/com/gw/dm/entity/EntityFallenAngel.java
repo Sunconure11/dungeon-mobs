@@ -232,11 +232,11 @@ public class EntityFallenAngel extends EntityDungeonFlying
 	}
 
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public int getBrightnessForRender() {
-		return 0xf000f0;
-	}
+//	@SideOnly(Side.CLIENT)
+//	@Override
+//	public int getBrightnessForRender() {
+//		return 0xf000f0;
+//	}
 
 
 }
