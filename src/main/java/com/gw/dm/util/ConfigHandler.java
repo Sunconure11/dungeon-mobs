@@ -53,6 +53,7 @@ public class ConfigHandler {
 	public static boolean lightBallExplode;
 	public static boolean loudVescavor;
 	public static boolean hardcoreVampire;
+	public static boolean hardcoreThoqqua;
 	
 	public static boolean replaceRMFoods;
 	public static List<String> rustMonFoodsList;
@@ -294,6 +295,9 @@ public class ConfigHandler {
 				.getBoolean();
 		hardcoreVampire = config.get("Special Mob Traits", "HardcoreVampire", false, 
 				"If true vampires will drain levels from the player.")
+				.getBoolean();
+		hardcoreThoqqua = config.get("Special Mob Traits", "HardcoreThoqqua", true, 
+				"If true thoqquas will turn stone into actual lava (temporarily).")
 				.getBoolean();
 		
 		// Power-Up

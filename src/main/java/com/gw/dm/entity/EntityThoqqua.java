@@ -1,6 +1,10 @@
 package com.gw.dm.entity;
 
 import static com.gw.dm.util.ConfigHandler.thoqquaIg;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -32,17 +36,17 @@ import com.gw.dm.util.MiscRegistrar;
 
 public class EntityThoqqua extends EntityDungeonMob {
 	private static String mobName = DungeonMobs.MODID + ":dmthoqqua";
-	public int lavaResetTimer;
+	public List<BlockPos> blocksConverted;
 	public int setShitOnFire;
 	public int attackTime;
 
 	public EntityThoqqua(World par1World) {
 		super(par1World);
+		blocksConverted = new ArrayList<>();
 		setSize(1.8F, 0.5F);
 		experienceValue = 30;
 		isImmuneToFire = true;
 		ignoreHeight = false;
-		lavaResetTimer = 0;
 		setShitOnFire = 0;
 		attackTime = 0;
 	}
@@ -126,6 +130,8 @@ public class EntityThoqqua extends EntityDungeonMob {
 	@Override
 	public void onLivingUpdate() {
 		super.onLivingUpdate();
+		
+		changeLavaToMagma(false);
 
 		setShitOnFire++;
 		attackTime--;
@@ -197,29 +203,55 @@ public class EntityThoqqua extends EntityDungeonMob {
 					l = world.getBlockState(bp).getBlock();
 
 					if (l == Blocks.STONE) {
-						world.setBlockState(bp,
-								MiscRegistrar.blockLavarock.getDefaultState(), 3);
+						if(ConfigHandler.hardcoreThoqqua) {
+		                    world.setBlockState(bp, Blocks.FLOWING_LAVA.getDefaultState(), 3);		                    
+		                    blocksConverted.add(bp);
+						} else {
+							world.setBlockState(bp, MiscRegistrar.blockLavarock.getDefaultState(), 3);
+						}
 					}
 				}
 			} else if (getAttackTarget() != null && !hasPath())
 				setAttackTarget(null);
 		}
 	}
+	
+	
+	private int[] BlockPosToArray(BlockPos pos) {
+		return new int[]{pos.getX(), pos.getY(), pos.getZ()};
+	}
+	
+	
+	private BlockPos BlockPosFromArray(int[] nums) {
+		return new BlockPos(nums[0], nums[1], nums[2]);
+	}
 
 
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-		super.writeEntityToNBT(par1NBTTagCompound);
-
-		par1NBTTagCompound.setInteger("LavaTimer", lavaResetTimer);
-		par1NBTTagCompound.setInteger("FireTimer", setShitOnFire);
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		nbt.setInteger("FireTimer", setShitOnFire);
+        
+        int n = blocksConverted.size();
+        
+        nbt.setInteger("BlockCount", n);
+        
+        for(int i = 0; i < n; i++) {
+        	nbt.setIntArray("Block[" + i + "]", 
+        			BlockPosToArray(blocksConverted.get(i)));
+        }
 	}
 
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readEntityFromNBT(par1NBTTagCompound);
-		lavaResetTimer = par1NBTTagCompound.getInteger("LavaTimer");
-		setShitOnFire = par1NBTTagCompound.getInteger("FireTimer");
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		setShitOnFire = nbt.getInteger("FireTimer");
+        
+        int n = nbt.getInteger("BlockCount");
+        
+        for(int i = 0; i < n; i++) {
+        	this.blocksConverted.add(BlockPosFromArray(nbt.getIntArray("Block[" + i + "]")));
+        }
 	}
 
 
@@ -248,4 +280,38 @@ public class EntityThoqqua extends EntityDungeonMob {
 	public boolean canRenderOnFire() {
 		return false;
 	}
+	
+	
+	private void changeLavaToMagma(boolean forced) {
+		if(forced) {
+			for(int i = 0; i < blocksConverted.size(); i++) {
+				BlockPos pos = blocksConverted.get(i);
+				System.err.println("Testing block " + pos);
+				Block block = world.getBlockState(pos).getBlock();
+				if((block == Blocks.LAVA) || (block  == Blocks.FLOWING_LAVA)) {
+					System.err.println("Converting block " + pos);					
+					world.setBlockState(pos, MiscRegistrar.blockLavarock.getDefaultState(), 3);
+				}
+			}
+			
+			blocksConverted.clear();
+		} else while(!blocksConverted.isEmpty() && (rand.nextInt(256) == 0)) {
+			BlockPos pos = this.blocksConverted.get(0);
+			Block block = world.getBlockState(pos).getBlock();
+			if((block == Blocks.LAVA) || (block  == Blocks.FLOWING_LAVA)) {
+				world.setBlockState(pos, MiscRegistrar.blockLavarock.getDefaultState(), 3);
+			}
+			
+			this.blocksConverted.remove(0);
+		}
+	}
+	
+	
+	@Override
+	public void setDead() {
+		changeLavaToMagma(true);
+		super.setDead();
+	}
+	
+	
 }
