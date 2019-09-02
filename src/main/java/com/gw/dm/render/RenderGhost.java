@@ -30,7 +30,7 @@ public class RenderGhost extends RenderBiped<EntityGhost>  {
 	public void doRender(EntityGhost entity, double x, double y, double z,
 			float entityYaw, float partialTicks) {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 0.25F);
-        GlStateManager.depthMask(false);
+        //GlStateManager.depthMask(false);
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, 
         		GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
@@ -41,7 +41,7 @@ public class RenderGhost extends RenderBiped<EntityGhost>  {
         GlStateManager.enableLighting();
         GlStateManager.disableBlend();
         GlStateManager.alphaFunc(516, 0.1F);
-        GlStateManager.depthMask(true);
+        //GlStateManager.depthMask(true);
 	}
 
 }

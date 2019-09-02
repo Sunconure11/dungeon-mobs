@@ -238,21 +238,21 @@ public class EntityCaveFisher extends EntitySpider {
 					for (difZ = getAttackTarget().posZ - posZ;
 					     difX * difX + difZ * difZ < 1.0E-4D;
 					     difZ = (Math.random() - Math.random()) * 0.01D) {
-						difX = (Math.random() - Math.random()) * 0.01D;
+						 difX = (Math.random() - Math.random()) * 0.01D;
 					}
 
 					if (!(getAttackTarget() instanceof EntityPlayer)) {
 						grabTarget(getAttackTarget(), difX, difZ);
 					} else {
-						EntityPlayer crap = (EntityPlayer) getAttackTarget();
+						EntityPlayer player = (EntityPlayer) getAttackTarget();
 
-						if (!crap.capabilities.isCreativeMode) {
+						if (!player.capabilities.isCreativeMode) {
 							//if(FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
 							if (!(getAttackTarget() instanceof EntityPlayerMP)) {
-								int moo = FMLClientHandler.instance().getClient().player.getEntityId();
-								int cow = getAttackTarget().getEntityId();
+								int playerID = FMLClientHandler.instance().getClient().player.getEntityId();
+								int targetID = getAttackTarget().getEntityId();
 
-								if (moo == cow) {
+								if (playerID == targetID) {
 									grabTarget(FMLClientHandler.instance().getClient().player,
 											difX, difZ);
 								}
