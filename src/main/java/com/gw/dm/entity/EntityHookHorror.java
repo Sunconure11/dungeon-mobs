@@ -3,6 +3,7 @@ package com.gw.dm.entity;
 
 import static com.gw.dm.util.ConfigHandler.hookHorrorIg;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -209,4 +210,11 @@ public class EntityHookHorror extends EntityDungeonMob {
 
 		super.onEntityUpdate();
 	}
+	
+
+	@Override
+	public EnumCreatureAttribute getCreatureAttribute() {
+		return EnumCreatureAttribute.ARTHROPOD;
+	}
+	
 }
