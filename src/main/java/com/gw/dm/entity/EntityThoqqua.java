@@ -132,6 +132,10 @@ public class EntityThoqqua extends EntityDungeonMob {
 		super.onLivingUpdate();
 		
 		changeLavaToMagma(false);
+		
+		if(inWater) {
+			damageEntity(DamageSource.DROWN, 1);
+		}
 
 		setShitOnFire++;
 		attackTime--;
@@ -311,6 +315,30 @@ public class EntityThoqqua extends EntityDungeonMob {
 	public void setDead() {
 		changeLavaToMagma(true);
 		super.setDead();
+	}
+	
+	
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		if(immune(source)) {
+			return false;
+		}
+		return super.attackEntityFrom(source, amount);
+	}
+	
+	
+	@Override
+	protected void damageEntity(DamageSource source, float damageAmount) {
+		if(immune(source)) {
+			return;
+		}
+		super.damageEntity(source, damageAmount);
+	}
+	
+	
+	private boolean immune(DamageSource source) {
+		return source.isFireDamage() || (source == DamageSource.LAVA) || 
+				(source == DamageSource.IN_WALL);
 	}
 	
 	
