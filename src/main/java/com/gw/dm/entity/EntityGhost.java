@@ -12,6 +12,8 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.boss.EntityWither;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -164,8 +166,8 @@ public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
 		Entity attacker = damageSrc.getTrueSource();
 		if(damageSrc.isMagicDamage() || damageSrc.isCreativePlayer() 
 				|| (damageSrc == DungeonMobsDamageSource.LIGHT_BALL)
-				|| damageSrc.isFireDamage() || 
-				(damageSrc.getTrueSource() instanceof IBeMagicMob)) {
+				|| damageSrc.isFireDamage() 
+				|| (attacker instanceof IBeMagicMob)) {
 			return true;
 		} else if(attacker instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer)attacker;
@@ -173,7 +175,7 @@ public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
 			if(equipt.isItemEnchanted()) {
 				return true;
 			}
-		}
+		} 
 		return false;
 	}
 	

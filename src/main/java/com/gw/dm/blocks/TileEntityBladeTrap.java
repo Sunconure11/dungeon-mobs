@@ -159,27 +159,27 @@ public class TileEntityBladeTrap extends TileEntity implements ITickable {
 
 	public boolean canEntityBeSeen(World world,
 	                               int x, int y, int z, Entity par1Entity) {
-		int entX = (int) par1Entity.posX;
-		int entY = (int) par1Entity.posY;
-		int entZ = (int) par1Entity.posZ;
+		int maxX = Math.max(x, (int)par1Entity.posX);
+		int maxY = Math.max(y, (int)par1Entity.posY);
+		int maxZ = Math.max(z, (int)par1Entity.posZ);
 
-		int thisX = x;
-		int thisY = y;
-		int thisZ = z;
+		int minX = Math.min(x, (int)par1Entity.posX);
+		int minY = Math.min(y, (int)par1Entity.posY);
+		int minZ = Math.min(z, (int)par1Entity.posZ);
 
-		if (entX != thisX) {
-			for (int i = thisX + 1; i < entX; i++) {
-				if (world.isAirBlock(new BlockPos(i, thisY, thisZ)))
+		if (maxX != minX) {
+			for (int i = minX + 1; i < maxX; i++) {
+				if (world.isAirBlock(new BlockPos(i, minY, minZ)))
 					return false;
 			}
-		} else if (entY != thisY) {
-			for (int i = thisY + 1; i < entY; i++) {
-				if (world.isAirBlock(new BlockPos(thisX, i, thisZ)))
+		} else if (maxY != minY) {
+			for (int i = minY + 1; i < maxY; i++) {
+				if (world.isAirBlock(new BlockPos(minX, i, minZ)))
 					return false;
 			}
-		} else if (entZ != thisZ) {
-			for (int i = thisZ + 1; i < entZ; i++) {
-				if (world.isAirBlock(new BlockPos(thisX, thisY, i)))
+		} else if (maxZ != minZ) {
+			for (int i = minZ + 1; i < maxZ; i++) {
+				if (world.isAirBlock(new BlockPos(minX, minY, i)))
 					return false;
 			}
 		}

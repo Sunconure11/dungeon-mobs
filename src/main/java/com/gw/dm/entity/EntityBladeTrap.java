@@ -76,14 +76,14 @@ public class EntityBladeTrap extends EntityLiving {
 		if (attackTimer > 11)
 			attackTimer = 11;
 
-		motionX += (0.12D * dir[0]);
-		motionY += (0.12D * dir[1]);
-		motionZ += (0.12D * dir[2]);
+		motionX += (0.12d * dir[0]);
+		motionY += (0.12d * dir[1]);
+		motionZ += (0.12d * dir[2]);
 
 		move(MoverType.SELF, motionX, motionY, motionZ);
-		motionX *= 0.9800000190734863D;
-		motionY *= 0.9800000190734863D;
-		motionZ *= 0.9800000190734863D;
+		motionX *= 0.9800000190734863d;
+		motionY *= 0.9800000190734863d;
+		motionZ *= 0.9800000190734863d;
 
 		BlockPos where;
 		if (!world.isRemote) {
@@ -95,11 +95,9 @@ public class EntityBladeTrap extends EntityLiving {
 
 			if (!BlockBladeTrap.canMoveInto(world, i + dir[0], j + dir[1], k + dir[2])) {
 				world.setBlockState(where, MiscRegistrar.blockBladeTrap.getDefaultState(), 3);
-
 				setDead();
 			} else if (moveTime > 40) {
 				world.setBlockState(where, MiscRegistrar.blockBladeTrap.getDefaultState(), 3);
-
 				setDead();
 			}
 		}
@@ -255,93 +253,6 @@ public class EntityBladeTrap extends EntityLiving {
 	@Override
 	public boolean getCanSpawnHere() {
 		return false;
-
-		/*
-		System.out.println("DEBUG: Blade Trap attempting to spawn. [X: " + posX + ", Y: " + posY + ", Z: " + posZ + "]");
-
-		//ChunkPosition foo = world.findClosestStructure("Stronghold", 8, 8, 8);
-		//ChunkPosition bar = world.findClosestStructure("Dungeon", 8, 8, 8);
-
-		ChunkPosition foo = world.findClosestStructure("Stronghold", (int)posX, (int)posY, (int)posZ);
-
-		if(foo == null)
-			foo = world.findClosestStructure("Dungeon", 8, 8, 8);
-
-		if(foo != null)
-			System.out.println("DEBUG: ChunkPosition foo. [X: " + foo.x + ", Y: " + foo.y + ", Z: " + foo.z + "]");
-
-		boolean spawned = false;
-
-		if(foo.x < (posX - 32) || foo.x > (posX + 32))
-			return false;
-		if(foo.z < (posZ - 32) || foo.z > (posZ + 32))
-			return false;
-
-		if(foo != null)
-		{
-			System.out.println("DEBUG: Blade Trap found a place to spawn. [X: " + posX + ", Y: " + posY + ", Z: " + posZ + "]");
-
-			int barX;
-			int barY;
-			int barZ;
-
-			for(int i = 0; i < 10 && !spawned; i++)
-			{
-				barX = foo.x + (getRNG().nextInt(33) - 16);
-				barY = foo.y + (getRNG().nextInt(33) - 16);
-				barZ = foo.z + (getRNG().nextInt(33) - 16);
-
-				if(barY < 1)
-					barY = 1;
-
-				if(barY > 50)
-					barY = 50;
-
-				while(world.canBlockSeeTheSky(barX, barY, barZ))
-				{
-					barY--;
-				}
-
-				if(world.getBlockId(barX, barY, barZ) == 0)
-				{
-					if(findNearbyMoss(barX, barY, barZ))
-					{
-						posX = barX;
-						posY = barY;
-						posZ = barZ;
-						spawned = true;
-
-						System.out.println("DEBUG: Blade Trap is spawning. [X: " + posX + ", Y: " + posY + ", Z: " + posZ + "]");
-					}
-				}
-			}
-		}
-		 */
-		/*
-		else
-			return false;
-		 */
-
-		/*
-		if(tooManyTrapsNearby((int)posX, (int)posY, (int)posZ))
-			return false;
-
-		if(world.canBlockSeeTheSky((int)posX, (int)posY, (int)posZ))
-			return false;
-
-		if(world.canBlockSeeTheSky((int)posX, (int)posY + 1, (int)posZ))
-			return false;
-
-		if(!spawned)
-			return false;
-		else
-		{
-			System.out.println("DEBUG: Blade Trap has landed.");
-			System.out.println("DEBUG: Blade Trap final position. [X: " + posX + ", Y: " + posY + ", Z: " + posZ + "]");
-			moveTime = 90;
-			return super.getCanSpawnHere();
-		}
-		 */
 	}
 
 

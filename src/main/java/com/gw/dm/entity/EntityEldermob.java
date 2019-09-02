@@ -65,10 +65,10 @@ public class EntityEldermob extends EntityDungeonFlying
 			double dz = target.posZ - posZ;
 			EntityThrowable ball;
 			int which = rand.nextInt(3);
-			if ((which == 3) && target.isImmuneToExplosions()) {
+			if ((which == 2) && target.isImmuneToFire()) {
 				which--;
 			}
-			if ((which == 2) && target.isEntityUndead()) {
+			if ((which == 1) && target.isEntityUndead()) {
 				which--;
 			}
 			switch (rand.nextInt(3)) {
@@ -161,10 +161,10 @@ public class EntityEldermob extends EntityDungeonFlying
 
 	@Override
 	public void onUpdate() {
-		if (world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+		if(world.getDifficulty() == EnumDifficulty.PEACEFUL) {
 			setDead();
 		}
-		if ((getAttackTarget() != null) && getAttackTarget().isDead) {
+		if((getAttackTarget() != null) && getAttackTarget().isDead) {
 			setAttackTarget(null);
 		}
 		super.onUpdate();
@@ -227,6 +227,17 @@ public class EntityEldermob extends EntityDungeonFlying
 	private boolean deepEnoughInEnd() {
 		return outerThingEI || (((posX * posX) + (posZ * posZ)) > SD);
 	}
+	
+	
+	@Override
+	protected void damageEntity(DamageSource source, float damageAmount) {
+		if (source.isFireDamage() || source.isMagicDamage() 
+				|| (source.getTrueSource() == this)) {
+			return;
+		}
+		super.damageEntity(source, damageAmount);
+	}
+	
 
 
 	@Override
@@ -235,7 +246,11 @@ public class EntityEldermob extends EntityDungeonFlying
 			return false;
 		}
 		Entity entity = source.getTrueSource();
-		if ((entity != null) && (entity instanceof EntityLivingBase)) {
+		if(entity == this) {
+			return false;
+		}
+		if ((entity != null) && (entity instanceof EntityLivingBase)
+				&& !(entity instanceof EntityEldermob)) {
 			if ((getAttackTarget() == null)
 					|| (rand.nextInt(20) < amount)
 					|| (!canEntityBeSeen(getAttackTarget()))) {
@@ -244,7 +259,7 @@ public class EntityEldermob extends EntityDungeonFlying
 		}
 		return super.attackEntityFrom(source, amount);
 	}
-
+	
 
 	@Override
 	/**

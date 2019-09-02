@@ -3,7 +3,7 @@ package com.gw.dm;
 import net.minecraft.util.DamageSource;
 
 public class DungeonMobsDamageSource extends DamageSource {
-	public static final DamageSource BLADE_TRAP   = (new DamageSource("bladeTrap"));
+	public static final DamageSource BLADE_TRAP   = (new DamageSource("bladetrap"));
 	public static final DamageSource PETRIFIED   = (new DamageSource("petrified"))
 			.setDamageBypassesArmor();
 	public static final DamageSource ENERGY_DRAIN = (new DamageSource("energydrain"))
