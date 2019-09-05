@@ -46,8 +46,13 @@ public class EntityMagicMissile extends EntityArrow {
 		if (!world.isRemote) {
 			if (var1.entityHit != null) {
 				EntityLivingBase foo = (EntityLivingBase) var1.entityHit;
-				foo.addPotionEffect(new PotionEffect(Potion
+				if(foo.isEntityUndead()) {
+					foo.addPotionEffect(new PotionEffect(Potion
+						.getPotionFromResourceLocation("instant_health"), 1, potionLevel));
+				} else {
+					foo.addPotionEffect(new PotionEffect(Potion
 						.getPotionFromResourceLocation("instant_damage"), 1, potionLevel));
+				}
 			}
 		}
 		setDead();

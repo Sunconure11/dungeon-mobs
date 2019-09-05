@@ -11,20 +11,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PotionAddle extends Potion {
 	private static final ResourceLocation addledIcon
 			= new ResourceLocation(DungeonMobs.MODID + ":textures/gui/potionicons.png");
+	public static final String NAME = "potion_addled";
+	public static final String ENAME = "effect." + DungeonMobs.MODID + ".addled";
 
 	public PotionAddle(int par1, boolean par2, int par3) {
 		super(par2, par3);
 		this.setIconIndex(0, 0);
-		setRegistryName(DungeonMobs.MODID, "potionAddle");
-		setPotionName("addled");
+		setRegistryName(DungeonMobs.MODID, NAME);
+		setPotionName(ENAME);
 	}
 
 	public PotionAddle(boolean par2, int par3) {
 		// FIXME?: Not sure if this match up with older verions
 		super(par2, par3);
 		this.setIconIndex(0, 0);
-		setRegistryName(DungeonMobs.MODID, "potionAddle");
-		setPotionName("Addled");
+		setRegistryName(DungeonMobs.MODID, NAME);
+		setPotionName(ENAME);
 	}
 
 	@Override

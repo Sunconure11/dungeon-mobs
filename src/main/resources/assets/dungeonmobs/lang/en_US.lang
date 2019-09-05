@@ -37,3 +37,4 @@ death.attack.energydrain=%s life force was devoured
 block.dungeonmobs.beamos.name=Beamos
 tile.dungeonmobs.beamos.name=Beamos
 entity.dungeonmobs.dmbeamosbeam.name=Beamos Laser
+effect.dungeonmobs.addled=Addled
