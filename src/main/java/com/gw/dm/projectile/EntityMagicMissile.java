@@ -44,7 +44,7 @@ public class EntityMagicMissile extends EntityArrow {
 	@Override
 	protected void onHit(RayTraceResult var1) {
 		if (!world.isRemote) {
-			if (var1.entityHit != null) {
+			if (var1.entityHit != null && (var1.entityHit instanceof EntityLivingBase)) {
 				EntityLivingBase foo = (EntityLivingBase) var1.entityHit;
 				if(foo.isEntityUndead()) {
 					foo.addPotionEffect(new PotionEffect(Potion
