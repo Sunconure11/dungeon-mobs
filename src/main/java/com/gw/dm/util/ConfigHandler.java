@@ -54,6 +54,7 @@ public class ConfigHandler {
 	public static boolean loudVescavor;
 	public static boolean hardcoreVampire;
 	public static boolean hardcoreThoqqua;
+	public static boolean fireClouds;
 	
 	public static boolean replaceRMFoods;
 	public static List<String> rustMonFoodsList;
@@ -298,6 +299,9 @@ public class ConfigHandler {
 				.getBoolean();
 		hardcoreThoqqua = config.get("Special Mob Traits", "HardcoreThoqqua", true, 
 				"If true thoqquas will turn stone into actual lava (temporarily).")
+				.getBoolean();
+		fireClouds = config.get("Special Mob Traits", "Outerthing Fireclouds", true, 
+				"If false outerthings will not use the fire cloud attack.")
 				.getBoolean();
 		
 		// Power-Up

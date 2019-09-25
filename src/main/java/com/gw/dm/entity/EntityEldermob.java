@@ -64,21 +64,27 @@ public class EntityEldermob extends EntityDungeonFlying
 			double dy = (target.posY + (target.height / 2)) - (posY + (height / 2));
 			double dz = target.posZ - posZ;
 			EntityThrowable ball;
-			int which = rand.nextInt(3);
-			if ((which == 2) && target.isImmuneToFire()) {
+			int which;
+			
+			if(ConfigHandler.fireClouds) {
+				which = rand.nextInt(3);
+			} else {
+				which = rand.nextInt(2);				
+			}
+			if((which == 2) && (target.isImmuneToFire())) {
 				which--;
 			}
-			if ((which == 1) && target.isEntityUndead()) {
+			if((which == 1) && target.isEntityUndead()) {
 				which--;
 			}
-			switch (rand.nextInt(3)) {
+			switch(which) {
 				case 0:
 					ball = new EntityEldermobBall(world, this);
 					ball.shoot(dx, dy, dz, 1.2f, 0.0f);
 					world.spawnEntity(ball);
 					break;
 				case 1:
-					dy = target.posY - posY;
+					dy = target.posY - posY - (height / 2);
 					ball = new EntityCloudGenerator(world, this, poison);
 					ball.shoot(dx, dy, dz, 1.2f, 0.0f);
 					world.spawnEntity(ball);
