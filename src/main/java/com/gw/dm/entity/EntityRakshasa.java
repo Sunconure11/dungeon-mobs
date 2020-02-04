@@ -45,7 +45,6 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 	private static final ResourceLocation rakshasaTextures
 			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Rakshasa.png");
 	private static String mobName = DungeonMobs.MODID + ":dmrakshasa";
-	private static final int potionLevel;
 	public boolean ignoreHeight;
 	public String currentName;
 	public ResourceLocation currentSkin;
@@ -59,12 +58,6 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 	private EntityAIAttackMelee meleeAttack
 			= new EntityAIAttackMelee(this, 0.3F, false);
 	private List myImages;
-	
-	
-	static {
-		potionLevel = Math.min(Math.max(1, (int)(Math.sqrt(ConfigHandler.damagex) 
-				+ Math.log(ConfigHandler.damageplus + 1)) - 2), 127);
-	}
 
 
 	public EntityRakshasa(World par1World) {
@@ -185,7 +178,7 @@ public class EntityRakshasa extends EntityDungeonMob implements IRangedAttackMob
 				+ var1.height - getEntityBoundingBox().maxY;
 		double var15 = var1.posZ + var1.motionZ - posZ;
 
-		EntityMagicMissile mm = new EntityMagicMissile(world, this, potionLevel);
+		EntityMagicMissile mm = new EntityMagicMissile(world, this, ConfigHandler.rakshasaPtLvl);
 		targetArrow(mm);
 		world.spawnEntity(mm);
 	}

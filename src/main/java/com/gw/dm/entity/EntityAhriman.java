@@ -125,7 +125,7 @@ public class EntityAhriman extends EntityDungeonFlying
 			else if (eff == 1)
 				theEffect[i] = makePotionEffect("mining_fatigue", 160, 2);
 			else if (eff == 2)
-				theEffect[i] = makePotionEffect("instant_damage", 1, 1);
+				theEffect[i] = makePotionEffect("instant_damage", 1, ConfigHandler.beholderPtLvl);
 			else if (eff == 3)
 				theEffect[i] = makePotionEffect("nausea", 280, 1);
 			else if (eff == 4)
@@ -141,9 +141,7 @@ public class EntityAhriman extends EntityDungeonFlying
 			else if (eff == 9)
 				theEffect[i] = makePotionEffect("wither", 100, 1);
 			else
-				theEffect[i] = makePotionEffect("levitation", 100, 1);
-			//new PotionEffectAddled(DungeonMobs.potionAddleID, 180, 0);
-			// Change back?
+				theEffect[i] = makePotionEffect("levitation", 160, 1);
 
 			if (i > 0) {
 				if (theEffect[i - 1].equals(theEffect[i]))

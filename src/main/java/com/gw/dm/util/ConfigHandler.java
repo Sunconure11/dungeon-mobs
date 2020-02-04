@@ -99,6 +99,7 @@ public class ConfigHandler {
 	public static int beholderP;
 	public static int beholderMn;
 	public static int beholderMx;
+	public static int beholderPtLvl;
 	
 	public static boolean caveFisherIg;
 	public static int caveFisherP;
@@ -142,6 +143,7 @@ public class ConfigHandler {
 	public static int rakshasaP;
 	public static int rakshasaMn;
 	public static int rakshasaMx;
+	public static int rakshasaPtLvl;
 	
 	public static boolean thoqquaIg;
 	public static int thoqquaP;
@@ -304,17 +306,22 @@ public class ConfigHandler {
 				"If false outerthings will not use the fire cloud attack.")
 				.getBoolean();
 		
+		
 		// Power-Up
 		config.addCustomCategoryComment("Power Boost", 
 				"Incase you don't think these mobs are tough enough for your "
 				+ "OP modpack / gear");		
-		healthx = config.getFloat("Health Multiplier", "Power Boost", 1.0f, 1.0f, 1000f, 
+		healthx = config.getFloat("Health Multiplier", "Power Boost", 1.0f, 0.1f, 1000f, 
 					"Multiply every mob's base health by this");
-		damagex = config.getFloat("Damage Multiplier", "Power Boost", 1.0f, 1.0f, 1000f, 
+		damagex = config.getFloat("Damage Multiplier", "Power Boost", 1.0f, 0.1f, 1000f, 
 				"Multiply every mob's base damage by this");;
 		damageplus  = config.getFloat("Damage Additive", "Power Boost", 0.0f, 0.0f, 1000f, 
 				"Add this to every mob's base damage "
 				+ "(usually less extreme than multiplying"); 
+		rakshasaPtLvl = config.getInt("Rakshasa Damage", "Power Boost", 2, 0, 127,
+				"The damage potion level for rakshasa magic missles.");
+		beholderPtLvl = config.getInt("Beholder Damage", "Power Boost", 1, 0, 127,
+				"The potion level for eye rays that act as damage potions.");
 		
 		
 

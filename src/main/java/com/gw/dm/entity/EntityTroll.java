@@ -38,7 +38,7 @@ public class EntityTroll extends EntityMob {
 	public int stoneStatus = 1;
 	public int stoneCounter = 0;
 	public int regenTimer = 0;
-	public static final float regen = (float)(0.3 + Math.log10(ConfigHandler.healthx));;
+	public static final float regen = (float)Math.max((0.3 + Math.log10(ConfigHandler.healthx)), 0.1);
 
 	public EntityTroll(World par1World) {
 		super(par1World);
