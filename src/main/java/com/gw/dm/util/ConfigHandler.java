@@ -374,82 +374,82 @@ public class ConfigHandler {
 			
 		config.addCustomCategoryComment("Rust Monster", "Spawn configurations for rust monster");		
 		rustMonsterIg = config.get("Rust Monster", "RMSpawnAnywhere", false).getBoolean();;
-		rustMonsterP  = config.get("Rust Monster", "RMSpawnChance", 8).getInt();
+		rustMonsterP  = config.get("Rust Monster", "RMSpawnChance", 25).getInt();
 		rustMonsterMn = config.get("Rust Monster", "RMSpawnMin", 1).getInt();
 		rustMonsterMx = config.get("Rust Monster", "RMSpawnMax", 4).getInt(); 	
 		
 		config.addCustomCategoryComment("Ghoul", "Spawn configurations for ghoul");		
 		ghoulIg = config.get("Ghoul", "GhoulSpawnAnywhere", false).getBoolean();;
-		ghoulP  = config.get("Ghoul", "GhoulSpawnChance", 5).getInt();
+		ghoulP  = config.get("Ghoul", "GhoulSpawnChance", 15).getInt();
 		ghoulMn = config.get("Ghoul", "GhoulSpawnMin", 2).getInt();
 		ghoulMx = config.get("Ghoul", "GhoulSpawnMax", 4).getInt();	
 		
 		config.addCustomCategoryComment("Ghost", "Spawn configurations for ghostl");		
 		ghostIg = config.get("Ghost", "GhostSpawnAnywhere", false).getBoolean();;
-		ghostP  = config.get("Ghost", "GhostSpawnChance", 2).getInt();
+		ghostP  = config.get("Ghost", "GhostSpawnChance", 6).getInt();
 		ghostMn = config.get("Ghost", "GhostSpawnMin", 1).getInt();
 		ghostMx = config.get("Ghost", "GhostSpawnMax", 3).getInt();  	
 		
 		config.addCustomCategoryComment("Shrieker", "Spawn configurations for shrieker");		
 		shriekerIg = config.get("Shrieker", "ShriekerSpawnAnywhere", false).getBoolean();;
-		shriekerP  = config.get("Shrieker", "ShriekerSpawnChance", 5).getInt();
+		shriekerP  = config.get("Shrieker", "ShriekerSpawnChance", 15).getInt();
 		shriekerMn = config.get("Shrieker", "ShriekerSpawnMin", 2).getInt();
 		shriekerMx = config.get("Shrieker", "ShriekerSpawnMax", 4).getInt();  	
 		
 		config.addCustomCategoryComment("Hook Horror", "Spawn configurations for hook horror");		
 		hookHorrorIg = config.get("Hook Horror", "HHSpawnAnywhere", false).getBoolean();;
-		hookHorrorP  = config.get("Hook Horror", "HHSpawnChance", 4).getInt();
+		hookHorrorP  = config.get("Hook Horror", "HHSpawnChance", 12).getInt();
 		hookHorrorMn = config.get("Hook Horror", "HHSpawnMin", 1).getInt();
 		hookHorrorMx = config.get("Hook Horror", "HHSpawnMax", 4).getInt();  	
 		
 		config.addCustomCategoryComment("Umber Hulk", "Spawn configurations for umber hulk");		
 		umberHulkIg = config.get("Umber Hulk", "UHSpawnAnywhere", false).getBoolean();;
-		umberHulkP  = config.get("Umber Hulk", "UHSpawnChance", 2).getInt();
+		umberHulkP  = config.get("Umber Hulk", "UHSpawnChance", 6).getInt();
 		umberHulkMn = config.get("Umber Hulk", "UHSpawnMin", 1).getInt();
 		umberHulkMx = config.get("Umber Hulk", "UHSpawnMax", 1).getInt();  	
 		
 		config.addCustomCategoryComment("Beholder", "Spawn configurations for beholder");		
 		beholderIg = config.get("Beholder", "BeholderSpawnAnywhere", false).getBoolean();;
-		beholderP  = config.get("Beholder", "BeholderSpawnChance", 2).getInt();
+		beholderP  = config.get("Beholder", "BeholderSpawnChance", 6).getInt();
 		beholderMn = config.get("Beholder", "BeholderSpawnMin", 1).getInt();
 		beholderMx = config.get("Beholder", "BeholderSpawnMax", 2).getInt();  	
 		
 		config.addCustomCategoryComment("Cave Fisher", "Spawn configurations for cave fisher");		
 		caveFisherIg = config.get("Cave Fisher", "CFSpawnAnywhere", false).getBoolean();;
-		caveFisherP  = config.get("Cave Fisher", "CFSpawnChance", 4).getInt();
+		caveFisherP  = config.get("Cave Fisher", "CFSpawnChance", 12).getInt();
 		caveFisherMn = config.get("Cave Fisher", "CFSpawnMin", 1).getInt();
 		caveFisherMx = config.get("Cave Fisher", "CFSpawnMax", 2).getInt();  	
 		
 		config.addCustomCategoryComment("Cockatrice", "Spawn configurations for cockatrice");		
 		cockatriceIg = config.get("Cockatrice", "CockatriceSpawnAnywhere", false).getBoolean();;
-		cockatriceP  = config.get("Cockatrice", "CockatriceSpawnChance", 5).getInt();
+		cockatriceP  = config.get("Cockatrice", "CockatriceSpawnChance", 15).getInt();
 		cockatriceMn = config.get("Cockatrice", "CockatriceSpawnMin", 1).getInt();
 		cockatriceMx = config.get("Cockatrice", "CockatriceSpawnMax", 3).getInt();  	
 		
 		config.addCustomCategoryComment("Destrachan", "Spawn configurations for destrachanr");		
 		destrachanIg = config.get("Destrachan", "DestrachanSpawnAnywhere", false).getBoolean();;
-		destrachanP  = config.get("Destrachan", "DestrachanSpawnChance", 5).getInt();
+		destrachanP  = config.get("Destrachan", "DestrachanSpawnChance", 15).getInt();
 		destrachanMn = config.get("Destrachan", "DestrachanSpawnMin", 1).getInt();
 		destrachanMx = config.get("Destrachan", "DestrachanSpawnMax", 3).getInt();  	
 		
 		config.addCustomCategoryComment("Illithid", "Spawn configurations for illithid");		
 		illithidIg = config.get("Illithid", "IllithidSpawnAnywhere", false).getBoolean();;
-		illithidP  = config.get("Illithid", "IllithidSpawnChance", 3).getInt();
+		illithidP  = config.get("Illithid", "IllithidSpawnChance", 10).getInt();
 		illithidMn = config.get("Illithid", "IllithidSpawnMin", 1).getInt();
 		illithidMx = config.get("Illithid", "IllithidSpawnMax", 1).getInt();  	
 		
 		config.addCustomCategoryComment("Manticore", "Spawn configurations for manticore");		
 		manticoreIg = config.get("Manticore", "ManticoreSpawnAnywhere", false).getBoolean();;
-		manticoreP  = config.get("Manticore", "ManticoreSpawnChance", 5).getInt();
+		manticoreP  = config.get("Manticore", "ManticoreSpawnChance", 15).getInt();
 		manticoreMn = config.get("Manticore", "ManticoreSpawnMin", 2).getInt();
 		manticoreMx = config.get("Manticore", "ManticoreSpawnMax", 4).getInt(); 
 		
 		config.addCustomCategoryComment("Hell Hound", "Spawn configurations for hell hound");		
 		hellHoundIg = config.get("Hell Hound", "HHSpawnAnywhere", false).getBoolean();;
-		hellHoundP  = config.get("Hell Hound", "HHSpawnChance", 4).getInt();
+		hellHoundP  = config.get("Hell Hound", "HHSpawnChance", 10).getInt();
 		hellHoundMn = config.get("Hell Hound", "HHSpawnMin", 1).getInt();
 		hellHoundMx = config.get("Hell Hound", "HHSpawnMax", 2).getInt();
-		hellHoundNP  = config.get("Hell Hound", "HHNetherChance", 10).getInt();
+		hellHoundNP  = config.get("Hell Hound", "HHNetherChance", 20).getInt();
 		hellHoundNMn = config.get("Hell Hound", "HHNetherMin", 4).getInt();
 		hellHoundNMx = config.get("Hell Hound", "HHNetherMax", 4).getInt(); 
 		
@@ -461,46 +461,46 @@ public class ConfigHandler {
 		
 		config.addCustomCategoryComment("Manticore", "Spawn configurations for manticore");		
 		manticoreIg = config.get("Manticore", "ManticoreSpawnAnywhere", false).getBoolean();;
-		manticoreP  = config.get("Manticore", "ManticoreSpawnChance", 4).getInt();
+		manticoreP  = config.get("Manticore", "ManticoreSpawnChance", 12).getInt();
 		manticoreMn = config.get("Manticore", "ManticoreSpawnMin", 1).getInt();
 		manticoreMx = config.get("Manticore", "ManticoreSpawnMax", 2).getInt(); 
 		
 		config.addCustomCategoryComment("Thoqqua", "Spawn configurations for thoqqua");		
 		thoqquaIg = config.get("Thoqqua", "ThoqquaSpawnAnywhere", false).getBoolean();
-		thoqquaP  = config.get("Thoqqua", "ThoqquaSpawnChance", 3).getInt();
+		thoqquaP  = config.get("Thoqqua", "ThoqquaSpawnChance", 10).getInt();
 		thoqquaMn = config.get("Thoqqua", "ThoqquaSpawnMin", 1).getInt();
 		thoqquaMx = config.get("Thoqqua", "ThoqquaSpawnMax", 1).getInt();
-		thoqquaNP  = config.get("Thoqqua", "ThoqquaNetherChance", 6).getInt();
+		thoqquaNP  = config.get("Thoqqua", "ThoqquaNetherChance", 15).getInt();
 		thoqquaNMn = config.get("Thoqqua", "ThoqquaNetherMin", 1).getInt();
 		thoqquaNMx = config.get("Thoqqua", "ThoqquaNetherMax", 2).getInt(); 
 		
 		config.addCustomCategoryComment("Troll", "Spawn configurations for troll");		
 		trollIg = config.get("Troll", "TrollSpawnAnywhere", false).getBoolean();;
-		trollP  = config.get("Troll", "TrollSpawnChance", 6).getInt();
+		trollP  = config.get("Troll", "TrollSpawnChance", 20).getInt();
 		trollMn = config.get("Troll", "TrollSpawnMin", 1).getInt();
 		trollMx = config.get("Troll", "TrollSpawnMax", 4).getInt();
 		
 		config.addCustomCategoryComment("Vescavor", "Spawn configurations for vescavor");		
 		vescavorIg = config.get("Vescavor", "VescavorSpawnAnywhere", false).getBoolean();;
-		vescavorP  = config.get("Vescavor", "VescavorSpawnChance", 6).getInt();
+		vescavorP  = config.get("Vescavor", "VescavorSpawnChance", 18).getInt();
 		vescavorMn = config.get("Vescavor", "VescavorSpawnMin", 2).getInt();
 		vescavorMx = config.get("Vescavor", "VescavorSpawnMax", 8).getInt();  
 		
 		config.addCustomCategoryComment("Revenant", "Spawn configurations for revenant");		
 		revenantIg = config.get("Revenant", "RevenantSpawnAnywhere", false).getBoolean();;
-		revenantP  = config.get("Revenant", "RevenantSpawnChance", 3).getInt();
+		revenantP  = config.get("Revenant", "RevenantSpawnChance", 9).getInt();
 		revenantMn = config.get("Revenant", "RevenantSpawnMin", 1).getInt();
 		revenantMx = config.get("Revenant", "RevenantSpawnMax", 2).getInt(); 
 		
 		config.addCustomCategoryComment("Vampire", "Spawn configurations for vampire");		
 		vampireIg = config.get("Vampire", "VampireSpawnAnywhere", false).getBoolean();;
-		vampireP  = config.get("Vampire", "VampireSpawnChance", 2).getInt();
+		vampireP  = config.get("Vampire", "VampireSpawnChance", 5).getInt();
 		vampireMn = config.get("Vampire", "VampireSpawnMin", 1).getInt();
 		vampireMx = config.get("Vampire", "VampireSpawnMax", 2).getInt(); 
 		
 		config.addCustomCategoryComment("Fallen Angel", "Spawn configurations for fallen angel");		
 		fallenAngelIg = config.get("Fallen Angel", "FASpawnAnywhere", false).getBoolean();
-		fallenAngelP  = config.get("Fallen Angel", "FASpawnChance", 1).getInt();
+		fallenAngelP  = config.get("Fallen Angel", "FASpawnChance", 2).getInt();
 		fallenAngelMn = config.get("Fallen Angel", "FASpawnMin", 1).getInt();
 		fallenAngelMx = config.get("Fallen Angel", "FASpawnMax", 1).getInt(); 
 		fallenAngelNP  = config.get("Fallen Angel", "FANetherChance", 1).getInt();
@@ -510,16 +510,16 @@ public class ConfigHandler {
 		config.addCustomCategoryComment("Outer Thing", "Spawn configurations for other thing");		
 		outerThingIg = config.get("Outer Thing", "OTSpawnAnywhere", false).getBoolean();	
 		outerThingEI = config.get("Outer Thing", "OTMainEndIsland", false).getBoolean();
-		outerThingP  = config.get("Outer Thing", "OTSpawnChance", 1).getInt();
+		outerThingP  = config.get("Outer Thing", "OTSpawnChance", 2).getInt();
 		outerThingMn = config.get("Outer Thing", "OTSpawnMin", 1).getInt();
 		outerThingMx = config.get("Outer Thing", "OTSpawnMax", 1).getInt();
-		outerThingEP  = config.get("Outer Thing", "OTEndChance", 1).getInt();
+		outerThingEP  = config.get("Outer Thing", "OTEndChance", 2).getInt();
 		outerThingEMn = config.get("Outer Thing", "OTEndMin", 1).getInt();
 		outerThingEMx = config.get("Outer Thing", "OTEndMax", 1).getInt();  
 		
 		config.addCustomCategoryComment("Lizalfos", "Spawn configurations for lizalfos");		
 		lizalfosIg = config.get("Lizalfos", "LizalfosSpawnAnywhere", false).getBoolean();;
-		lizalfosP  = config.get("Lizalfos", "LizalfosSpawnChance", 2).getInt();
+		lizalfosP  = config.get("Lizalfos", "LizalfosSpawnChance", 6).getInt();
 		lizalfosMn = config.get("Lizalfos", "LizalfosSpawnMin", 2).getInt();
 		lizalfosMx = config.get("Lizalfos", "LizalfosSpawnMax", 2).getInt(); 
 
