@@ -1,52 +1,52 @@
 {
   "variants": {
-    "age=0": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=1": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=2": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=3": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=4": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=5": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=6": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=7": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=8": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=9": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=10": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=11": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=12": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=13": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=14": {
-      "model": "dungeonmobs:lavarock"
-    },
-    "age=15": {
-      "model": "dungeonmobs:lavarock"
-    }
+	"age=0": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=1": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=2": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=3": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=4": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=5": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=6": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=7": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=8": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=9": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=10": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=11": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=12": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=13": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=14": {
+	  "model": "dungeonmobs:lavarock"
+	},
+	"age=15": {
+	  "model": "dungeonmobs:lavarock"
+	}
   }
 }

@@ -11,19 +11,18 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderFallenAngel<T extends EntityLiving> extends RenderLiving<T> {
 	public ModelBase mainModel;
-
-	public RenderFallenAngel(RenderManager rendermanagerIn,
-	                         ModelFallenAngel modelIn, float shadowsizeIn) {
+	
+	public RenderFallenAngel(RenderManager rendermanagerIn, ModelFallenAngel modelIn, float shadowsizeIn) {
 		super(rendermanagerIn, modelIn, shadowsizeIn);
 		mainModel = modelIn;
 		addLayer(new LayerCustomHead(modelIn.head));
-
+		
 	}
-
-
+	
+	
 	@Override
 	protected ResourceLocation getEntityTexture(T entity) {
 		return new ResourceLocation(DungeonMobs.MODID, "textures/entity/FallenAngel.png");
 	}
-
+	
 }

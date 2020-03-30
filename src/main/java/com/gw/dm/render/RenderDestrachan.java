@@ -8,17 +8,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderDestrachan extends RenderLiving {
-	private static final ResourceLocation destrachanTextures
-			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Destrachan.png");
+	private static final ResourceLocation destrachanTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/Destrachan.png");
 	protected ModelDestrachan model;
-
-
+	
+	
 	public RenderDestrachan(RenderManager manager, ModelDestrachan modelD, float f) {
 		super(manager, modelD, f);
 		model = (ModelDestrachan) mainModel;
 	}
-
-
+	
+	
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return destrachanTextures;

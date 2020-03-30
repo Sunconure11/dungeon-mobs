@@ -9,10 +9,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PotionAddle extends Potion {
-	private static final ResourceLocation addledIcon
-			= new ResourceLocation(DungeonMobs.MODID + ":textures/gui/potionicons.png");
 	public static final String NAME = "potion_addled";
 	public static final String ENAME = "effect." + DungeonMobs.MODID + ".addled";
+	private static final ResourceLocation addledIcon = new ResourceLocation(DungeonMobs.MODID + ":textures/gui/potionicons.png");
 
 	public PotionAddle(int par1, boolean par2, int par3) {
 		super(par2, par3);

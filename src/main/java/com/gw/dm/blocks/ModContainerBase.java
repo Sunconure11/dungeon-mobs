@@ -15,8 +15,7 @@ public abstract class ModContainerBase extends BlockContainer implements IHaveMo
 
 	@Override
 	public void registerModel() {
-		DungeonMobs.proxy.registerItemRender(Item
-				.getItemFromBlock(this), 0, "inventory");
+		DungeonMobs.proxy.registerItemRender(Item.getItemFromBlock(this), 0, "inventory");
 	}
 
 

@@ -116,7 +116,8 @@ public class InputConfusedMovement extends MovementInput {
 			if (foo == 1) {
 				this.jump = underlyingMovementInput.jump;
 				this.sneak = underlyingMovementInput.sneak;
-			} else {
+			}
+			else {
 				this.jump = underlyingMovementInput.sneak;
 				this.sneak = underlyingMovementInput.jump;
 			}

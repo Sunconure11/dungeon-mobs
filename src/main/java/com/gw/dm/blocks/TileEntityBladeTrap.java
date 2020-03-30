@@ -29,8 +29,7 @@ public class TileEntityBladeTrap extends TileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		if (spawnTicks < 40)
-			spawnTicks++;
+		if (spawnTicks < 40) spawnTicks++;
 
 		BlockPos pos = getPos();
 		int xCoord = pos.getX();
@@ -70,9 +69,7 @@ public class TileEntityBladeTrap extends TileEntity implements ITickable {
 
 		List<EntityPlayer> players = new ArrayList<>();
 		for (EntityPlayer player : world.playerEntities) {
-			if (((player.posX - x) * (player.posX - x)) +
-					((player.posY - y) * (player.posY - y)) +
-					((player.posZ - z) * (player.posZ - z)) < sqDist) {
+			if (((player.posX - x) * (player.posX - x)) + ((player.posY - y) * (player.posY - y)) + ((player.posZ - z) * (player.posZ - z)) < sqDist) {
 				players.add(player);
 			}
 		}
@@ -82,14 +79,14 @@ public class TileEntityBladeTrap extends TileEntity implements ITickable {
 
 		if (players.isEmpty()) {
 			return -1;
-		} else {
+		}
+		else {
 			Iterator iter = players.iterator();
 
 			while (iter.hasNext()) {
 				EntityPlayer foo = (EntityPlayer) iter.next();
 
-				if (canEntityBeSeen(w, x, y, z, foo) && !foo.capabilities.isCreativeMode)
-					playersCanSee.add(foo);
+				if (canEntityBeSeen(w, x, y, z, foo) && !foo.capabilities.isCreativeMode) playersCanSee.add(foo);
 			}
 			if (playersCanSee.isEmpty()) {
 				return -1;
@@ -110,22 +107,19 @@ public class TileEntityBladeTrap extends TileEntity implements ITickable {
 			int entY = (int) Math.floor(foo.posY);
 			int entZ = (int) Math.floor(foo.posZ);
 
-			if (thisX == entX)
-				bar++;
+			if (thisX == entX) bar++;
 
-			if (thisY == entY)
-				bar++;
+			if (thisY == entY) bar++;
 
-			if (thisZ == entZ)
-				bar++;
+			if (thisZ == entZ) bar++;
 
-			if (bar > 1)
-				playersInLine.add(foo);
+			if (bar > 1) playersInLine.add(foo);
 		}
 
 		if (playersInLine.isEmpty()) {
 			return -1;
-		} else {
+		}
+		else {
 			Random rand = new Random();
 
 			EntityPlayer select = playersInLine.get(rand.nextInt(playersInLine.size()));
@@ -137,19 +131,24 @@ public class TileEntityBladeTrap extends TileEntity implements ITickable {
 			if (thisX != entX) {
 				if (thisX > entX) {
 					return 2;
-				} else {
+				}
+				else {
 					return 3;
 				}
-			} else if (thisY != entY) {
+			}
+			else if (thisY != entY) {
 				if (thisY > entY) {
 					return 0;
-				} else {
+				}
+				else {
 					return 1;
 				}
-			} else {
+			}
+			else {
 				if (thisZ > entZ) {
 					return 4;
-				} else {
+				}
+				else {
 					return 5;
 				}
 			}
@@ -157,44 +156,40 @@ public class TileEntityBladeTrap extends TileEntity implements ITickable {
 	}
 
 
-	public boolean canEntityBeSeen(World world,
-	                               int x, int y, int z, Entity par1Entity) {
-		int maxX = Math.max(x, (int)par1Entity.posX);
-		int maxY = Math.max(y, (int)par1Entity.posY);
-		int maxZ = Math.max(z, (int)par1Entity.posZ);
+	public boolean canEntityBeSeen(World world, int x, int y, int z, Entity par1Entity) {
+		int maxX = Math.max(x, (int) par1Entity.posX);
+		int maxY = Math.max(y, (int) par1Entity.posY);
+		int maxZ = Math.max(z, (int) par1Entity.posZ);
 
-		int minX = Math.min(x, (int)par1Entity.posX);
-		int minY = Math.min(y, (int)par1Entity.posY);
-		int minZ = Math.min(z, (int)par1Entity.posZ);
+		int minX = Math.min(x, (int) par1Entity.posX);
+		int minY = Math.min(y, (int) par1Entity.posY);
+		int minZ = Math.min(z, (int) par1Entity.posZ);
 
 		if (maxX != minX) {
 			for (int i = minX + 1; i < maxX; i++) {
-				if (world.isAirBlock(new BlockPos(i, minY, minZ)))
-					return false;
+				if (world.isAirBlock(new BlockPos(i, minY, minZ))) return false;
 			}
-		} else if (maxY != minY) {
+		}
+		else if (maxY != minY) {
 			for (int i = minY + 1; i < maxY; i++) {
-				if (world.isAirBlock(new BlockPos(minX, i, minZ)))
-					return false;
+				if (world.isAirBlock(new BlockPos(minX, i, minZ))) return false;
 			}
-		} else if (maxZ != minZ) {
+		}
+		else if (maxZ != minZ) {
 			for (int i = minZ + 1; i < maxZ; i++) {
-				if (world.isAirBlock(new BlockPos(minX, minY, i)))
-					return false;
+				if (world.isAirBlock(new BlockPos(minX, minY, i))) return false;
 			}
 		}
 		return true;
 	}
 
+	@Override
+	public void readFromNBT(NBTTagCompound par1) {
+		super.readFromNBT(par1);
+	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound par1) {
 		return super.writeToNBT(par1);
-	}
-
-
-	@Override
-	public void readFromNBT(NBTTagCompound par1) {
-		super.readFromNBT(par1);
 	}
 }

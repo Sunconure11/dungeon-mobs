@@ -21,16 +21,14 @@ public class TaskAngelAgroOnPlayer extends EntityAIBase {
 		return ((target != null) && owner.canEntityBeSeen(target));
 	}
 
+	@Override
+	public boolean shouldContinueExecuting() {
+		return false;
+	}
 
 	@Override
 	public void startExecuting() {
 		owner.setAttackTarget(target);
-	}
-
-
-	@Override
-	public boolean shouldContinueExecuting() {
-		return false;
 	}
 
 }

@@ -14,8 +14,7 @@ public abstract class ModBlockBase extends Block implements IHaveModel {
 
 	@Override
 	public void registerModel() {
-		DungeonMobs.proxy.registerItemRender(Item
-				.getItemFromBlock(this), 0, "inventory");
+		DungeonMobs.proxy.registerItemRender(Item.getItemFromBlock(this), 0, "inventory");
 	}
 
 }

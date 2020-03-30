@@ -8,17 +8,16 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderVescavor extends RenderLiving {
-	private static final ResourceLocation vescavorTextures
-			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Vescavor.png");
+	private static final ResourceLocation vescavorTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/Vescavor.png");
 	protected ModelVescavor model;
-
-
+	
+	
 	public RenderVescavor(RenderManager manager, ModelVescavor modelV, float f) {
 		super(manager, modelV, f);
 		model = (ModelVescavor) mainModel;
 	}
-
-
+	
+	
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return vescavorTextures;

@@ -38,7 +38,7 @@ public class ModelCockatrice extends ModelBase {
 	ModelRenderer Tail2;
 	ModelRenderer RightWing;
 	ModelRenderer LeftWing;
-
+	
 	public ModelCockatrice() {
 		textureWidth = 64;
 		textureHeight = 32;
@@ -228,11 +228,10 @@ public class ModelCockatrice extends ModelBase {
 		LeftWing.mirror = true;
 		setRotation(LeftWing, 0.1047198F, -0.1047198F, -0.4363323F);
 	}
-
-
+	
+	
 	@Override
-	public void render(Entity entity, float f, float f1, float f2,
-	                   float f3, float f4, float f5) {
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		//LeftClawBack.render(f5);
@@ -266,29 +265,26 @@ public class ModelCockatrice extends ModelBase {
 		RightWing.render(f5);
 		LeftWing.render(f5);
 	}
-
-
+	
+	@Override
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent) {
+		// Math.abs(MathHelper.cos(f * 0.5662F) * 1.4F * f1);
+		
+		HeadBase.rotateAngleY = f3 / 57.29578F;
+		BeakBase.rotateAngleY = 0.7853982F + f3 / 57.29578F;
+		BeakNose.rotateAngleY = f3 / 57.29578F;
+		
+		LeftLegTop.rotateAngleX = 0.4363323F + Math.abs(MathHelper.cos(f * 0.5662F) * 1.4F * f1);
+		LeftLegLow.rotateAngleX = -0.5235988F + Math.abs(MathHelper.cos(f * 0.5662F) * 1.4F * f1);
+		
+		RightLegTop.rotateAngleX = 0.4363323F + Math.abs(MathHelper.sin(f * 0.5662F) * 1.4F * f1);
+		RightLegLow.rotateAngleX = -0.5235988F + Math.abs(MathHelper.sin(f * 0.5662F) * 1.4F * f1);
+	}
+	
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
-
-	@Override
-	public void setRotationAngles(float f, float f1, float f2,
-	                              float f3, float f4, float f5, Entity ent) {
-		// Math.abs(MathHelper.cos(f * 0.5662F) * 1.4F * f1);
-
-		HeadBase.rotateAngleY = f3 / 57.29578F;
-		BeakBase.rotateAngleY = 0.7853982F + f3 / 57.29578F;
-		BeakNose.rotateAngleY = f3 / 57.29578F;
-
-		LeftLegTop.rotateAngleX = 0.4363323F + Math.abs(MathHelper.cos(f * 0.5662F) * 1.4F * f1);
-		LeftLegLow.rotateAngleX = -0.5235988F + Math.abs(MathHelper.cos(f * 0.5662F) * 1.4F * f1);
-
-		RightLegTop.rotateAngleX = 0.4363323F + Math.abs(MathHelper.sin(f * 0.5662F) * 1.4F * f1);
-		RightLegLow.rotateAngleX = -0.5235988F + Math.abs(MathHelper.sin(f * 0.5662F) * 1.4F * f1);
-	}
-
+	
 }

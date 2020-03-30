@@ -15,8 +15,8 @@ public class AIEldermobMove extends EntityAIBase {
 	private final double rate;
 	private double targetx, targety, targetz, dtx, dty, dtz;
 	private int cooldown;
-
-
+	
+	
 	public AIEldermobMove(EntityEldermob it, double speed) {
 		super();
 		owner = it;
@@ -29,43 +29,26 @@ public class AIEldermobMove extends EntityAIBase {
 		targety = owner.posY + dty;
 		targetz = owner.posZ + dtz;
 	}
-
-
+	
+	
 	@Override
 	public boolean shouldExecute() {
 		if (cooldown < 2) {
 			cooldown = 2;
 		}
-		boolean out = (owner.getRNG().nextInt(--cooldown) < 1)
-				&& needNewTarget();
+		boolean out = (owner.getRNG().nextInt(--cooldown) < 1) && needNewTarget();
 		if (out) {
-			cooldown = 20 + owner.getRNG().nextInt(20)
-					- (DungeonMobsHelper.getDifficulty(owner.world) * 5);
+			cooldown = 20 + owner.getRNG().nextInt(20) - (DungeonMobsHelper.getDifficulty(owner.world) * 5);
 		}
 		return out;
 	}
-
-
+	
+	
 	@Override
 	public boolean shouldContinueExecuting() {
 		return false;
 	}
-
-
-	public boolean needNewTarget() {
-		EntityMoveHelper helper = owner.getMoveHelper();
-		if (helper.isUpdating()) {
-			return true;
-		} else {
-			double dx = helper.getX() - owner.posX;
-			double dy = helper.getY() - owner.posY;
-			double dz = helper.getZ() - owner.posZ;
-			double dist = ((dx * dx) + (dy * dy) + (dz * dz));
-			return (dist < 1.0) || (dist > 432.0) || ((EldermobMover) helper).blocked;
-		}
-	}
-
-
+	
 	@Override
 	public void startExecuting() {
 		//System.out.println("Starting execution");
@@ -74,11 +57,13 @@ public class AIEldermobMove extends EntityAIBase {
 			dtx = (random.nextDouble() * 48.0) - 24.0;
 			if (owner.posY > 192.0) {
 				dty = -((random.nextDouble() * 24.0) + 24.0);
-			} else {
+			}
+			else {
 				dty = (random.nextDouble() * 24.0) - 12.0;
 			}
 			dtz = (random.nextDouble() * 48.0) - 24.0;
-		} else if (random.nextBoolean()) {
+		}
+		else if (random.nextBoolean()) {
 			double change = random.nextDouble();
 			double stable = change - 1;
 			dtx = (dtx * stable) + (change * ((random.nextDouble() * 8.0) - 4.0));
@@ -96,17 +81,28 @@ public class AIEldermobMove extends EntityAIBase {
 		}
 		owner.getMoveHelper().setMoveTo(targetx, targety, targetz, rate);
 	}
-
-
+	
+	public boolean needNewTarget() {
+		EntityMoveHelper helper = owner.getMoveHelper();
+		if (helper.isUpdating()) {
+			return true;
+		}
+		else {
+			double dx = helper.getX() - owner.posX;
+			double dy = helper.getY() - owner.posY;
+			double dz = helper.getZ() - owner.posZ;
+			double dist = ((dx * dx) + (dy * dy) + (dz * dz));
+			return (dist < 1.0) || (dist > 432.0) || ((EldermobMover) helper).blocked;
+		}
+	}
+	
 	public AIEldermobMove startingMove() {
-		owner.getMoveHelper().setMoveTo(owner.posX,
-				owner.posY + (owner.getRNG().nextDouble() * 8.0) + 4.0,
-				owner.posZ, rate);
+		owner.getMoveHelper().setMoveTo(owner.posX, owner.posY + (owner.getRNG().nextDouble() * 8.0) + 4.0, owner.posZ, rate);
 		cooldown = 2;
 		return this;
 	}
-
-
+	
+	
 	private boolean isTooFar() {
 		EntityLivingBase victim = owner.getAttackTarget();
 		if (victim == null || victim.isDead) {
@@ -118,8 +114,8 @@ public class AIEldermobMove extends EntityAIBase {
 		double dist = ((dx * dx) + (dy * dy) + (dz * dz));
 		return (dist > 1024);
 	}
-
-
+	
+	
 	private boolean atTarget() {
 		EntityMoveHelper helper = owner.getMoveHelper();
 		double dx = targetx - owner.posX;
@@ -127,15 +123,15 @@ public class AIEldermobMove extends EntityAIBase {
 		double dz = targetz - owner.posZ;
 		return (((dx * dx) + (dy * dy) + (dz * dz)) < 1.0);
 	}
-
-
+	
+	
 	void setTarget(double toX, double toY, double toZ) {
 		targetx = owner.posX + toX;
 		targety = owner.posY + toY;
 		targetz = owner.posZ + toZ;
 	}
-
-
+	
+	
 	void callMoveHelper() {
 		owner.getMoveHelper().setMoveTo(targetx, targety, targetz, rate);
 	}
@@ -144,17 +140,17 @@ public class AIEldermobMove extends EntityAIBase {
 	/*---------------------------------------------------*
 	 *                    MOVE HELPER                    *
 	 *---------------------------------------------------*/
-
-
+	
+	
 	public static class EldermobMover extends EntityMoveHelper {
 		EntityEldermob owner;
 		boolean blocked;
-
+		
 		public EldermobMover(EntityEldermob eldermob) {
 			super(eldermob);
 			owner = eldermob;
 		}
-
+		
 		@Override
 		public void onUpdateMoveHelper() {
 			//System.out.println("Starting onUpdateMoveHelper, action = " + action);
@@ -168,7 +164,8 @@ public class AIEldermobMove extends EntityAIBase {
 				if (isColliding(posX, posY, posZ, dist)) {
 					//System.out.println("Colliding");
 					blocked = true;
-				} else {
+				}
+				else {
 					//System.out.println("Moving");
 					dist = Math.sqrt(dist);
 					double diffEffect;
@@ -197,16 +194,18 @@ public class AIEldermobMove extends EntityAIBase {
 						dx /= dist;
 						dz /= dist;
 						owner.rotationYaw = (float) (Math.toDegrees(MathHelper.atan2(dz, dx)) + 90f);
-					} else if (dist > 1.5) {
+					}
+					else if (dist > 1.5) {
 						owner.rotationYaw = (float) (Math.toDegrees(MathHelper.atan2(dz, dx)) - 90f);
 					}
 				}
-			} else {
+			}
+			else {
 				super.onUpdateMoveHelper();
 			}
 		}
-
-
+		
+		
 		public boolean isColliding(double dx, double dy, double dz, double dist) {
 			double dx0 = (dx - owner.posX) / dist;
 			double dy0 = (dy - owner.posY) / dist;
@@ -223,5 +222,5 @@ public class AIEldermobMove extends EntityAIBase {
 			return false;
 		}
 	}
-
+	
 }

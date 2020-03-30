@@ -24,7 +24,8 @@ public class AIVampireAttack extends EntityAIBase {
 	public boolean shouldExecute() {
 		if (shouldAttack()) {
 			return attack.shouldExecute();
-		} else {
+		}
+		else {
 			return run.shouldExecute();
 		}
 	}
@@ -34,7 +35,8 @@ public class AIVampireAttack extends EntityAIBase {
 	public boolean shouldContinueExecuting() {
 		if (shouldAttack()) {
 			return attack.shouldContinueExecuting();
-		} else {
+		}
+		else {
 			return run.shouldContinueExecuting();
 		}
 	}
@@ -44,7 +46,8 @@ public class AIVampireAttack extends EntityAIBase {
 	public void startExecuting() {
 		if (shouldAttack()) {
 			attack.startExecuting();
-		} else {
+		}
+		else {
 			run.startExecuting();
 		}
 	}
@@ -54,7 +57,8 @@ public class AIVampireAttack extends EntityAIBase {
 	public void resetTask() {
 		if (shouldAttack()) {
 			attack.resetTask();
-		} else {
+		}
+		else {
 			run.resetTask();
 		}
 	}
@@ -69,8 +73,7 @@ public class AIVampireAttack extends EntityAIBase {
 
 
 	private boolean shouldAttack() {
-		boolean out = (owner.getHealth() > THRESHHOLD) || owner.isTrapped() 
-				|| !(owner.getTags() instanceof EntityPlayer);
+		boolean out = (owner.getHealth() > THRESHHOLD) || owner.isTrapped() || !(owner.getTags() instanceof EntityPlayer);
 		owner.setRunning(!out);
 		return out;
 	}

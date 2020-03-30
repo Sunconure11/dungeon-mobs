@@ -9,8 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderIllithid extends RenderLiving {
 
-	private static final ResourceLocation illithidTextures
-			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Illithid.png");
+	private static final ResourceLocation illithidTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/Illithid.png");
 	protected ModelIllithid model;
 
 

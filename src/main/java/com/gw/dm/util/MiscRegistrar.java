@@ -85,8 +85,7 @@ public class MiscRegistrar {
 
 
 	public static void registerTileEntities() {
-		GameRegistry.registerTileEntity(TileEntityBladeTrap.class,
-				DungeonMobs.MODID + ".bladetrap");
+		GameRegistry.registerTileEntity(TileEntityBladeTrap.class, DungeonMobs.MODID + ".bladetrap");
 	}
 
 

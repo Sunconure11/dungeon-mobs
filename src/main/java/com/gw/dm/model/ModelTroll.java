@@ -18,11 +18,11 @@ public class ModelTroll extends ModelBase {
 	ModelRenderer ArmLeftJoint;
 	ModelRenderer Nose;
 	ModelRenderer ArmRight;
-
+	
 	public ModelTroll() {
 		textureWidth = 64;
 		textureHeight = 32;
-
+		
 		LegLeft = new ModelRenderer(this, 38, 0);
 		LegLeft.addBox(-2.5F, 0F, -2F, 5, 16, 5);
 		LegLeft.setRotationPoint(5F, 8F, 0F);
@@ -90,7 +90,7 @@ public class ModelTroll extends ModelBase {
 		ArmRight.mirror = true;
 		setRotation(ArmRight, 0F, 0F, 0F);
 	}
-
+	
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
@@ -106,27 +106,27 @@ public class ModelTroll extends ModelBase {
 		Nose.render(f5);
 		ArmRight.render(f5);
 	}
-
+	
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent) {
+		//super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
+		
+		this.Shape1.rotateAngleY = f3 / 57.29578F;
+		this.Shape1.rotateAngleX = f4 / 57.29578F;
+		this.Nose.rotateAngleY = f3 / 57.29578F;
+		this.Nose.rotateAngleX = f4 / 57.29578F;
+		
+		this.LegLeft.rotateAngleX = MathHelper.cos(f * 0.5662F) * 1.4F * f1;
+		this.LegRight.rotateAngleX = MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
+		
+		this.ArmRight.rotateAngleX = MathHelper.cos(f * 0.5662F) * 1.4F * f1;
+		this.ArmLeft.rotateAngleX = MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
+	}
+	
 	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent) {
-		//super.setRotationAngles(f, f1, f2, f3, f4, f5, ent);
-
-		this.Shape1.rotateAngleY = f3 / 57.29578F;
-		this.Shape1.rotateAngleX = f4 / 57.29578F;
-		this.Nose.rotateAngleY = f3 / 57.29578F;
-		this.Nose.rotateAngleX = f4 / 57.29578F;
-
-		this.LegLeft.rotateAngleX = MathHelper.cos(f * 0.5662F) * 1.4F * f1;
-		this.LegRight.rotateAngleX = MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
-
-		this.ArmRight.rotateAngleX = MathHelper.cos(f * 0.5662F) * 1.4F * f1;
-		this.ArmLeft.rotateAngleX = MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
-	}
-
+	
 }
 	

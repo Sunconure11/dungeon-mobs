@@ -31,12 +31,10 @@ public class EntityAIFollowTwin extends EntityAIBase {
 	@Override
 	public boolean shouldContinueExecuting() {
 		EntityLizalfos twin = entityOwner.getTwin();
-		if ((path == null)
-				|| entityOwner.isTwinDead()
-				|| (entityOwner.getAttackTarget() != null)
-				|| (twin == null)) {
+		if ((path == null) || entityOwner.isTwinDead() || (entityOwner.getAttackTarget() != null) || (twin == null)) {
 			return false;
-		} else {
+		}
+		else {
 			double var1 = this.entityOwner.getDistanceSq(this.entityOwner.getTwin());
 			return var1 >= 16.0D;
 		}

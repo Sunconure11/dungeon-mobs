@@ -8,19 +8,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderUmberHulk extends RenderLiving {
-	private static final ResourceLocation umberHulkTextures
-			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/umberhulk.png");
+	private static final ResourceLocation umberHulkTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/umberhulk.png");
 	protected ModelUmberHulk model;
-
+	
 	public RenderUmberHulk(RenderManager manager, ModelUmberHulk modelUH, float f) {
 		super(manager, modelUH, f);
 		model = (ModelUmberHulk) mainModel;
 	}
-
-
+	
+	
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return umberHulkTextures;
 	}
-
+	
 }

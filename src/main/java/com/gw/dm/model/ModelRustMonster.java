@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelRustMonster extends ModelBase {
-
+	
 	ModelRenderer BodyBase1;
 	ModelRenderer BodyBase2;
 	ModelRenderer BodyBase3;
@@ -97,12 +97,12 @@ public class ModelRustMonster extends ModelBase {
 	float RAntFeel2Angle;
 	ModelRenderer RAntFeel3;
 	float RAntFeel3Angle;
-
-
+	
+	
 	public ModelRustMonster() {
 		textureWidth = 64;
 		textureHeight = 32;
-
+		
 		BodyBase1 = new ModelRenderer(this, 11, 5);
 		BodyBase1.addBox(-4.0F, 0.0F, 0.0F, 8, 4, 13);
 		BodyBase1.setRotationPoint(0.0F, 15.0F, -2.0F);
@@ -277,7 +277,7 @@ public class ModelRustMonster extends ModelBase {
 		RBLegFootBase.setTextureSize(64, 32);
 		RBLegFootBase.mirror = true;
 		setRotation(RBLegFootBase, 0.0F, 0.0F, 0.0F);
-
+		
 		RBLegBase1 = new ModelRenderer(this, 19, 9);
 		RBLegBase1.addBox(0.5F, -3.0F, -1.5F, 2, 3, 3);
 		RBLegBase1.setRotationPoint(-5.5F, 19.0F, 9.0F);
@@ -308,7 +308,7 @@ public class ModelRustMonster extends ModelBase {
 		RBLegBase5.setTextureSize(64, 32);
 		RBLegBase5.mirror = true;
 		setRotation(RBLegBase5, 0.0F, 0.0F, -0.9773844F);
-
+		
 		RFLegFootBase = new ModelRenderer(this, 25, 0);
 		RFLegFootBase.addBox(-0.5F, 2.0F, 0.0F, 1, 3, 1);
 		RFLegFootBase.setRotationPoint(-10.3F, 19.0F, 0.3F);
@@ -357,7 +357,7 @@ public class ModelRustMonster extends ModelBase {
 		LFLegFootBase.setTextureSize(64, 32);
 		LFLegFootBase.mirror = true;
 		setRotation(LFLegFootBase, 0.0F, 0.0F, 0.0F);
-
+		
 		RFLegBase1 = new ModelRenderer(this, 15, 15);
 		RFLegBase1.addBox(0.5F, -3.0F, -1.5F, 2, 3, 3);
 		RFLegBase1.setRotationPoint(-5.5F, 19.0F, 1.0F);
@@ -406,7 +406,7 @@ public class ModelRustMonster extends ModelBase {
 		Head.setTextureSize(64, 32);
 		Head.mirror = true;
 		setRotation(Head, 0.0F, 0.0F, 0.0F);
-
+		
 		RAntBase1 = new ModelRenderer(this, 22, 20);
 		RAntBase1.addBox(-0.5F, -0.5F, -4.0F, 1, 1, 4);
 		RAntBase1.setRotationPoint(-2.0F, 21.0F, -3.0F);
@@ -414,7 +414,7 @@ public class ModelRustMonster extends ModelBase {
 		RAntBase1.mirror = true;
 		setRotation(RAntBase1, 0.20944F, 0.0872665F, 0.0F);
 		RAntBase1Angle = 0.20944F;
-
+		
 		LAntBase1 = new ModelRenderer(this, 46, 19);
 		LAntBase1.addBox(-0.5F, -0.5F, -4.0F, 1, 1, 4);
 		LAntBase1.setRotationPoint(2.0F, 21.0F, -3.0F);
@@ -422,7 +422,7 @@ public class ModelRustMonster extends ModelBase {
 		LAntBase1.mirror = true;
 		setRotation(LAntBase1, 0.20944F, -0.0872665F, 0.0F);
 		LAntBase1Angle = 0.20944F;
-
+		
 		RAntBase2 = new ModelRenderer(this, 60, 17);
 		RAntBase2.addBox(-0.5F, -8.0F, -0.5F, 1, 8, 1);
 		RAntBase2.setRotationPoint(-2.3F, 22.0F, -6.4F);
@@ -430,7 +430,7 @@ public class ModelRustMonster extends ModelBase {
 		RAntBase2.mirror = true;
 		setRotation(RAntBase2, 0.1396263F, 0.10472F, 0.0F);
 		RAntBase2Angle = 0.1396263F;
-
+		
 		RAntBase3 = new ModelRenderer(this, 59, 13);
 		RAntBase3.addBox(-0.5F, -14.0F, -3.0F, 1, 7, 1);
 		RAntBase3.setRotationPoint(-2.3F, 22.0F, -6.4F);
@@ -438,7 +438,7 @@ public class ModelRustMonster extends ModelBase {
 		RAntBase3.mirror = true;
 		setRotation(RAntBase3, -0.20944F, 0.10472F, 0.0F);
 		RAntBase3Angle = -0.20944F;
-
+		
 		LAntBase2 = new ModelRenderer(this, 60, 23);
 		LAntBase2.addBox(-0.5F, -8.0F, -0.5F, 1, 8, 1);
 		LAntBase2.setRotationPoint(2.2F, 21.799999F, -6.5F);
@@ -446,7 +446,7 @@ public class ModelRustMonster extends ModelBase {
 		LAntBase2.mirror = true;
 		setRotation(LAntBase2, 0.1396263F, -0.10472F, 0.0F);
 		LAntBase2Angle = 0.1396263F;
-
+		
 		RAntBase4 = new ModelRenderer(this, 59, 13);
 		RAntBase4.addBox(-0.5F, -19.0F, 6.5F, 1, 7, 1);
 		RAntBase4.setRotationPoint(-2.3F, 22.0F, -6.4F);
@@ -454,7 +454,7 @@ public class ModelRustMonster extends ModelBase {
 		RAntBase4.mirror = true;
 		setRotation(RAntBase4, 0.5061455F, 0.10472F, 0.0F);
 		RAntBase4Angle = 0.5061455F;
-
+		
 		LAntBase3 = new ModelRenderer(this, 58, 12);
 		LAntBase3.addBox(-0.5F, -14.0F, -3.0F, 1, 7, 1);
 		LAntBase3.setRotationPoint(2.2F, 21.799999F, -6.5F);
@@ -462,7 +462,7 @@ public class ModelRustMonster extends ModelBase {
 		LAntBase3.mirror = true;
 		setRotation(LAntBase3, -0.20944F, -0.10472F, 0.0F);
 		LAntBase3Angle = -0.20944F;
-
+		
 		LAntBase4 = new ModelRenderer(this, 59, 11);
 		LAntBase4.addBox(-0.5F, -19.0F, 6.5F, 1, 7, 1);
 		LAntBase4.setRotationPoint(2.2F, 21.799999F, -6.5F);
@@ -470,7 +470,7 @@ public class ModelRustMonster extends ModelBase {
 		LAntBase4.mirror = true;
 		setRotation(LAntBase4, 0.5061455F, -0.10472F, 0.0F);
 		LAntBase4Angle = 0.5061455F;
-
+		
 		RAntFeel1 = new ModelRenderer(this, 43, 9);
 		RAntFeel1.addBox(0.0F, -7.5F, -1.1F, 0, 7, 1);
 		RAntFeel1.setRotationPoint(-2.4F, 22.0F, -6.4F);
@@ -478,7 +478,7 @@ public class ModelRustMonster extends ModelBase {
 		RAntFeel1.mirror = true;
 		setRotation(RAntFeel1, 0.1745329F, 0.10472F, 0.0F);
 		RAntFeel1Angle = 0.1745329F;
-
+		
 		LAntFeel3 = new ModelRenderer(this, 47, 10);
 		LAntFeel3.addBox(0.0F, -18.5F, 5.7F, 0, 6, 1);
 		LAntFeel3.setRotationPoint(2.2F, 21.799999F, -6.5F);
@@ -486,7 +486,7 @@ public class ModelRustMonster extends ModelBase {
 		LAntFeel3.mirror = true;
 		setRotation(LAntFeel3, 0.5061455F, -0.10472F, 0.0F);
 		LAntFeel3Angle = 0.5061455F;
-
+		
 		LAntFeel1 = new ModelRenderer(this, 54, 10);
 		LAntFeel1.addBox(0.0F, -7.5F, -1.1F, 0, 7, 1);
 		LAntFeel1.setRotationPoint(2.2F, 21.799999F, -6.5F);
@@ -494,7 +494,7 @@ public class ModelRustMonster extends ModelBase {
 		LAntFeel1.mirror = true;
 		setRotation(LAntFeel1, 0.1745329F, -0.10472F, 0.0F);
 		LAntFeel1Angle = 0.1745329F;
-
+		
 		LAntFeel2 = new ModelRenderer(this, 42, 9);
 		LAntFeel2.addBox(0.0F, -13.5F, -3.7F, 0, 6, 1);
 		LAntFeel2.setRotationPoint(2.2F, 21.799999F, -6.5F);
@@ -502,7 +502,7 @@ public class ModelRustMonster extends ModelBase {
 		LAntFeel2.mirror = true;
 		setRotation(LAntFeel2, -0.20944F, -0.10472F, 0.0F);
 		LAntFeel2Angle = -0.20944F;
-
+		
 		RAntFeel2 = new ModelRenderer(this, 50, 9);
 		RAntFeel2.addBox(0.0F, -13.5F, -3.7F, 0, 6, 1);
 		RAntFeel2.setRotationPoint(-2.3F, 22.0F, -6.4F);
@@ -510,7 +510,7 @@ public class ModelRustMonster extends ModelBase {
 		RAntFeel2.mirror = true;
 		setRotation(RAntFeel2, -0.20944F, 0.10472F, 0.0F);
 		RAntFeel2Angle = -0.20944F;
-
+		
 		RAntFeel3 = new ModelRenderer(this, 55, 9);
 		RAntFeel3.addBox(0.0F, -18.5F, 5.7F, 0, 6, 1);
 		RAntFeel3.setRotationPoint(-2.3F, 22.0F, -6.4F);
@@ -519,7 +519,7 @@ public class ModelRustMonster extends ModelBase {
 		setRotation(RAntFeel3, 0.5061455F, 0.10472F, 0.0F);
 		RAntFeel3Angle = 0.5061455F;
 	}
-
+	
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		BodyBase1.render(f5);
@@ -551,13 +551,13 @@ public class ModelRustMonster extends ModelBase {
 		RFLegBase4.render(f5);
 		RBLegBase4.render(f5);
 		RBLegFootBase.render(f5);
-
+		
 		RBLegBase1.render(f5);
 		RFLegBase2.render(f5);
 		RFLegBase3.render(f5);
 		RBLegBase3.render(f5);
 		RBLegBase5.render(f5);
-
+		
 		RFLegFootBase.render(f5);
 		RFLegBase5.render(f5);
 		LFLegBase1.render(f5);
@@ -566,7 +566,7 @@ public class ModelRustMonster extends ModelBase {
 		LFLegBase4.render(f5);
 		LFLegBase5.render(f5);
 		LFLegFootBase.render(f5);
-
+		
 		RFLegBase1.render(f5);
 		LBLegFootBase.render(f5);
 		LBLegBase6.render(f5);
@@ -590,49 +590,38 @@ public class ModelRustMonster extends ModelBase {
 		RAntFeel2.render(f5);
 		RAntFeel3.render(f5);
 	}
-
-
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-
+	
 	@Override
-	public void setRotationAngles(float f, float f1, float f2,
-	                              float f3, float f4, float f5, Entity ent) {
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent) {
 		RBLegFootBase.rotateAngleX = (MathHelper.cos(f * 0.5662F) * 1.4F * f1);
 		LBLegFootBase.rotateAngleX = (MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1);
 		RFLegFootBase.rotateAngleX = (MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1);
 		LFLegFootBase.rotateAngleX = (MathHelper.cos(f * 0.5662F) * 1.4F * f1);
-
+		
 		LBLegBase6.rotateAngleX = (MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1);
 		RBLegBase6.rotateAngleX = (MathHelper.cos(f * 0.5662F) * 1.4F * f1);
 		RFLegBase5.rotateAngleX = (MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1);
 		LFLegBase5.rotateAngleX = (MathHelper.cos(f * 0.5662F) * 1.4F * f1);
-
-		LAntBase1.rotateAngleX = (LAntBase1Angle - MathHelper.cos(f * 0.5662F + 3.141593F)
-				* 1.4F * f1 / 2.0F);
-		RAntBase1.rotateAngleX = (RAntBase1Angle - MathHelper.cos(f * 0.5662F)
-				* 1.4F * f1 / 2.0F);
-		LAntBase2.rotateAngleX = (LAntBase2Angle - MathHelper.cos(f * 0.5662F + 3.141593F)
-				* 1.4F * f1 / 2.0F);
+		
+		LAntBase1.rotateAngleX = (LAntBase1Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1 / 2.0F);
+		RAntBase1.rotateAngleX = (RAntBase1Angle - MathHelper.cos(f * 0.5662F) * 1.4F * f1 / 2.0F);
+		LAntBase2.rotateAngleX = (LAntBase2Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1 / 2.0F);
 		RAntBase2.rotateAngleX = (RAntBase2Angle - MathHelper.cos(f * 0.5662F) * 1.4F * f1 / 2.0F);
-		LAntBase3.rotateAngleX = (LAntBase3Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F
-				* f1 / 2.0F);
+		LAntBase3.rotateAngleX = (LAntBase3Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1 / 2.0F);
 		RAntBase3.rotateAngleX = (RAntBase3Angle - MathHelper.cos(f * 0.5662F) * 1.4F * f1 / 2.0F);
-		LAntBase4.rotateAngleX = (LAntBase4Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F
-				* f1 / 2.0F);
+		LAntBase4.rotateAngleX = (LAntBase4Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1 / 2.0F);
 		RAntBase4.rotateAngleX = (RAntBase4Angle - MathHelper.cos(f * 0.5662F) * 1.4F * f1 / 2.0F);
-		LAntFeel1.rotateAngleX = (LAntFeel1Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F
-				* f1 / 2.0F);
+		LAntFeel1.rotateAngleX = (LAntFeel1Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1 / 2.0F);
 		RAntFeel1.rotateAngleX = (RAntFeel1Angle - MathHelper.cos(f * 0.5662F) * 1.4F * f1 / 2.0F);
-		LAntFeel2.rotateAngleX = (LAntFeel2Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F
-				* f1 / 2.0F);
+		LAntFeel2.rotateAngleX = (LAntFeel2Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1 / 2.0F);
 		RAntFeel2.rotateAngleX = (RAntFeel2Angle - MathHelper.cos(f * 0.5662F) * 1.4F * f1 / 2.0F);
-		LAntFeel3.rotateAngleX = (LAntFeel3Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F
-				* f1 / 2.0F);
+		LAntFeel3.rotateAngleX = (LAntFeel3Angle - MathHelper.cos(f * 0.5662F + 3.141593F) * 1.4F * f1 / 2.0F);
 		RAntFeel3.rotateAngleX = (RAntFeel3Angle - MathHelper.cos(f * 0.5662F) * 1.4F * f1 / 2.0F);
+	}
+	
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
 	}
 }

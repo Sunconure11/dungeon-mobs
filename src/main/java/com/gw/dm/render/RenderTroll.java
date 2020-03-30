@@ -9,8 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderTroll extends RenderLiving {
 
-	private static final ResourceLocation trollTextures
-			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Troll.png");
+	private static final ResourceLocation trollTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/Troll.png");
 	protected ModelTroll model;
 
 	public RenderTroll(RenderManager renderManager, ModelTroll modelT, float f) {
