@@ -35,7 +35,8 @@ public class BlockLavarock extends ModBlockBase {
 		setLightLevel(0.4375f);
 		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		MiscRegistrar.addBlock(this);
-		MiscRegistrar.addItem(new ItemBlock(this).setRegistryName(getRegistryName()));
+		MiscRegistrar.addItem(new ItemBlock(this)
+				.setRegistryName(getRegistryName()));
 	}
 
 
@@ -45,36 +46,16 @@ public class BlockLavarock extends ModBlockBase {
 		if ((worldIn.getTotalWorldTime() % 10) == 0) entity.attackEntityFrom(DamageSource.LAVA, 4);
 	}
 
-	private boolean byWater(World world, BlockPos pos) {
-		for (EnumFacing enumfacing : EnumFacing.values()) {
-			if (world.getBlockState(pos.offset(enumfacing)).getMaterial() == Material.WATER) {
-				return true;
-			}
-		}
-		return false;
-	}
 
 	@Override
-	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
-		world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 3);
-		super.onBlockDestroyedByPlayer(world, pos, state);
-	}
-
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(TIME_TO_LIVE, meta);
-	}
-
-	@Override
-	public int getMetaFromState(IBlockState state) {
-		return state.getValue(TIME_TO_LIVE).intValue();
-	}
-
-	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess world, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
+	                                             IBlockAccess world, BlockPos pos) {
 		float f = 0.0625F;
-		return new AxisAlignedBB((double) ((float) pos.getX() + f), (double) pos.getX(), (double) ((float) pos.getY() + f), (double) ((float) (pos.getY() + 1) - f), (double) (float) (pos.getZ() + f), (double) (float) (pos.getZ() + f));
+		return new AxisAlignedBB((double) ((float) pos.getX() + f), (double) pos.getX(),
+				(double) ((float) pos.getY() + f), (double) ((float) (pos.getY() + 1) - f),
+				(double) (float) (pos.getZ() + f), (double) (float) (pos.getZ() + f));
 	}
+
 
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
@@ -85,21 +66,54 @@ public class BlockLavarock extends ModBlockBase {
 		if (foo < 1) {
 			int age = state.getValue(TIME_TO_LIVE).intValue();
 			if (age > 0) {
-				worldIn.setBlockState(pos, getDefaultState().withProperty(TIME_TO_LIVE, Integer.valueOf(age - 1)));
-			}
-			else {
+				worldIn.setBlockState(pos, getDefaultState()
+						.withProperty(TIME_TO_LIVE, Integer.valueOf(age - 1)));
+			} else {
 				worldIn.setBlockState(pos, Blocks.STONE.getDefaultState(), 3);
 			}
 		}
 	}
 
-	@Override
-	public int damageDropped(IBlockState state) {
-		return getMetaFromState(state);
+
+	private boolean byWater(World world, BlockPos pos) {
+		for (EnumFacing enumfacing : EnumFacing.values()) {
+			if (world.getBlockState(pos.offset(enumfacing)).getMaterial()
+					== Material.WATER) {
+				return true;
+			}
+		}
+		return false;
 	}
+
+
+	@Override
+	public void onBlockDestroyedByPlayer(World world, BlockPos pos,
+	                                     IBlockState state) {
+		world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 3);
+		super.onBlockDestroyedByPlayer(world, pos, state);
+	}
+
 
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[]{TIME_TO_LIVE});
+	}
+
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(TIME_TO_LIVE, meta);
+	}
+
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(TIME_TO_LIVE).intValue();
+	}
+
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return getMetaFromState(state);
 	}
 }

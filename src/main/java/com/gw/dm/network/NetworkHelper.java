@@ -12,12 +12,15 @@ import static com.gw.dm.network.NetworkHelper.PacketType.CONFUSION;
 import static com.gw.dm.network.NetworkHelper.PacketType.KNOCKBACK;
 
 public class NetworkHelper {
-	public static final SimpleNetworkWrapper NETWRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(DungeonMobs.MODID);
+	public static final SimpleNetworkWrapper NETWRAPPER
+			= NetworkRegistry.INSTANCE.newSimpleChannel(DungeonMobs.MODID);
 	private static NetworkHelper HELPER;
 
 	private NetworkHelper() {
-		NETWRAPPER.registerMessage(KnockbackPacketHandler.class, KnockBackPacket.class, KNOCKBACK.id, Side.CLIENT);
-		NETWRAPPER.registerMessage(ConfusionPacketHandler.class, ConfusionPacket.class, CONFUSION.id, Side.CLIENT);
+		NETWRAPPER.registerMessage(KnockbackPacketHandler.class, KnockBackPacket.class,
+				KNOCKBACK.id, Side.CLIENT);
+		NETWRAPPER.registerMessage(ConfusionPacketHandler.class, ConfusionPacket.class,
+				CONFUSION.id, Side.CLIENT);
 	}
 
 	public static NetworkHelper getNetworkHelper() {
@@ -33,7 +36,8 @@ public class NetworkHelper {
 
 
 	public static enum PacketType {
-		KNOCKBACK(0), CONFUSION(1);
+		KNOCKBACK(0),
+		CONFUSION(1);
 		public final int id;
 
 		PacketType(int type) {

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-	"layer0": "dungeonmobs:blocks/bladetrap"
+    "layer0": "dungeonmobs:blocks/bladetrap"
   }
 }

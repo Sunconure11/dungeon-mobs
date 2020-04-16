@@ -1,6 +1,7 @@
 package com.gw.dm.projectile;
 
 import com.gw.dm.util.ConfigHandler;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,25 +13,50 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityEldermobBall extends EntityThrowable {
 	private int age;
-	
-	
+
+
 	public EntityEldermobBall(World worldIn) {
 		super(worldIn);
 		age = 0;
 	}
-	
-	
+
+
 	public EntityEldermobBall(World worldIn, double x, double y, double z) {
 		super(worldIn, x, y, z);
 		age = 0;
 	}
-	
-	
+
+
 	public EntityEldermobBall(World world, EntityLivingBase thrower) {
 		super(world, thrower);
 		age = 0;
 	}
-	
+
+
+	@Override
+	protected void onImpact(RayTraceResult result) {
+		if (!world.isRemote) {
+			if (result.entityHit instanceof EntityLivingBase) {
+				// No longer checking for null thrower -- that should never happen!
+				EntityLivingBase entity = (EntityLivingBase) result.entityHit;
+				entity.attackEntityFrom(DamageSource.causeMobDamage(getThrower())
+						.setDifficultyScaled()
+						.setProjectile(), 6.0f +   
+							(6.0f * ConfigHandler.damagex) + ConfigHandler.damageplus);
+				world.newExplosion(this, posX, posY, posZ, 1, false, true);
+			}
+			setDead();
+		}
+
+	}
+
+
+	@Override
+	public float getGravityVelocity() {
+		return 0.0f;
+	}
+
+
 	@Override
 	public void onUpdate() {
 		age++;
@@ -40,58 +66,43 @@ public class EntityEldermobBall extends EntityThrowable {
 		}
 		super.onUpdate();
 	}
-	
-	@Override
-	public float getGravityVelocity() {
-		return 0.0f;
-	}
-	
-	@Override
-	protected void onImpact(RayTraceResult result) {
-		if (!world.isRemote) {
-			if (result.entityHit instanceof EntityLivingBase) {
-				// No longer checking for null thrower -- that should never happen!
-				EntityLivingBase entity = (EntityLivingBase) result.entityHit;
-				entity.attackEntityFrom(DamageSource.causeMobDamage(getThrower()).setDifficultyScaled().setProjectile(), 6.0f + (6.0f * ConfigHandler.damagex) + ConfigHandler.damageplus);
-				world.newExplosion(this, posX, posY, posZ, 1, false, true);
-			}
-			setDead();
-		}
-		
-	}
-	
+
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
 		compound.setInteger("Age", age);
 	}
-	
-	
+
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
 		age = compound.getInteger("Age");
 	}
-	
-	
+
+
 	public float getBrightness(float partialTicks) {
 		return 1.0f;
 	}
-	
-	@Override
-	public boolean hasNoGravity() {
-		return true;
-	}
-	
-	@Override
-	public boolean isInWater() {
-		return false;
-	}
-	
+
+
 	@SideOnly(Side.CLIENT)
 	@Override
 	public int getBrightnessForRender() {
 		return 0xf000f0;
 	}
-	
+
+
+	@Override
+	public boolean hasNoGravity() {
+		return true;
+	}
+
+
+	@Override
+	public boolean isInWater() {
+		return false;
+	}
+
 }

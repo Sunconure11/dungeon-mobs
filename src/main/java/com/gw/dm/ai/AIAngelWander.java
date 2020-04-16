@@ -36,10 +36,26 @@ public class AIAngelWander extends EntityAIBase {
 		return ((enemy == null) || enemy.isDead) && needNewTarget();
 	}
 
+
+	public boolean needNewTarget() {
+		EntityMoveHelper helper = owner.getMoveHelper();
+		if (helper.isUpdating()) {
+			return true;
+		} else {
+			double dx = helper.getX() - owner.posX;
+			double dy = helper.getY() - owner.posY;
+			double dz = helper.getZ() - owner.posZ;
+			double dist = ((dx * dx) + (dy * dy) + (dz * dz));
+			return (dist < 1.0) || (dist > 432.0) || ((AngelicMoveHelper) helper).blocked;
+		}
+	}
+
+
 	@Override
 	public boolean shouldContinueExecuting() {
 		return false;
 	}
+
 
 	@Override
 	public void startExecuting() {
@@ -49,8 +65,7 @@ public class AIAngelWander extends EntityAIBase {
 			dtx = (random.nextDouble() * 8.0) - 4.0;
 			dty = (random.nextDouble() * 8.0) - 4.0;
 			dtz = (random.nextDouble() * 8.0) - 4.0;
-		}
-		else if (random.nextBoolean()) {
+		} else if (random.nextBoolean()) {
 			double change = random.nextDouble();
 			double stable = change - 1;
 			dtx = (dtx * stable) + (change * ((random.nextDouble() * 8.0) - 4.0));
@@ -63,19 +78,6 @@ public class AIAngelWander extends EntityAIBase {
 		owner.getMoveHelper().setMoveTo(targetx, targety, targetz, rate);
 	}
 
-	public boolean needNewTarget() {
-		EntityMoveHelper helper = owner.getMoveHelper();
-		if (helper.isUpdating()) {
-			return true;
-		}
-		else {
-			double dx = helper.getX() - owner.posX;
-			double dy = helper.getY() - owner.posY;
-			double dz = helper.getZ() - owner.posZ;
-			double dist = ((dx * dx) + (dy * dy) + (dz * dz));
-			return (dist < 1.0) || (dist > 432.0) || ((AngelicMoveHelper) helper).blocked;
-		}
-	}
 
 	private boolean atTarget() {
 		EntityMoveHelper helper = owner.getMoveHelper();
@@ -125,8 +127,7 @@ public class AIAngelWander extends EntityAIBase {
 				if (isColliding(posX, posY, posZ, dist)) {
 					//System.out.println("Colliding");
 					blocked = true;
-				}
-				else {
+				} else {
 					//System.out.println("Moving");
 					dist = Math.sqrt(dist);
 					double diffEffect;
@@ -155,13 +156,11 @@ public class AIAngelWander extends EntityAIBase {
 						dx /= dist;
 						dz /= dist;
 						owner.rotationYaw = (float) (Math.toDegrees(MathHelper.atan2(dz, dx)) + 90f);
-					}
-					else if (dist > 1.5) {
+					} else if (dist > 1.5) {
 						owner.rotationYaw = (float) (Math.toDegrees(MathHelper.atan2(dz, dx)) - 90f);
 					}
 				}
-			}
-			else {
+			} else {
 				super.onUpdateMoveHelper();
 			}
 		}

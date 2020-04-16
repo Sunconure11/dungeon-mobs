@@ -11,8 +11,7 @@ public class ConfusionPacketHandler implements IMessageHandler<ConfusionPacket, 
 	public IMessage onMessage(ConfusionPacket message, MessageContext ctx) {
 		if (message.getToConfuse()) {
 			DungeonMobsHelper.makePlayerConfused(ctx.getServerHandler().player);
-		}
-		else {
+		} else {
 			DungeonMobsHelper.makePlayerNormal(ctx.getServerHandler().player);
 		}
 		return null;

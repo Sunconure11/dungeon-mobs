@@ -95,8 +95,7 @@ public class AIAngelAttack extends EntityAIBase {
 			double dist = ((dx * dx) + (dy * dy) + (dz * dz));
 			if (dist > 576) {
 				movingIn = true;
-			}
-			else if (dist < 256) {
+			} else if (dist < 256) {
 				movingIn = false;
 			}
 			dx *= r.nextDouble();
@@ -104,15 +103,15 @@ public class AIAngelAttack extends EntityAIBase {
 			dz *= r.nextDouble();
 			if (movingIn && !(((AngelicMoveHelper) owner.getMoveHelper()).blocked)) {
 				dist = Math.sqrt((dx * dx) + (dy * dy) + (dz * dz)) / 4;
-				baseMotion.setTarget((dx / dist), (dy / dist), (dz / dist));
+				baseMotion.setTarget((dx / dist),
+						(dy / dist),
+						(dz / dist));
 				baseMotion.callMoveHelper();
-			}
-			else if ((dist < 64) && !(((AngelicMoveHelper) owner.getMoveHelper()).blocked)) {
+			} else if ((dist < 64) && !(((AngelicMoveHelper) owner.getMoveHelper()).blocked)) {
 				dist = -(Math.sqrt((dx * dx) + (dy * dy) + (dz * dz)) / 4);
 				baseMotion.setTarget(dx / dist, dy / dist, dz / dist);
 				baseMotion.callMoveHelper();
-			}
-			else {
+			} else {
 				baseMotion.startExecuting();
 			}
 		}

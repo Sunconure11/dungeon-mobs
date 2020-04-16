@@ -25,16 +25,15 @@ public class EntityAIMonsterPanic extends EntityAIBase {
 	 */
 	@Override
 	public boolean shouldExecute() {
-		if (this.theEntityCreature.getAttackTarget() == null && !this.theEntityCreature.isBurning()) {
+		if (this.theEntityCreature.getAttackTarget() == null
+				&& !this.theEntityCreature.isBurning()) {
 			return false;
-		}
-		else {
+		} else {
 			Vec3d var1 = RandomPositionGenerator.findRandomTarget(this.theEntityCreature, 5, 4);
 
 			if (var1 == null) {
 				return false;
-			}
-			else {
+			} else {
 				this.randPosX = var1.x;
 				this.randPosY = var1.y;
 				this.randPosZ = var1.z;
@@ -43,19 +42,22 @@ public class EntityAIMonsterPanic extends EntityAIBase {
 		}
 	}
 
-	/**
-	 * Returns whether an in-progress EntityAIBase should continue executing
-	 */
-	@Override
-	public boolean shouldContinueExecuting() {
-		return !this.theEntityCreature.getNavigator().noPath();
-	}
 
 	/**
 	 * Execute a one shot task or start executing a continuous task
 	 */
 	@Override
 	public void startExecuting() {
-		this.theEntityCreature.getNavigator().tryMoveToXYZ(this.randPosX, this.randPosY, this.randPosZ, this.speed);
+		this.theEntityCreature.getNavigator()
+				.tryMoveToXYZ(this.randPosX, this.randPosY, this.randPosZ, this.speed);
+	}
+
+
+	/**
+	 * Returns whether an in-progress EntityAIBase should continue executing
+	 */
+	@Override
+	public boolean shouldContinueExecuting() {
+		return !this.theEntityCreature.getNavigator().noPath();
 	}
 }

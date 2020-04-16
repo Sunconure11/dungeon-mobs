@@ -9,7 +9,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderRakshasa extends RenderLiving {
-	private static final ResourceLocation rakshasaTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/Rakshasa.png");
+	private static final ResourceLocation rakshasaTextures
+			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Rakshasa.png");
 	protected ModelRakshasa model;
 
 	public RenderRakshasa(RenderManager manager, ModelRakshasa modelR, float f) {

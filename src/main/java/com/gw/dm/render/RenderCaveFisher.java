@@ -8,16 +8,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderCaveFisher extends RenderLiving {
-	private static final ResourceLocation caveFisherTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/CaveFisher.png");
+	private static final ResourceLocation caveFisherTextures
+			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/CaveFisher.png");
 	protected ModelCaveFisher model;
-	
-	
+
+
 	public RenderCaveFisher(RenderManager manager, ModelCaveFisher modelCF, float f) {
 		super(manager, modelCF, f);
 		model = (ModelCaveFisher) mainModel;
 	}
-	
-	
+
+
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return caveFisherTextures;

@@ -23,33 +23,34 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class DungeonMobsHelper {
-	
+
 	public static boolean displayedVersion = false;
 	private static NetworkHelper helper = NetworkHelper.getNetworkHelper();
 	private static LinkedList confusedClientPlayers = new LinkedList<EntityPlayerMP>();
 	private static LinkedList confusedPlayers = new LinkedList<EntityPlayerMP>();
-	
+
 	public static void printLists() {
 		System.out.println("[DM] Printing " + confusedClientPlayers.size() + " client players.");
-		
+
 		for (int i = 0; i < confusedClientPlayers.size(); i++) {
 			System.out.println("[DM] " + confusedClientPlayers.get(i).toString());
 		}
-		
+
 		System.out.println("[DM] Printing " + confusedPlayers.size() + " players.");
-		
+
 		for (int i = 0; i < confusedPlayers.size(); i++) {
 			System.out.println("[DM] " + confusedPlayers.get(i).toString());
 		}
 	}
-	
-	
+
+
 	public static void sendConfusionPacket(EntityPlayerMP target, boolean b) {
 		Entity test = (Entity) target;
-		
-		if (!(test instanceof FakePlayer)) helper.sendPacketToPlayer(new ConfusionPacket(b), target);
+
+		if (!(test instanceof FakePlayer))
+			helper.sendPacketToPlayer(new ConfusionPacket(b), target);
 	}
-	
+
 	// FIXME:  I don't know if these are needed with the current networking
 	//         System.
 	/*
@@ -69,35 +70,37 @@ public class DungeonMobsHelper {
 			confusedClientPlayers.remove(player);
 	}
 	*/
-	
-	
+
+
 	/*
 	 *  These three are local, don't deal with packet bullshit.
 	 */
 	public static void makePlayerConfused(EntityPlayerMP player) {
-		if (!confusedPlayers.contains(player)) confusedPlayers.add(player);
+		if (!confusedPlayers.contains(player))
+			confusedPlayers.add(player);
 	}
-	
-	
+
+
 	public static boolean isPlayerConfused(EntityPlayerMP player) {
 		return confusedPlayers.contains(player);
 	}
-	
-	
+
+
 	public static void makePlayerNormal(EntityPlayerMP player) {
-		if (confusedPlayers.contains(player)) confusedPlayers.remove(player);
+		if (confusedPlayers.contains(player))
+			confusedPlayers.remove(player);
 	}
-	
-	
+
+
 	public static void sendKnockBackPacket(EntityPlayerMP target, double xVel, double zVel) {
 		Entity test = (Entity) target;
-		
+
 		if (!(test instanceof FakePlayer)) {
 			helper.sendPacketToPlayer(new KnockBackPacket((float) xVel, (float) zVel), target);
 		}
 	}
-	
-	
+
+
 	public static void knockBack(EntityLivingBase target, double x, double z) {
 		target.isAirBorne = true;
 		float normalizedPower = MathHelper.sqrt(x * x + z * z);
@@ -108,23 +111,27 @@ public class DungeonMobsHelper {
 		target.motionX -= x / (double) normalizedPower * (double) knockPower;
 		target.motionY += (double) knockPower;
 		target.motionZ -= z / (double) normalizedPower * (double) knockPower;
-		
+
 		if (target.motionY > 0.4000000059604645D) {
 			target.motionY = 0.4000000059604645D;
 		}
 	}
-	
-	
+
+
 	public static int getDifficulty(World world) {
-		if (world.getDifficulty() == EnumDifficulty.PEACEFUL) return 0;
-		if (world.getDifficulty() == EnumDifficulty.EASY) return 1;
-		if (world.getDifficulty() == EnumDifficulty.NORMAL) return 2;
-		if (world.getDifficulty() == EnumDifficulty.HARD) return 3;
-		
+		if (world.getDifficulty() == EnumDifficulty.PEACEFUL)
+			return 0;
+		if (world.getDifficulty() == EnumDifficulty.EASY)
+			return 1;
+		if (world.getDifficulty() == EnumDifficulty.NORMAL)
+			return 2;
+		if (world.getDifficulty() == EnumDifficulty.HARD)
+			return 3;
+
 		return 0;
 	}
-	
-	
+
+
 	/**
 	 * This method will tell whether a mob is near a spawner for that
 	 * type of mob.  This if for spawning logic, to allow mobs to spawn
@@ -144,7 +151,7 @@ public class DungeonMobsHelper {
 		int minz = (int) (entity.posZ - 4), maxz = (int) (entity.posZ + 5);
 		boolean out = false;
 		BlockPos test;
-		
+
 		for (int i = minx; i < maxx; i++)
 			for (int j = miny; j < maxy; j++)
 				for (int k = minz; k < maxz; k++) {
@@ -161,19 +168,19 @@ public class DungeonMobsHelper {
 									if (spawnData.hasKey("id")) {
 										String mobSpawnEntityId = spawnData.getString("id");
 										String id = (name);
-										if (mobSpawnEntityId.equalsIgnoreCase(id)) return true;
+										if (mobSpawnEntityId.equalsIgnoreCase(id))
+											return true;
 									}
 								}
-							}
-							catch (Exception e) {
+							} catch (Exception e) {
 							}
 						}
 					}
 				}
 		return out;
 	}
-	
-	
+
+
 	/**
 	 * A replacement for the vanilla addRandomEnchantment methodm which is
 	 * broken in Forge 1.12.2.
@@ -188,5 +195,5 @@ public class DungeonMobsHelper {
 			stack.addEnchantment(ench, l);
 		}
 	}
-	
+
 }

@@ -8,7 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderShrieker extends RenderLiving {
-	private static final ResourceLocation shriekerTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/Shrieker.png");
+	private static final ResourceLocation shriekerTextures
+			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Shrieker.png");
 	protected ModelShrieker model;
 
 

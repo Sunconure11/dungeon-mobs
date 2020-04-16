@@ -8,7 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderGhoul extends RenderLiving {
-	private static final ResourceLocation ghoulTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/ghoul.png");
+	private static final ResourceLocation ghoulTextures
+			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/ghoul.png");
 	protected ModelGhoul model;
 
 	public RenderGhoul(RenderManager renderManager, ModelGhoul modelG, float f) {

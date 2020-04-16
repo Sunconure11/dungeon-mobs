@@ -6,7 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelUmberHulk extends ModelBase {
-	
+
 	ModelRenderer RightFoot;
 	ModelRenderer LeftFoot;
 	ModelRenderer LeftLegLow;
@@ -38,11 +38,11 @@ public class ModelUmberHulk extends ModelBase {
 	ModelRenderer LittleEyeRight;
 	ModelRenderer BigEyeRight;
 	ModelRenderer LeftLegHigh;
-	
+
 	public ModelUmberHulk() {
 		textureWidth = 64;
 		textureHeight = 32;
-		
+
 		RightFoot = new ModelRenderer(this, 0, 0);
 		RightFoot.addBox(-3F, 15F, -11F, 6, 6, 6);
 		RightFoot.setRotationPoint(-8F, 3F, 15F);
@@ -133,8 +133,8 @@ public class ModelUmberHulk extends ModelBase {
 		LeftPincer1.setTextureSize(64, 32);
 		LeftPincer1.mirror = false;
 		setRotation(LeftPincer1, 0F, -0.5759587F, 0F);
-		
-		
+
+
 		LeftPincer2 = new ModelRenderer(this, 25, 13);
 		LeftPincer2.addBox(12F, 4F, -21.3F, 2, 2, 10);
 		LeftPincer2.setRotationPoint(0F, -10F, 2F);
@@ -142,24 +142,24 @@ public class ModelUmberHulk extends ModelBase {
 		LeftPincer2.mirror = true;
 		setRotation(LeftPincer2, 0F, 0.2617994F, 0F);
 		LeftPincer2.mirror = false;
-		
-		
+
+
 		RightPincer1 = new ModelRenderer(this, 25, 13);
 		RightPincer1.addBox(-1F, 4F, -18F, 2, 2, 10);
 		RightPincer1.setRotationPoint(0F, -10F, 2F);
 		RightPincer1.setTextureSize(64, 32);
 		RightPincer1.mirror = true;
 		setRotation(RightPincer1, 0F, 0.5759587F, 0F);
-		
-		
+
+
 		RightPincer2 = new ModelRenderer(this, 25, 13);
 		RightPincer2.addBox(-14F, 4F, -21.3F, 2, 2, 10);
 		RightPincer2.setRotationPoint(0F, -10F, 2F);
 		RightPincer2.setTextureSize(64, 32);
 		RightPincer2.mirror = true;
 		setRotation(RightPincer2, 0F, -0.2617994F, 0F);
-		
-		
+
+
 		LeftArmBase = new ModelRenderer(this, 0, 0);
 		LeftArmBase.addBox(-1.5F, 0F, -1.5F, 3, 14, 3);
 		LeftArmBase.setRotationPoint(10F, -8F, 2F);
@@ -240,10 +240,11 @@ public class ModelUmberHulk extends ModelBase {
 		LeftLegHigh.mirror = true;
 		setRotation(LeftLegHigh, 0.3490659F, 0F, 0F);
 	}
-	
-	
+
+
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void render(Entity entity, float f, float f1, float f2,
+	                   float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		RightFoot.render(f5);
@@ -278,9 +279,18 @@ public class ModelUmberHulk extends ModelBase {
 		BigEyeRight.render(f5);
 		LeftLegHigh.render(f5);
 	}
-	
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity ent) {
-		
+
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
+		model.rotateAngleX = x;
+		model.rotateAngleY = y;
+		model.rotateAngleZ = z;
+	}
+
+
+	public void setRotationAngles(float f, float f1, float f2,
+	                              float f3, float f4, float f5, Entity ent) {
+
 		Head.rotateAngleY = f3 / 57.29578F;
 		Head.rotateAngleX = f4 / 57.29578F;
 		LittleEyeRight.rotateAngleY = f3 / 57.29578F;
@@ -291,12 +301,12 @@ public class ModelUmberHulk extends ModelBase {
 		LittleEyeLeft.rotateAngleX = f4 / 57.29578F;
 		BigEyeLeft.rotateAngleY = f3 / 57.29578F;
 		BigEyeLeft.rotateAngleX = f4 / 57.29578F;
-		
+
 		LeftPincer1.rotateAngleY = -0.5759587F + (f3 / 57.29578F);
 		LeftPincer1.rotateAngleX = f4 / 57.29578F;
 		RightPincer1.rotateAngleY = 0.5759587F + (f3 / 57.29578F);
 		RightPincer1.rotateAngleX = f4 / 57.29578F;
-		
+
 		RightFoot.rotateAngleX = MathHelper.cos(f * 0.5662F) * 1.4F * f1;
 		LeftFoot.rotateAngleX = MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
 		RightLegLow.rotateAngleX = -0.4363323F - MathHelper.cos(f * 0.5662F) * 1.4F * f1;
@@ -305,7 +315,7 @@ public class ModelUmberHulk extends ModelBase {
 		LeftLegMid.rotateAngleX = -0.1745329F - MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
 		RightLegHigh.rotateAngleX = 0.3490659F - MathHelper.cos(f * 0.5662F) * 1.4F * f1;
 		LeftLegHigh.rotateAngleX = 0.3490659F - MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
-		
+
 		LeftArmBase.rotateAngleX = -0.3490659F - MathHelper.cos(f * 0.5662F) * 1.4F * f1;
 		LeftArmLow.rotateAngleX = -1.570796F - MathHelper.cos(f * 0.5662F) * 1.4F * f1;
 		LeftArmCara.rotateAngleX = -1.570796F - MathHelper.cos(f * 0.5662F) * 1.4F * f1;
@@ -314,18 +324,12 @@ public class ModelUmberHulk extends ModelBase {
 		RightArmLow.rotateAngleX = -1.570796F - MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
 		RightArmCara.rotateAngleX = -1.570796F - MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
 		RightHand.rotateAngleX = -1.570796F - MathHelper.cos(f * 0.5662F + (float) Math.PI) * 1.4F * f1;
-		
+
 		RightPincer2.rotateAngleY = -0.2617994F + ((f3 / 57.29578F) * 1.333F);
 		RightPincer2.rotateAngleX = ((f4 / 57.29578F) * 1.333F);
 		LeftPincer2.rotateAngleY = 0.2617994F + ((f3 / 57.29578F) * 1.333F);
 		LeftPincer2.rotateAngleX = ((f4 / 57.29578F) * 1.333F);
-		
+
 	}
-	
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-	
+
 }

@@ -8,7 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderThoqqua extends RenderLiving {
-	private static final ResourceLocation thoqquaTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/Thoqqua.png");
+	private static final ResourceLocation thoqquaTextures
+			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Thoqqua.png");
 	protected ModelThoqqua model;
 
 	public RenderThoqqua(RenderManager manager, ModelThoqqua modelT, float f) {

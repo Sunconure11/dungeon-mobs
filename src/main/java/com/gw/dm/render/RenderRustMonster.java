@@ -8,14 +8,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderRustMonster extends RenderLiving {
-	protected static final ResourceLocation rustMonsterTexture = new ResourceLocation(DungeonMobs.MODID, "textures/entity/RustMonster.png");
+	protected static final ResourceLocation rustMonsterTexture
+			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/RustMonster.png");
 	protected ModelRustMonster model;
-	
+
 	public RenderRustMonster(RenderManager manager, ModelRustMonster modelRM, float f) {
 		super(manager, modelRM, f);
 		model = modelRM;
 	}
-	
+
 	// FIXME: Do I need to keep this?  I don't know what was planned for it!
 	/*
 	// Why is this here?
@@ -26,7 +27,7 @@ public class RenderRustMonster extends RenderLiving {
 		GL11.glScalef(2.0F, 2.0F, 2.0F);
 	}
 	*/
-	
+
 	@Override
 	protected ResourceLocation getEntityTexture(Entity par1Entity) {
 		return rustMonsterTexture;

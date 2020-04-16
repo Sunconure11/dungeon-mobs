@@ -8,7 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderLizalfos extends RenderLiving {
-	private static final ResourceLocation lizalfosTextures = new ResourceLocation(DungeonMobs.MODID, "textures/entity/Lizalfos.png");
+	private static final ResourceLocation lizalfosTextures
+			= new ResourceLocation(DungeonMobs.MODID, "textures/entity/Lizalfos.png");
 	protected ModelLizalfos model;
 
 	public RenderLizalfos(RenderManager manager, ModelLizalfos modelL, float f) {

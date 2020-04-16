@@ -1,13 +1,22 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.projectile.EntitySonicBoom;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.ConfigHandler;
-import com.gw.dm.util.DungeonMobsHelper;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import static com.gw.dm.util.ConfigHandler.destrachanIg;
+
+import java.util.StringTokenizer;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IRangedAttackMob;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIAttackRanged;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.potion.PotionEffect;
@@ -16,9 +25,12 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.StringTokenizer;
-
-import static com.gw.dm.util.ConfigHandler.destrachanIg;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.projectile.EntitySonicBoom;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityDestrachan extends EntityDungeonMob implements IRangedAttackMob {
 	private static String mobName = DungeonMobs.MODID + ":dmdestrachan";
@@ -29,93 +41,61 @@ public class EntityDestrachan extends EntityDungeonMob implements IRangedAttackM
 	public boolean isRanged;
 	public boolean ignoreHeight;
 	private int resetAttackTimer;
-	
+
 	public EntityDestrachan(World par1World) {
 		super(par1World);
 		experienceValue = 35;
 		resetAttackTimer = 0;
 		setSize(1.9F, 1.7F);
 		ignoreHeight = false;
-		
+
 		isRanged = true;
-		
+
 		tasks.addTask(1, new EntityAISwimming(this));
 		tasks.addTask(2, rangedAttack);
 		tasks.addTask(3, new EntityAIWander(this, 1.0D));
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 12.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
 		targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true, false, null));
+		targetTasks.addTask(2, new EntityAINearestAttackableTarget(this,
+				EntityPlayer.class, 0, true, false, null));
 	}
-	
+
+
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24.0D 
+				* ConfigHandler.healthx);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D 
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
+	}
+
+
 	protected boolean isAIEnabled() {
 		return true;
 	}
-	
-	public int getAttackStrength(Entity par1Entity) {
-		return 4;
-	}
-	
-	@Override
-	public boolean isPotionApplicable(PotionEffect par1PotionEffect) {
-		return par1PotionEffect.getEffectName().equals("blindness") ? false : super.isPotionApplicable(par1PotionEffect);
-	}
-	
+
+
 	@Override
 	public int getTotalArmorValue() {
 		return 6;
 	}
-	
-	public void resetAttackType() {
-		tasks.removeTask(rangedAttack);
-		tasks.removeTask(meleeAttack);
-		
-		EntityLivingBase theTarget = getAttackTarget();
-		if (theTarget == null) {
-			tasks.addTask(2, rangedAttack);
-			isRanged = true;
-		}
-		else {
-			double chkX = theTarget.posX - posX;
-			double chkY = theTarget.posY - posY;
-			double chkZ = theTarget.posZ - posZ;
-			
-			if (((chkX * chkX) + (chkY * chkY) + (chkZ * chkZ)) < 12.0D) {
-				tasks.addTask(2, meleeAttack);
-				isRanged = false;
-			}
-			else {
-				tasks.addTask(2, rangedAttack);
-				isRanged = true;
-			}
-		}
+
+
+	public int getAttackStrength(Entity par1Entity) {
+		return 4;
 	}
-	
-	@Override
-	public void attackEntityWithRangedAttack(EntityLivingBase target, float lol) {
-		double vx = target.posX + target.motionX - posX;
-		double vy = target.getEntityBoundingBox().minY + target.motionY + target.height - getEntityBoundingBox().maxY;
-		double vz = target.posZ + target.motionZ - posZ;
-		
-		EntitySonicBoom sonicBoom = new EntitySonicBoom(world, (EntityLiving) this, vx, vy, vz);
-		world.spawnEntity(sonicBoom);
-		playSound(AudioHandler.entityDestrachanStep, 1.0f, 1.0f);
-	}
-	
-	@Override
-	public void setSwingingArms(boolean swingingArms) {
-	}
-	
-	@Override
-	public boolean canAttackClass(Class par1Class) {
-		return EntityDestrachan.class != par1Class;
-	}
-	
+
+
 	@Override
 	public int getTalkInterval() {
 		return 100;
 	}
-	
+
+
 	@Override
 	protected SoundEvent getAmbientSound() {
 		if (rand.nextInt(4) == 0) {
@@ -123,46 +103,20 @@ public class EntityDestrachan extends EntityDungeonMob implements IRangedAttackM
 		}
 		return AudioHandler.entityDestrachanAmbient;
 	}
-	
-	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		int var3;
-		int var4;
-		
-		var3 = rand.nextInt(2);
-		
-		for (var4 = 0; var4 < var3; var4++) {
-			switch (rand.nextInt(2)) {
-				case (0):
-					dropItem(Items.RECORD_13, 1);
-					break;
-				case (1):
-					dropItem(Items.RECORD_WAIT, 1);
-					break;
-				default:
-					break;
-			}
-		}
-	}
-	
-	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount) {
-		if (source.isExplosion()) {
-			return false;
-		}
-		return super.attackEntityFrom(source, amount);
-	}
-	
+
+
 	@Override
 	protected SoundEvent getHurtSound(DamageSource src) {
 		return AudioHandler.entityDestrachanHurt;
 	}
-	
+
+
 	@Override
 	protected SoundEvent getDeathSound() {
 		return AudioHandler.entityDestrachanDeath;
 	}
-	
+
+
 	@Override
 	public boolean getCanSpawnHere() {
 		if (destrachanIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
@@ -176,32 +130,109 @@ public class EntityDestrachan extends EntityDungeonMob implements IRangedAttackM
 		}
 		return super.getCanSpawnHere();
 	}
-	
+
+
 	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24.0D * ConfigHandler.healthx);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D * ConfigHandler.damagex + ConfigHandler.damageplus);
-		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
+	protected void dropFewItems(boolean par1, int par2) {
+		int var3;
+		int var4;
+
+		var3 = rand.nextInt(2);
+
+		for (var4 = 0; var4 < var3; var4++) {
+			switch (rand.nextInt(2)) {
+				case (0):
+					dropItem(Items.RECORD_13, 1);
+					break;
+				case (1):
+					dropItem(Items.RECORD_WAIT, 1);
+					break;
+				default:
+					break;
+			}
+		}
 	}
-	
+
+
+	@Override
+	public boolean isPotionApplicable(PotionEffect par1PotionEffect) {
+		return par1PotionEffect.getEffectName().equals("blindness") ? false :
+				super.isPotionApplicable(par1PotionEffect);
+	}
+
+
+	public void resetAttackType() {
+		tasks.removeTask(rangedAttack);
+		tasks.removeTask(meleeAttack);
+
+		EntityLivingBase theTarget = getAttackTarget();
+		if (theTarget == null) {
+			tasks.addTask(2, rangedAttack);
+			isRanged = true;
+		} else {
+			double chkX = theTarget.posX - posX;
+			double chkY = theTarget.posY - posY;
+			double chkZ = theTarget.posZ - posZ;
+
+			if (((chkX * chkX) + (chkY * chkY) + (chkZ * chkZ)) < 12.0D) {
+				tasks.addTask(2, meleeAttack);
+				isRanged = false;
+			} else {
+				tasks.addTask(2, rangedAttack);
+				isRanged = true;
+			}
+		}
+	}
+
+
+	@Override
+	public void attackEntityWithRangedAttack(EntityLivingBase target, float lol) {
+		double vx = target.posX + target.motionX - posX;
+		double vy = target.getEntityBoundingBox().minY + target.motionY + target.height
+				- getEntityBoundingBox().maxY;
+		double vz = target.posZ + target.motionZ - posZ;
+
+		EntitySonicBoom sonicBoom = new EntitySonicBoom(world, (EntityLiving) this, vx, vy, vz);
+		world.spawnEntity(sonicBoom);
+		playSound(AudioHandler.entityDestrachanStep, 1.0f, 1.0f);
+	}
+
+
+	@Override
+	public boolean canAttackClass(Class par1Class) {
+		return EntityDestrachan.class != par1Class;
+	}
+
+
+	@Override
+	public boolean attackEntityFrom(DamageSource source, float amount) {
+		if (source.isExplosion()) {
+			return false;
+		}
+		return super.attackEntityFrom(source, amount);
+	}
+
+	@Override
+	public void setSwingingArms(boolean swingingArms) {
+	}
+
+
 	public String getRegistryName() {
 		if (mobName == null) fixNameIfNull();
 		return mobName;
 	}
-	
-	
+
+
 	public void setRegistryName(String name) {
 		mobName = (DungeonMobs.MODID + ":" + name).trim().toLowerCase();
 	}
-	
-	
+
+
 	private void fixNameIfNull() {
-		StringTokenizer fixer = new StringTokenizer(this.getName().trim().toLowerCase(), ".");
+		StringTokenizer fixer = new StringTokenizer(this.getName()
+				.trim().toLowerCase(), ".");
 		do {
 			mobName = fixer.nextToken();
-		}
-		while (fixer.hasMoreTokens());
+		} while (fixer.hasMoreTokens());
 	}
 }

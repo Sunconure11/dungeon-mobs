@@ -12,7 +12,8 @@ import net.minecraft.util.ResourceLocation;
 public class RenderEldermob<T extends EntityLiving> extends RenderLiving<T> {
 	public ModelBase mainModel;
 
-	public RenderEldermob(RenderManager rendermanagerIn, ModelEldermob modelIn, float shadowsizeIn) {
+	public RenderEldermob(RenderManager rendermanagerIn, ModelEldermob modelIn,
+	                      float shadowsizeIn) {
 		super(rendermanagerIn, modelIn, shadowsizeIn);
 		mainModel = modelIn;
 		addLayer(new LayerCustomHead(modelIn.body));

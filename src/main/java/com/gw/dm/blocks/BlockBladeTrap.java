@@ -31,7 +31,15 @@ import java.util.Random;
 public class BlockBladeTrap extends ModContainerBase {
 	public static boolean fallInstantly = false;
 
-	public int[][] dir = {{0, -1, 0}, {0, 1, 0}, {-1, 0, 0}, {1, 0, 0}, {0, 0, -1}, {0, 0, 1}};
+	public int[][] dir =
+			{
+					{0, -1, 0},
+					{0, 1, 0},
+					{-1, 0, 0},
+					{1, 0, 0},
+					{0, 0, -1},
+					{0, 0, 1}
+			};
 
 
 	public BlockBladeTrap() {
@@ -43,12 +51,14 @@ public class BlockBladeTrap extends ModContainerBase {
 		setUnlocalizedName(DungeonMobs.MODID + ".bladetrap");
 		setRegistryName(DungeonMobs.MODID, "bladetrap");
 		MiscRegistrar.addBlock(this);
-		MiscRegistrar.addItem(new ItemBlock(this).setRegistryName(getRegistryName()));
+		MiscRegistrar.addItem(new ItemBlock(this)
+				.setRegistryName(getRegistryName()));
 	}
 
 	public static boolean canMoveInto(World par0World, int par1, int par2, int par3) {
 		Block l = par0World.getBlockState(new BlockPos(par1, par2, par3)).getBlock();
-		return ((l == Blocks.AIR) || (l == Blocks.FIRE) || (l == Blocks.WATER) || (l == Blocks.LAVA));
+		return ((l == Blocks.AIR) || (l == Blocks.FIRE)
+				|| (l == Blocks.WATER) || (l == Blocks.LAVA));
 	}
 
 	@Override
@@ -61,12 +71,18 @@ public class BlockBladeTrap extends ModContainerBase {
 	}
 
 	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
 	public BlockRenderLayer getBlockLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+	public void onEntityCollidedWithBlock(World world,
+	                                      BlockPos pos, IBlockState state, Entity entity) {
 		int dmgValue = 0;
 
 		switch (world.getDifficulty()) {
@@ -88,28 +104,24 @@ public class BlockBladeTrap extends ModContainerBase {
 		}
 
 		if (entity != null && !world.isRemote) {
-			if (entity instanceof EntityPlayer) entity.attackEntityFrom(DungeonMobsDamageSource.BLADE_TRAP, dmgValue);
+			if (entity instanceof EntityPlayer)
+				entity.attackEntityFrom(DungeonMobsDamageSource.BLADE_TRAP, dmgValue);
 		}
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState,
+	                                             IBlockAccess worldIn, BlockPos pos) {
 		float f = 0.0625F;
-		return new AxisAlignedBB((double) ((float) pos.getX() + f), (double) pos.getX(), (double) ((float) pos.getY() + f), (double) ((float) (pos.getY() + 1) - f), (double) ((float) (pos.getZ() + 1) - f), (double) ((float) (pos.getZ() + 1) - f));
+		return new AxisAlignedBB(
+				(double) ((float) pos.getX() + f), (double) pos.getX(),
+				(double) ((float) pos.getY() + f), (double) ((float) (pos.getY() + 1) - f),
+				(double) ((float) (pos.getZ() + 1) - f), (double) ((float) (pos.getZ() + 1) - f));
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
-
-	@Override
-	public int quantityDropped(Random par1Random) {
-		return 0;
-	}
-
-	@Override
-	public void onBlockDestroyedByPlayer(World world, BlockPos pos, IBlockState state) {
+	public void onBlockDestroyedByPlayer(World world,
+	                                     BlockPos pos, IBlockState state) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -175,6 +187,11 @@ public class BlockBladeTrap extends ModContainerBase {
 		}
 	}
 
+	@Override
+	public int quantityDropped(Random par1Random) {
+		return 0;
+	}
+
 	public void spawnBladeTrapEntity(World world, int x, int y, int z, int d) {
 		if (canMoveInto(world, x + dir[d][0], y + dir[d][1], z + dir[d][2]) && y >= 0) {
 			BlockPos pos = new BlockPos(x, y, z);
@@ -184,7 +201,11 @@ public class BlockBladeTrap extends ModContainerBase {
 
 				EntityBladeTrap entity = new EntityBladeTrap(world);
 				entity.setDirection(dir[d]);
-				entity.setLocationAndAngles((double) ((float) x + 0.5F), (double) ((float) y + 0.1F), (double) ((float) z + 0.5F), MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
+				entity.setLocationAndAngles((double) ((float) x + 0.5F),
+						(double) ((float) y + 0.1F),
+						(double) ((float) z + 0.5F),
+						MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F),
+						0.0F);
 				entity.rotationYawHead = entity.rotationYaw;
 				entity.renderYawOffset = entity.rotationYaw;
 				world.spawnEntity(entity);

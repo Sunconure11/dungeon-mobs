@@ -1,14 +1,24 @@
 package com.gw.dm.entity;
 
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.ConfigHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import static com.gw.dm.util.ConfigHandler.illithidIg;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.ai.EntityAIWatchClosest2;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,9 +36,11 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.*;
-
-import static com.gw.dm.util.ConfigHandler.illithidIg;
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
+import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityIllithid extends EntityDungeonMob {
 	private static String mobName = DungeonMobs.MODID + ":dmillithid";
@@ -41,23 +53,23 @@ public class EntityIllithid extends EntityDungeonMob {
 	private List dominatedEntities;
 	private Map ownerIDs;
 	private EntityAIAttackMelee grapple = new EntityAIAttackMelee(this, 1.0F, false);
-	
+
 	public EntityIllithid(World par1World) {
 		super(par1World);
 		ignoreHeight = false;
-		
+
 		experienceValue = 50;
 		tentacleCounter = 0;
-		
+
 		setSize(1.1F, 2.9F);
-		
+
 		stunnedEntity = null;
 		stunDuration = 0;
 		mindBlastTicks = 0;
-		
+
 		dominatedEntities = new LinkedList<EntityTameable>();
 		ownerIDs = new HashMap<EntityTameable, EntityLivingBase>();
-		
+
 		tasks.addTask(1, new EntityAISwimming(this));
 		tasks.addTask(3, new EntityAIWander(this, 1.0F));
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -65,59 +77,66 @@ public class EntityIllithid extends EntityDungeonMob {
 		tasks.addTask(5, new EntityAIWatchClosest2(this, EntityRakshasa.class, 5.0F, 0.02F));
 		tasks.addTask(5, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true, false, null));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this,
+				EntityPlayer.class, 0, true, false, null));
 	}
-	
+
+
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(45.0D 
+				* ConfigHandler.healthx);
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D 
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
+	}
+
+
+	@Override
+	public int getTotalArmorValue() {
+		return 5;
+	}
+
+
 	@Override
 	public int getTalkInterval() {
 		return 180;
 	}
-	
+
+
 	@Override
 	protected SoundEvent getAmbientSound() {
 		return AudioHandler.entityIllithidAmbient;
 	}
-	
-	@Override
-	protected void dropFewItems(boolean par1, int par2) {
-		int var3;
-		int var4;
-		
-		var3 = rand.nextInt(4);
-		
-		for (var4 = 0; var4 < var3; var4++) {
-			dropItem(Items.SLIME_BALL, 1);
-		}
-	}
-	
+
+
 	@Override
 	protected SoundEvent getHurtSound(DamageSource src) {
 		return SoundEvents.ENTITY_ZOMBIE_HURT;
 	}
-	
+
+
 	@Override
 	protected SoundEvent getDeathSound() {
 		return AudioHandler.entityIllithidDeath;
 	}
-	
+
+
 	@Override
-	public boolean attackEntityAsMob(Entity ent) {
-		if (ent instanceof EntityPlayer) {
-			EntityPlayer player = (EntityPlayer) ent;
-			
-			if (!player.capabilities.isCreativeMode) {
-				if (player.inventory.armorInventory.get(3) != null) {
-					if (world.rand.nextInt(4 - DungeonMobsHelper.getDifficulty(world)) == 0) {
-						this.playSound(AudioHandler.entityIllithidPower, 1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
-						EntityItem helm = ent.entityDropItem(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD), 1.5F);
-						player.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
-					}
-				}
-			}
+	protected void dropFewItems(boolean par1, int par2) {
+		int var3;
+		int var4;
+
+		var3 = rand.nextInt(4);
+
+		for (var4 = 0; var4 < var3; var4++) {
+			dropItem(Items.SLIME_BALL, 1);
 		}
-		return super.attackEntityAsMob(ent);
 	}
-	
+
+
 	@Override
 	public boolean getCanSpawnHere() {
 		if (illithidIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
@@ -131,69 +150,61 @@ public class EntityIllithid extends EntityDungeonMob {
 		}
 		return super.getCanSpawnHere();
 	}
-	
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(45.0D * ConfigHandler.healthx);
-		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D * ConfigHandler.damagex + ConfigHandler.damageplus);
-		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
-	}
-	
+
+
 	@Override
 	public void onLivingUpdate() {
 		if (getAttackTarget() == null) {
 			Iterator thralls = dominatedEntities.iterator();
-			
+
 			while (thralls.hasNext()) {
 				EntityTameable winner = (EntityTameable) thralls.next();
 				winner.setAttackTarget(getAttackTarget());
 			}
 		}
-		
+
 		mindBlastTicks++;
-		
+
 		if (mindBlastTicks >= (60 - ((DungeonMobsHelper.getDifficulty(world) - 1) * 20))) {
-			List tameables = world.getEntitiesWithinAABB(EntityTameable.class, getEntityBoundingBox().expand(24.0F, 24.0F, 24.0F));
+			List tameables = world.getEntitiesWithinAABB(EntityTameable.class,
+					getEntityBoundingBox().expand(24.0F, 24.0F, 24.0F));
 			List want = new LinkedList<EntityTameable>();
-			
+
 			for (int i = 0; i < tameables.size(); i++) {
 				EntityTameable thrall = (EntityTameable) tameables.get(i);
-				
+
 				if (thrall.isTamed() && canEntityBeSeen(thrall)) {
-					if (thrall.getOwner() != null) want.add(thrall);
+					if (thrall.getOwner() != null)
+						want.add(thrall);
 				}
 			}
-			
+
 			Iterator iter = want.iterator();
-			
+
 			if (iter.hasNext()) {
 				EntityTameable target = (EntityTameable) iter.next();
-				
+
 				if (getAttackTarget() != null && getAttackTarget().equals((EntityLivingBase) target)) {
 					setAttackTarget(null);
 				}
-				
+
 				int ownerID = target.getOwner().getEntityId();
-				
+
 				EntityLivingBase victim = target.getOwner();
-				
+
 				target.setTamed(false);
-				
+
 				target.setRevengeTarget(getAttackTarget());
-				
+
 				if (getAttackTarget() == null) {
 					target.setAttackTarget((EntityLivingBase) world.getEntityByID(ownerID));
-				}
-				else {
+				} else {
 					target.setAttackTarget(getAttackTarget());
 				}
-				
+
 				dominatedEntities.add(target);
 				ownerIDs.put(target, victim);
-			}
-			else {
+			} else {
 				if (getAttackTarget() != null) {
 					Potion mf = MobEffects.MINING_FATIGUE;
 					if (!getAttackTarget().isPotionActive(mf)) {
@@ -203,31 +214,33 @@ public class EntityIllithid extends EntityDungeonMob {
 					if (!getAttackTarget().isPotionActive(slow)) {
 						getAttackTarget().addPotionEffect(new PotionEffect(slow, 240, 3));
 					}
-					if (getAttackTarget() instanceof EntityPlayer) stunnedEntity = getAttackTarget();
+					if (getAttackTarget() instanceof EntityPlayer)
+						stunnedEntity = getAttackTarget();
 				}
 			}
 			mindBlastTicks = 0;
 		}
-		
+
 		if (getAttackTarget() == null) {
 			stunnedEntity = null;
 		}
-		
+
 		if (stunnedEntity != null) {
 			tasks.addTask(2, grapple);
-			
-			if (!stunnedEntity.isPotionActive(MobEffects.MINING_FATIGUE) && !stunnedEntity.isPotionActive(MobEffects.SLOWNESS)) {
+
+			if (!stunnedEntity.isPotionActive(MobEffects.MINING_FATIGUE)
+					&& !stunnedEntity.isPotionActive(MobEffects.SLOWNESS)) {
 				tasks.removeTask(grapple);
 				stunnedEntity = null;
-			}
-			else if (stunnedEntity instanceof EntityPlayer) {
+			} else if (stunnedEntity instanceof EntityPlayer) {
 				EntityPlayer foo = (EntityPlayer) stunnedEntity;
-				
-				if (getEntityBoundingBox().expand(2.0F, 2.0F, 2.0F).intersects(foo.getEntityBoundingBox())) {
-					
+
+				if (getEntityBoundingBox().expand(2.0F, 2.0F, 2.0F)
+						.intersects(foo.getEntityBoundingBox())) {
+
 					isGrappling = true;
 					stunDuration++;
-					
+
 					ItemStack hat = null;
 					Iterable<ItemStack> armors = foo.getArmorInventoryList();
 					for (ItemStack slot : armors) {
@@ -239,74 +252,91 @@ public class EntityIllithid extends EntityDungeonMob {
 							}
 						}
 					}
-					
+
 					if (stunDuration % 30 == 0 && hat == null) {
 						tentacleCounter++;
-						
+
 						if (tentacleCounter > 4) {
 							tentacleCounter = 4;
 						}
 					}
-				}
-				else {
+				} else {
 					tentacleCounter = 0;
 					stunDuration = 0;
 					isGrappling = false;
 				}
-				
+
 				if (tentacleCounter == 4) {
 					getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(100.0D);
-				}
-				else {
+				} else {
 					getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(6.0D);
 				}
 			}
 		}
 		super.onLivingUpdate();
 	}
-	
+
+
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
-		super.writeEntityToNBT(nbt);
-		
-		nbt.setInteger("TentacleCounter", tentacleCounter);
-		nbt.setInteger("MindBlast", mindBlastTicks);
+	public boolean attackEntityAsMob(Entity ent) {
+		if (ent instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) ent;
+
+			if (!player.capabilities.isCreativeMode) {
+				if (player.inventory.armorInventory.get(3) != null) {
+					if (world.rand.nextInt(4 - DungeonMobsHelper.getDifficulty(world)) == 0) {
+						this.playSound(AudioHandler.entityIllithidPower,
+								1.0F, 1.0F / (getRNG().nextFloat() * 0.4F + 0.8F));
+						EntityItem helm = ent.entityDropItem(player.getItemStackFromSlot(EntityEquipmentSlot.HEAD), 1.5F);
+						player.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
+					}
+				}
+			}
+		}
+		return super.attackEntityAsMob(ent);
 	}
-	
-	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readEntityFromNBT(par1NBTTagCompound);
-		
-		tentacleCounter = par1NBTTagCompound.getInteger("TentacleCounter");
-		mindBlastTicks = par1NBTTagCompound.getInteger("MindBlast");
-	}
-	
+
+
 	public void stunTarget(EntityPlayer bar) {
 		bar.motionX *= 0.0D;
 		bar.motionY *= 0.0D;
 		bar.motionZ *= 0.0D;
 	}
-	
+
+
 	@Override
 	public void onDeath(DamageSource par1DamageSource) {
 		Iterator iter1 = dominatedEntities.iterator();
-		
+
 		while (iter1.hasNext()) {
 			EntityTameable thrall = (EntityTameable) iter1.next();
-			
+
 			EntityLivingBase bar = (EntityLivingBase) ownerIDs.get(thrall);
-			
+
 			thrall.setOwnerId(bar.getUniqueID());
 			thrall.setTamed(true);
-			
+
 			thrall.setAttackTarget(null);
 		}
-		
+
 		super.onDeath(par1DamageSource);
 	}
-	
+
+
 	@Override
-	public int getTotalArmorValue() {
-		return 5;
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+
+		nbt.setInteger("TentacleCounter", tentacleCounter);
+		nbt.setInteger("MindBlast", mindBlastTicks);
+	}
+
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+		super.readEntityFromNBT(par1NBTTagCompound);
+
+		tentacleCounter = par1NBTTagCompound.getInteger("TentacleCounter");
+		mindBlastTicks = par1NBTTagCompound.getInteger("MindBlast");
 	}
 }

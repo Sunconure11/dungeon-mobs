@@ -8,7 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderAhriman extends RenderLiving {
-	private static final ResourceLocation ahrimanTextures = new ResourceLocation(DungeonMobs.MODID + ":textures/entity/ahriman.png");
+	private static final ResourceLocation ahrimanTextures
+			= new ResourceLocation(DungeonMobs.MODID + ":textures/entity/ahriman.png");
 	protected ModelAhriman model;
 
 	public RenderAhriman(RenderManager renderManager, ModelAhriman modelA, float f) {

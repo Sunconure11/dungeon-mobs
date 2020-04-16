@@ -17,8 +17,8 @@ public class EntityCloudGenerator extends EntityThrowable {
 	private int duration; // Time to live
 	private int age;
 	private double sx, sy, sz;
-	
-	
+
+
 	public EntityCloudGenerator(World worldIn, EntityLivingBase thrower, PotionEffect effect) {
 		super(worldIn, thrower);
 		type = effect;
@@ -29,29 +29,15 @@ public class EntityCloudGenerator extends EntityThrowable {
 		sy = posY;
 		sz = posZ;
 	}
-	
-	@Override
-	public void onUpdate() {
-		if (!world.isRemote) {
-			spawnGas();
-		}
-		if ((traveled() > RANGE) || (++age > duration)) {
-			setDead();
-		}
-		super.onUpdate();
-	}
-	
-	@Override
-	public float getGravityVelocity() {
-		return 0.0f;
-	}
-	
+
+
 	@Override
 	protected void onImpact(RayTraceResult result) {
 		spawnAreaEffectCloud();
 		setDead();
 	}
-	
+
+
 	@Override
 	public void writeEntityToNBT(NBTTagCompound compound) {
 		super.writeEntityToNBT(compound);
@@ -63,7 +49,8 @@ public class EntityCloudGenerator extends EntityThrowable {
 		compound.setDouble("startY", sy);
 		compound.setDouble("startZ", sz);
 	}
-	
+
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);
@@ -74,9 +61,23 @@ public class EntityCloudGenerator extends EntityThrowable {
 		sy = compound.getDouble("startY");
 		sz = compound.getDouble("startZ");
 	}
-	
+
+
+	@Override
+	public void onUpdate() {
+		if (!world.isRemote) {
+			spawnGas();
+		}
+		if ((traveled() > RANGE) || (++age > duration)) {
+			setDead();
+		}
+		super.onUpdate();
+	}
+
+
 	private void spawnAreaEffectCloud() {
-		EntityAreaEffectCloud droppedCloud = new EntityAreaEffectCloud(world, posX, posY, posZ);
+		EntityAreaEffectCloud droppedCloud
+				= new EntityAreaEffectCloud(world, posX, posY, posZ);
 		float powerLeft = (float) (1.0f - (traveled() / RANGE));
 		droppedCloud.setOwner(getThrower());
 		droppedCloud.setDuration(duration - age);
@@ -87,9 +88,11 @@ public class EntityCloudGenerator extends EntityThrowable {
 		droppedCloud.addEffect(new PotionEffect(type.getPotion(), type.getDuration(), type.getAmplifier()));
 		world.spawnEntity(droppedCloud);
 	}
-	
+
+
 	private void spawnGas() {
-		EntityAreaEffectCloud tempCloud = new EntityAreaEffectCloud(world, posX, posY, posZ);
+		EntityAreaEffectCloud tempCloud
+				= new EntityAreaEffectCloud(world, posX, posY, posZ);
 		tempCloud.setOwner(getThrower());
 		tempCloud.setDuration(10);
 		tempCloud.setRadius(2.5f);
@@ -99,27 +102,34 @@ public class EntityCloudGenerator extends EntityThrowable {
 		tempCloud.addEffect(new PotionEffect(type.getPotion(), type.getDuration(), type.getAmplifier()));
 		world.spawnEntity(tempCloud);
 	}
-	
+
+
+	@Override
+	public float getGravityVelocity() {
+		return 0.0f;
+	}
+
+
 	private double traveled() {
 		return ((posX - sx) * (posX - sx)) + ((posY - sy) * (posY - sx)) + ((posZ - sz) * (posZ - sz));
 	}
-	
-	
+
+
 	@Override
 	public boolean hasNoGravity() {
 		return true;
 	}
-	
-	
+
+
 	@Override
 	public boolean isInWater() {
 		return false;
 	}
-	
-	
+
+
 	@Override
 	public boolean canBePushed() {
 		return false;
 	}
-	
+
 }
