@@ -11,6 +11,34 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    maven { url = "http://dvs1.progwml6.com/files/maven" }
+    maven { url = "https://minecraft.curseforge.com/api/maven" }
+    maven { url "http://maven.tterrag.com" }
+    maven { url "https://maven.blamejared.com" }
+    maven { url "https://maven.mcmoddev.com/" }
+    maven { url "http://repo.spongepowered.org/maven" }
+    maven {
+        name = "buildcraft"
+        url = "https://mod-buildcraft.com/maven"
+    }
+    maven {
+        name = "thiakil"
+        url = "http://maven.thiakil.com"
+    }
+    maven {
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        url = "http://minecraft.curseforge.com/api/maven/"
+    }
+}
+
+
 version = "5.8.6-MC1.12.2"
 group = "com.gw.dm" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "dungeonmobs"
@@ -34,6 +62,7 @@ minecraft {
 }
 
 dependencies {
+    deobfProvided "thaumcraft:Thaumcraft:1.12.2:6.1.BETA26"
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
