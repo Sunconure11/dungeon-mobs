@@ -1,0 +1,45 @@
+#Translate by AlexEgoist
+#Insta @garfield_2k15
+
+
+
+tile.dungeonmobs.bladetrap.name=Ловушка лезвие
+block.dungeonmobs.bladetrap.name=Ловушка лезвие
+entity.dungeonmobs.dmbladetrap.name=Ловушка лезвие
+entity.dungeonmobs.dmrustmonster.name=Ржавый Монстр
+entity.dungeonmobs.dmghoul.name=Упырь
+entity.dungeonmobs.dmshrieker.name=Шрикер
+entity.dungeonmobs.dmumberhulk.name=Умбра Халк
+entity.dungeonmobs.dmhookhorror.name=Ужасный Крюк
+entity.dungeonmobs.dmbeholder.name=Очевидец
+entity.dungeonmobs.dmeyeray.name=Лучевой глаз
+entity.dungeonmobs.dmtroll.name=Тролль
+entity.dungeonmobs.dmcavefisher.name=Пещерный Рыбак
+entity.dungeonmobs.dmdestrachan.name=Дэстрашан
+entity.dungeonmobs.dmsonicboom.name=Ударная Волна
+entity.dungeonmobs.dmillithid.name=Иллитид
+entity.dungeonmobs.dmnetherhound.name=Адский пёс
+entity.dungeonmobs.dmhellhound.name=Адский пёс
+entity.dungeonmobs.dmrakshasa.name=Ракшаса
+entity.dungeonmobs.dmrakshasaimage.name=Ракшаса
+entity.dungeonmobs.dmmagicmissile.name=Волшебная ракета
+entity.dungeonmobs.dmlizalfos.name=Лизальфос
+entity.dungeonmobs.dmcockatrice.name=Василиск
+entity.dungeonmobs.dmpetrified.name=Статуя
+entity.dungeonmobs.dmmanticore.name=Мантикора
+entity.dungeonmobs.dmthoqqua.name=Токкуа
+entity.dungeonmobs.dmrevenant.name=Потусторонний
+entity.dungeonmobs.dmvampire.name=Вампир
+entity.dungeonmobs.dmfallenangel.name=Падший Ангел
+entity.dungeonmobs.dmlightball.name=Cветлый шар
+entity.dungeonmobs.dmeldermob.name=Внешняя вещь
+entity.dungeonmobs.dmghost.name=Привидение
+tile.lavarock.name=Магмовый камень
+entity.dungeonmobs.dmvescavor.name=Вескавор
+death.attack.bladetrap=%s был убит ловушкой лезвием
+death.attack.petrified=%s был превращён в камень
+death.attack.energydrain=%s жизненная сила была поглощена
+block.dungeonmobs.beamos.name=Беамос
+tile.dungeonmobs.beamos.name=Беамос
+entity.dungeonmobs.dmbeamosbeam.name=Лазер Беамоса
+effect.dungeonmobs.addled=Испорченный

@@ -633,7 +633,7 @@
     "category": "entity",
     "sounds": [
       {
-        "name": "dungeonmobs:g2_l",
+        "name": "dungeonmobs:g2_l1",
         "stream": true
       }
     ]
