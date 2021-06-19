@@ -110,31 +110,30 @@ public class EntityCockatrice extends EntityDungeonMob {
 
 	@Override
 	public boolean attackEntityAsMob(Entity ent) {
-		int moo = world.rand.nextInt(100) + 1;
+		int chance = world.rand.nextInt(100) + 1;
 
-		if ((moo < stoneChance)
+		if ((chance < stoneChance)
 				&& (ent instanceof EntityPlayer)
 				&& (!world.isRemote)
 				&& (ent.ticksExisted > 100)) {
-			EntityPlayer cow = (EntityPlayer) ent;
+			EntityPlayer player = (EntityPlayer) ent;
 
-			if (!cow.capabilities.isCreativeMode) {
+			if (!player.capabilities.isCreativeMode) {
 				super.playSound(AudioHandler.entityCockatriceStone, 1.0f, 1.0f);
 
-				EntityPetrified foo = new EntityPetrified(world);
-				EntityPlayer bar = (EntityPlayer) ent;
+				EntityPetrified statue = new EntityPetrified(world);
 
-				foo.setLocationAndAngles(bar.posX, bar.posY, bar.posZ, bar.rotationYaw, bar.rotationPitch);
+				statue.setLocationAndAngles(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 
-				foo.setStuff(bar);
+				statue.setStuff(player);
 
-				bar.attackEntityFrom(DungeonMobsDamageSource.PETRIFIED, 1024);
+				player.attackEntityFrom(DungeonMobsDamageSource.PETRIFIED, 1024);
 
 				incoming = true;
 				waitTick = true;
-				stonedPlayer = foo;
+				stonedPlayer = statue;
 			}
-		} else if (moo < stoneChance && !world.isRemote) {
+		} else if (chance < stoneChance && !world.isRemote) {
 			int a = (int) ent.posX;
 			int b = (int) ent.getEntityBoundingBox().minY;
 			int c = (int) ent.posZ;

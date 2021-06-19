@@ -17,6 +17,7 @@ import com.gw.dm.DungeonMobsDamageSource;
 import com.gw.dm.util.ConfigHandler;
 
 public class EntityLightball extends EntityThrowable {
+	private static final double RANGE = 160.0d * 160.0d;
 	public static final DamageSource LIGHT_BALL = DungeonMobsDamageSource.LIGHT_BALL;
 	private int age;
 
@@ -102,12 +103,15 @@ public class EntityLightball extends EntityThrowable {
 
 	@Override
 	public void onUpdate() {
-		age++;
-		if ((age >= 72) && world.isRemote) {
-			world.newExplosion(this, posX, posY, posZ, 1, false, false);
+		try {
+			age++;
+			if ((age >= 72)) {
+				this.setDead();
+			}
+			super.onUpdate();
+		} catch(Exception e) {
 			this.setDead();
 		}
-		super.onUpdate();
 	}
 
 
@@ -116,8 +120,8 @@ public class EntityLightball extends EntityThrowable {
 		super.writeEntityToNBT(compound);
 		compound.setInteger("Age", age);
 	}
-
-
+	
+	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound compound) {
 		super.readEntityFromNBT(compound);

@@ -39,7 +39,7 @@ repositories {
 }
 
 
-version = "5.8.6-MC1.12.2"
+version = "5.8.7-MC1.12.2"
 group = "com.gw.dm" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "dungeonmobs"
 

@@ -133,16 +133,16 @@ public class AIAngelWander extends EntityAIBase {
 					double diffEffect;
 					switch (owner.world.getDifficulty()) {
 						case EASY:
-							diffEffect = 0.75;
+							diffEffect = 0.075;
 							break;
 						case HARD:
-							diffEffect = 0.1;
+							diffEffect = 0.085;
 							break;
 						case NORMAL:
 						default:
-							diffEffect = 0.1125;
+							diffEffect = 0.080;
 					}
-					double ra = (speed / dist) * diffEffect * 0.85;
+					double ra = (speed / dist) * diffEffect;
 					dx = dx * ra;
 					dy = dy * ra;
 					dz = dz * ra;

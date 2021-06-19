@@ -148,12 +148,12 @@ public class EntityVampire extends EntityDungeonMob implements IBeMagicMob {
 				}
 				player.addExperienceLevel(levels);
 			}
-			heal(2.0f);
+			heal(2.0f * (-levels));
 		} else if(victim instanceof EntityLiving) {
 			EntityLiving mob = (EntityLiving)victim;
 			mob.attackEntityFrom(DungeonMobsDamageSource.ENERGY_DRAIN, 
-					(exhaustion / 2) - levels);
-			heal(2.0f);
+					(exhaustion / 2) - (levels * 5));
+			heal(2.0f * (-levels));
 		}
 	}
 
