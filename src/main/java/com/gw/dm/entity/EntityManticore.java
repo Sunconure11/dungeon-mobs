@@ -129,7 +129,7 @@ public class EntityManticore extends EntityDungeonMob implements IRangedAttackMo
 		if (manticoreIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
-		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
 			return false;
 		}
 		if (this.posY > 42.0D && !this.ignoreHeight) {

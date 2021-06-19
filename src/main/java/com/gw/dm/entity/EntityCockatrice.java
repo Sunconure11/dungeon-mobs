@@ -85,7 +85,7 @@ public class EntityCockatrice extends EntityDungeonMob {
 		if (cockatriceIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
-		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)))
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight)
 			return false;
 
 		if (posY > 64.0D && !ignoreHeight)

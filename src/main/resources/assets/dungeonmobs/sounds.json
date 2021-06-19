@@ -664,5 +664,68 @@
         "stream": true
       }
     ]
+  },
+  "db_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:db_l",
+        "stream": true
+      }
+    ]
+  },
+  "db_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:db_h",
+        "stream": true
+      }
+    ]
+  },
+  "ml_l1": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ml_l1",
+        "stream": true
+      }
+    ]
+  },
+  "ml_l2": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ml_l2",
+        "stream": true
+      }
+    ]
+  },
+  "ml_h": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:ml_h",
+        "stream": true
+      }
+    ]
+  },
+  "tq_l": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:tq_l",
+        "stream": true
+      }
+    ]
+  },
+  "tq_lh": {
+    "category": "entity",
+    "sounds": [
+      {
+        "name": "dungeonmobs:tq_lh",
+        "stream": true
+      }
+    ]
   }
 }

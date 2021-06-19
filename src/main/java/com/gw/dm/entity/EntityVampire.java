@@ -170,7 +170,7 @@ public class EntityVampire extends EntityDungeonMob implements IBeMagicMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
-		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {
+		if (world.canSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
 			return false;
 		}
 		if (vampireIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {

@@ -142,7 +142,7 @@ public class EntityIllithid extends EntityDungeonMob {
 		if (illithidIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
-		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
 			return false;
 		}
 		if (posY > 32.0D && !ignoreHeight) {

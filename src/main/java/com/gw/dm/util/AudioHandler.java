@@ -100,6 +100,16 @@ public class AudioHandler {
 	public static SoundEvent entityGhostAmbient2;
 	public static SoundEvent entityGhostHurt;
 	public static SoundEvent entityGhostDeath;
+	
+	public static SoundEvent entityDisplacerAmbient;
+	public static SoundEvent entityDisplacerHurt;
+	
+	public static SoundEvent entityMaralithAmbient1;
+	public static SoundEvent entityMaralithAmbient2;
+	public static SoundEvent entityMaralithHurt;
+	
+	public static SoundEvent entityTarasqueAmbient;
+	public static SoundEvent entityTarasqueHurt;
 
 
 	public static void registerSounds() {
@@ -203,6 +213,16 @@ public class AudioHandler {
 		entityGhostAmbient2 = registerSound("g2_l2");
 		entityGhostHurt = registerSound("g2_h");
 		entityGhostDeath = registerSound("g2_d");
+		
+		entityMaralithAmbient1 = registerSound("ml_l1");
+		entityMaralithAmbient2 = registerSound("ml_l2");
+		entityMaralithHurt = registerSound("ml_h");
+		
+		entityDisplacerAmbient = registerSound("db_l");
+		entityDisplacerHurt = registerSound("db_lh");
+		
+		entityTarasqueAmbient = registerSound("tq_l");
+		entityTarasqueHurt = registerSound("tq_lh");
 	}
 
 
