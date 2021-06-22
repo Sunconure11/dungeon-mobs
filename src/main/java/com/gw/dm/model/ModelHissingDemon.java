@@ -58,27 +58,25 @@ public class ModelHissingDemon extends ModelBase {
 		textureHeight = 96;
 
 		head = hbone = new ModelRenderer(this);
-		hbone.setRotationPoint(8.0F, -2.0F, 0.0F);
-		hbone.cubeList.add(new ModelBox(hbone, 0, 0, -14.0F, -7.0F, -3.0F, 12, 12, 12, 0.0F, false));
+		hbone.setRotationPoint(0.0F, 1.0F, 0.0F);
+		hbone.cubeList.add(new ModelBox(hbone, 0, 0, -6.0F, -22.0F, -3.0F, 12, 12, 12, 0.0F, false));
 
 		ab1 = new ModelRenderer(this);
-		ab1.setRotationPoint(-8.0F, 12.0F, 0.0F);
+		ab1.setRotationPoint(-6.0F, 2.0F, 0.0F);
 		
 
 		arm1_r1 = new ModelRenderer(this);
-		arm1_r1.setRotationPoint(2.0F, -9.0F, 0.0F);
+		arm1_r1.setRotationPoint(0.0F, -9.0F, 0.0F);
 		ab1.addChild(arm1_r1);
-		//setRotationAngle(arm1_r1, 0.0F, 0.0F, 2.3562F);
-		arm1_r1.cubeList.add(new ModelBox(arm1_r1, 0, 61, -2.5F, 0.15F, 0.75F, 4, 18, 4, 0.0F, false));
+		arm1_r1.cubeList.add(new ModelBox(arm1_r1, 0, 61, -2.4289F, -1.9211F, 0.75F, 4, 18, 4, 0.0F, false));
 
 		ab2 = new ModelRenderer(this);
-		ab2.setRotationPoint(-8.0F, -4.0F, 0.0F);
+		ab2.setRotationPoint(-6.0F, 5.0F, 0.0F);
 		
 
 		arm2_r1 = new ModelRenderer(this);
-		arm2_r1.setRotationPoint(2.0F, 8.5F, 0.0F);
+		arm2_r1.setRotationPoint(0.0F, -9.5F, 0.0F);
 		ab2.addChild(arm2_r1);
-		//setRotationAngle(arm2_r1, 0.0F, 0.0F, 1.5708F);
 		arm2_r1.cubeList.add(new ModelBox(arm2_r1, 21, 61, -1.75F, 0.15F, 0.825F, 4, 18, 4, 0.0F, false));
 
 		ab3 = new ModelRenderer(this);
@@ -86,29 +84,26 @@ public class ModelHissingDemon extends ModelBase {
 		
 
 		arm3_r1 = new ModelRenderer(this);
-		arm3_r1.setRotationPoint(3.0F, -9.0F, 0.0F);
+		arm3_r1.setRotationPoint(3.0F, -17.0F, 0.0F);
 		ab3.addChild(arm3_r1);
-		//setRotationAngle(arm3_r1, 0.0F, 0.0F, 0.7854F);
-		arm3_r1.cubeList.add(new ModelBox(arm3_r1, 0, 61, -1.0F, 0.15F, 0.675F, 4, 18, 5, 0.0F, false));
+		arm3_r1.cubeList.add(new ModelBox(arm3_r1, 0, 61, -2.3431F, -1.1931F, 0.675F, 4, 18, 5, 0.0F, false));
 
 		ab4 = new ModelRenderer(this);
 		ab4.setRotationPoint(-8.0F, 12.0F, 0.0F);
 		
 
 		arm4_r1 = new ModelRenderer(this);
-		arm4_r1.setRotationPoint(14.0F, -9.0F, 0.0F);
+		arm4_r1.setRotationPoint(14.0F, -19.0F, 0.0F);
 		ab4.addChild(arm4_r1);
-		//setRotationAngle(arm4_r1, 0.0F, 0.0F, -2.3562F);
-		arm4_r1.cubeList.add(new ModelBox(arm4_r1, 0, 61, -1.0F, 0.15F, 0.75F, 4, 18, 5, 0.0F, false));
+		arm4_r1.cubeList.add(new ModelBox(arm4_r1, 0, 61, -2.0711F, -1.9211F, 0.75F, 4, 18, 5, 0.0F, false));
 
 		ab5 = new ModelRenderer(this);
 		ab5.setRotationPoint(-8.0F, -4.0F, 0.0F);
 		
 
 		arm5_r1 = new ModelRenderer(this);
-		arm5_r1.setRotationPoint(14.0F, 8.5F, 0.0F);
+		arm5_r1.setRotationPoint(14.0F, -0.5F, 0.0F);
 		ab5.addChild(arm5_r1);
-		//setRotationAngle(arm5_r1, 0.0F, 0.0F, -1.5708F);
 		arm5_r1.cubeList.add(new ModelBox(arm5_r1, 21, 61, -1.75F, 0.15F, 0.825F, 4, 18, 4, 0.0F, false));
 
 		ab6 = new ModelRenderer(this);
@@ -116,45 +111,44 @@ public class ModelHissingDemon extends ModelBase {
 		
 
 		arm6_r1 = new ModelRenderer(this);
-		arm6_r1.setRotationPoint(15.0F, -9.0F, 0.0F);
+		arm6_r1.setRotationPoint(15.0F, -17.0F, 0.0F);
 		ab6.addChild(arm6_r1);
-		//setRotationAngle(arm6_r1, 0.0F, 0.0F, -0.7854F);
-		arm6_r1.cubeList.add(new ModelBox(arm6_r1, 0, 61, -2.5F, 0.15F, 0.675F, 4, 18, 5, 0.0F, false));
+		arm6_r1.cubeList.add(new ModelBox(arm6_r1, 0, 61, -2.1569F, -2.1931F, 0.675F, 4, 18, 5, 0.0F, false));
 
 		t1 = new ModelRenderer(this);
-		t1.setRotationPoint(-9.0F, 15.0F, 0.0F);
-		t1.cubeList.add(new ModelBox(t1, 43, 17, 4.0F, 1.0F, 12.0F, 10, 8, 8, 0.0F, false));
+		t1.setRotationPoint(0.0F, 15.0F, 0.0F);
+		t1.cubeList.add(new ModelBox(t1, 43, 17, -5.0F, -4.0F, 4.0F, 10, 8, 8, 0.0F, false));
 
 		t2 = new ModelRenderer(this);
-		t2.setRotationPoint(-9.0F, 15.0F, 0.0F);
-		t2.cubeList.add(new ModelBox(t2, 0, 44, 5.0F, 1.0F, 19.0F, 8, 8, 8, 0.0F, false));
+		t2.setRotationPoint(0.0F, 15.0F, 0.0F);
+		t2.cubeList.add(new ModelBox(t2, 0, 44, -4.0F, 1.0F, 6.0F, 8, 8, 8, 0.0F, false));
 
 		t3 = new ModelRenderer(this);
-		t3.setRotationPoint(-9.0F, 15.0F, 0.0F);
-		t3.cubeList.add(new ModelBox(t3, 51, 0, 5.0F, 1.0F, 27.0F, 8, 8, 8, 0.0F, false));
+		t3.setRotationPoint(0.0F, 15.0F, 0.0F);
+		t3.cubeList.add(new ModelBox(t3, 51, 0, -4.0F, 1.0F, 14.0F, 8, 8, 8, 0.0F, false));
 
 		t4 = new ModelRenderer(this);
-		t4.setRotationPoint(-9.0F, 15.0F, 0.0F);
-		t4.cubeList.add(new ModelBox(t4, 40, 63, 6.0F, 3.0F, 34.0F, 6, 6, 6, 0.0F, false));
+		t4.setRotationPoint(0.0F, 15.0F, 0.0F);
+		t4.cubeList.add(new ModelBox(t4, 40, 63, -3.0F, 3.0F, 22.0F, 6, 6, 6, 0.0F, false));
 
 		t5 = new ModelRenderer(this);
 		t5.setRotationPoint(0.0F, 24.0F, 0.0F);
-		t5.cubeList.add(new ModelBox(t5, 65, 63, -2.0F, -4.0F, 40.0F, 4, 4, 4, 0.0F, false));
+		t5.cubeList.add(new ModelBox(t5, 65, 63, -2.0F, -4.0F, 28.0F, 4, 4, 4, 0.0F, false));
 
 		t6 = new ModelRenderer(this);
 		t6.setRotationPoint(0.0F, 24.0F, 0.0F);
-		t6.cubeList.add(new ModelBox(t6, 39, 0, -1.5F, -3.0F, 44.0F, 3, 3, 3, 0.0F, false));
+		t6.cubeList.add(new ModelBox(t6, 39, 0, -1.5F, -3.0F, 32.0F, 3, 3, 3, 0.0F, false));
 
 		t7 = new ModelRenderer(this);
 		t7.setRotationPoint(0.0F, 24.0F, 0.0F);
-		t7.cubeList.add(new ModelBox(t7, 0, 0, -1.0F, -2.0F, 47.0F, 2, 2, 2, 0.0F, false));
+		t7.cubeList.add(new ModelBox(t7, 0, 0, -1.0F, -2.0F, 35.0F, 2, 2, 2, 0.0F, false));
 
 		bb_main = new ModelRenderer(this);
 		bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
-		bb_main.cubeList.add(new ModelBox(bb_main, 0, 25, -7.0F, -9.0F, 3.0F, 14, 9, 9, 0.0F, false));
-		bb_main.cubeList.add(new ModelBox(bb_main, 41, 38, -6.0F, -21.0F, 0.0F, 12, 18, 6, 0.0F, false));
-		bb_main.cubeList.add(new ModelBox(bb_main, 27, 44, -5.0F, -18.0F, -1.5F, 4, 3, 2, 0.0F, false));
-		bb_main.cubeList.add(new ModelBox(bb_main, 27, 44, 1.0F, -18.0F, -1.5F, 4, 3, 2, 0.0F, true));
+		bb_main.cubeList.add(new ModelBox(bb_main, 0, 25, -7.0F, -19.0F, 1.0F, 14, 9, 9, 0.0F, false));
+		bb_main.cubeList.add(new ModelBox(bb_main, 41, 38, -6.0F, -33.0F, 0.0F, 12, 18, 6, 0.0F, false));
+		bb_main.cubeList.add(new ModelBox(bb_main, 27, 44, -5.0F, -31.0F, -1.5F, 4, 3, 2, 0.0F, false));
+		bb_main.cubeList.add(new ModelBox(bb_main, 27, 44, 1.0F, -31.0F, -1.5F, 4, 3, 2, 0.0F, true));
 		
 		arms = new ModelRenderer[6];		
 		arms[0] = arm1_r1;
@@ -202,28 +196,29 @@ public class ModelHissingDemon extends ModelBase {
 		head.rotateAngleY = netHeadYaw * 0.017453292F;
 		head.rotateAngleX = headPitch * 0.017453292F;
 		
-		//Temporary hack to see if it works
-		limbSwing = ageInTicks;
-		limbSwingAmount = 0.025f;
-		
         arms[0].rotateAngleZ = ARM1Z;
         arms[1].rotateAngleZ = ARM2Z;
         arms[2].rotateAngleZ = ARM3Z;
         arms[0].rotateAngleY = arms[1].rotateAngleY = arms[2].rotateAngleY = 0f; 
-        arms[0].rotateAngleX = arms[1].rotateAngleX = arms[2].rotateAngleX = 0f; 
+        arms[0].rotateAngleX = arms[1].rotateAngleX = arms[2].rotateAngleX = -ARM3Z; 
         arms[3].rotateAngleZ  = -ARM1Z;
         arms[4].rotateAngleZ  = -ARM2Z;
         arms[5].rotateAngleZ  = -ARM3Z;
         arms[3].rotateAngleY  = arms[4].rotateAngleY  = arms[5].rotateAngleY  = 0f;
-        arms[3].rotateAngleX  = arms[4].rotateAngleX  = arms[5].rotateAngleX  = 0f;
+        arms[3].rotateAngleX  = arms[4].rotateAngleX  = arms[5].rotateAngleX  = -ARM3Z;
 
-        tail[0].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[0]) * tailMov[0] * limbSwingAmount * 16f;
-        tail[1].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[1]) * tailMov[1] * limbSwingAmount * 16f;
-        tail[2].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[2]) * tailMov[2] * limbSwingAmount * 16f;
-        tail[3].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[3]) * tailMov[3] * limbSwingAmount * 16f;
-        tail[4].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[4]) * tailMov[4] * limbSwingAmount * 16f;
-        tail[5].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[5]) * tailMov[5] * limbSwingAmount * 16f;
-        tail[6].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[6]) * tailMov[6] * limbSwingAmount * 16f;
+        tail[0].offsetX = MathHelper.cos(limbSwing * 0.2666f + tailAng[0]) * tailMov[0] * limbSwingAmount / 2f;
+        tail[1].offsetX = MathHelper.cos(limbSwing * 0.2666f + tailAng[1]) * tailMov[1] * limbSwingAmount / 2f;
+        tail[2].offsetX = MathHelper.cos(limbSwing * 0.2666f + tailAng[2]) * tailMov[2] * limbSwingAmount / 2f;
+        tail[3].offsetX = MathHelper.cos(limbSwing * 0.2666f + tailAng[3]) * tailMov[3] * limbSwingAmount / 2f;
+        tail[4].offsetX = MathHelper.cos(limbSwing * 0.2666f + tailAng[4]) * tailMov[4] * limbSwingAmount / 2f;
+        tail[5].offsetX = MathHelper.cos(limbSwing * 0.2666f + tailAng[5]) * tailMov[5] * limbSwingAmount / 2f;
+        tail[6].offsetX = MathHelper.cos(limbSwing * 0.2666f + tailAng[6]) * tailMov[6] * limbSwingAmount / 2f;
+	}
+
+
+	public void postRenderArm(float scale, int hand) {
+        arms[hand].postRender(scale);
 	}
 	
 	
