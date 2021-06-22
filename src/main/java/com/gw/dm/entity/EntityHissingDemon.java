@@ -6,48 +6,40 @@ import java.util.List;
 
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
-import com.gw.dm.ai.AIAngelAttack;
-import com.gw.dm.ai.AIAngelWander;
-import com.gw.dm.ai.TaskAngelAgroOnPlayer;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.ConfigHandler;
 
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIFindEntityNearestPlayer;
-import net.minecraft.entity.ai.EntityAIFleeSun;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILeapAtTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIRestrictSun;
 import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.ai.EntityAIZombieAttack;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.network.play.server.SPacketAnimation;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 
 public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRangedAttackMob, IBeMagicMob  {	
 	private static String mobName = DungeonMobs.MODID + ":dmmaralith";
@@ -103,7 +95,7 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(12.0d);
 		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(4.0d);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(9.0d 
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0d 
 				* ConfigHandler.damagex + ConfigHandler.damageplus);
 		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(32.0d);
 	}
@@ -138,7 +130,6 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 	
 	
 	public ItemStack getHeldItem(final int hand) {
-		//System.err.println("Item #" + hand  + " requested, returning " + hands.get(hand));
 		return hands.get(hand);
 	}
 	
@@ -146,7 +137,9 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 	private void setHandWeapons(DifficultyInstance difficulty) {
 		for(int i = 0; i < hands.size(); i++) {
 			hands.set(i, getHandWeapon(difficulty));
-			//System.err.println(hands.get(i));
+			shuffle = 0;
+			Collections.shuffle(handshuffler, rand);
+			armInUse = handshuffler.get(shuffle);
 		}
 	}
 	
@@ -215,14 +208,66 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 	}
 	
 	
+	@Override
+	public boolean attackEntityAsMob(Entity entity) {
+		float damage;
+		int knockback = 0;
+		boolean hit = false;
+		ItemStack weaponStack = getHeldItemMainhand();
+		Item weapon = weaponStack.getItem();
+		boolean isSword = weapon instanceof ItemSword; 
+		if(isSword) {
+			damage = ((ItemSword)weapon).getAttackDamage() + 1.0f;
+		} else {
+			damage = 10.0f;
+		}
+		if(entity instanceof EntityLivingBase) {
+			EntityLivingBase victim = (EntityLivingBase)entity;			
+	        if (victim instanceof EntityLivingBase) {
+	            damage += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase)victim).getCreatureAttribute());
+	            knockback += EnchantmentHelper.getKnockbackModifier(this);
+	        }
+	        hit = victim.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
+	        if(hit) {
+	        	int burn;
+	        	if((burn = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.FIRE_ASPECT, victim)) > 0) {
+	        		victim.setFire(burn * 4);
+	        	}
+	            if (victim instanceof EntityPlayer) {
+	                EntityPlayer player = (EntityPlayer)victim;
+	                ItemStack itemstack = player.isHandActive() ? player.getActiveItemStack() : ItemStack.EMPTY;
+	                if(!itemstack.isEmpty() && itemstack.getItem().isShield(itemstack, player)) {
+		                if (isSword) {
+		                    if (this.rand.nextFloat() < 0.20f) {
+		                        player.getCooldownTracker().setCooldown(itemstack.getItem(), 50 + rand.nextInt(50));
+		                        world.setEntityState(player, (byte)30);
+		                    }
+		                } else {
+		                    float chance = 0.50F + (float)EnchantmentHelper.getEfficiencyModifier(this) * 0.05F;
+		                    if (this.rand.nextFloat() < chance) {
+		                        player.getCooldownTracker().setCooldown(itemstack.getItem(), 100 + rand.nextInt(50));
+		                        world.setEntityState(player, (byte)30);
+		                    }
+		                }
+	                }	                
+	            }
+	            applyEnchantments(this, entity);
+	        }
+		} else {
+			hit = entity.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
+		}
+		nextHand();
+		return hit;
+	}
+	
+	
 	public void nextHand() {
 		shuffle++;
-		if(shuffle > handshuffler.size() || shuffle < 0) {
+		if(shuffle >= handshuffler.size() || shuffle < 0) {
 			shuffle = 0;
 			Collections.shuffle(handshuffler, rand);
 		}
 		armInUse = handshuffler.get(shuffle);
-		setArmToSwing(armInUse);
 	}
 
 
@@ -232,18 +277,8 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 	}
 
 
-	public void setArmToSwing(int arm) {
-		dataManager.set(SWINGING_ARM, Integer.valueOf(arm));
-	}
-
-
 	public boolean isMeleeSwinging() {
 		return ((Boolean) dataManager.get(SWINGING_ARMS)).booleanValue();
-	}
-
-
-	public int getArmSwinging() {
-		return ((Integer) dataManager.get(SWINGING_ARM)).intValue();
 	}
 
 
