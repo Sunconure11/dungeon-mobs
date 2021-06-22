@@ -217,6 +217,7 @@ public class ModelHissingDemon extends ModelBase {
         arms[3].rotateAngleY  = arms[4].rotateAngleY  = arms[5].rotateAngleY  = 0f;
         arms[3].rotateAngleX  = arms[4].rotateAngleX  = arms[5].rotateAngleX  = 0f;
 
+        tail[0].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[0]) * tailMov[0] * limbSwingAmount * 16f;
         tail[1].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[1]) * tailMov[1] * limbSwingAmount * 16f;
         tail[2].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[2]) * tailMov[2] * limbSwingAmount * 16f;
         tail[3].offsetX = MathHelper.cos(limbSwing * 0.6662F + tailAng[3]) * tailMov[3] * limbSwingAmount * 16f;

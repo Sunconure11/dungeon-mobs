@@ -41,6 +41,7 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 
 	public EntityHissingDemon(World worldIn) {
 		super(worldIn);
+        this.setSize(0.9F, 3.5F);
         this.isImmuneToFire = true;
         this.experienceValue = 50;
         for(int i = 0; i < 6; i++) {
