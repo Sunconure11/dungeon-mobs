@@ -82,17 +82,17 @@ public class ModelFallenAngel extends ModelBase {
 	@Override
 	public void render(Entity entity, float limbSwing, float limbSwingAmount,
 	                   float age, float headYaw, float headPitch, float scale) {
-		GlStateManager.pushMatrix();
-		head.render(scale);
-		torso.render(scale);
-		rightArm.render(scale);
-		leftArm.render(scale);
-		base1.render(scale);
-		base2.render(scale);
-		base3.render(scale);
-		rightWing.render(scale);
-		leftWing.render(scale);
-		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix(); {
+			head.render(scale);
+			torso.render(scale);
+			rightArm.render(scale);
+			leftArm.render(scale);
+			base1.render(scale);
+			base2.render(scale);
+			base3.render(scale);
+			rightWing.render(scale);
+			leftWing.render(scale);
+		} GlStateManager.popMatrix();
 	}
 
 
@@ -120,8 +120,6 @@ public class ModelFallenAngel extends ModelBase {
 			rightArm.rotateAngleZ = 0.0f;
 			leftArm.rotateAngleZ = 0.0f;
 		}
-
-
 	}
 
 

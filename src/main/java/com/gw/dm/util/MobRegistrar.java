@@ -103,14 +103,6 @@ import static com.gw.dm.util.ConfigHandler.vescavorP;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.DungeonHooks;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-
 import com.gw.dm.entity.EntityAhriman;
 import com.gw.dm.entity.EntityBladeTrap;
 import com.gw.dm.entity.EntityCaveFisher;
@@ -120,6 +112,7 @@ import com.gw.dm.entity.EntityEldermob;
 import com.gw.dm.entity.EntityFallenAngel;
 import com.gw.dm.entity.EntityGhost;
 import com.gw.dm.entity.EntityGhoul;
+import com.gw.dm.entity.EntityHissingDemon;
 import com.gw.dm.entity.EntityHookHorror;
 import com.gw.dm.entity.EntityIllithid;
 import com.gw.dm.entity.EntityLizalfos;
@@ -140,6 +133,14 @@ import com.gw.dm.projectile.EntityEldermobBall;
 import com.gw.dm.projectile.EntityEyeRay;
 import com.gw.dm.projectile.EntityLightball;
 import com.gw.dm.projectile.EntityMagicMissile;
+
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.DungeonHooks;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class MobRegistrar {
 	public static final int revenantID = 0;
@@ -177,6 +178,7 @@ public class MobRegistrar {
 	public static final int eldermobID = 34;
 	public static final int fireparticloidID = 35;
 	public static final int ghostID = 36;
+	public static final int maralithID = 37;
 
 	// FIXME: All identifiers should now be all lower case!
 
@@ -340,6 +342,12 @@ public class MobRegistrar {
 			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmghost"),
 					EntityGhost.class, MODID + ".dmghost", ghostID, instance, 80, 3,
 					true, 0xffffff, 0xe0e0e8);
+		}
+		// HISSING DEMON
+		if (true) {
+			EntityRegistry.registerModEntity(new ResourceLocation(MODID, "dmmaralith"),
+					EntityHissingDemon.class, MODID + ".dmmaralith", maralithID, instance, 80, 3,
+					true, 0x003300, 0x550000);
 		}
 	}
 

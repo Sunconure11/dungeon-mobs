@@ -7,9 +7,11 @@ import javax.annotation.Nullable;
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
 import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
 import com.gw.dm.util.DungeonMobsHelper;
 
 import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -23,8 +25,31 @@ public class EntityTarasque extends EntityDungeonMob implements IBeMagicMob {
 
 	public EntityTarasque(World worldIn) {
 		super(worldIn);
+        this.isImmuneToFire = true;
+        this.experienceValue = 75;
 		// TODO Auto-generated constructor stub
 	}
+
+
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(200.0d 
+				* ConfigHandler.healthx);
+		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(1.0d);;
+		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5d);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(20.0d);
+		getEntityAttribute(SharedMonsterAttributes.ARMOR_TOUGHNESS).setBaseValue(20.0d);
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0d 
+				* ConfigHandler.damagex + ConfigHandler.damageplus);
+		getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(20.0d);
+	}
+
+	
+	@Override
+    public boolean isNonBoss() {
+        return false;
+    }
 
 
 	@Override
