@@ -147,8 +147,8 @@ public class ModelHissingDemon extends ModelBase {
 		bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
 		bb_main.cubeList.add(new ModelBox(bb_main, 0, 25, -7.0F, -19.0F, 1.0F, 14, 9, 9, 0.0F, false));
 		bb_main.cubeList.add(new ModelBox(bb_main, 41, 38, -6.0F, -33.0F, 0.0F, 12, 18, 6, 0.0F, false));
-		bb_main.cubeList.add(new ModelBox(bb_main, 27, 44, -5.0F, -31.0F, -1.5F, 4, 3, 2, 0.0F, false));
-		bb_main.cubeList.add(new ModelBox(bb_main, 27, 44, 1.0F, -31.0F, -1.5F, 4, 3, 2, 0.0F, true));
+		bb_main.cubeList.add(new ModelBox(bb_main, 27, 44, -5.0F, -30.0F, -1.5F, 4, 3, 2, 0.0F, false));
+		bb_main.cubeList.add(new ModelBox(bb_main, 27, 44, 1.0F, -30.0F, -1.5F, 4, 3, 2, 0.0F, true));
 		
 		arms = new ModelRenderer[6];		
 		arms[0] = arm1_r1;
