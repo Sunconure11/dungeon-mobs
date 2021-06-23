@@ -54,8 +54,8 @@ public class ModelHissingDemon extends ModelBase {
     
 
     public ModelHissingDemon() {
-		textureWidth = 96;
-		textureHeight = 96;
+		textureWidth = 128;
+		textureHeight = 128;
 
 		head = hbone = new ModelRenderer(this);
 		hbone.setRotationPoint(0.0F, 1.0F, 0.0F);
