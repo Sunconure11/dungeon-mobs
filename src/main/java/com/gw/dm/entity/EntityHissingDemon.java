@@ -41,28 +41,18 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRangedAttackMob, IBeMagicMob, IAnimatable  {	
 	private static String mobName = DungeonMobs.MODID + ":dmmaralith";
-    private AnimationFactory factory = new AnimationFactory(this);
 	private final NonNullList<ItemStack> hands = NonNullList.<ItemStack>withSize(6, ItemStack.EMPTY);
 	private final List<Integer> handshuffler = new ArrayList<>();
 	private int shuffle = 0;
 
 	private static final DataParameter<Boolean> SWINGING_ARMS
 			= EntityDataManager.<Boolean>createKey(EntityHissingDemon.class, DataSerializers.BOOLEAN);
-	private volatile int armInUse = 0, attackNum = -1;
-	private static final String[] attacks = new String[] {"animation.hd.swinga1", "animation.hd.swinga2", 
-			"animation.hd.swinga3", "animation.hd.swinga4", "animation.hd.swinga5", "animation.hd.swinga6"};
-	private AnimationController attackController; 
-	private static final String MOVE_ANIM = "animation.hd.tail";
-	private AnimationController moveController; 
+	private int armInUse = 0;
 
 	public EntityHissingDemon(World worldIn) {
 		super(worldIn);
@@ -72,7 +62,6 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
         for(int i = 0; i < 6; i++) {
         	handshuffler.add(i);
         }
-        this.ignoreFrustumCheck = true;
 	}
 	
 	
@@ -224,7 +213,6 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 		float damage;
 		int knockback = 0;
 		boolean hit = false;
-		attackNum = armInUse;
 		ItemStack weaponStack = getHeldItemMainhand();
 		Item weapon = weaponStack.getItem();
 		boolean isSword = weapon instanceof ItemSword; 
@@ -346,35 +334,19 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 		}
 		super.dropEquipment(wasRecentlyHit, lootingModifier);
 	}
-	
-
-    private <E extends IAnimatable> PlayState pmove(AnimationEvent<E> event) {
-        event.getController().setAnimation(new AnimationBuilder().addAnimation(MOVE_ANIM, true));
-        return PlayState.CONTINUE;
-    }
-    
-
-    private <E extends IAnimatable> PlayState pattack(AnimationEvent<E> event) {
-    	System.out.println("Runngin pattack!, attackNum is " + attackNum + ".");
-    	if(attackNum > -1) {
-    		event.getController().setAnimation(new AnimationBuilder().addAnimation(attacks[attackNum], true));
-    	}
-        return PlayState.STOP;
-    }
 
 
 	@Override
 	public void registerControllers(AnimationData data) {
-		attackController = new AnimationController(this, "attack", 0, this::pattack);
-		data.addAnimationController(attackController);
-		moveController = new AnimationController(this, "move", 0, this::pmove);
-		data.addAnimationController(moveController);
+		// TODO Auto-generated method stub
+		
 	}
 
 
 	@Override
 	public AnimationFactory getFactory() {
-		return factory;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,11 +1,11 @@
 package com.gw.dm.util;
 
 import com.gw.dm.DungeonMobs;
+import com.gw.dm.Items.ItemLavarock;
 import com.gw.dm.blocks.BlockBladeTrap;
 import com.gw.dm.blocks.BlockLavarock;
 import com.gw.dm.blocks.IHaveModel;
 import com.gw.dm.blocks.TileEntityBladeTrap;
-import com.gw.dm.items.ItemLavarock;
 import com.gw.dm.potion.PotionAddle;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

@@ -1,4 +1,4 @@
-package com.gw.dm.items;
+package com.gw.dm.Items;
 
 import com.gw.dm.DungeonMobs;
 import net.minecraft.block.Block;
