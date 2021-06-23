@@ -4,6 +4,16 @@ import static com.gw.dm.util.ConfigHandler.fallenAngelIg;
 
 import javax.annotation.Nullable;
 
+import com.gw.dm.DungeonMobs;
+import com.gw.dm.EntityDungeonFlying;
+import com.gw.dm.ai.AIAngelAttack;
+import com.gw.dm.ai.AIAngelWander;
+import com.gw.dm.ai.TaskAngelAgroOnPlayer;
+import com.gw.dm.projectile.EntityLightball;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
+import com.gw.dm.util.DungeonMobsHelper;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,21 +37,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProviderHell;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.gw.dm.DungeonMobs;
-import com.gw.dm.EntityDungeonFlying;
-import com.gw.dm.ai.AIAngelAttack;
-import com.gw.dm.ai.AIAngelWander;
-import com.gw.dm.ai.TaskAngelAgroOnPlayer;
-import com.gw.dm.projectile.EntityLightball;
-import com.gw.dm.util.AudioHandler;
-import com.gw.dm.util.ConfigHandler;
-import com.gw.dm.util.DungeonMobsHelper;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class EntityFallenAngel extends EntityDungeonFlying 
-				implements IMob, IRangedAttackMob, IBeMagicMob  {
+				implements IMob, IRangedAttackMob, IBeMagicMob, IAnimatable  {
 
 	private static final DataParameter<Boolean> SWINGING_ARMS
 			= EntityDataManager.<Boolean>createKey(EntityFallenAngel.class, DataSerializers.BOOLEAN);
@@ -229,6 +230,20 @@ public class EntityFallenAngel extends EntityDungeonFlying
 
 	public boolean areArmsUp() {
 		return ((Boolean) dataManager.get(SWINGING_ARMS)).booleanValue();
+	}
+
+
+	@Override
+	public void registerControllers(AnimationData data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public AnimationFactory getFactory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

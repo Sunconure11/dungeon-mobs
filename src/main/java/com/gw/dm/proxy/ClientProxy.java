@@ -397,7 +397,7 @@ public class ClientProxy extends CommonProxy {
 					@Override
 					public Render<EntityHissingDemon> createRenderFor(
 							RenderManager manager) {
-						return new RenderHissingDemon(manager, new ModelHissingDemon(), 0.5f);
+						return new RenderHissingDemon(manager, new ModelHissingDemon());
 					}
 				});
 	}

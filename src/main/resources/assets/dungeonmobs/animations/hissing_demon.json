@@ -145,6 +145,46 @@
 					}
 				}
 			}
+		},
+		"animation.hd.tail": {
+			"loop": true,
+			"bones": {
+				"t1": {
+					"position": {
+						"vector": ["math.sin((query.anim_time * query.ground_speed * 120)) * math.min(query.ground_speed, 3)", 0, 0]
+					}
+				},
+				"t2": {
+					"position": {
+						"vector": ["math.sin((query.anim_time * query.ground_speed * 120) + 45) * math.min(query.ground_speed * 2, 6)", 0, 0]
+					}
+				},
+				"t3": {
+					"position": {
+						"vector": ["math.sin((query.anim_time * query.ground_speed * 120) + 90)math.sin((query.anim_time * query.ground_speed * 240) + 45) * math.min(query.ground_speed * 2, 7)", 0, 0]
+					}
+				},
+				"t4": {
+					"position": {
+						"vector": ["math.sin((query.anim_time * query.ground_speed * 120) + 135)math.sin((query.anim_time * query.ground_speed * 240) + 45) * math.min(query.ground_speed * 2, 6)", 0, 0]
+					}
+				},
+				"t5": {
+					"position": {
+						"vector": ["math.sin((query.anim_time * query.ground_speed * 120) + 180)math.sin((query.anim_time * query.ground_speed * 240) + 45) * math.min(query.ground_speed * 1.5, 5)", 0, 0]
+					}
+				},
+				"t6": {
+					"position": {
+						"vector": ["math.sin((query.anim_time * query.ground_speed * 120) + 225)math.sin((query.anim_time * query.ground_speed * 240) + 45) * math.min(query.ground_speed, 4)", 0, 0]
+					}
+				},
+				"t7": {
+					"position": {
+						"vector": ["math.sin((query.anim_time * query.ground_speed * 120) + 225)math.sin((query.anim_time * query.ground_speed * 240) + 45) * math.min(query.ground_speed, 2)", 0, 0]
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

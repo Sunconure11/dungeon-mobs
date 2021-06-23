@@ -1,9 +1,15 @@
 package com.gw.dm;
 
+import java.util.Arrays;
+
 import com.gw.dm.compat.DLDCompat;
 import com.gw.dm.entity.EntityLizalfos;
 import com.gw.dm.proxy.CommonProxy;
-import com.gw.dm.util.*;
+import com.gw.dm.util.AudioHandler;
+import com.gw.dm.util.ConfigHandler;
+import com.gw.dm.util.DMGenerationHandler;
+import com.gw.dm.util.MiscRegistrar;
+import com.gw.dm.util.MobRegistrar;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -13,8 +19,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-
-import java.util.Arrays;
+import software.bernie.geckolib3.GeckoLib;
 
 @Mod(modid = DungeonMobs.MODID, name = "Dungeon Mobs", version = DungeonMobs.VERSION,
 		dependencies = "after:thaumcraft; after:dldungeonsjbg")
@@ -29,6 +34,12 @@ public class DungeonMobs {
 	public static CommonProxy proxy;
 	private static boolean gotDLD;
 	DMGenerationHandler worldGen;
+	
+	
+	public DungeonMobs() {
+		GeckoLib.initialize();
+	}
+	
 
 	private static void initMonsterSpecialData() {
 		EntityLizalfos.initLocations();
