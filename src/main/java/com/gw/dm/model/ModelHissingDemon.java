@@ -62,58 +62,82 @@ public class ModelHissingDemon extends ModelBase {
 		hbone.cubeList.add(new ModelBox(hbone, 0, 0, -6.0F, -22.0F, -3.0F, 12, 12, 12, 0.0F, false));
 
 		ab1 = new ModelRenderer(this);
-		ab1.setRotationPoint(-6.0F, -8.0F, 3.0F);
+		ab1.setRotationPoint(-6.0F, 2.0F, 0.0F);
 		
 
 		arm1_r1 = new ModelRenderer(this);
-		arm1_r1.setRotationPoint(0.0F, 1.0F, 0.0F);
+		arm1_r1.setRotationPoint(0.0F, -9.0F, 0.0F);
 		ab1.addChild(arm1_r1);
-		arm1_r1.setTextureOffset(0, 61).addBox(-2.5F, -2.0F, -2.25F, 4.0F, 18.0F, 4.0F, 0.0F, false);
+		arm1_r1.cubeList.add(new ModelBox(arm1_r1, 0, 61, -2.4289F, -1.9211F, 0.75F, 4, 18, 4, 0.0F, false));
 
 		ab2 = new ModelRenderer(this);
-		ab2.setRotationPoint(-6.0F, -4.0F, 2.0F);
+		ab2.setRotationPoint(-6.0F, 5.0F, 0.0F);
 		
 
 		arm2_r1 = new ModelRenderer(this);
-		arm2_r1.setRotationPoint(0.0F, -0.5F, 1.0F);
+		arm2_r1.setRotationPoint(0.0F, -9.5F, 0.0F);
 		ab2.addChild(arm2_r1);
-		arm2_r1.setTextureOffset(21, 61).addBox(-1.75F, 0.25F, -2.25F, 4.0F, 18.0F, 4.0F, 0.0F, false);
+		arm2_r1.cubeList.add(new ModelBox(arm2_r1, 21, 61, -1.75F, 0.15F, 0.825F, 4, 18, 4, 0.0F, false));
 
 		ab3 = new ModelRenderer(this);
-		ab3.setRotationPoint(-5.0F, -3.0F, 3.0F);
+		ab3.setRotationPoint(-9.0F, 15.0F, 0.0F);
 		
 
 		arm3_r1 = new ModelRenderer(this);
-		arm3_r1.setRotationPoint(-1.0F, 1.0F, 0.0F);
+		arm3_r1.setRotationPoint(3.0F, -17.0F, 0.0F);
 		ab3.addChild(arm3_r1);
-		arm3_r1.setTextureOffset(0, 61).addBox(-2.25F, -1.25F, -2.25F, 4.0F, 18.0F, 5.0F, 0.0F, false);
+		arm3_r1.cubeList.add(new ModelBox(arm3_r1, 0, 61, -2.3431F, -1.1931F, 0.675F, 4, 18, 5, 0.0F, false));
 
 		ab4 = new ModelRenderer(this);
-		ab4.setRotationPoint(6.0F, -7.0F, 3.0F);
+		ab4.setRotationPoint(-8.0F, 12.0F, 0.0F);
 		
 
 		arm4_r1 = new ModelRenderer(this);
-		arm4_r1.setRotationPoint(0.0F, 0.0F, -3.0F);
+		arm4_r1.setRotationPoint(14.0F, -19.0F, 0.0F);
 		ab4.addChild(arm4_r1);
-		arm4_r1.setTextureOffset(0, 61).addBox(-2.0F, -2.0F, 0.75F, 4.0F, 18.0F, 5.0F, 0.0F, false);
+		arm4_r1.cubeList.add(new ModelBox(arm4_r1, 0, 61, -2.0711F, -1.9211F, 0.75F, 4, 18, 5, 0.0F, false));
 
 		ab5 = new ModelRenderer(this);
-		ab5.setRotationPoint(7.0F, -4.0F, 3.0F);
+		ab5.setRotationPoint(-8.0F, -4.0F, 0.0F);
 		
 
 		arm5_r1 = new ModelRenderer(this);
-		arm5_r1.setRotationPoint(-1.0F, -0.5F, -3.0F);
+		arm5_r1.setRotationPoint(14.0F, -0.5F, 0.0F);
 		ab5.addChild(arm5_r1);
-		arm5_r1.setTextureOffset(21, 61).addBox(-1.75F, 0.25F, 0.75F, 4.0F, 18.0F, 4.0F, 0.0F, false);
+		arm5_r1.cubeList.add(new ModelBox(arm5_r1, 21, 61, -1.75F, 0.15F, 0.825F, 4, 18, 4, 0.0F, false));
 
 		ab6 = new ModelRenderer(this);
-		ab6.setRotationPoint(4.0F, -3.0F, 0.0F);
+		ab6.setRotationPoint(-9.0F, 15.0F, 0.0F);
 		
 
 		arm6_r1 = new ModelRenderer(this);
-		arm6_r1.setRotationPoint(2.0F, 1.0F, 3.0F);
+		arm6_r1.setRotationPoint(15.0F, -17.0F, 0.0F);
 		ab6.addChild(arm6_r1);
-		arm6_r1.setTextureOffset(0, 61).addBox(-2.25F, -2.25F, -2.25F, 4.0F, 18.0F, 5.0F, 0.0F, false);
+		arm6_r1.cubeList.add(new ModelBox(arm6_r1, 0, 61, -2.1569F, -2.1931F, 0.675F, 4, 18, 5, 0.0F, false));
+
+		t1 = new ModelRenderer(this);
+		t1.setRotationPoint(0.0F, 15.0F, 0.0F);
+		t1.cubeList.add(new ModelBox(t1, 43, 17, -5.0F, -4.0F, 4.0F, 10, 8, 8, 0.0F, false));
+
+		t2 = new ModelRenderer(this);
+		t2.setRotationPoint(0.0F, 15.0F, 0.0F);
+		t2.cubeList.add(new ModelBox(t2, 0, 44, -4.0F, 1.0F, 6.0F, 8, 8, 8, 0.0F, false));
+
+		t3 = new ModelRenderer(this);
+		t3.setRotationPoint(0.0F, 15.0F, 0.0F);
+		t3.cubeList.add(new ModelBox(t3, 51, 0, -4.0F, 1.0F, 14.0F, 8, 8, 8, 0.0F, false));
+
+		t4 = new ModelRenderer(this);
+		t4.setRotationPoint(0.0F, 15.0F, 0.0F);
+		t4.cubeList.add(new ModelBox(t4, 40, 63, -3.0F, 3.0F, 22.0F, 6, 6, 6, 0.0F, false));
+
+		t5 = new ModelRenderer(this);
+		t5.setRotationPoint(0.0F, 24.0F, 0.0F);
+		t5.cubeList.add(new ModelBox(t5, 65, 63, -2.0F, -4.0F, 28.0F, 4, 4, 4, 0.0F, false));
+
+		t6 = new ModelRenderer(this);
+		t6.setRotationPoint(0.0F, 24.0F, 0.0F);
+		t6.cubeList.add(new ModelBox(t6, 39, 0, -1.5F, -3.0F, 32.0F, 3, 3, 3, 0.0F, false));
 
 		t7 = new ModelRenderer(this);
 		t7.setRotationPoint(0.0F, 24.0F, 0.0F);

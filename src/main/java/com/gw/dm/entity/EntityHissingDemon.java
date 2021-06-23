@@ -40,8 +40,11 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRangedAttackMob, IBeMagicMob  {	
+public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRangedAttackMob, IBeMagicMob, IAnimatable  {	
 	private static String mobName = DungeonMobs.MODID + ":dmmaralith";
 	private final NonNullList<ItemStack> hands = NonNullList.<ItemStack>withSize(6, ItemStack.EMPTY);
 	private final List<Integer> handshuffler = new ArrayList<>();
@@ -49,8 +52,6 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 
 	private static final DataParameter<Boolean> SWINGING_ARMS
 			= EntityDataManager.<Boolean>createKey(EntityHissingDemon.class, DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> SWINGING_ARM
-			= EntityDataManager.<Integer>createKey(EntityHissingDemon.class, DataSerializers.VARINT);
 	private int armInUse = 0;
 
 	public EntityHissingDemon(World worldIn) {
@@ -61,7 +62,6 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
         for(int i = 0; i < 6; i++) {
         	handshuffler.add(i);
         }
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -333,6 +333,20 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 	        }
 		}
 		super.dropEquipment(wasRecentlyHit, lootingModifier);
+	}
+
+
+	@Override
+	public void registerControllers(AnimationData data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public AnimationFactory getFactory() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
