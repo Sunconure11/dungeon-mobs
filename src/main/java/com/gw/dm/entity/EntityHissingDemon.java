@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.EntityDungeonMob;
+import com.gw.dm.ai.AIHissingDemonAttack;
 import com.gw.dm.util.AudioHandler;
 import com.gw.dm.util.ConfigHandler;
 
@@ -15,7 +16,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.IRangedAttackMob;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
@@ -76,7 +76,7 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 	protected void initEntityAI() {
 		//TODO: Stand-in code here, replace with specific
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
+        this.tasks.addTask(2, new AIHissingDemonAttack(this, 1.0d, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -145,9 +145,9 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 	
 	
 	private ItemStack getHandWeapon(DifficultyInstance difficulty) {
-		int die = rand.nextInt(12);
+		int die = rand.nextInt(10);
 		ItemStack out;
-		if(die < 3) {
+		if(die < 2) {
 			if(rand.nextInt(3) < 2) {
 				out = new ItemStack(Items.STONE_SWORD);
 			} else {
@@ -159,7 +159,7 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 			} else {
 				out = new ItemStack(Items.IRON_AXE);
 			}				
-		} else if(die < 10) {
+		} else if(die < 9) {
 			if(rand.nextInt(3) < 2) {
 				out = new ItemStack(Items.GOLDEN_SWORD);
 			} else {
@@ -180,12 +180,12 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 				}
 				break;
 			case HARD:
-				if(rand.nextGaussian() < 0.30f * d) {
-					out = EnchantmentHelper.addRandomEnchantment(rand, out, 10 + (int)((rand.nextFloat() * d) * 20), false);
+				if(rand.nextGaussian() < 0.35f * d) {
+					out = EnchantmentHelper.addRandomEnchantment(rand, out, 15 + (int)((rand.nextFloat() * d) * 15), false);
 				}
 				break;
 			case NORMAL:
-				if(rand.nextGaussian() < 0.35f * d) {
+				if(rand.nextGaussian() < 0.30f * d) {
 					out = EnchantmentHelper.addRandomEnchantment(rand, out, 10 + (int)((rand.nextFloat() * d) * 15), false);
 				}
 				break;
@@ -209,7 +209,7 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 	
 	
 	@Override
-	public boolean attackEntityAsMob(Entity entity) {
+	public boolean attackEntityAsMob(Entity entity) {		
 		float damage;
 		int knockback = 0;
 		boolean hit = false;
@@ -227,7 +227,7 @@ public class EntityHissingDemon extends EntityDungeonMob implements IMob, IRange
 	            damage += EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase)victim).getCreatureAttribute());
 	            knockback += EnchantmentHelper.getKnockbackModifier(this);
 	        }
-	        hit = victim.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
+	        hit = victim.attackEntityFrom(DamageSource.causeMobDamage(this).setDifficultyScaled(), damage);
 	        if(hit) {
 	        	int burn;
 	        	if((burn = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.FIRE_ASPECT, victim)) > 0) {
