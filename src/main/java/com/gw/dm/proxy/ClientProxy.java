@@ -2,6 +2,26 @@ package com.gw.dm.proxy;
 
 import java.util.Collection;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderZombie;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+
 import com.gw.dm.DungeonMobs;
 import com.gw.dm.entity.EntityAhriman;
 import com.gw.dm.entity.EntityBladeTrap;
@@ -12,7 +32,6 @@ import com.gw.dm.entity.EntityEldermob;
 import com.gw.dm.entity.EntityFallenAngel;
 import com.gw.dm.entity.EntityGhost;
 import com.gw.dm.entity.EntityGhoul;
-import com.gw.dm.entity.EntityHissingDemon;
 import com.gw.dm.entity.EntityHookHorror;
 import com.gw.dm.entity.EntityIllithid;
 import com.gw.dm.entity.EntityLizalfos;
@@ -37,7 +56,6 @@ import com.gw.dm.model.ModelDestrachan;
 import com.gw.dm.model.ModelEldermob;
 import com.gw.dm.model.ModelFallenAngel;
 import com.gw.dm.model.ModelGhoul;
-import com.gw.dm.model.ModelHissingDemon;
 import com.gw.dm.model.ModelHookHorror;
 import com.gw.dm.model.ModelIllithid;
 import com.gw.dm.model.ModelLizalfos;
@@ -64,7 +82,6 @@ import com.gw.dm.render.RenderEldermob;
 import com.gw.dm.render.RenderFallenAngel;
 import com.gw.dm.render.RenderGhost;
 import com.gw.dm.render.RenderGhoul;
-import com.gw.dm.render.RenderHissingDemon;
 import com.gw.dm.render.RenderHookHorror;
 import com.gw.dm.render.RenderIllithid;
 import com.gw.dm.render.RenderLizalfos;
@@ -84,26 +101,6 @@ import com.gw.dm.render.RenderVescavor;
 import com.gw.dm.util.DungeonMobsHelper;
 import com.gw.dm.util.InputConfusedMovement;
 import com.gw.dm.util.MiscRegistrar;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.RenderZombie;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
-import net.minecraftforge.fml.relauncher.Side;
 
 //import com.gw.dm.render.RenderBladeTrapBlock;
 
@@ -390,14 +387,6 @@ public class ClientProxy extends CommonProxy {
 					public Render<EntityGhost> createRenderFor(
 							RenderManager manager) {
 						return new RenderGhost(manager, new ModelBiped(), 0.5f);
-					}
-				});
-		RenderingRegistry.registerEntityRenderingHandler(EntityHissingDemon.class,
-				new IRenderFactory<EntityHissingDemon>() {
-					@Override
-					public Render<EntityHissingDemon> createRenderFor(
-							RenderManager manager) {
-						return new RenderHissingDemon(manager, new ModelHissingDemon(), 0.5f);
 					}
 				});
 	}

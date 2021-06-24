@@ -103,7 +103,7 @@ public class EntityNetherHound extends EntityDungeonMob {
 				|| DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
-		if (world.canBlockSeeSky(new BlockPos((int) posX, (int) posY, (int) posZ)) && !ignoreHeight) {
+		if (world.canBlockSeeSky(new BlockPos((int) posX, (int) posY, (int) posZ))) {
 			return false;
 		}
 		if (posY > 48.0D && !ignoreHeight) {

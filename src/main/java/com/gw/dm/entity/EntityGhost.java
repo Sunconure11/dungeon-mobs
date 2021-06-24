@@ -96,11 +96,11 @@ public class EntityGhost extends EntityDungeonMob  implements IBeMagicMob {
 
 	@Override
 	public boolean getCanSpawnHere() {
+		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {
+			return false;
+		}
 		if (ghostIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
-		}
-		if (world.canSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
-			return false;
 		}
 		if (posY > 36.0D && !ignoreHeight) {
 			return false;

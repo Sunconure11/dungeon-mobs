@@ -188,7 +188,7 @@ public class EntityFallenAngel extends EntityDungeonFlying
 				|| DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
-		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
 		if (posY > 32.0D && !ignoreHeight) {

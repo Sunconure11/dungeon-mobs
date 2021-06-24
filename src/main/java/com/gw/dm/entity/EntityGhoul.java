@@ -64,7 +64,7 @@ public class EntityGhoul extends EntityZombie {
 		if (ghoulIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
-		if (world.canSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
+		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
 		if (posY > 60.0D && !ignoreHeight) {

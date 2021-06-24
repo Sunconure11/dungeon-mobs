@@ -136,7 +136,7 @@ public class EntityHookHorror extends EntityDungeonMob {
 			return super.getCanSpawnHere();
 		}
 
-		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
 

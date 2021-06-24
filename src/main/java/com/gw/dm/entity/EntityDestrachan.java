@@ -122,7 +122,7 @@ public class EntityDestrachan extends EntityDungeonMob implements IRangedAttackM
 		if (destrachanIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
-		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
 		if (posY > 36.0D && !ignoreHeight) {

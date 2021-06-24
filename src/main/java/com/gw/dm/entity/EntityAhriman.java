@@ -174,7 +174,7 @@ public class EntityAhriman extends EntityDungeonFlying
 		if (beholderIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
-		if (world.canSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
+		if (world.canSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
 		if (posY > 32.0D && !ignoreHeight) {

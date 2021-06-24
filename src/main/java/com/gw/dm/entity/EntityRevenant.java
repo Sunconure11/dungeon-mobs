@@ -134,7 +134,7 @@ public class EntityRevenant extends EntityZombie implements IBeMagicMob  {
 			darkspawn = false;
 			return super.getCanSpawnHere();
 		}
-		if ((world.canBlockSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) 
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))
 				|| (!world.isRemote && world.isDaytime())) {
 			return false;
 		}

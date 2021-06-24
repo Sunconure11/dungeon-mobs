@@ -165,7 +165,7 @@ public class EntityRustMonster extends EntityDungeonMob {
 		if (rustMonsterIg || DungeonMobsHelper.isNearSpawner(world, this, mobName)) {
 			return super.getCanSpawnHere();
 		}
-		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ)) && !ignoreHeight) {
+		if (world.canBlockSeeSky(new BlockPos(posX, posY, posZ))) {
 			return false;
 		}
 
