@@ -61,7 +61,7 @@ public class EntityEldermobBall extends EntityThrowable {
 	public void onUpdate() {
 		try {
 			age++;
-			if ((age >= 72) && world.isRemote) {
+			if ((age >= 123) && world.isRemote) {
 				world.newExplosion(this, posX, posY, posZ, 1, false, false);
 				this.setDead();
 			}

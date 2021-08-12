@@ -21,7 +21,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(modid = DungeonMobs.MODID)
 public class MiscRegistrar {
 	private static final List<Block> BLOCKS = new ArrayList<>();
 	private static final List<Item> ITEMS = new ArrayList<>();
@@ -84,7 +84,7 @@ public class MiscRegistrar {
 	}
 
 
-	public static void registerTileEntities() {
+	public static void registerTileEntities() {		
 		GameRegistry.registerTileEntity(TileEntityBladeTrap.class,
 				DungeonMobs.MODID + ".bladetrap");
 	}
