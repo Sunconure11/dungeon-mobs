@@ -2,114 +2,10 @@ package com.gw.dm.util;
 
 import static com.gw.dm.DungeonMobs.MODID;
 import static com.gw.dm.DungeonMobs.instance;
-import static com.gw.dm.util.ConfigHandler.beholderMn;
-import static com.gw.dm.util.ConfigHandler.beholderMx;
-import static com.gw.dm.util.ConfigHandler.beholderP;
-import static com.gw.dm.util.ConfigHandler.caveFisherMn;
-import static com.gw.dm.util.ConfigHandler.caveFisherMx;
-import static com.gw.dm.util.ConfigHandler.caveFisherP;
-import static com.gw.dm.util.ConfigHandler.cockatriceMn;
-import static com.gw.dm.util.ConfigHandler.cockatriceMx;
-import static com.gw.dm.util.ConfigHandler.cockatriceP;
-import static com.gw.dm.util.ConfigHandler.destrachanMn;
-import static com.gw.dm.util.ConfigHandler.destrachanMx;
-import static com.gw.dm.util.ConfigHandler.destrachanP;
-import static com.gw.dm.util.ConfigHandler.fallenAngelMn;
-import static com.gw.dm.util.ConfigHandler.fallenAngelMx;
-import static com.gw.dm.util.ConfigHandler.fallenAngelP;
-import static com.gw.dm.util.ConfigHandler.ghostMn;
-import static com.gw.dm.util.ConfigHandler.ghostMx;
-import static com.gw.dm.util.ConfigHandler.ghostP;
-import static com.gw.dm.util.ConfigHandler.ghoulMn;
-import static com.gw.dm.util.ConfigHandler.ghoulMx;
-import static com.gw.dm.util.ConfigHandler.ghoulP;
-import static com.gw.dm.util.ConfigHandler.hellHoundMn;
-import static com.gw.dm.util.ConfigHandler.hellHoundMx;
-import static com.gw.dm.util.ConfigHandler.hellHoundNMn;
-import static com.gw.dm.util.ConfigHandler.hellHoundNP;
-import static com.gw.dm.util.ConfigHandler.hellHoundP;
-import static com.gw.dm.util.ConfigHandler.hookHorrorMn;
-import static com.gw.dm.util.ConfigHandler.hookHorrorMx;
-import static com.gw.dm.util.ConfigHandler.hookHorrorP;
-import static com.gw.dm.util.ConfigHandler.illithidMn;
-import static com.gw.dm.util.ConfigHandler.illithidMx;
-import static com.gw.dm.util.ConfigHandler.illithidP;
-import static com.gw.dm.util.ConfigHandler.lizalfosMn;
-import static com.gw.dm.util.ConfigHandler.lizalfosMx;
-import static com.gw.dm.util.ConfigHandler.lizalfosP;
-import static com.gw.dm.util.ConfigHandler.manticoreMn;
-import static com.gw.dm.util.ConfigHandler.manticoreMx;
-import static com.gw.dm.util.ConfigHandler.manticoreP;
-import static com.gw.dm.util.ConfigHandler.outerThingEMn;
-import static com.gw.dm.util.ConfigHandler.outerThingEMx;
-import static com.gw.dm.util.ConfigHandler.outerThingEP;
-import static com.gw.dm.util.ConfigHandler.outerThingMn;
-import static com.gw.dm.util.ConfigHandler.outerThingMx;
-import static com.gw.dm.util.ConfigHandler.outerThingP;
-import static com.gw.dm.util.ConfigHandler.rakshasaMn;
-import static com.gw.dm.util.ConfigHandler.rakshasaMx;
-import static com.gw.dm.util.ConfigHandler.rakshasaP;
-import static com.gw.dm.util.ConfigHandler.revenantMn;
-import static com.gw.dm.util.ConfigHandler.revenantMx;
-import static com.gw.dm.util.ConfigHandler.revenantP;
-import static com.gw.dm.util.ConfigHandler.rustMonsterMn;
-import static com.gw.dm.util.ConfigHandler.rustMonsterMx;
-import static com.gw.dm.util.ConfigHandler.rustMonsterP;
-import static com.gw.dm.util.ConfigHandler.shriekerMn;
-import static com.gw.dm.util.ConfigHandler.shriekerMx;
-import static com.gw.dm.util.ConfigHandler.shriekerP;
-import static com.gw.dm.util.ConfigHandler.spawnBeholder;
-import static com.gw.dm.util.ConfigHandler.spawnBladeTrap;
-import static com.gw.dm.util.ConfigHandler.spawnCaveFisher;
-import static com.gw.dm.util.ConfigHandler.spawnCockatrice;
-import static com.gw.dm.util.ConfigHandler.spawnDestrachan;
-import static com.gw.dm.util.ConfigHandler.spawnFallenAngel;
-import static com.gw.dm.util.ConfigHandler.spawnGhost;
-import static com.gw.dm.util.ConfigHandler.spawnGhoul;
-import static com.gw.dm.util.ConfigHandler.spawnHellHound;
-import static com.gw.dm.util.ConfigHandler.spawnHookHorror;
-import static com.gw.dm.util.ConfigHandler.spawnIllithid;
-import static com.gw.dm.util.ConfigHandler.spawnLizalfos;
-import static com.gw.dm.util.ConfigHandler.spawnManticore;
-import static com.gw.dm.util.ConfigHandler.spawnOuterThing;
-import static com.gw.dm.util.ConfigHandler.spawnRakshasa;
-import static com.gw.dm.util.ConfigHandler.spawnRevenant;
-import static com.gw.dm.util.ConfigHandler.spawnRustMonster;
-import static com.gw.dm.util.ConfigHandler.spawnShrieker;
-import static com.gw.dm.util.ConfigHandler.spawnThoqqua;
-import static com.gw.dm.util.ConfigHandler.spawnTroll;
-import static com.gw.dm.util.ConfigHandler.spawnUmberHulk;
-import static com.gw.dm.util.ConfigHandler.spawnVampire;
-import static com.gw.dm.util.ConfigHandler.spawnVescavor;
-import static com.gw.dm.util.ConfigHandler.thoqquaMn;
-import static com.gw.dm.util.ConfigHandler.thoqquaMx;
-import static com.gw.dm.util.ConfigHandler.thoqquaNMn;
-import static com.gw.dm.util.ConfigHandler.thoqquaNMx;
-import static com.gw.dm.util.ConfigHandler.thoqquaNP;
-import static com.gw.dm.util.ConfigHandler.thoqquaP;
-import static com.gw.dm.util.ConfigHandler.trollMn;
-import static com.gw.dm.util.ConfigHandler.trollMx;
-import static com.gw.dm.util.ConfigHandler.trollP;
-import static com.gw.dm.util.ConfigHandler.umberHulkMn;
-import static com.gw.dm.util.ConfigHandler.umberHulkMx;
-import static com.gw.dm.util.ConfigHandler.umberHulkP;
-import static com.gw.dm.util.ConfigHandler.vampireMn;
-import static com.gw.dm.util.ConfigHandler.vampireMx;
-import static com.gw.dm.util.ConfigHandler.vampireP;
-import static com.gw.dm.util.ConfigHandler.vescavorMn;
-import static com.gw.dm.util.ConfigHandler.vescavorMx;
-import static com.gw.dm.util.ConfigHandler.vescavorP;
+import static com.gw.dm.util.ConfigHandler.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeDictionary.Type;
-import net.minecraftforge.common.DungeonHooks;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 import com.gw.dm.entity.EntityAhriman;
 import com.gw.dm.entity.EntityBladeTrap;
@@ -140,6 +36,14 @@ import com.gw.dm.projectile.EntityEldermobBall;
 import com.gw.dm.projectile.EntityEyeRay;
 import com.gw.dm.projectile.EntityLightball;
 import com.gw.dm.projectile.EntityMagicMissile;
+
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.common.DungeonHooks;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class MobRegistrar {
 	public static final int revenantID = 0;
@@ -408,7 +312,7 @@ public class MobRegistrar {
 					hellHoundP, hellHoundMn, hellHoundMx,
 					EnumCreatureType.MONSTER, overworld);
 			if(hellHoundNP > 0) EntityRegistry.addSpawn(EntityNetherHound.class, 
-					hellHoundNP, hellHoundNMn, hellHoundMx,
+					hellHoundNP, hellHoundNMn, hellHoundNMx,
 					EnumCreatureType.MONSTER, nether);
 		}
 		if (spawnRakshasa && (rakshasaP > 0)) EntityRegistry.addSpawn(EntityRakshasa.class, 

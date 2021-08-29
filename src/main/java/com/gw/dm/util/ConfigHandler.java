@@ -450,7 +450,7 @@ public class ConfigHandler {
 		hellHoundMn = config.get("Hell Hound", "HHSpawnMin", 1).getInt();
 		hellHoundMx = config.get("Hell Hound", "HHSpawnMax", 2).getInt();
 		hellHoundNP  = config.get("Hell Hound", "HHNetherChance", 20).getInt();
-		hellHoundNMn = config.get("Hell Hound", "HHNetherMin", 4).getInt();
+		hellHoundNMn = config.get("Hell Hound", "HHNetherMin", 2).getInt();
 		hellHoundNMx = config.get("Hell Hound", "HHNetherMax", 4).getInt(); 
 		
 		config.addCustomCategoryComment("Rakshasa", "Spawn configurations for rakshasa");		
