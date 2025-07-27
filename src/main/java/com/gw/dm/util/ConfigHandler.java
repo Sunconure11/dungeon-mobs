@@ -110,7 +110,8 @@ public class ConfigHandler {
 	public static int cockatriceP;
 	public static int cockatriceMn;
 	public static int cockatriceMx;
-	
+	public static double cockatricePetrifyDamage;
+
 	public static boolean destrachanIg;
 	public static int destrachanP;
 	public static int destrachanMn;
@@ -197,8 +198,9 @@ public class ConfigHandler {
 	
 	public static float healthx;
 	public static float damagex;
-	public static float damageplus; 
-	
+	public static float damageplus;
+
+
 	/*----------------------------------------------------------*
 	 *                     WORKING CODE                         *
 	 *----------------------------------------------------------*/
@@ -424,8 +426,9 @@ public class ConfigHandler {
 		cockatriceIg = config.get("Cockatrice", "CockatriceSpawnAnywhere", false).getBoolean();;
 		cockatriceP  = config.get("Cockatrice", "CockatriceSpawnChance", 15).getInt();
 		cockatriceMn = config.get("Cockatrice", "CockatriceSpawnMin", 1).getInt();
-		cockatriceMx = config.get("Cockatrice", "CockatriceSpawnMax", 3).getInt();  	
-		
+		cockatriceMx = config.get("Cockatrice", "CockatriceSpawnMax", 3).getInt();
+		cockatricePetrifyDamage = config.get("Cockatrice", "CockatricePetrifyDamage", 1024).getDouble();
+
 		config.addCustomCategoryComment("Destrachan", "Spawn configurations for destrachanr");		
 		destrachanIg = config.get("Destrachan", "DestrachanSpawnAnywhere", false).getBoolean();;
 		destrachanP  = config.get("Destrachan", "DestrachanSpawnChance", 15).getInt();

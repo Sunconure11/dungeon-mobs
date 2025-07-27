@@ -5,6 +5,7 @@ import static com.gw.dm.util.ConfigHandler.cockatriceIg;
 import java.util.StringTokenizer;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -14,7 +15,6 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -30,8 +30,8 @@ import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityCockatrice extends EntityDungeonMob {
 	private static String mobName;
-	private boolean ignoreHeight;
-	private int stoneChance;
+	private final boolean ignoreHeight;
+	private final int stoneChance;
 	private EntityPetrified stonedPlayer;
 	private boolean incoming;
 	private boolean waitTick;
@@ -57,18 +57,17 @@ public class EntityCockatrice extends EntityDungeonMob {
 		tasks.addTask(4, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
 		tasks.addTask(4, new EntityAILookIdle(this));
 		targetTasks.addTask(0, new EntityAIHurtByTarget(this, false));
-		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this,
-				EntityPlayer.class, 0, true, false, null));
+		targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true, false, null));
 	}
 
 
 	@Override
 	protected void applyEntityAttributes() {
 		super.applyEntityAttributes();
-		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D 
+		getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(25.0D
 				* ConfigHandler.healthx);
 		getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D);
-		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D 
+		getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(3.0D
 				* ConfigHandler.damagex + ConfigHandler.damageplus);
 		getEntityAttribute(SharedMonsterAttributes.KNOCKBACK_RESISTANCE).setBaseValue(0.0D);
 	}
@@ -112,10 +111,7 @@ public class EntityCockatrice extends EntityDungeonMob {
 	public boolean attackEntityAsMob(Entity ent) {
 		int chance = world.rand.nextInt(100) + 1;
 
-		if ((chance < stoneChance)
-				&& (ent instanceof EntityPlayer)
-				&& (!world.isRemote)
-				&& (ent.ticksExisted > 100)) {
+		if ((chance < stoneChance) && (ent instanceof EntityPlayer) && (!world.isRemote) && (ent.ticksExisted > 100)) {
 			EntityPlayer player = (EntityPlayer) ent;
 
 			if (!player.capabilities.isCreativeMode) {
@@ -125,24 +121,15 @@ public class EntityCockatrice extends EntityDungeonMob {
 
 				statue.setLocationAndAngles(player.posX, player.posY, player.posZ, player.rotationYaw, player.rotationPitch);
 
-				statue.setStuff(player);
-
-				player.attackEntityFrom(DungeonMobsDamageSource.PETRIFIED, 1024);
+				player.attackEntityFrom(DungeonMobsDamageSource.PETRIFIED, (float) ConfigHandler.cockatricePetrifyDamage);
 
 				incoming = true;
 				waitTick = true;
 				stonedPlayer = statue;
 			}
 		} else if (chance < stoneChance && !world.isRemote) {
-			int a = (int) ent.posX;
-			int b = (int) ent.getEntityBoundingBox().minY;
-			int c = (int) ent.posZ;
-
-			ent.setDead();
+			ent.attackEntityFrom(DungeonMobsDamageSource.PETRIFIED, ent instanceof EntityLivingBase ? ((EntityLivingBase) ent).getMaxHealth() * 2F : (float) ConfigHandler.cockatricePetrifyDamage);
 			super.playSound(AudioHandler.entityCockatriceStone, 1.0f, 1.0f);
-
-			world.setBlockState(new BlockPos(a, b, c), Blocks.STONE.getDefaultState());
-			world.setBlockState(new BlockPos(a, b + 1, c), Blocks.STONE.getDefaultState());
 		}
 		return super.attackEntityAsMob(ent);
 	}

@@ -30,7 +30,7 @@ public class BlockLavarock extends ModBlockBase {
 		super(Material.ROCK);
 		setTickRandomly(true);
 		setRegistryName(new ResourceLocation(DungeonMobs.MODID, "lavarock"));
-		setUnlocalizedName(DungeonMobs.MODID + ".lavarock");
+		setTranslationKey(DungeonMobs.MODID + ".lavarock");
 		setDefaultState(blockState.getBaseState().withProperty(TIME_TO_LIVE, Integer.valueOf(6)));
 		setLightLevel(0.4375f);
 		setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
@@ -41,7 +41,7 @@ public class BlockLavarock extends ModBlockBase {
 
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entity) {
 		entity.setFire(10);
 		if ((worldIn.getTotalWorldTime() % 10) == 0) entity.attackEntityFrom(DamageSource.LAVA, 4);
 	}
@@ -87,10 +87,10 @@ public class BlockLavarock extends ModBlockBase {
 
 
 	@Override
-	public void onBlockDestroyedByPlayer(World world, BlockPos pos,
+	public void onPlayerDestroy(World world, BlockPos pos,
 	                                     IBlockState state) {
 		world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 3);
-		super.onBlockDestroyedByPlayer(world, pos, state);
+		super.onPlayerDestroy(world, pos, state);
 	}
 
 
