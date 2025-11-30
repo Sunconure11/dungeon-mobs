@@ -36,7 +36,10 @@ repositories {
 }
 
 dependencies {
+    deobfCompile "curse.maven:llibrary-243298:2504999"
     deobfCompile "curse.maven:thaumcraft-223628:2629023"
+    deobfCompile "curse.maven:ice-and-fire-rotn-edition-457668:7155386"
+
 }
 
 processResources {
