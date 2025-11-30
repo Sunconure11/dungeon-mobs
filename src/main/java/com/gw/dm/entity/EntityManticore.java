@@ -30,7 +30,7 @@ import com.gw.dm.util.DungeonMobsHelper;
 
 public class EntityManticore extends EntityDungeonMob implements IRangedAttackMob {
 
-	private static String mobName = DungeonMobs.MODID + ":dmmanticore";
+	private static final String mobName = DungeonMobs.MODID + ":dmmanticore";
 
 	public EntityManticore(World par1World) {
 		super(par1World);
@@ -84,9 +84,9 @@ public class EntityManticore extends EntityDungeonMob implements IRangedAttackMo
 				+ (rand.nextFloat() - 0.5)
 				- entityarrow.posY;
 		double vz = target.posZ + (rand.nextFloat() - 0.5) - posZ;
-		double dist = (double) MathHelper.sqrt((vx * vx) + (vz * vz));
+		double dist = MathHelper.sqrt((vx * vx) + (vz * vz));
 		entityarrow.shoot(vx, vy + (dist / 5), vz, 1.6F,
-				(16 - world.getDifficulty().getDifficultyId() * 4));
+				(16 - world.getDifficulty().getId() * 4));
 	}
 
 

@@ -10,7 +10,7 @@ public class ItemLavarock extends ItemBlock {
 	public ItemLavarock(Block block) {
 		super(block);
 		setRegistryName(new ResourceLocation(DungeonMobs.MODID, "lavarock"));
-		setUnlocalizedName(DungeonMobs.MODID + ".lavarock");
+		setTranslationKey(DungeonMobs.MODID + ".lavarock");
 	}
 
 }
